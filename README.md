@@ -1,36 +1,232 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Vraj Patel — Premium Portfolio & Enterprise Systems Control Center
 
-## Getting Started
+This is a production-hardened, over-engineered portfolio website and administration console built for Vraj Patel, a Computer Science student at Nirma University. The project highlights his expertise in **Full-Stack Development**, **Enterprise ERP Engineering**, **Autonomous AI Agents**, and **Quantitative Finance Research**.
 
-First, run the development server:
+The UI uses a custom-tuned, dark glassmorphism design built using Tailwind CSS v4.0 and Framer Motion, utilizing deep slate grids, glowing particle lines, and responsive micro-interactions to create a premium product feel.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+---
+
+## 🛠️ Technology Stack
+
+| Layer | Technologies Used |
+|---|---|
+| **Core Framework** | Next.js App Router (v16.2.x), React 19 |
+| **Styling & Motion** | Tailwind CSS (v4.0.x), Framer Motion (v12.x), Lucide Icons |
+| **State & Forms** | React Hook Form, Zod schema validation, TanStack Query |
+| **Backend & DB** | Supabase PostgreSQL Client (with local JSON filesystem fallback) |
+| **Intelligence Layer** | Google Gemini API (`gemini-2.5-flash`), LangChain, Zod structured output |
+| **Options & Math Engine** | WebAssembly (C++ WASM options pricing engine), Numba-compiled Python backtesters |
+| **Visualization** | Recharts (drawdowns, equity curves, Monte Carlo curves), Custom SVG network graph |
+| **Testing** | Vitest testing framework (lightweight headless unit & route integration tests) |
+
+---
+
+## ⚡ Main Features & Pages
+
+1. **Command Palette (`Ctrl+K` / `Cmd+K`)**: Keyboard-navigable finder letting visitors instantly browse case studies, trigger recruiter exports, clear cache records, and open pages.
+2. **Interactive Developer Terminal**: Unix-like command shell on the homepage supporting standard utilities (`whoami`, `projects --quant`, `skills --fullstack`) and the `ask "<question>"` command, which streams Gemini API responses token-by-token.
+3. **Interactive Tech Stack Graph**: SVGs displaying relationships between projects and technology dependencies, with active glows and highlighted paths on hover.
+4. **Quant Strategy Playground (`/lab`)**: Includes a Strategy Simulator (leverage/slippage drag parameters), Position Risk Calculator, and Monte Carlo Equity Curves simulator.
+5. **Project Architecture Viewer (`/projects/[slug]`)**: Tabbed breakdown outlining Frontend, Backend, Database, AI/Math Layer, Deployment, and Security details for all 10 projects.
+6. **Ask Vraj Assistant (`/ask-vraj` & Widget)**: Conversational page and floating widget allowing queries about Vraj's background, education, and projects, backed by the Gemini API.
+7. **Admin Dashboard (`/admin`)**: A secure dashboard displaying incoming lead messages, analytics, client data, and letting Vraj manage projects, skills, and research notes.
+
+---
+
+## 💾 1. Supabase Setup Guide
+
+The application uses Supabase PostgreSQL as its main database. If Supabase environment variables are missing, the system will fall back to reading and writing local data logs in `db/messages.json`.
+
+### Step 1: Create a Supabase Project
+1. Log in to your [Supabase Dashboard](https://supabase.com/).
+2. Click **New Project**, choose a name, configure a secure password, and select a regional host closest to your users.
+3. Once provisioned, locate the project API keys in your settings dashboard under **Settings > API**.
+
+### Step 2: Initialize Database Schemas
+Navigate to the **SQL Editor** in your Supabase dashboard and run the following queries to create tables, status enums, and configure Row-Level Security (RLS) policies:
+
+```sql
+-- 1. Table: Contact Inquiries
+create table public.contact_inquiries (
+    id uuid default gen_random_uuid() primary key,
+    name text not null,
+    email text not null,
+    subject text not null,
+    message text not null,
+    status text default 'unread'::text check (status in ('unread', 'read', 'archived')),
+    created_at timestamp with time zone default timezone('utc'::text, now()) not null
+);
+
+-- Enable RLS for inquiries
+alter table public.contact_inquiries enable row level security;
+
+-- Insert Policy: Anyone can submit messages via contact forms
+create policy "Allow anonymous submissions" 
+on public.contact_inquiries for insert 
+with check (true);
+
+-- Read Policy: Only authenticated admin role can view submissions
+create policy "Allow admins to read inquiries" 
+on public.contact_inquiries for select 
+using (auth.role() = 'authenticated');
+
+-- Delete Policy: Only admins can delete logs
+create policy "Allow admins to delete inquiries" 
+on public.contact_inquiries for delete 
+using (auth.role() = 'authenticated');
+
+
+-- 2. Table: AI Logs
+create table public.ai_logs (
+    id uuid default gen_random_uuid() primary key,
+    session_id text,
+    prompt text not null,
+    response text not null,
+    user_ip text,
+    created_at timestamp with time zone default timezone('utc'::text, now()) not null
+);
+
+-- Enable RLS for AI logs
+alter table public.ai_logs enable row level security;
+
+-- Insert Policy: Anyone can log AI prompts
+create policy "Allow anonymous logging" 
+on public.ai_logs for insert 
+with check (true);
+
+-- Read Policy: Only authenticated admin role can read AI logs
+create policy "Allow admins to read AI logs" 
+on public.ai_logs for select 
+using (auth.role() = 'authenticated');
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🧠 2. Gemini API Setup Guide
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The conversational features (`/ask-vraj` and the AI widget) query the **Google Gemini API** (`gemini-2.5-flash`) to stream responses.
 
-## Learn More
+### Step 1: Obtain a Gemini API Key
+1. Go to [Google AI Studio](https://aistudio.google.com/).
+2. Log in with your Google account and click **Get API Key**.
+3. Create a key and copy the token string.
 
-To learn more about Next.js, take a look at the following resources:
+### Step 2: System Prompt & Safety Rails
+The backend API route in [app/api/ask/route.ts](file:///c:/Users/vishv/OneDrive/Desktop/Vraj_Port/app/api/ask/route.ts) initializes the model with detailed developer instructions:
+- Pre-injects context regarding Vraj Patel's education (Nirma University, CSE), GPA (8.7), technologies, and deep specifications for the 10 featured projects.
+- Enforces a professional, developer-focused persona.
+- Restricts responses to approved information, returning *"I am only allowed to answer questions based on Vraj Patel's approved portfolio context"* if queries attempt to jailbreak or query unrelated subjects.
+- Streams the output token-by-token to the client interface using server-sent events.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 📊 3. Admin Dashboard Usage Guide
 
-## Deploy on Vercel
+The administrative console (`/admin`) serves as Vraj's remote management dashboard.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Accessing the Dashboard
+1. Navigate to `/admin` in your browser.
+2. If unauthorized, you will be redirected to the secure login page `/admin/login`.
+3. Provide the security credential matching the `ADMIN_PASSCODE` defined in your environment variables.
+4. Once authenticated, a secure token is saved to local session cookies, enabling access to dashboard paths.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Management Controls
+- **Overview Stat Cards**: Monitor overall metrics, contact form inquiries counts, active projects stats, and recent activities telemetry.
+- **Projects Manager**: Create, modify, delete, and toggle visibility states (Published vs. Draft/Private) for portfolio case studies.
+- **Skills Catalog**: Manage technology name entries, category designations, and proficiency levels (Expert, Advanced, Intermediate).
+- **Research logs / Blogs**: Draft, write, and archive research articles (like option pricing algorithms or HMM market regime reports).
+- **Recruiter Inbox**: Read incoming contact form inquiries and delete spam logs.
+- **AI Telemetry Viewer**: Audit conversations generated between users and the AI assistant, tracking sessions grouped by client IP.
+
+---
+
+## 🔑 4. Environment Variables
+
+Create a `.env.local` file in your project root using the templates outlined below:
+
+```bash
+# Supabase Integration (Get these from your Supabase Dashboard)
+NEXT_PUBLIC_SUPABASE_URL=your-supabase-project-url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key
+SUPABASE_SERVICE_ROLE_KEY=your-supabase-service-role-key
+
+# Gemini API Key (Get this from Google AI Studio)
+GEMINI_API_KEY=your-gemini-api-key
+
+# Admin Dashboard Access Passcode
+ADMIN_PASSCODE=your-secure-passcode
+```
+
+---
+
+## 💻 5. Local Development
+
+Ensure you have [Node.js](https://nodejs.org/) (v20+ recommended) installed on your system.
+
+### Install Dependencies
+```bash
+npm install
+```
+
+### Run Development Server
+```bash
+npm run dev
+```
+Open [http://localhost:3000](http://localhost:3000) to inspect the application in the browser.
+
+### Run Testing Suite
+The project uses `vitest` for test coverage.
+```bash
+# Run tests in headless mode
+npm run test
+
+# Run tests in watch mode
+npx vitest
+```
+
+### TypeScript Validation
+```bash
+npm run typecheck
+```
+
+### Linter Checks
+```bash
+npm run lint
+```
+
+### Production Bundling (Verification Build)
+```bash
+npm run build
+```
+
+---
+
+## 🚀 6. Production Deployment
+
+The project is structured to deploy on **Vercel** with minimal configuration.
+
+1. Push your repository to GitHub.
+2. Link the repository to your [Vercel Dashboard](https://vercel.com).
+3. Set the required **Environment Variables** in the Vercel project settings.
+4. Click **Deploy**. Vercel will build the static layouts, bundle Javascript modules, and deploy API serverless functions globally.
+
+---
+
+## 🛡️ 8. Security Hardening Checklist
+
+- [x] **Content Security Policy (CSP)**: Set headers via `next.config.ts` to restrict external resources and prevent Cross-Site Scripting (XSS).
+- [x] **Rate Throttling**: Added a memory-cached sliding-window rate-limiter on endpoints:
+  - Contact submissions are restricted to 3 runs per 5 minutes per IP.
+  - AI Assistant queries are limited to 10 queries per minute per IP.
+- [x] **Zod Validation**: All requests submitted to `/api/contact` and `/api/ask` are validated using strict Zod schemas, returning `400` on any malformed formats.
+- [x] **Supabase Row-Level Security (RLS)**: Public tables enforce rigid read/write policy parameters, restricting selective select actions to authenticated administrative accounts.
+- [x] **Credential Obfuscation**: The administration router utilizes server-only environment checks. Passcodes and Gemini keys are never leaked to client bundles.
+
+---
+
+## 📈 9. Future Roadmap
+
+1. **Geospatial Pre-mapping (Enermass Solar ERP)**: Integrate Google Solar API and satellite mapping tools to automatically pre-calculate building shade profiles before a site survey.
+2. **Advanced Volatility Analytics (MSPE WASM)**: Update the C++ options pricing engine to support SABR Volatility models and compute implied probability distribution curves dynamically.
+3. **Smart CRM Dispatching**: Connect recruiter form submissions directly to automated email workflows that respond with customizable, profile-matched resume files.
+4. **Outbox Semantic scoring (AI outreach)**: Utilize vector embeddings to analyze leads lists, sorting outreach prioritizations based on relevance matches.
