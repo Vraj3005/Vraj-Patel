@@ -19,7 +19,7 @@ const suggestedPrompts = [
   'What client software has Vraj built?',
   'Explain Enermass Solar ERP.',
   'Explain Bhagwati Interior ERP.',
-  'What is ConstructionOS?',
+  'Explain Driedhub Marketplace.',
   'What is Surendra & Co. website?',
   'What quant projects has Vraj built?',
   'Explain NF-LRD technically.',
@@ -50,15 +50,17 @@ export default function AskVraj() {
     }
     return null;
   });
-  const threadEndRef = useRef<HTMLDivElement>(null);
+  const feedRef = useRef<HTMLDivElement>(null);
 
   // Auto-scroll chat thread to bottom
   const scrollToBottom = () => {
-    threadEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    feedRef.current?.scrollTo({ top: feedRef.current.scrollHeight, behavior: 'smooth' });
   };
 
   useEffect(() => {
-    scrollToBottom();
+    if (messages.length > 1) {
+      scrollToBottom();
+    }
   }, [messages, isLoading]);
 
   // Handle message send submission
@@ -201,7 +203,7 @@ export default function AskVraj() {
         <div className="absolute inset-0 cyber-grid opacity-5 pointer-events-none" />
 
         {/* Message Feed container */}
-        <div className="flex-1 overflow-y-auto p-4 md:p-6 flex flex-col gap-5 scrollbar-thin relative z-10">
+        <div ref={feedRef} className="flex-1 overflow-y-auto p-4 md:p-6 flex flex-col gap-5 scrollbar-thin relative z-10">
           <AnimatePresence initial={false}>
             {messages.map((message) => {
               const isUser = message.role === 'user';
@@ -269,7 +271,6 @@ export default function AskVraj() {
               </motion.div>
             )}
           </AnimatePresence>
-          <div ref={threadEndRef} />
         </div>
 
         {/* Input submission container */}

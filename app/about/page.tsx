@@ -15,38 +15,24 @@ interface ExperienceItem {
 
 const timeline: ExperienceItem[] = [
   {
-    period: 'Nov 2025 - Mar 2026',
-    role: 'Lead Full-Stack Architect',
-    organization: 'Enermass Energies Pvt. Ltd.',
-    description: 'Designed and shipped their core solar calculator engine and material procurement ERP. Offloaded calculations to client-side GPU shaders, reducing computation times by 98%.',
-    type: 'client',
-  },
-  {
-    period: 'Dec 2025 - Feb 2026',
-    role: 'Backend & System Architect',
-    organization: 'ConstructionOS ERP',
-    description: 'Implemented multi-tenant offline synchronization algorithms. Resolved high-volume site inventory queries via write-ahead aggregated tables cached in Redis.',
+    period: 'May 2026 - Jul 2026',
+    role: 'Software Engineering Intern',
+    organization: 'Pitbull Corporation',
+    description: 'Engineered and delivered core client ERP platforms and e-commerce websites (Enermass Solar Calculator, Bhagwati Interior ERP, Driedhub Marketplace, Marea Luxury Storefront, and Surendra website) during a 2-month summer internship, designing database schemas and optimizing visual layouts.',
     type: 'client',
   },
   {
     period: 'Sep 2025 - Nov 2025',
-    role: 'Quant Developer / Researcher',
+    role: 'Solo Quant Researcher',
     organization: 'NIFTY 50 Regime Discovery',
-    description: 'Developed python-based Hidden Markov Models (HMM) to classify market trend transitions. Achieved 25x backtesting speedups using numba hot loop compilations.',
+    description: 'Developed Python-based Hidden Markov Models (HMM) to classify market price regimes and run performance backtesting dashboards.',
     type: 'research',
   },
   {
-    period: 'Jul 2025 - Oct 2025',
-    role: 'Solo Full-Stack Developer',
-    organization: 'Bhagwati Interior ERP',
-    description: 'Created secure invoicing automation pipelines compiling layout-perfect PDFs using serverless lambdas. Shipped dynamic budget ledgers scaling to 150+ active project designers.',
-    type: 'client',
-  },
-  {
-    period: 'Aug 2022 - May 2026',
+    period: 'Aug 2023 - May 2027',
     role: 'B.Tech Undergrad in CSE',
     organization: 'Nirma University',
-    description: 'Specializing in computer architecture, database management, and mathematical foundations. Completed coursework in advanced algorithms, machine learning, and systems.',
+    description: 'Specializing in data structures, algorithms, databases, and systems. Completed coursework in advanced algorithms, database management, and operating systems.',
     type: 'academic',
   },
 ];
@@ -102,7 +88,7 @@ export default function About() {
           Engineering Scalable Business Systems
         </h1>
         <p className="text-sm md:text-base text-secondary leading-relaxed max-w-3xl mt-1 font-medium">
-          I am Vraj Patel, a fourth-year Computer Science and Engineering student at Nirma University. 
+          I am Vraj Patel, a third-year Computer Science and Engineering student at Nirma University. 
           I focus on building functional business products—like custom ERP pipelines and quantitative visualizers—rather than toy projects. I enjoy bridging the gap between database designs and slick, interactive client interfaces.
         </p>
       </motion.div>
@@ -122,7 +108,7 @@ export default function About() {
             <div className="flex flex-col gap-1 border-t border-card-border pt-4">
               <span className="text-xs text-secondary font-bold uppercase tracking-wider font-mono">Expected Completion</span>
               <span className="text-xs text-foreground font-semibold flex items-center gap-1.5">
-                <Calendar className="h-3.5 w-3.5 text-secondary" /> May 2026
+                <Calendar className="h-3.5 w-3.5 text-secondary" /> May 2027
               </span>
             </div>
             <div className="flex flex-col gap-1 border-t border-card-border pt-4">
@@ -148,7 +134,7 @@ export default function About() {
                 </li>
                 <li className="flex gap-2">
                   <ChevronRight className="h-4 w-4 text-foreground shrink-0" />
-                  <span><strong>Optimize Bottlenecks:</strong> If a function takes more than 500ms, it is a liability. I actively optimize latency using WebGL shaders, WebAssembly compilations, and memory caching structures.</span>
+                  <span><strong>Optimize Bottlenecks:</strong> If a page load or response takes more than 500ms, it needs optimization. I prioritize performance using database indexes, client-side caching, and asynchronous backend pipelines.</span>
                 </li>
                 <li className="flex gap-2">
                   <ChevronRight className="h-4 w-4 text-foreground shrink-0" />

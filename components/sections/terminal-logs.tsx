@@ -39,7 +39,7 @@ export default function TerminalLogs() {
         break;
       case 'about':
         newLines.push({
-          text: 'Candidate: Vraj Patel\nPosition: Full-Stack Architect / Quant Dev\nEducation: B.Tech CSE (Final Year), Nirma University\nCGPA: 8.7/10.0\nBio: Custom ERP systems developer, options volatility smile modeling, and LLM automation scripts builder.',
+          text: 'Candidate: Vraj Patel\nPosition: Full-Stack Architect / Quant Dev\nEducation: B.Tech CSE (3rd Year), Nirma University\nCGPA: 7.98/10.0\nBio: Custom ERP systems developer, options volatility smile modeling, and LLM automation scripts builder.',
           type: 'output',
         });
         break;
@@ -51,7 +51,7 @@ export default function TerminalLogs() {
         break;
       case 'projects':
         newLines.push({
-          text: 'Production Cases Shipped:\n1. Enermass Solar Calculator (Fast mathematical tilt & shading model)\n2. ConstructionOS (Offline-first timesheet CRDTs syncing)\n3. NF-LRD Quant regime switches classifier (Hidden Markov Models)\n4. MSPE implied option volatility smile visualizer (WebGL rendering)\n5. AI Cold Outreach Emailer (Zod schema JSON response validation)\nVisit the "/projects" tab for full technical analyses.',
+          text: 'Production Cases Shipped:\n1. OutreachOps AI (Autonomous B2B outbound campaign SaaS)\n2. Enermass Solar Calculator (Fast mathematical tilt & shading model)\n3. NF-LRD Quant regime switches classifier (Hidden Markov Models)\n4. MSPE implied option volatility smile visualizer (3D Plotly rendering)\n5. Driedhub Marketplace (DTC e-commerce & Razorpay payments)\nVisit the "/projects" tab for full technical analyses.',
           type: 'output',
         });
         break;

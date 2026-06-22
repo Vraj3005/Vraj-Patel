@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { askVrajAI, askVrajAIStream } from '@/lib/ai/gemini';
 import { isRateLimited } from '@/lib/security/rate-limiter';
 import { aiChatInputSchema } from '@/lib/security/zod-schemas';
-import { createServerSupabaseClient, isSupabaseConfigured } from '@/lib/supabase/server';
+import { createSimpleSupabaseClient, isSupabaseConfigured } from '@/lib/supabase/server';
 
 export async function POST(req: NextRequest) {
   const ip = req.headers.get('x-forwarded-for') || '127.0.0.1';
@@ -32,19 +32,25 @@ export async function POST(req: NextRequest) {
     let activeSessionId = sessionId;
 
     if (isSupabaseConfigured && !activeSessionId) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const supabase = (await createServerSupabaseClient()) as any;
-      
-      const { data: sessionData, error: sessionErr } = await supabase
-        .from('ai_chat_sessions')
-        .insert([{ title: `Query: ${prompt.substring(0, 30)}...`, user_ip: ip }])
-        .select()
-        .single();
+      try {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const supabase = createSimpleSupabaseClient() as any;
+        
+        const { data: sessionData, error: sessionErr } = await supabase
+          .from('ai_chat_sessions')
+          .insert([{ title: `Query: ${prompt.substring(0, 30)}...`, user_ip: ip }])
+          .select()
+          .single();
 
-      if (!sessionErr && sessionData) {
-        activeSessionId = sessionData.id;
+        if (!sessionErr && sessionData) {
+          activeSessionId = sessionData.id;
+        }
+      } catch (dbErr) {
+        console.error('Supabase session log failed:', dbErr);
       }
-    } else if (!activeSessionId) {
+    }
+    
+    if (!activeSessionId) {
       activeSessionId = crypto.randomUUID();
     }
 
@@ -72,12 +78,16 @@ export async function POST(req: NextRequest) {
 
               // Log to database AFTER streaming completes
               if (isSupabaseConfigured && activeSessionId) {
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                const supabase = (await createServerSupabaseClient()) as any;
-                await supabase.from('ai_chat_messages').insert([
-                  { session_id: activeSessionId, role: 'user', content: prompt },
-                  { session_id: activeSessionId, role: 'assistant', content: fullText }
-                ]);
+                try {
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                  const supabase = createSimpleSupabaseClient() as any;
+                  await supabase.from('ai_chat_messages').insert([
+                    { session_id: activeSessionId, role: 'user', content: prompt },
+                    { session_id: activeSessionId, role: 'assistant', content: fullText }
+                  ]);
+                } catch (dbErr) {
+                  console.error('Supabase message log failed in simulated stream:', dbErr);
+                }
               }
             } catch (err) {
               controller.error(err);
@@ -100,12 +110,16 @@ export async function POST(req: NextRequest) {
 
               // Log to database AFTER streaming completes
               if (isSupabaseConfigured && activeSessionId) {
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                const supabase = (await createServerSupabaseClient()) as any;
-                await supabase.from('ai_chat_messages').insert([
-                  { session_id: activeSessionId, role: 'user', content: prompt },
-                  { session_id: activeSessionId, role: 'assistant', content: fullText }
-                ]);
+                try {
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                  const supabase = createSimpleSupabaseClient() as any;
+                  await supabase.from('ai_chat_messages').insert([
+                    { session_id: activeSessionId, role: 'user', content: prompt },
+                    { session_id: activeSessionId, role: 'assistant', content: fullText }
+                  ]);
+                } catch (dbErr) {
+                  console.error('Supabase message log failed in real stream:', dbErr);
+                }
               }
             } catch (err) {
               controller.error(err);
@@ -129,12 +143,16 @@ export async function POST(req: NextRequest) {
     const aiResponse = await askVrajAI(prompt, history || []);
 
     if (isSupabaseConfigured && activeSessionId) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const supabase = (await createServerSupabaseClient()) as any;
-      await supabase.from('ai_chat_messages').insert([
-        { session_id: activeSessionId, role: 'user', content: prompt },
-        { session_id: activeSessionId, role: 'assistant', content: aiResponse }
-      ]);
+      try {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const supabase = createSimpleSupabaseClient() as any;
+        await supabase.from('ai_chat_messages').insert([
+          { session_id: activeSessionId, role: 'user', content: prompt },
+          { session_id: activeSessionId, role: 'assistant', content: aiResponse }
+        ]);
+      } catch (dbErr) {
+        console.error('Supabase message log failed in standard JSON ask:', dbErr);
+      }
     }
 
     const headers: Record<string, string> = {

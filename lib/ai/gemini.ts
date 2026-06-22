@@ -14,13 +14,13 @@ function getMockVrajResponse(prompt: string): string {
   if (normalized.includes('project') || normalized.includes('work') || normalized.includes('build')) {
     return `Vraj has built 10 major systems across ERPs, E-commerce, AI automation, and Quant Finance. Key highlights include:
 - **Enermass Solar Calculator & ERP**: Features 99.4% solar forecast accuracy and offloads calculations to GPU WebGL shaders.
-- **ConstructionOS**: A Go/Next.js ERP that utilizes offline-first synced CRDTs for field engineers.
+- **Driedhub Marketplace**: A DTC dried fruit marketplace integrated with Razorpay and custom metrics board.
 - **NF-LRD Platform**: A Nifty 50 market regime discovery model built using Hidden Markov Models.
 Visit the '/projects' tab for the full list of case studies.`;
   }
 
   if (normalized.includes('resume') || normalized.includes('cv') || normalized.includes('education') || normalized.includes('university') || normalized.includes('nirma')) {
-    return `Vraj is a 4th-year B.Tech CSE student at Nirma University (graduating in 2026). He has a CGPA of 7.98, has maintained strong academic records, and possesses deep full-stack architecture skills. You can view, interact with, and print Vraj's full A4 resume on the '/resume' page.`;
+    return `Vraj is a 3rd-year B.Tech CSE student at Nirma University (graduating in 2027). He has a CGPA of 7.98, did a Software Engineering Internship at Pitbull Corporation, and possesses deep full-stack architecture and quant research skills. You can view, interact with, and print Vraj's full A4 resume on the '/resume' page.`;
   }
 
   if (normalized.includes('contact') || normalized.includes('email') || normalized.includes('hire') || normalized.includes('message') || normalized.includes('phone') || normalized.includes('mail')) {
@@ -56,7 +56,7 @@ export function getMockVrajResponseStream(prompt: string): ReadableStream<Uint8A
   const fullText = getMockVrajResponse(prompt);
   const encoder = new TextEncoder();
   const chunks = fullText.split(/(\s+)/);
-  
+
   return new ReadableStream({
     async start(controller) {
       for (const chunk of chunks) {
@@ -95,8 +95,8 @@ export async function askVrajAI(
     const text = result.response.text();
     return text || "I couldn't process that query. Please check back later.";
   } catch (error) {
-    console.error('Gemini API call failed:', error);
-    return `[Gemini Error]: ${error instanceof Error ? error.message : 'Unknown error'}. Fallback info: Vraj Patel is a CSE student at Nirma University specialized in Next.js, Go, and Quant models.`;
+    console.error('Gemini API call failed, falling back to mock response:', error);
+    return getMockVrajResponse(prompt);
   }
 }
 
@@ -111,7 +111,7 @@ export async function askVrajAIStream(
 
   try {
     const model = genAI.getGenerativeModel({
-      model: 'gemini-2.5-flash',
+      model: 'gemini-3.1-flash-lite',
       systemInstruction: SYSTEM_INSTRUCTION,
     });
 
@@ -122,8 +122,8 @@ export async function askVrajAIStream(
     const result = await chat.sendMessageStream(prompt);
     return result;
   } catch (error) {
-    console.error('Gemini Stream initiation failed:', error);
-    throw error;
+    console.error('Gemini Stream initiation failed, falling back to mock stream:', error);
+    return getMockVrajResponseStream(prompt);
   }
 }
 

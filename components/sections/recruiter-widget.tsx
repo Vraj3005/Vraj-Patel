@@ -15,7 +15,7 @@ interface QAPair {
 const recruiterQAs: QAPair[] = [
   {
     question: 'When is Vraj available for full-time employment?',
-    answer: 'Vraj graduates from Nirma University in May 2026. He is available for immediate full-time software engineering roles or internships starting immediately.',
+    answer: 'Vraj graduates from Nirma University in May 2027. He is available for internships starting immediately, or full-time software engineering roles upon his expected graduation.',
   },
   {
     question: 'Is he willing to relocate for work?',

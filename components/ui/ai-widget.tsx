@@ -43,11 +43,11 @@ export default function AIWidget() {
     return null;
   });
   
-  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const feedRef = useRef<HTMLDivElement>(null);
 
   // Scroll to bottom
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    feedRef.current?.scrollTo({ top: feedRef.current.scrollHeight, behavior: 'smooth' });
   };
 
   useEffect(() => {
@@ -206,7 +206,7 @@ export default function AIWidget() {
             </div>
 
             {/* Message Feed */}
-            <div className="flex-1 overflow-y-auto p-4 flex flex-col gap-4 scrollbar-thin">
+            <div ref={feedRef} className="flex-1 overflow-y-auto p-4 flex flex-col gap-4 scrollbar-thin">
               {messages.map((message) => {
                 const isUser = message.role === 'user';
                 return (
@@ -244,7 +244,6 @@ export default function AIWidget() {
                   </div>
                 );
               })}
-              <div ref={messagesEndRef} />
             </div>
 
             {/* Suggestion & Input Panel */}

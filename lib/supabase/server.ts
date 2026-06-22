@@ -1,5 +1,5 @@
 import { createServerClient } from '@supabase/ssr';
-import { SupabaseClient } from '@supabase/supabase-js';
+import { createClient, SupabaseClient } from '@supabase/supabase-js';
 import { cookies } from 'next/headers';
 import { Database } from '@/types/supabase';
 
@@ -53,3 +53,33 @@ export async function createServerSupabaseClient(): Promise<SupabaseClient<Datab
     },
   });
 }
+
+/**
+ * Creates a simple cookie-less Supabase client for background operations like log tracking.
+ * This prevents runtime Next.js exceptions when accessing cookies during async streaming.
+ */
+export function createSimpleSupabaseClient(): SupabaseClient<Database> {
+  if (!isSupabaseConfigured) {
+    return new Proxy({} as SupabaseClient<Database>, {
+      get() {
+        return () => {
+          return {
+            select: () => ({
+              order: () => Promise.resolve({ data: [], error: null }),
+              limit: () => Promise.resolve({ data: [], error: null }),
+            }),
+            insert: (args: unknown) => Promise.resolve({ data: args, error: null }),
+          };
+        };
+      },
+    });
+  }
+
+  return createClient<Database>(supabaseUrl, supabaseAnonKey, {
+    auth: {
+      persistSession: false,
+      autoRefreshToken: false,
+    },
+  });
+}
+

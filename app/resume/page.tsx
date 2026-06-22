@@ -18,13 +18,13 @@ export default function Resume() {
     setTimeout(() => setCopyStatus(null), 2000);
   };
 
-  const shortSummaryText = `Highly technical CSE student at Nirma University. Architects high-concurrency Node/Go APIs, web applications, custom pricing ERP platforms (Enermass, Bhagwati), and quantitative market research tools (regime discovery, WebAssembly option calculators).`;
+  const shortSummaryText = `Highly technical CSE student at Nirma University. Architects robust web applications, custom pricing ERP platforms (Enermass, Bhagwati), and quantitative market research tools (regime discovery, options pricing engines).`;
 
-  const fullStackSummaryText = `Computer Science Undergrad with proven expertise building client ERP architectures. Experienced shipping next-generation full-stack solutions, Go microservices, and offline synchronization interfaces using CRDTs. Proficient with Next.js, Express, Go, PostgreSQL, Redis, and Supabase RLS policies.`;
+  const fullStackSummaryText = `Computer Science Undergrad with proven expertise building client ERP architectures. Experienced shipping next-generation full-stack solutions, custom pricing matrices, and database query optimizations. Proficient with Next.js, Express, FastAPI, PostgreSQL, Redis, and Supabase RLS policies.`;
 
-  const aiSummaryText = `AI/Automation developer specialized in LangChain agent pipelines and LLM operations. Experienced crawling CRM pages and candidate records using Gemini API with Zod structured output schemas. Proficient configuring robust outbox sequences throttled via Redis bullmq lines.`;
+  const aiSummaryText = `AI/Automation developer specialized in Google GenAI SDK integrations and LLM workflow operations. Experienced scraping target company pages using Gemini API with structured JSON output configurations. Proficient configuring robust async background task handlers.`;
 
-  const quantSummaryText = `Quantitative developer and mathematical modeler. Built Hidden Markov Model (HMM) volatility trackers for NIFTY 50 (Numba compiled, 25x backtesting speed loops) and compiled high-speed C++ option implied volatility solvers to WebAssembly running inside browser Web Workers.`;
+  const quantSummaryText = `Quantitative developer and mathematical modeler. Built Hidden Markov Model (HMM) volatility trackers for NIFTY 50 (hmmlearn, statsmodels) and Option implied volatility calculators using Python math solver pipelines (FastAPI, NumPy, Pandas).`;
 
   return (
     <div className="py-6 md:py-10 max-w-4xl mx-auto w-full flex flex-col gap-8 px-4 sm:px-6">
@@ -151,12 +151,33 @@ export default function Resume() {
                   <span className="text-secondary print:text-gray-700 font-medium">Nirma University · Gujarat, India</span>
                 </div>
                 <div className="flex flex-col items-end text-[10px] md:text-xs font-bold text-secondary print:text-primary font-mono">
-                  <span>2022 - 2026</span>
+                  <span>2023 - 2027</span>
                   <span>CGPA: 7.98 / 10.0</span>
                 </div>
               </div>
               <p className="text-xs text-secondary print:text-gray-600 leading-relaxed font-medium">
-                Core coursework: Data Structures & Algorithms, Database Management Systems, System Design Patterns, Computer Networks, Operating Systems, Quantitative Finance modeling.
+                Core coursework: Data Structures & Algorithms, Database Management Systems, System Design, Computer Networks, Operating Systems, Quantitative Finance modeling.
+              </p>
+            </div>
+          </div>
+
+          {/* Section 3.5: Professional Experience */}
+          <div className="flex flex-col gap-4">
+            <h3 className="text-xs font-bold uppercase tracking-wider text-foreground print:text-black border-b border-card-border pb-1 font-mono">
+              Professional Experience
+            </h3>
+            <div className="flex flex-col gap-2">
+              <div className="flex justify-between items-start text-xs md:text-sm">
+                <div className="flex flex-col gap-0.5">
+                  <span className="font-bold font-serif text-foreground print:text-black">Software Engineering Intern</span>
+                  <span className="text-secondary print:text-gray-700 font-medium">Pitbull Corporation · Gujarat, India</span>
+                </div>
+                <div className="flex flex-col items-end text-[10px] md:text-xs font-bold text-secondary print:text-primary font-mono">
+                  <span>May 2026 - Jul 2026</span>
+                </div>
+              </div>
+              <p className="text-xs text-secondary print:text-gray-650 leading-relaxed font-medium">
+                Engineered and delivered core client ERP systems and B2B layouts (Bhagwati Interior ERP, Enermass Solar Calculator, Driedhub, Marea, and Surendra website). Built performant data sync logic, automated GST invoice pipelines, and optimized Three.js/scroll rendering interfaces.
               </p>
             </div>
           </div>
@@ -168,47 +189,47 @@ export default function Resume() {
             </h3>
             
             <div className="flex flex-col gap-4">
-              {/* Project 1: Enermass */}
+              {/* Project 1: OutreachOps AI */}
               <div className="flex flex-col gap-1 text-xs">
                 <div className="flex justify-between items-start">
-                  <span className="font-bold font-serif text-foreground print:text-black">Enermass Solar Calculator & ERP</span>
-                  <span className="text-[10px] font-bold text-secondary print:text-primary font-mono">Nov 2025 - Mar 2026</span>
+                  <span className="font-bold font-serif text-foreground print:text-black">OutreachOps AI (AI Coldmail) · <span className="text-[10px] text-muted italic">100% Personal Project</span></span>
+                  <span className="text-[10px] font-bold text-secondary print:text-primary font-mono">Feb 2026 - Apr 2026</span>
                 </div>
                 <p className="text-secondary print:text-gray-700 leading-relaxed text-[11px] md:text-xs font-medium">
-                  Developed an enterprise solar layout planning dashboard. Built WebGL shaders to compute coordinate trigonometry matrices in browser (reducing response from 4.8s to &lt;80ms). Synced bill-of-material inventory directly with regional suppliers.
+                  Developed an autonomous outbound personalization email campaign SaaS. Integrated Gemini API structured JSON mode to scrape lead details, personalize drafts, and sequence dispatches via Gmail OAuth APIs.
                 </p>
               </div>
 
-              {/* Project 2: ConstructionOS */}
+              {/* Project 2: MSPE */}
               <div className="flex flex-col gap-1 text-xs">
                 <div className="flex justify-between items-start">
-                  <span className="font-bold font-serif text-foreground print:text-black">ConstructionOS (Construction ERP Module)</span>
-                  <span className="text-[10px] font-bold text-secondary print:text-primary font-mono">Dec 2025 - Feb 2026</span>
+                  <span className="font-bold font-serif text-foreground print:text-black">Market Surface Projection Engine (MSPE) · <span className="text-[10px] text-muted italic">100% Personal Project</span></span>
+                  <span className="text-[10px] font-bold text-secondary print:text-primary font-mono">Oct 2025 - Dec 2025</span>
                 </div>
                 <p className="text-secondary print:text-gray-700 leading-relaxed text-[11px] md:text-xs font-medium">
-                  Architected offline-first timesheet and raw material logs utilizing indexedDB. Merged conflicting field entries using Go, PostgreSQL, and conflict-free replicated data types (CRDTs). Streamed analytics caches via Redis WAL syncing.
+                  Built options pricing and volatility surface modeling web calculator. Created FastAPI mathematics backend using GARCH, Pandas, and statsmodels models, visualizing 3D skews in-browser.
                 </p>
               </div>
 
               {/* Project 3: NF-LRD */}
               <div className="flex flex-col gap-1 text-xs">
                 <div className="flex justify-between items-start">
-                  <span className="font-bold font-serif text-foreground print:text-black">NF-LRD NIFTY 50 Regime Discovery</span>
+                  <span className="font-bold font-serif text-foreground print:text-black">NF-LRD NIFTY 50 Regime Discovery · <span className="text-[10px] text-muted italic">100% Personal Project</span></span>
                   <span className="text-[10px] font-bold text-secondary print:text-primary font-mono">Sep 2025 - Nov 2025</span>
                 </div>
                 <p className="text-secondary print:text-gray-700 leading-relaxed text-[11px] md:text-xs font-medium">
-                  Designed quantitative research engine to segment market price regimes using Hidden Markov Models (HMM). Applied Numba-compiled machine code vectors, achieving 25x backtesting speed loops.
+                  Designed quantitative research platform to segment Nifty 50 market trend transitions using Hidden Markov Models (HMM). Implemented statistical feature extraction and analytics using statsmodels and hmmlearn libraries.
                 </p>
               </div>
 
-              {/* Project 4: AI Outbound Automation */}
+              {/* Project 4: Enermass */}
               <div className="flex flex-col gap-1 text-xs">
                 <div className="flex justify-between items-start">
-                  <span className="font-bold font-serif text-foreground print:text-black">AI Cold Email Automation Script</span>
-                  <span className="text-[10px] font-bold text-secondary print:text-primary font-mono">Feb 2026 - Apr 2026</span>
+                  <span className="font-bold font-serif text-foreground print:text-black">Enermass Solar Calculator & ERP · <span className="text-[10px] text-muted italic">Collaboration Project</span></span>
+                  <span className="text-[10px] font-bold text-secondary print:text-primary font-mono">May 2026 - Jun 2026</span>
                 </div>
                 <p className="text-secondary print:text-gray-700 leading-relaxed text-[11px] md:text-xs font-medium">
-                  Configured automated B2B script pipeline using Gemini API. Utilized strict Zod schemas to ensure JSON payloads, personalized outbox letters with lead LinkedIn context, and configured staggered mailing loops.
+                  Co-engineered a client-side rooftop solar capacity and pricing calculator. Implemented state-specific government subsidy formulas (PM Surya Ghar brackets) and dynamic material inventory cost configurations.
                 </p>
               </div>
             </div>

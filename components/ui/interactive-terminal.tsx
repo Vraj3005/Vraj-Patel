@@ -88,7 +88,7 @@ export default function InteractiveTerminal() {
         ...prev,
         { text: 'Name: Vraj Patel', type: 'system' },
         { text: 'Role: Full-Stack Architect / Quant Research / AI Automation Engineer', type: 'output' },
-        { text: 'Academics: CSE Undergrad (4th year) at Nirma University | CGPA: 7.98', type: 'output' },
+        { text: 'Academics: CSE Undergrad (3rd year) at Nirma University | CGPA: 7.98', type: 'output' },
         { text: 'Core Focus: Building performant ERP engines, full-stack SPAs, offline synchronization layers, and volatility calculators.', type: 'output' },
         { text: '', type: 'output' }
       ]);
@@ -100,11 +100,12 @@ export default function InteractiveTerminal() {
       if (arg === '--client') {
         setHistory(prev => [
           ...prev,
-          { text: 'Client Software & Custom ERP platforms:', type: 'system' },
-          { text: '1. Enermass Solar Calculator & ERP (Live) - 3D rooftop estimation trigonometry and auto Bill of Materials. Reduced computation time from 4.8s to <80ms.', type: 'output' },
-          { text: '2. Bhagwati Interior ERP (Live) - Bespoke wooden material pricing registers, offline pre-signed AWS S3 templates generator.', type: 'output' },
-          { text: '3. ConstructionOS (In Development) - High-concurrency Go microservices, offline attendance log using indexedDB & CRDT synchronization.', type: 'output' },
-          { text: '4. Surendra & Co. Website (Live) - B2B fleet interior body designer configurations rendered using Draco-compressed Three.js models.', type: 'output' },
+          { text: 'Client Software & Custom ERP platforms (Collaborations):', type: 'system' },
+          { text: '1. Enermass Solar Calculator & ERP (Live) - 3D rooftop shading models and materials management.', type: 'output' },
+          { text: '2. Bhagwati Interior ERP (Live) - Designer material logs, real-time budgets, and PDF quotation compiler.', type: 'output' },
+          { text: '3. Driedhub Marketplace & ERP (Live) - DTC dried fruit marketplace integrated with Razorpay and custom metrics board.', type: 'output' },
+          { text: '4. Marea Luxury Fashion & ERP (Live) - Editorial fashion storefront utilizing GSAP scroll triggers and drag-drop admin board.', type: 'output' },
+          { text: '5. Surendra & Co. Website (Live) - Coach manufacturer presentation portal with interactive options configuration.', type: 'output' },
           { text: '', type: 'output' }
         ]);
       } else if (arg === '--quant') {

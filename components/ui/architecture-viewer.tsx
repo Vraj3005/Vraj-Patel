@@ -26,442 +26,486 @@ interface ProjectArchitecture {
 const architectureData: Record<string, ProjectArchitecture> = {
   'enermass-solar-calculator': {
     frontend: {
-      title: 'Frontend Engine',
+      title: 'Frontend Sizing UI',
       icon: <Layout className="h-4 w-4" />,
-      tech: ['Next.js', 'WebGL', 'TypeScript', 'Framer Motion'],
-      description: 'Single-page surveyor workstation layout. Employs GPU-accelerated client WebGL shaders to compute coordinate trigonometry matrices in browser, avoiding heavy serverroundtrips.',
-      keyMetric: 'WebGL load: <80ms'
+      tech: ['Next.js', 'React', 'Zustand', 'Tailwind CSS', 'TypeScript'],
+      description: 'Client-side rooftop solar calculator interface. Manages custom panel selections, inline quantity overrides, and margin adjustments dynamically.',
+      keyMetric: 'Sizing Store: Zustand'
     },
     backend: {
-      title: 'Backend Services',
+      title: 'Backend Controller',
       icon: <Server className="h-4 w-4" />,
-      tech: ['Python', 'FastAPI', 'Pandas'],
-      description: 'Modular calculations servers running on FastAPI. Manages the core quotation pricing matrices and coordinates scraper requests to inventory feeds.',
-      keyMetric: 'Response time: ~45ms'
+      tech: ['Next.js API routes', 'TypeScript'],
+      description: 'Exposes API handlers for quote dispatches, lead details saving, and global master rates database overrides.',
+      keyMetric: 'API response: <120ms'
     },
     database: {
       title: 'Database Schema',
       icon: <Database className="h-4 w-4" />,
-      tech: ['PostgreSQL', 'SQLAlchemy'],
-      description: 'Normalized database structure for client leads, regional solar coefficients, billing history, and supplier pricing lists.',
-      keyMetric: '99.9% consistency rate'
+      tech: ['Supabase PostgreSQL', 'Drizzle ORM'],
+      description: 'Stores materials master lists, saved client quotes, lead status changes, and geographic parameters registers.',
+      keyMetric: 'Sync: LocalStorage + DB'
     },
     ai: {
       title: 'Mathematical Layer',
       icon: <Cpu className="h-4 w-4" />,
-      tech: ['Geospatial coordinate arrays', 'Irradiance models'],
-      description: 'Geospatial calculations to estimate shading factors and solar tilt optimizations based on regional coordinates.',
-      keyMetric: '99.4% yield prediction accuracy'
+      tech: ['Subsidy Logic', 'State coefficient matrix'],
+      description: 'Calculates central government subsidies (PM Surya Ghar brackets) and Simple Payback ROI ratios dynamically client-side.',
+      keyMetric: 'Indian States: 28 mapped'
     },
     deployment: {
-      title: 'Deployment Architecture',
+      title: 'Deployment Infrastructure',
       icon: <Globe className="h-4 w-4" />,
-      tech: ['Vercel CDN', 'AWS EC2', 'GitHub Actions'],
-      description: 'The Next.js frontend is served via Vercel Edge networks, and calculations servers run inside Docker containers on AWS EC2 nodes.',
-      keyMetric: '99.98% uptime SLA'
+      tech: ['Vercel Edge CDN'],
+      description: 'Served statically using Next.js Incremental Static Regeneration (ISR) and distributed across Vercel edge networks.',
+      keyMetric: 'Hosted on Vercel CDN'
     },
     security: {
       title: 'Security Audits',
       icon: <ShieldCheck className="h-4 w-4" />,
-      tech: ['JWT auth', 'CORS restrictions', 'Webhook handshakes'],
-      description: 'Enforces rigid CORS validation policies on the FastAPI servers, JWT token authorization, and cryptographic signature validations on supplier webhooks.',
-      keyMetric: 'Zero CVE warnings'
+      tech: ['Supabase Auth', 'Gated Admin sessions'],
+      description: 'Protects administrative routes, restricting settings defaults overrides and rate master tables modification to authorized accounts.',
+      keyMetric: 'Protected Admin Routes'
+    }
+  },
+  'outreachops-ai': {
+    frontend: {
+      title: 'Frontend Dashboard',
+      icon: <Layout className="h-4 w-4" />,
+      tech: ['Next.js 14', 'TypeScript', 'Tailwind CSS', 'Recharts'],
+      description: 'Sales operations dashboard. Visualizes campaign lead sheets, edit queues, generated email drafts, and response rates charts.',
+      keyMetric: 'Interactive Grids'
+    },
+    backend: {
+      title: 'Backend Controller',
+      icon: <Server className="h-4 w-4" />,
+      tech: ['FastAPI (Python)', 'Pydantic Settings', 'gspread', 'Gmail API'],
+      description: 'Exposes Python endpoints to sync lead files from Google Sheets, trigger LLM generation queues, and dispatch emails via Gmail APIs.',
+      keyMetric: 'FastAPI Backend (async)'
+    },
+    database: {
+      title: 'Database Schema',
+      icon: <Database className="h-4 w-4" />,
+      tech: ['Supabase Postgres', 'Row Level Security'],
+      description: 'Logs active campaigns, outbound drafts, leads lists, and schedule records. Restricts database writes using RLS checks.',
+      keyMetric: 'Supabase Postgres'
+    },
+    ai: {
+      title: 'AI Personalization',
+      icon: <Cpu className="h-4 w-4" />,
+      tech: ['Google GenAI SDK', 'Structured JSON Outputs'],
+      description: 'Scrapes target company landing pages and generates tailored pitches. Uses Gemini Structured Output mode to parse JSON variables.',
+      keyMetric: 'Gemini Generative API'
+    },
+    deployment: {
+      title: 'Deployment Architecture',
+      icon: <Globe className="h-4 w-4" />,
+      tech: ['Vercel Edge CDN (Frontend)', 'Render (Backend VPS)', 'Docker'],
+      description: 'Vercel Edge serves the dashboard. The FastAPI backend compiles inside Docker containers and deploys to Render VPS instances.',
+      keyMetric: 'Containerized Backend'
+    },
+    security: {
+      title: 'Security Audits',
+      icon: <ShieldCheck className="h-4 w-4" />,
+      tech: ['Supabase Auth', 'Google OAuth 2.0', 'DNC filters checks'],
+      description: 'Authenticates administrative logins before email approvals. Connects securely via Gmail OAuth scopes to route dispatches.',
+      keyMetric: 'OAuth 2.0 Secure'
     }
   },
   'bhagwati-interior-erp': {
     frontend: {
-      title: 'Frontend Engine',
+      title: 'Frontend Dashboard',
       icon: <Layout className="h-4 w-4" />,
-      tech: ['React SPA', 'Redux Toolkit', 'Tailwind CSS'],
-      description: 'Interactive designer budget tool and live progress layout screens. Uses dynamic form buffers to compute wood and metal pricing on-the-fly.',
-      keyMetric: 'FPS: stable 60Hz'
+      tech: ['Next.js 16', 'Tailwind CSS v4', 'shadcn/ui', 'Framer Motion'],
+      description: 'Real-time studio designer dashboard displaying active sites, catalogs registers, designer profiles, and expense charts.',
+      keyMetric: 'Material Catalog Cards'
     },
     backend: {
       title: 'Backend Services',
       icon: <Server className="h-4 w-4" />,
-      tech: ['Node.js', 'Express', 'PDFKit'],
-      description: 'Express REST server hosting leads creation, designer kanbans, and serverless invoice PDF rendering engines.',
-      keyMetric: 'Average API delay: 90ms'
+      tech: ['Next.js Server Actions', 'Prisma ORM'],
+      description: 'Processes database queries, material catalog rate edits, designer task updates, and automated GST billing reports.',
+      keyMetric: 'Prisma ORM'
     },
     database: {
       title: 'Database Schema',
       icon: <Database className="h-4 w-4" />,
-      tech: ['MongoDB Atlas', 'Mongoose'],
-      description: 'Flexible JSON collections recording structural wood grades catalogs, furniture spec modifications, and clients details.',
-      keyMetric: 'No-schema flexibility'
+      tech: ['PostgreSQL (Supabase)', 'Prisma Schema'],
+      description: 'PostgreSQL database. Stores structured schemas for sites progress, transport details, and item catalogues.',
+      keyMetric: 'Supabase PostgreSQL'
     },
     ai: {
-      title: 'Automation Layer',
+      title: 'AI Advisor Layer',
       icon: <Cpu className="h-4 w-4" />,
-      tech: ['Serverless billing triggers'],
-      description: 'Standard rules engine mapping changes in interior materials specs directly to invoice ledgers.',
-      keyMetric: 'Instant budget sync'
+      tech: ['Google Gemini API', 'Context Prompting'],
+      description: 'Generates business analytics and efficiency advisories checking active project budgets, deadlines, and stock warnings.',
+      keyMetric: 'Gemini Analytics'
     },
     deployment: {
       title: 'Deployment Architecture',
       icon: <Globe className="h-4 w-4" />,
-      tech: ['AWS App Runner', 'AWS S3', 'Docker'],
-      description: 'Node API is deployed via AWS App Runner containers. Rendered project attachments and customer PDFs write to secure AWS S3 buckets.',
-      keyMetric: 'AWS pre-signed URLs'
+      tech: ['Vercel CDN', 'Supabase Cloud'],
+      description: 'Frontend is distributed dynamically via Vercel Edge networks, and database transactions route to Supabase cloud instances.',
+      keyMetric: 'Vercel Serverless'
     },
     security: {
       title: 'Security Audits',
       icon: <ShieldCheck className="h-4 w-4" />,
-      tech: ['Pre-signed S3 tokens', 'JSON schema validations'],
-      description: 'Protects customer documents via pre-signed, short-lived AWS S3 URLs. Checks incoming admin mutations against rigid Zod models.',
-      keyMetric: 'Role-based access'
+      tech: ['Bcryptjs Hashing', 'NextAuth.js', 'Route Middleware'],
+      description: 'Gated workspace access restricted using NextAuth authentication middleware and session checks.',
+      keyMetric: 'NextAuth Credentials'
     }
   },
-  'constructionos-erp': {
+  'driedhub-marketplace': {
     frontend: {
-      title: 'Frontend Engine',
+      title: 'Frontend Storefront',
       icon: <Layout className="h-4 w-4" />,
-      tech: ['Next.js', 'IndexedDB', 'Tailwind CSS'],
-      description: 'Client dashboard with offline-first support. Feeds timesheets and logs directly to indexedDB and syncs to server once connection is restored.',
-      keyMetric: 'Offline buffer size: 50MB'
+      tech: ['Next.js', 'Zustand', 'Tailwind CSS', 'Resend'],
+      description: 'Consumer marketplace storefront. Features static catalogs, search indexing, responsive grids, and Google login callbacks.',
+      keyMetric: 'Static pages (ISR)'
     },
     backend: {
-      title: 'Backend Services',
+      title: 'Backend Controller',
       icon: <Server className="h-4 w-4" />,
-      tech: ['Go (Golang)', 'gRPC APIs', 'Goroutines'],
-      description: 'High-speed Go microservices supporting concurrent worker requests, material tracking audits, and gRPC routes.',
-      keyMetric: 'Concurrences: 10k+ req/sec'
+      tech: ['Next.js API routes', 'Razorpay SDK', 'Resend'],
+      description: 'Coordinates customer shopping carts, stock validations, Resend email notices, and Razorpay transaction requests.',
+      keyMetric: 'Checkout: Razorpay SDK'
     },
     database: {
       title: 'Database Schema',
       icon: <Database className="h-4 w-4" />,
-      tech: ['PostgreSQL', 'Redis WAL', 'CRDTs'],
-      description: 'PostgreSQL database. Uses Conflict-free Replicated Data Types (CRDTs) to merge offline logs and updates Redis logs via Debezium pipeline.',
-      keyMetric: 'Sync conflict rate: <0.1%'
+      tech: ['Supabase PostgreSQL', 'Transactional Locks'],
+      description: 'Supabase Postgres tables mapping product catalogs, inventory levels, cart sessions, and client profiles.',
+      keyMetric: 'Supabase DB'
     },
     ai: {
-      title: 'Vision Layer',
+      title: 'Search Indexing',
       icon: <Cpu className="h-4 w-4" />,
-      tech: ['Computer Vision (planned)', 'OCR engines'],
-      description: 'Automated steel reinforcement rebar counting utilizing image segmentation algorithms.',
-      keyMetric: 'Under research'
-    },
-    deployment: {
-      title: 'Deployment Architecture',
-      icon: <Globe className="h-4 w-4" />,
-      tech: ['Docker Swarm', 'VPS gateway', 'Nginx proxy'],
-      description: 'Multi-tenant swarm node deployments across private VPS servers, balanced by Nginx reverse proxy buffers.',
-      keyMetric: 'Multi-region deployment'
-    },
-    security: {
-      title: 'Security Audits',
-      icon: <ShieldCheck className="h-4 w-4" />,
-      tech: ['RBAC checks', 'Immutable audit logs', 'HTTPS locks'],
-      description: 'Immutable system audit trails tracking materials transfers. Secure role-based endpoint gating (RBAC) written in Go middleware.',
-      keyMetric: 'Audit tampering blocked'
-    }
-  },
-  'surendra-bus-body': {
-    frontend: {
-      title: 'Frontend Engine',
-      icon: <Layout className="h-4 w-4" />,
-      tech: ['Three.js', 'Next.js', 'Draco Compression'],
-      description: 'Interactive 3D coach configurations canvas. Draco compression processes structural GLTF files in-browser for immediate responsiveness.',
-      keyMetric: 'Asset download payload: -75%'
-    },
-    backend: {
-      title: 'Backend Services',
-      icon: <Server className="h-4 w-4" />,
-      tech: ['Next.js Serverless Route API'],
-      description: 'Lightweight contact request validations routing chassis configuration parameters to admin emails.',
-      keyMetric: 'Cold start: ~120ms'
-    },
-    database: {
-      title: 'Database Schema',
-      icon: <Database className="h-4 w-4" />,
-      tech: ['Static JSON catalogs'],
-      description: 'No database storage server is used; config items are loaded from static, structured JSON files.',
-      keyMetric: '0ms query latency'
-    },
-    ai: {
-      title: 'Heuristics Layer',
-      icon: <Cpu className="h-4 w-4" />,
-      tech: ['Three.js vector matrices'],
-      description: 'Uses vector space calculations to map coordinate offsets for customized luxury seating distributions.',
-      keyMetric: 'Perfect seats align'
+      tech: ['Typo-tolerant heuristics'],
+      description: 'Standard product query completion matching, checking input queries against cached product vectors.',
+      keyMetric: 'Typo-tolerant matching'
     },
     deployment: {
       title: 'Deployment Architecture',
       icon: <Globe className="h-4 w-4" />,
       tech: ['Vercel Edge CDN'],
-      description: 'Statically pre-rendered routes distributed across global edge nodes, ensuring minimal load delay.',
-      keyMetric: 'LCP latency: <1.2s'
+      description: 'Served statically using Next.js Incremental Static Regeneration (ISR) to distribute pages across Vercel nodes.',
+      keyMetric: 'Distributed storefront'
     },
     security: {
       title: 'Security Audits',
       icon: <ShieldCheck className="h-4 w-4" />,
-      tech: ['Honeypot form protection', 'Zod validation'],
-      description: 'Honeypot inputs screen bot spam, while Zod schemas structure form details before compilation.',
-      keyMetric: 'Spam forms blocked: 100%'
+      tech: ['Google OAuth 2.0', 'Supabase Auth', 'Signature verification'],
+      description: 'Protects payment callbacks using Razorpay webhook signature hashes, and isolates user credentials in Supabase Auth.',
+      keyMetric: 'Webhook verification'
     }
   },
-  'ecommerce-brand-websites': {
+  'driedhub-admin-dashboard': {
     frontend: {
-      title: 'Frontend Engine',
+      title: 'Frontend Interface',
       icon: <Layout className="h-4 w-4" />,
-      tech: ['Next.js ISR', 'Tailwind CSS', 'GraphQL Client'],
-      description: 'Incremental Static Regeneration pre-renders top selling item pages and lazy-generates the remaining pages upon request.',
-      keyMetric: 'Static index hit rate: 94%'
+      tech: ['Next.js 14', 'Radix UI', 'Recharts SVG', 'Tailwind CSS'],
+      description: 'Internal operations dashboard illustrating order metrics, returns logs, shipment records, and sales charts.',
+      keyMetric: 'Recharts Metrics'
     },
     backend: {
       title: 'Backend Services',
       icon: <Server className="h-4 w-4" />,
-      tech: ['Shopify Storefront GraphQL API'],
-      description: 'Queries product catalogs and coordinates shopping carts via custom storefront GraphQL schemas.',
-      keyMetric: 'Query latency: <110ms'
-    },
-    database: {
-      title: 'Database Schema',
-      icon: <Database className="h-4 w-4" />,
-      tech: ['Shopify relational databases', 'Vercel KV cache'],
-      description: 'Leverages Shopify transactional database pipelines for inventory, backed by Vercel KV caches for active user checkout sessions.',
-      keyMetric: 'Edge cache hit: ~60%'
-    },
-    ai: {
-      title: 'AI Optimization',
-      icon: <Cpu className="h-4 w-4" />,
-      tech: ['Algolia Search', 'Semantic cross-sellers'],
-      description: 'Typo-tolerant search matching. Recommends alternative products based on shopping session embeddings.',
-      keyMetric: 'Search latency: <40ms'
-    },
-    deployment: {
-      title: 'Deployment Architecture',
-      icon: <Globe className="h-4 w-4" />,
-      tech: ['Vercel Edge network', 'Shopify CDN'],
-      description: 'Fully hosted on Vercel with localized assets distribution, integrated with Shopify global checkout nodes.',
-      keyMetric: 'Sub-second page loads'
-    },
-    security: {
-      title: 'Security Audits',
-      icon: <ShieldCheck className="h-4 w-4" />,
-      tech: ['Stripe 3DS tokens', 'Cryptographic signing'],
-      description: 'Payment routes rely on iframe isolation and token signatures. Webhook listeners verify Shopify cryptographic parameters.',
-      keyMetric: 'PCI-DSS Compliant routing'
-    }
-  },
-  'ecommerce-business-dashboards': {
-    frontend: {
-      title: 'Frontend Engine',
-      icon: <Layout className="h-4 w-4" />,
-      tech: ['Next.js', 'Recharts SVG', 'Radix UI'],
-      description: 'Dashboard panels plotting sales performance, blended ROAS, and inventory health rates using optimized SVG Recharts grids.',
-      keyMetric: 'Chart paint: <35ms'
-    },
-    backend: {
-      title: 'Backend Services',
-      icon: <Server className="h-4 w-4" />,
-      tech: ['Node.js', 'BullMQ queue', 'Redis pools'],
-      description: 'Runs asynchronous BullMQ background workers to batch query Stripe, Shopify, and ad platforms APIs.',
-      keyMetric: 'API rate limits bypass: 100%'
+      tech: ['Next.js API routes', 'Supabase Client'],
+      description: 'Processes inventory updates, shipping logistics updates, customer search queries, and inventory tracking scripts.',
+      keyMetric: 'REST API endpoints'
     },
     database: {
       title: 'Database Schema',
       icon: <Database className="h-4 w-4" />,
       tech: ['Supabase PostgreSQL', 'Materialized Views'],
-      description: 'Supabase PostgreSQL relational schemas with indexed views compiling multi-platform transactions instantly.',
-      keyMetric: 'Query responses: <180ms'
+      description: 'Supabase PostgreSQL database storing sales logs and historical order inventories, optimizing analytics tables.',
+      keyMetric: 'DB: Supabase Postgres'
     },
     ai: {
-      title: 'Forecasting Layer',
+      title: 'Forecasting Logic',
       icon: <Cpu className="h-4 w-4" />,
-      tech: ['Linear regression models'],
-      description: 'Computes inventory depletion rates to warn merchants when stock is projected to run out.',
-      keyMetric: 'Stockout forecasts'
+      tech: ['Stock depleting estimation'],
+      description: 'Calculates basic stock depletion intervals checking average sales volume and current warehouse totals.',
+      keyMetric: 'Automated warnings'
     },
     deployment: {
       title: 'Deployment Architecture',
       icon: <Globe className="h-4 w-4" />,
-      tech: ['Supabase hosting', 'Vercel Edge functions'],
-      description: 'Ingestion routes run on serverless Vercel Edge functions, updating tables in Supabase cloud nodes.',
-      keyMetric: 'Webhook sync: <30s'
+      tech: ['Vercel'],
+      description: 'Dashboard is deployed via Vercel platform, updating databases asynchronously on Supabase hosting instances.',
+      keyMetric: 'Dashboard deployment'
     },
     security: {
       title: 'Security Audits',
       icon: <ShieldCheck className="h-4 w-4" />,
-      tech: ['PostgreSQL RLS policies', 'OAuth 2.0 gates'],
-      description: 'Secured via PostgreSQL Row Level Security (RLS) policies. Sensitive marketing and payout credentials stored under AES-256 wraps.',
-      keyMetric: 'Strict data partitioning'
+      tech: ['Session checks', 'Row Level Security'],
+      description: 'Protects admin workflows using Next.js backend middleware session gates. Restricts database writes using RLS checks.',
+      keyMetric: 'RLS Protected'
     }
   },
-  'nf-lrd-regime-discovery': {
+  'marea-website': {
     frontend: {
-      title: 'Frontend Engine',
+      title: 'Frontend Interface',
       icon: <Layout className="h-4 w-4" />,
-      tech: ['Next.js', 'Plotly grids', 'TypeScript'],
-      description: 'Visualizes structural market regimes and historical NIFTY 50 backtests using interactive Plotly charts.',
-      keyMetric: 'UI renders: stable 60fps'
+      tech: ['Next.js 16', 'Framer Motion', 'Lenis', 'GSAP', 'Zustand'],
+      description: 'Cinematic brand editorial interface. Scroll animations, custom cursors, media galleries, and typography reveal timelines.',
+      keyMetric: 'GSAP Anim: 60fps'
     },
     backend: {
       title: 'Backend Services',
       icon: <Server className="h-4 w-4" />,
-      tech: ['FastAPI (Python)', 'Numba JIT compiler'],
-      description: 'FastAPI server compiling hot mathematical computation loops to machine code vectors via Numba.',
-      keyMetric: 'Simulation speedup: 25x'
+      tech: ['Next.js App Router', 'Supabase SDK', 'Resend'],
+      description: 'Processes luxury collection catalogues and synchronizes user cart states via serverless functions.',
+      keyMetric: 'Serverless dispatches'
     },
     database: {
       title: 'Database Schema',
       icon: <Database className="h-4 w-4" />,
-      tech: ['In-memory NumPy arrays', 'Parquet sheets'],
-      description: 'Numerical compute lists are loaded directly in-memory using highly-indexed Parquet files.',
-      keyMetric: '0ms database latency'
+      tech: ['Supabase PostgreSQL', 'Row Level Security'],
+      description: 'Relational PostgreSQL schema managing collection catalog variables and client profiles files.',
+      keyMetric: 'Supabase Postgres'
     },
     ai: {
-      title: 'Machine Learning',
+      title: 'Visual Enhancements',
       icon: <Cpu className="h-4 w-4" />,
-      tech: ['Hidden Markov Models (HMM)', 'GARCH models'],
-      description: 'Hidden Markov Model (HMM) running Gaussian distributions to segment market volatility and returns vectors.',
-      keyMetric: 'Win rate lift: +12%'
+      tech: ['Scroll-driven easing', 'GSAP ScrollTrigger'],
+      description: 'Calculates scroll coordinates offsets to drive smooth visual transitions and easing galleries in-browser.',
+      keyMetric: 'GSAP ScrollTrigger'
     },
     deployment: {
       title: 'Deployment Architecture',
       icon: <Globe className="h-4 w-4" />,
-      tech: ['AWS Lightsail VPS', 'Vercel CDN'],
-      description: 'FastAPI calculations run continuously inside Python containers on AWS VPS, communicating with static Next.js frontend pages.',
-      keyMetric: 'Calculations pipeline: <200ms'
+      tech: ['Vercel Edge network'],
+      description: 'Hosted on Vercel Edge networks to deliver global assets, static frames, and styles instantly.',
+      keyMetric: 'Edge Distribution'
     },
     security: {
       title: 'Security Audits',
       icon: <ShieldCheck className="h-4 w-4" />,
-      tech: ['API keys isolation', 'Token authorizations'],
-      description: 'Limits calculations execution access to authenticated API requests. Restricts FastAPI origins to portfolio domains.',
-      keyMetric: 'CORS locked down'
+      tech: ['Supabase Auth', 'HTTPS locks'],
+      description: 'Gated customer profile sheets and carts via Supabase auth state checks.',
+      keyMetric: 'Secure account logins'
+    }
+  },
+  'marea-admin-dashboard': {
+    frontend: {
+      title: 'Frontend Interface',
+      icon: <Layout className="h-4 w-4" />,
+      tech: ['Next.js 14', 'Radix UI', 'TanStack Table', 'dnd-kit'],
+      description: 'Rich catalog and layout editing workspace. Supports sortable listings and drag-and-drop homepage adjustments.',
+      keyMetric: 'TanStack Table grids'
+    },
+    backend: {
+      title: 'Backend Services',
+      icon: <Server className="h-4 w-4" />,
+      tech: ['Next.js API routes', 'TipTap Editor', 'Supabase Client'],
+      description: 'Coordinates catalog updates, HTML filtering schemas, image attachment keys, and editorial block placements.',
+      keyMetric: 'TipTap integration'
+    },
+    database: {
+      title: 'Database Schema',
+      icon: <Database className="h-4 w-4" />,
+      tech: ['Supabase PostgreSQL', 'Audit logs'],
+      description: 'Postgres tables recording active catalog descriptions, order status records, and staff modification logs.',
+      keyMetric: 'PostgreSQL tables'
+    },
+    ai: {
+      title: 'Content Indexing',
+      icon: <Cpu className="h-4 w-4" />,
+      tech: ['Catalog query parsing'],
+      description: 'Organizes products categories configurations using structural metadata matrices.',
+      keyMetric: 'Organized catalogs'
+    },
+    deployment: {
+      title: 'Deployment Architecture',
+      icon: <Globe className="h-4 w-4" />,
+      tech: ['Vercel'],
+      description: 'Administrative client dashboard deployed to Vercel, linking with Supabase storage buckets.',
+      keyMetric: 'Deployed: Vercel'
+    },
+    security: {
+      title: 'Security Audits',
+      icon: <ShieldCheck className="h-4 w-4" />,
+      tech: ['Supabase RLS policies', 'Role authorization'],
+      description: 'Enforces Row Level Security (RLS) policies. Restricts sorting mutations to authorized administrative accounts.',
+      keyMetric: 'Role-based access locks'
+    }
+  },
+  'surendra-bus-body': {
+    frontend: {
+      title: 'Frontend Portal',
+      icon: <Layout className="h-4 w-4" />,
+      tech: ['Next.js 16', 'Framer Motion', 'Lenis', 'Resend'],
+      description: 'Cinematic brand presentation page showcasing manufacturing setups and interactive seating layouts.',
+      keyMetric: 'Lenis Scroll Easing'
+    },
+    backend: {
+      title: 'Backend Controller',
+      icon: <Server className="h-4 w-4" />,
+      tech: ['Next.js Serverless Route'],
+      description: 'Coordinates client design estimates submissions, routing configuration details to administrative mail boxes.',
+      keyMetric: 'Resend Mail API'
+    },
+    database: {
+      title: 'Database Schema',
+      icon: <Database className="h-4 w-4" />,
+      tech: ['Static JSON catalogs'],
+      description: 'Bypasses database server overhead by using static JSON catalog structures.',
+      keyMetric: '0ms query delay'
+    },
+    ai: {
+      title: 'Configuration Algebra',
+      icon: <Cpu className="h-4 w-4" />,
+      tech: ['Vector matrices calculations'],
+      description: 'Runs layout dimensions offset equations inside client viewport to ensure seating configurations align correctly.',
+      keyMetric: 'Visual form layouts'
+    },
+    deployment: {
+      title: 'Deployment Architecture',
+      icon: <Globe className="h-4 w-4" />,
+      tech: ['Vercel Edge CDN'],
+      description: 'Statically pre-rendered routes distributed across global Edge networks, ensuring immediate response.',
+      keyMetric: 'CDN pre-rendered'
+    },
+    security: {
+      title: 'Security Audits',
+      icon: <ShieldCheck className="h-4 w-4" />,
+      tech: ['Zod validations', 'Honeypot form logs'],
+      description: 'Blocks automated script submissions using client honeypot parameters, validating form models via Zod.',
+      keyMetric: 'Validation: Zod'
     }
   },
   'mspe-volatility-engine': {
     frontend: {
-      title: 'Frontend Engine',
+      title: 'Frontend Surface',
       icon: <Layout className="h-4 w-4" />,
-      tech: ['Three.js', 'WebAssembly (C++)', 'Recharts'],
-      description: 'Renders option implied volatility surface meshes in 3D using Draco-compressed Three.js vectors.',
-      keyMetric: 'Mesh repaint: <45ms'
+      tech: ['Next.js 16', 'React Plotly', 'Tailwind CSS v4'],
+      description: 'Dynamic math visualizer charting option implied volatility surfaces and risk projections.',
+      keyMetric: '3D Plotly surfaces'
     },
     backend: {
       title: 'Backend Solver',
       icon: <Server className="h-4 w-4" />,
-      tech: ['C++ WASM binary', 'Web Workers'],
-      description: 'Mathematical solver compiled to WebAssembly (WASM), running options pricing in background Web Workers.',
-      keyMetric: 'Greeks solved: 5,000+ /sec'
+      tech: ['FastAPI (Python)', 'Pandas', 'NumPy'],
+      description: 'Calculates options Greeks metrics and pricing estimations. Runs on FastAPI backend processes.',
+      keyMetric: 'Python FastAPI'
     },
     database: {
       title: 'Database Schema',
       icon: <Database className="h-4 w-4" />,
-      tech: ['In-memory struct arrays'],
-      description: 'Calculated Greeks metrics are stored in-memory in C++ structure buffers, bypassing standard database layers.',
-      keyMetric: 'Data latency: 0ms'
+      tech: ['Asyncpg PostgreSQL', 'In-memory caching'],
+      description: 'Stores historical underlying listings price points, utilizing in-memory structures to resolve pricing queries.',
+      keyMetric: 'Asyncpg Postgres'
     },
     ai: {
-      title: 'Solver Engine',
+      title: 'Quant Solvers Layer',
       icon: <Cpu className="h-4 w-4" />,
-      tech: ['Newton-Raphson solvers', 'Cubic splines'],
-      description: 'Newton-Raphson numerical solvers calculating implied volatilities, utilizing cubic splines to fill missing options.',
-      keyMetric: 'Volatility accuracy: 99.98%'
+      tech: ['GARCH modeling', 'Newton-Raphson methods', 'Cubic Splines'],
+      description: 'Employs Newton-Raphson solvers to determine Black-Scholes implied volatilities, GARCH indicators, and spline fittings.',
+      keyMetric: 'GARCH (arch) models'
     },
     deployment: {
       title: 'Deployment Architecture',
       icon: <Globe className="h-4 w-4" />,
-      tech: ['Static Vercel CDN'],
-      description: 'C++ code is compiled to WebAssembly binaries, bundled and served statically via Vercel CDN edge nodes.',
-      keyMetric: 'Zero server dependencies'
+      tech: ['Vercel (Frontend)', 'FastAPI server Docker'],
+      description: 'Frontend is hosted on Vercel, and Python mathematics servers compile inside Docker containers.',
+      keyMetric: 'Containerized Python API'
     },
     security: {
       title: 'Security Audits',
       icon: <ShieldCheck className="h-4 w-4" />,
-      tech: ['Sandbox WASM runtime'],
-      description: 'Calculations execute in sandboxed Web Worker contexts inside the client browser, mitigating server exploits.',
-      keyMetric: '100% client-side safety'
+      tech: ['API keys validation', 'CORS origin headers'],
+      description: 'Blocks unauthorized execution routes. Restricts FastAPI access origins to portfolio web addresses.',
+      keyMetric: 'CORS locked down'
+    }
+  },
+  'nf-lrd-regime-discovery': {
+    frontend: {
+      title: 'Frontend Dashboard',
+      icon: <Layout className="h-4 w-4" />,
+      tech: ['Streamlit', 'Plotly charts'],
+      description: 'Displays historical regime transitions and backtest simulations charts using dynamic Streamlit controls.',
+      keyMetric: 'Streamlit dashboard'
+    },
+    backend: {
+      title: 'Calculations Engine',
+      icon: <Server className="h-4 w-4" />,
+      tech: ['Python Pipeline', 'hmmlearn', 'statsmodels'],
+      description: 'Executes mathematical feature engineering calculations pipelines, returning NIFTY 50 close logs.',
+      keyMetric: 'Python pipeline'
+    },
+    database: {
+      title: 'Database Schema',
+      icon: <Database className="h-4 w-4" />,
+      tech: ['Parquet files', 'Pandas dataframes'],
+      description: 'Numerical compute lists are loaded in-memory from indexed Parquet databases files.',
+      keyMetric: 'Local Parquet files'
+    },
+    ai: {
+      title: 'Regime Clusterers',
+      icon: <Cpu className="h-4 w-4" />,
+      tech: ['Hidden Markov Models (HMM)', 'scipy statistics'],
+      description: 'Employs Hidden Markov Models (HMM) running Gaussian probabilities distributions to partition market trend regimes.',
+      keyMetric: 'Gaussian HMM model'
+    },
+    deployment: {
+      title: 'Deployment Architecture',
+      icon: <Globe className="h-4 w-4" />,
+      tech: ['Streamlit Cloud', 'Python execution logs'],
+      description: 'Streamlit dashboards deploy directly to Python cloud instances, hosting analytical engines continuously.',
+      keyMetric: 'Hosted Streamlit'
+    },
+    security: {
+      title: 'Security Audits',
+      icon: <ShieldCheck className="h-4 w-4" />,
+      tech: ['Environment security limits'],
+      description: 'Protects API parameters and keys via server environment variable mappings.',
+      keyMetric: 'Locked parameters'
     }
   },
   'btc-algo-trading': {
     frontend: {
-      title: 'Frontend Engine',
+      title: 'Frontend Portal',
       icon: <Layout className="h-4 w-4" />,
-      tech: ['Next.js', 'WebSockets client', 'Tailwind'],
-      description: 'Real-time dashboard plotting Binance candlestick updates and momentum indicators via secure socket streams.',
-      keyMetric: 'Feeds update: <100ms'
+      tech: ['Streamlit', 'Plotly charts', 'streamlit-autorefresh'],
+      description: 'Algorithmic execution desk plotting cryptocurrency trends indexes, open balances, and signals.',
+      keyMetric: 'Streamlit autorefresh'
     },
     backend: {
-      title: 'Backend Worker',
+      title: 'Backend Daemon',
       icon: <Server className="h-4 w-4" />,
-      tech: ['Node.js worker daemon', 'WebSockets server'],
-      description: 'Node.js daemon tracking live exchange prices, computing trend signals, and pushing updates via WebSockets.',
-      keyMetric: 'Signal execution: <120ms'
+      tech: ['Python worker daemon', 'Multi-threading'],
+      description: 'Continuous background daemons query live exchange APIs, running trend equations, and buffering signal registers.',
+      keyMetric: 'Streamlit backend'
     },
     database: {
       title: 'Database Schema',
       icon: <Database className="h-4 w-4" />,
-      tech: ['PostgreSQL', 'TimescaleDB indices'],
-      description: 'PostgreSQL database. Manages historical close levels and trade execution logs, indexed by timestamp metrics.',
-      keyMetric: 'Sharpe ratio math: <50ms'
+      tech: ['Pandas dataframes', 'CSV logs cache'],
+      description: 'Caches historical closing price points inside flat CSV sheets, loading structures directly into Python memory.',
+      keyMetric: 'Local CSV cache'
     },
     ai: {
-      title: 'Signal Engine',
+      title: 'Signal Modeling',
       icon: <Cpu className="h-4 w-4" />,
-      tech: ['Trend momentum filters', 'Sharpe/Sortino math'],
-      description: 'Algorithmic models tracking momentum breakouts. Position sizes adapt dynamically based on maximum drawdown indicators.',
-      keyMetric: 'Alpha lift: +24.8%'
+      tech: ['Quantitative trend filters'],
+      description: 'Momentum strategy filters tracking close updates to identify signal breakout triggers.',
+      keyMetric: 'Momentum strategy'
     },
     deployment: {
       title: 'Deployment Architecture',
       icon: <Globe className="h-4 w-4" />,
-      tech: ['AWS EC2 continuous node', 'AWS API Gateway'],
-      description: 'The background worker service runs on AWS EC2 instances, pushing updates to the dashboard via AWS API Gateway WebSocket routes.',
-      keyMetric: 'WebSocket throughput: 1k msg/sec'
+      tech: ['Render Cloud VPS'],
+      description: 'Background worker scripts and dashboard panels run on Render Cloud platform instances.',
+      keyMetric: 'Deployed: Render'
     },
     security: {
       title: 'Security Audits',
       icon: <ShieldCheck className="h-4 w-4" />,
-      tech: ['AES-256 API secrets', 'AWS security limits'],
-      description: 'Encrypts private exchange API credentials using AES-256-GCM. Restricted AWS security groups filter database ingress.',
-      keyMetric: 'Secrets stored in AWS KMS'
-    }
-  },
-  'ai-cold-email-automation': {
-    frontend: {
-      title: 'Frontend Engine',
-      icon: <Layout className="h-4 w-4" />,
-      tech: ['Next.js', 'TypeScript', 'Tailwind UI'],
-      description: 'Outbound monitoring desk listing parsed prospects, campaign configurations, and email sequences templates.',
-      keyMetric: 'Table load: <60ms'
-    },
-    backend: {
-      title: 'Backend Services',
-      icon: <Server className="h-4 w-4" />,
-      tech: ['Node.js API', 'LangChain JS', 'Vercel Cron'],
-      description: 'Next.js API endpoints triggering LangChain extraction pipelines. Chron tasks trigger outbound email sends in batches.',
-      keyMetric: 'Cron interval: 10 mins'
-    },
-    database: {
-      title: 'Database Schema',
-      icon: <Database className="h-4 w-4" />,
-      tech: ['Supabase PostgreSQL', 'PostgreSQL triggers'],
-      description: 'Supabase PostgreSQL relational tables. Monitors campaign status, prospective leads listings, and dispatch records.',
-      keyMetric: 'Triggers throttling safety: 100%'
-    },
-    ai: {
-      title: 'LLM Orchestration',
-      icon: <Cpu className="h-4 w-4" />,
-      tech: ['Gemini API (Flash/Pro)', 'Structured JSON'],
-      description: 'LangChain pipelines crawlers scrape company pages, querying Gemini with strict Zod schemas to extract verified email context.',
-      keyMetric: 'Structured compliance: 100%'
-    },
-    deployment: {
-      title: 'Deployment Architecture',
-      icon: <Globe className="h-4 w-4" />,
-      tech: ['Vercel Edge functions', 'Supabase triggers'],
-      description: 'LangChain routines run inside serverless Vercel functions, writing prospects records to a Supabase database instance.',
-      keyMetric: 'Cold start: ~150ms'
-    },
-    security: {
-      title: 'Security Audits',
-      icon: <ShieldCheck className="h-4 w-4" />,
-      tech: ['Prompt validation schemas', 'SMTP keys protection'],
-      description: 'Strict Zod schemas filter LLM payloads, protecting against prompt injections. SMTP credentials encrypted at database level.',
-      keyMetric: 'API calls rate-limited'
+      tech: ['Environment variables lock'],
+      description: 'Restricts API access tokens using server-only parameters.',
+      keyMetric: 'Gated indicators'
     }
   }
 };

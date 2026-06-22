@@ -37,7 +37,7 @@ export default function ProjectCaseStudy({ params }: ProjectPageProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [prevImage, setPrevImage] = useState('');
   const [imgSrc, setImgSrc] = useState('');
-  const threadEndRef = useRef<HTMLDivElement>(null);
+  const feedRef = useRef<HTMLDivElement>(null);
 
   // Unwrap params safely and initialize welcome message
   useEffect(() => {
@@ -65,11 +65,13 @@ export default function ProjectCaseStudy({ params }: ProjectPageProps) {
 
   // Auto-scroll chat thread to bottom
   const scrollToBottom = () => {
-    threadEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    feedRef.current?.scrollTo({ top: feedRef.current.scrollHeight, behavior: 'smooth' });
   };
 
   useEffect(() => {
-    scrollToBottom();
+    if (messages.length > 1) {
+      scrollToBottom();
+    }
   }, [messages, isLoading]);
 
   if (slug && !project) {
@@ -467,7 +469,7 @@ export default function ProjectCaseStudy({ params }: ProjectPageProps) {
           <div className="absolute inset-0 cyber-grid opacity-10 pointer-events-none" />
 
           {/* Messages Feed */}
-          <div className="flex-1 overflow-y-auto p-4 md:p-6 flex flex-col gap-5 scrollbar-thin relative z-10">
+          <div ref={feedRef} className="flex-1 overflow-y-auto p-4 md:p-6 flex flex-col gap-5 scrollbar-thin relative z-10">
             <AnimatePresence initial={false}>
               {messages.map((message) => {
                 const isUser = message.role === 'user';
@@ -524,7 +526,6 @@ export default function ProjectCaseStudy({ params }: ProjectPageProps) {
                 </motion.div>
               )}
             </AnimatePresence>
-            <div ref={threadEndRef} />
           </div>
 
           {/* Inputs Bar */}

@@ -93,7 +93,7 @@ export default function Home() {
                 Vraj Patel
               </h1>
               <p className="text-base md:text-lg text-secondary max-w-lg leading-relaxed">
-                4th year CSE student at Nirma University. I build full-stack applications,
+                3rd year CSE student at Nirma University. I build full-stack applications,
                 ERP systems, and quantitative research platforms.
               </p>
             </div>

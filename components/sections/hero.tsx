@@ -55,7 +55,7 @@ export default function Hero() {
         variants={itemVariants}
         className="text-sm md:text-base text-muted max-w-2xl leading-relaxed font-medium"
       >
-        I design and deploy end-to-end ERP structures for commercial operations, automated multi-agent AI scripts, and real-time WebAssembly-compiled quantitative engines. Currently pursuing my final year in CSE at Nirma University.
+        I design and deploy end-to-end ERP structures for commercial operations, automated multi-agent AI scripts, and real-time WebAssembly-compiled quantitative engines. Currently pursuing my 3rd year in CSE at Nirma University.
       </motion.p>
 
       {/* CTA Buttons */}

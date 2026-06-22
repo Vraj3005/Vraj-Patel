@@ -20,44 +20,59 @@ interface Edge {
 export default function TechStackGraph() {
   const [hoveredNode, setHoveredNode] = useState<string | null>(null);
 
-  // Define nodes with relative coordinates for a 600x480 SVG viewbox
+  // Define nodes with relative coordinates for a 600x520 SVG viewbox
   const nodes: Node[] = [
     // Source Tech Nodes (Left side)
     { id: 'nextjs', label: 'Next.js', type: 'tech', x: 100, y: 100, color: '#38bdf8' }, // Cyan
-    { id: 'supabase', label: 'Supabase', type: 'tech', x: 100, y: 210, color: '#34d399' }, // Emerald
-    { id: 'python', label: 'Python', type: 'tech', x: 100, y: 320, color: '#fbbf24' }, // Amber
-    { id: 'gemini', label: 'Gemini API', type: 'tech', x: 100, y: 430, color: '#60a5fa' }, // Blue
+    { id: 'supabase', label: 'Supabase', type: 'tech', x: 100, y: 220, color: '#34d399' }, // Emerald
+    { id: 'python', label: 'Python', type: 'tech', x: 100, y: 340, color: '#fbbf24' }, // Amber
+    { id: 'gemini', label: 'Gemini API', type: 'tech', x: 100, y: 460, color: '#60a5fa' }, // Blue
 
     // Target Project Nodes (Right side)
-    { id: 'surendra', label: 'Surendra & Co.', type: 'project', x: 500, y: 50, color: '#e2e8f0' },
-    { id: 'constructionos', label: 'ConstructionOS', type: 'project', x: 500, y: 110, color: '#e2e8f0' },
-    { id: 'portfolio', label: 'Portfolio Site', type: 'project', x: 500, y: 170, color: '#e2e8f0' },
-    { id: 'nflrd', label: 'NF-LRD Quant', type: 'project', x: 500, y: 230, color: '#e2e8f0' },
-    { id: 'mspe', label: 'MSPE Greeks', type: 'project', x: 500, y: 290, color: '#e2e8f0' },
-    { id: 'btcalgo', label: 'BTC-ALGO Execution', type: 'project', x: 500, y: 350, color: '#e2e8f0' },
-    { id: 'askvraj', label: 'Ask Vraj AI', type: 'project', x: 500, y: 410, color: '#e2e8f0' },
-    { id: 'coldemail', label: 'AI Cold Email', type: 'project', x: 500, y: 470, color: '#e2e8f0' },
+    { id: 'surendra', label: 'Surendra & Co.', type: 'project', x: 500, y: 30, color: '#e2e8f0' },
+    { id: 'enermass', label: 'Enermass Solar', type: 'project', x: 500, y: 76, color: '#e2e8f0' },
+    { id: 'bhagwati', label: 'Bhagwati Interior', type: 'project', x: 500, y: 122, color: '#e2e8f0' },
+    { id: 'driedhub', label: 'Driedhub Market', type: 'project', x: 500, y: 168, color: '#e2e8f0' },
+    { id: 'driedhub-admin', label: 'Driedhub Admin', type: 'project', x: 500, y: 214, color: '#e2e8f0' },
+    { id: 'marea', label: 'Marea Luxury', type: 'project', x: 500, y: 260, color: '#e2e8f0' },
+    { id: 'marea-admin', label: 'Marea Admin', type: 'project', x: 500, y: 306, color: '#e2e8f0' },
+    { id: 'mspe', label: 'MSPE Greeks', type: 'project', x: 500, y: 352, color: '#e2e8f0' },
+    { id: 'nflrd', label: 'NF-LRD Quant', type: 'project', x: 500, y: 398, color: '#e2e8f0' },
+    { id: 'btcalgo', label: 'BTC-ALGO Trading', type: 'project', x: 500, y: 444, color: '#e2e8f0' },
+    { id: 'coldemail', label: 'OutreachOps AI', type: 'project', x: 500, y: 490, color: '#e2e8f0' }
   ];
 
   // Connections mapping
   const edges: Edge[] = [
-    // Next.js -> Surendra, ConstructionOS, Portfolio
+    // Next.js connections
     { source: 'nextjs', target: 'surendra' },
-    { source: 'nextjs', target: 'constructionos' },
-    { source: 'nextjs', target: 'portfolio' },
+    { source: 'nextjs', target: 'enermass' },
+    { source: 'nextjs', target: 'bhagwati' },
+    { source: 'nextjs', target: 'driedhub' },
+    { source: 'nextjs', target: 'driedhub-admin' },
+    { source: 'nextjs', target: 'marea' },
+    { source: 'nextjs', target: 'marea-admin' },
+    { source: 'nextjs', target: 'mspe' },
+    { source: 'nextjs', target: 'coldemail' },
 
-    // Supabase -> ConstructionOS, Portfolio
-    { source: 'supabase', target: 'constructionos' },
-    { source: 'supabase', target: 'portfolio' },
+    // Supabase connections
+    { source: 'supabase', target: 'enermass' },
+    { source: 'supabase', target: 'driedhub' },
+    { source: 'supabase', target: 'driedhub-admin' },
+    { source: 'supabase', target: 'marea' },
+    { source: 'supabase', target: 'marea-admin' },
+    { source: 'supabase', target: 'coldemail' },
 
-    // Python -> NF-LRD, MSPE, BTC-ALGO
-    { source: 'python', target: 'nflrd' },
+    // Python connections
+    { source: 'python', target: 'enermass' },
     { source: 'python', target: 'mspe' },
+    { source: 'python', target: 'nflrd' },
     { source: 'python', target: 'btcalgo' },
+    { source: 'python', target: 'coldemail' },
 
-    // Gemini API -> Ask Vraj, AI Cold Email
-    { source: 'gemini', target: 'askvraj' },
-    { source: 'gemini', target: 'coldemail' },
+    // Gemini API connections
+    { source: 'gemini', target: 'bhagwati' },
+    { source: 'gemini', target: 'coldemail' }
   ];
 
   // Helper to determine active states
@@ -89,7 +104,7 @@ export default function TechStackGraph() {
       const tech = nodes.find(n => n.id === connectedEdge.source);
       if (tech) return tech.color;
     }
-    return '#a855f7';
+    return '#06b6d4';
   };
 
   return (

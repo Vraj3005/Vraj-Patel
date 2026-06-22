@@ -5,480 +5,550 @@ export const projects: Project[] = [
     slug: 'enermass-solar-calculator',
     title: 'Enermass Solar Calculator & ERP',
     category: 'ERP Systems',
-    shortDescription: 'Enterprise solar modeling engine and resource planning ERP that generates precise solar quotes and optimizes project materials.',
-    description: 'An enterprise-grade SaaS platform built for solar installers and engineers. It includes a custom geospatial layout model to compute solar irradiance, shading factors, and optimal panel tilt. The backend functions as an ERP, managing inventory procurement, material tracking, and client invoicing in real-time.',
-    technologies: ['Next.js', 'TypeScript', 'Tailwind CSS', 'PostgreSQL', 'Python', 'FastAPI', 'Framer Motion'],
+    shortDescription: 'Client-side solar modeling engine and resource planning ERP that generates precise solar quotes and optimizes project materials.',
+    description: 'An enterprise-grade pricing and materials catalog application built for solar installers. It includes a custom Indian state coefficient matrix to determine solar irradiance parameters and state-specific subsidy rules, generating print-optimized PDF brochures.',
+    technologies: ['Next.js', 'React', 'Zustand', 'Tailwind CSS', 'TypeScript', 'Drizzle ORM', 'Upstash Redis', 'PostgreSQL'],
     status: 'Live',
     year: '2026',
     image: '/images/projects/enermass.webp',
-    role: 'Lead Full-Stack Architect',
-    period: 'Nov 2025 - Mar 2026',
-    client: 'Enermass Energies Pvt. Ltd.',
+    liveUrl: 'https://enermass-calculator.vercel.app/',
+    role: 'Co-Developer (Collaboration)',
+    period: 'May 2026 - Jun 2026',
+    client: 'Pitbull Corporation (Enermass Solar)',
     metrics: [
-      { label: 'Forecast Accuracy', value: '99.4%' },
-      { label: 'Quotes Generated', value: '20,000+' },
-      { label: 'Design Time Saved', value: '65%' }
+      { label: 'Core State Store', value: 'Zustand Store' },
+      { label: 'Templates Base', value: '25+ Solar Kits' },
+      { label: 'BOM Calculations', value: 'GST + Margin' }
     ],
-    problem: 'Surveyors manually computed roof tilts and estimated shade loss with calculators on-site, which led to incorrect pricing proposals and margin leakage.',
-    whyBuilt: 'The project was built to standardize on-site measurements, accelerate quote-to-contract durations from days to minutes, and protect installer profit margins.',
-    solution: 'Implemented browser-compiled coordinate trigonometry shaders to automate tilt and shade loss estimation, feeding into an automated dynamic billing proposal dispatching system.',
+    problem: 'Sales representatives and surveyors manually estimated rooftop solar equipment counts, tax rates, and government subsidies on paper, leading to slow sales cycles and proposal errors.',
+    whyBuilt: 'Built to provide a fast, client-side, offline-capable solar design and financial estimation platform that generates clean, print-optimized PDF brochures instantly.',
+    solution: 'Developed a client-side pricing calculator utilizing Zustand store state and a rule-based state coefficient matrix to instantly compute panel capacity sizing, Indian state subsidies, and complete BOM pricing.',
     features: [
-      'Interactive 3D roof mapping and shading loss simulation.',
-      'Auto-generation of Bill of Materials (BOM) linked directly with regional suppliers.',
-      'Proprietary net-metering computation supporting complex utility tariffs.',
-      'Dynamic workflow dispatching for on-site solar surveyors and installers.'
+      'Selection of 25+ preconfigured solar system templates across multiple categories.',
+      'Equipment customization tab allowing dynamic panel mixes, inverters, and battery storage config.',
+      'Interactive Bill of Materials (BOM) table supporting inline double-click quantity, rate, and tax overrides.',
+      'Automatic central government subsidy lookup matching PM Surya Ghar brackets.',
+      'Lead and quote pipeline CRM tracking status history and WhatsApp/email sharing.',
+      'Print-optimized CSS templates rendering client proposals cleanly to A4 PDF brochures.'
     ],
-    architecture: 'Next.js App Router serves as the core dashboard. Fast mathematical operations are written as modular Python sub-services (using FastAPI), while PostgreSQL manages relational database schemas for client leads, solar calculations, and invoice models.',
-    dbBackendLogic: 'The PostgreSQL database holds structured tables for client leads, materials inventory, and regional solar coefficients. Calculations query geographic coordinates to fetch regional solar values, dynamically pricing invoices using real-time supplier scrapers.',
+    architecture: 'Built on Next.js App Router for frontend dashboards. State variables are maintained inside a hydration-configured Zustand store. The calculation engine processes values client-side to generate BOM rows and state subsidy logic.',
+    dbBackendLogic: 'Relational data structures are managed client-side using Zustand stores. Active quotes, custom presets, and global rate master lists are synchronized and persisted locally within the browser’s LocalStorage.',
     uiScreens: [
-      { title: 'Telemetry Board', description: 'Centralized admin feed tracking surveyor leads, active installs, and project margins.' },
-      { title: 'Interactive Layout Designer', description: 'Canvas UI letting engineers place virtual solar panels on roof profiles to calculate shading.' },
-      { title: 'Billing Center', description: 'Interactive ledger calculating BOM margins, government subsidies, and exporting PDF quotes.' }
+      { title: 'Interactive Sizing Console', description: 'Central design dashboard for editing BOM items, capacities, and profit markups.' },
+      { title: 'BOM Rate Master Sheets', description: 'Global administrative panel allowing operators to override specific materials base pricing.' },
+      { title: 'CRM Quote Pipeline', description: 'Pipeline monitor tracking lead conversions from drafts to active won/lost statuses.' }
     ],
     challenges: [
       {
-        problem: 'Calculating roof shading losses and panel orientation physics in-browser in real time was slow and crashed standard web workers.',
-        solution: 'Offloaded trigonometry calculations to GPU-accelerated client WebGL shaders, reducing calculation time from 4.8 seconds to under 80 milliseconds.'
+        problem: 'Indian states have varying central/state solar subsidies and labor multipliers, making centralized calculations inconsistent.',
+        solution: 'Designed a static state-coefficient matrix mapping local sun hours, GST tax rates, and PM Surya Ghar subsidy brackets, running instant client-side ROI evaluations.'
       },
       {
-        problem: 'Frequent price fluctuations of solar materials led to inaccurate quotes.',
-        solution: 'Implemented real-time supplier inventory API webhooks and automated daily pricing scrapers, feeding an incremental inventory model.'
+        problem: 'Allowing sales agents to override individual BOM line rates/quantities led to schema sync and validation issues during quote saves.',
+        solution: 'Built a Zustand-based override store with change indicators (warning badges), enabling agents to override pricing variables while retaining factory default rollback states.'
       }
     ],
-    whatILearned: 'Acquired in-depth knowledge of geospatial coordinate systems, client-side resource scheduling, WebGL performance constraints, and enterprise invoice compliance.',
+    whatILearned: 'Learned about client-side state persistence with Zustand hydration, managing dynamic invoice tax calculations, and configuring print media styles for high-fidelity PDF exports.',
     futureImprovements: [
-      'Integrate satellite imagery APIs to pre-fill layout plans before on-site surveyor visits.',
-      'Configure auto-routing surveyor dispatcher schedules using route planning algorithms.'
+      'Add local CSV inventory import mapping directly to master rate sheets.',
+      'Integrate Google Maps API to pre-measure roof areas on-screen.'
+    ],
+    featured: true
+  },
+  {
+    slug: 'outreachops-ai',
+    title: 'OutreachOps AI (AI Coldmail)',
+    category: 'AI Automation',
+    shortDescription: 'Autonomous outbound campaign engine leveraging LLMs to scrape leads, personalize copy, audit drafts, and schedule outreach.',
+    description: 'OutreachOps AI is an automated outreach personalization and email marketing software. It crawls target company websites, parses page content using the Gemini API, generates personalized ERP sales pitches, and automates outbound drafts queue management.',
+    technologies: ['Next.js', 'FastAPI', 'Google GenAI SDK', 'Google Sheets API', 'Gmail API', 'Supabase', 'Tailwind CSS', 'TypeScript'],
+    status: 'Live',
+    year: '2026',
+    image: '/images/projects/coldemail.webp',
+    liveUrl: 'https://outreachops-ai.vercel.app/',
+    role: 'Solo Developer (100% Personal Project)',
+    period: 'Feb 2026 - Apr 2026',
+    client: 'Personal Project',
+    metrics: [
+      { label: 'AI API Layer', value: 'Google GenAI SDK' },
+      { label: 'Outreach Pipeline', value: 'Gmail OAuth API' },
+      { label: 'Leads Source', value: 'Google Sheets API' }
+    ],
+    problem: 'B2B cold outreach campaigns suffer from low response rates due to generic, non-personalized email copy and high spam delivery risks.',
+    whyBuilt: 'Built to automate lead personalization by crawling target company websites, performing AI audits, and sequencing outbound emails dynamically.',
+    solution: 'Designed an autonomous email campaign engine with a FastAPI backend that scrapes target sites and utilizes the Google GenAI SDK to compose tailored pitches.',
+    features: [
+      'FastAPI background worker pipeline running lead audits concurrently.',
+      'Google Sheets integration using gspread to dynamically fetch active lead lists.',
+      'Gmail OAuth 2.0 API connection to send authorized outbound email campaigns securely.',
+      'Pydantic inputs validation and structural response schemas.'
+    ],
+    architecture: 'Next.js App Router powers the dashboard view. The Python FastAPI backend acts as the compute orchestrator, invoking Gemini models and linking directly to third-party Google services.',
+    dbBackendLogic: 'Local tracking stores hold campaign details and email schedules. Outbound queue statuses and logs are managed dynamically to prevent rate limit overflows.',
+    uiScreens: [
+      { title: 'Campaign Dashboard', description: 'Tracks pending drafts, successfully sent emails, and queue logs.' },
+      { title: 'Leads Sheets Tracker', description: 'Visual database listing active companies, site links, and personalization text.' },
+      { title: 'OAuth Connections Node', description: 'Displays authorized Google accounts credentials details.' }
+    ],
+    challenges: [
+      {
+        problem: 'API limit constraints and concurrency restrictions of standard LLMs made bulk lead personalization slow and prone to timeout exceptions.',
+        solution: 'Implemented async FastAPI handlers that batch-process lead lists and run concurrent scraper routines, validating inputs using Pydantic schemas.'
+      },
+      {
+        problem: 'Linking outreach targets directly from spreadsheets manually created double-entry overhead for sales operations.',
+        solution: 'Integrated the Google Sheets (gspread) API to dynamically import leads lists and sync generated email drafts in real-time.'
+      }
+    ],
+    whatILearned: 'Mastered async Python programming, prompt engineering with structured GenAI outputs, Google OAuth credential management, and multi-model LLM task delegation.',
+    futureImprovements: [
+      'Add automatic semantic leads scoring using vector embeddings.',
+      'Integrate email deliverability and warm-up monitoring logs.'
     ],
     featured: true
   },
   {
     slug: 'bhagwati-interior-erp',
     title: 'Bhagwati Interior ERP',
-    category: 'Client Software',
+    category: 'ERP Systems',
     shortDescription: 'Custom client and project management software for interior architecture studios, tracking budgets, materials, and invoicing.',
-    description: 'A dedicated internal enterprise planning software developed for Bhagwati Interior. This ERP tracks material sourcing, designer tasks, customer specifications, dynamic budgets, and generates high-fidelity PDFs for quotations and invoices.',
-    technologies: ['React', 'Node.js', 'Express', 'MongoDB', 'Tailwind CSS', 'Redux Toolkit', 'AWS S3'],
+    description: 'A custom enterprise planning system built for interior design operations. It manages material inventory databases, client layouts tracking pipelines, automated GST billing estimates, and designer task queues.',
+    technologies: ['Next.js', 'Prisma ORM', 'PostgreSQL', 'NextAuth.js', 'Google Gemini API', 'Upstash Redis', 'QStash Queue', 'Tailwind CSS', 'Nodemailer'],
     status: 'Live',
-    year: '2025',
+    year: '2026',
     image: '/images/projects/bhagwati.webp',
-    role: 'Solo Full-Stack Developer',
-    period: 'Jul 2025 - Oct 2025',
-    client: 'Bhagwati Interior',
+    liveUrl: 'https://erpbi.vercel.app/',
+    role: 'Co-Developer (Collaboration)',
+    period: 'May 2026 - Jun 2026',
+    client: 'Pitbull Corporation (Bhagwati Interior)',
     metrics: [
-      { label: 'Designer Productivity', value: '3x Speedup' },
-      { label: 'Budget Discrepancies', value: '< 2%' },
-      { label: 'Active Projects', value: '150+' }
+      { label: 'Database Access', value: 'Prisma ORM' },
+      { label: 'Auth Provider', value: 'NextAuth.js' },
+      { label: 'Queue Scheduler', value: 'Upstash QStash' }
     ],
-    problem: 'Designers frequently changed furniture material selections and wood grades without logging costs, creating significant budget overruns and invoicing delays.',
-    whyBuilt: 'This system was commissioned to reconcile design choices with billing ledgers instantly, ensuring studio margin safety and professional customer invoices.',
-    solution: 'Created a centralized material specifications registry with write-locking, binding dynamic specification modifications directly to contract proposals.',
+    problem: 'Interior design projects suffered from budget overruns because material selections, wood grades, and labor costs were not tracked in real-time.',
+    whyBuilt: 'Built to reconcile interior design choices with client budgets instantly, automate GST quotation generation, and streamline task delegations.',
+    solution: 'Created a Next.js ERP panel using Prisma ORM to track designer catalog items, client site logs, and auto-compile GST quotes and invoice proposals.',
     features: [
-      'Interior material specifications ledger tracking wood, metals, and fabrics.',
-      'Client portal showcasing real-time visual progress updates and stage approvals.',
-      'Custom invoice PDF engine rendering custom designs instantly.',
-      'Project management board with role-based task delegation.'
+      'Material catalog pricing registers with search filters.',
+      'Client lead status boards tracking active designs, approvals, and invoice states.',
+      'Unified admin credentials gateway powered by NextAuth.js.',
+      'Background tasks queuing for notifications via Upstash QStash.'
     ],
-    architecture: 'Client runs a clean SPA dashboard built with React. Server uses Node.js and Express deployed on AWS App Runner, communicating with MongoDB Atlas. File storage leverages secure pre-signed AWS S3 URLs.',
-    dbBackendLogic: 'Uses MongoDB collections to hold client files, project nodes, and dynamic catalog lists. The flexible schemas allow designers to append unstructured design notes while preserving pricing constraints.',
+    architecture: 'Client runs a Next.js dashboard panel. The database connector is powered by Prisma ORM communicating with PostgreSQL. Background tasks use Upstash Redis queue systems.',
+    dbBackendLogic: 'Relational PostgreSQL schemas hold material logs, client data, and user states, ensuring transactions remain integrated during concurrent updates.',
     uiScreens: [
-      { title: 'Material Registry Console', description: 'Lists active material codes, wood grades, and wholesale pricing parameters.' },
-      { title: 'Designer Task Board', description: 'A Kanban dashboard delegating site layout reviews and client material approvals.' },
-      { title: 'Client Portal View', description: 'A secure, responsive page letting clients inspect visual stage updates and click approvals.' }
+      { title: 'Material catalog Sheets', description: 'Lists active wood grades, laminates, hardware costs, and markup scales.' },
+      { title: 'Project Budget Ledger', description: 'Computes real-time summaries of material selections versus client limits.' },
+      { title: 'Task Dispatch Center', description: 'Kanban view delegating client reviews and approvals.' }
     ],
     challenges: [
       {
-        problem: 'Generating complex, layout-perfect PDF quotations with high-res interior photos was consuming excessive server memory.',
-        solution: 'Moved PDF compilation to a serverless lambda architecture, utilizing headless Chromium to render the template and write directly to AWS S3.'
+        problem: 'Managing asynchronous material updates across active designer catalogs created data write locks and performance bottlenecks.',
+        solution: 'Configured Upstash Redis caching and QStash background job queues to serialize catalog write transactions and speed up read requests.'
       },
       {
-        problem: 'Designers struggled to calculate custom modular kitchen layouts.',
-        solution: 'Created an interactive kitchen builder module that automatically translates layout shapes (L-shape, U-shape) into material cost estimation sheets.'
+        problem: 'Generating clean PDF quotes and invoicing ledger spreadsheets consumed heavy server compute resources.',
+        solution: 'Designed print-optimized CSS rules allowing standard web pages to render perfect, letterhead-branded invoices directly via browser PDF generation (window.print).'
       }
     ],
-    whatILearned: 'Mastered serverless compilation loops, flexible document database modeling, and managing file storage keys safely.',
+    whatILearned: 'Gained hands-on experience in schema migrations using Prisma, caching database queries with Redis, and integrating background queues.',
     futureImprovements: [
-      'Build a custom WebGL 3D floor plan layout compiler matching items to live inventory catalogs.',
-      'Integrate automatic SMS reminder notifications for customer approval confirmations.'
+      'Add client-accessible approval dashboard for live design confirmations.',
+      'Integrate automatic WhatsApp webhook reminders for billing status alerts.'
     ],
     featured: true
   },
   {
-    slug: 'constructionos-erp',
-    title: 'ConstructionOS / Construction ERP',
-    category: 'ERP Systems',
-    shortDescription: 'Multi-tenant cloud ERP for site construction scheduling, labor tracking, compliance alerts, and audit trails.',
-    description: 'A robust construction management software designed to bridge the gap between back-office accounting and on-site field engineers. ConstructionOS enables project managers to track concrete pours, equipment leases, raw inventory logs, and subcontractor working hours.',
-    technologies: ['Next.js', 'Go (Golang)', 'PostgreSQL', 'Redis', 'Tailwind CSS', 'gRPC'],
-    status: 'In Development',
+    slug: 'driedhub-marketplace',
+    title: 'Driedhub Marketplace',
+    category: 'E-commerce',
+    shortDescription: 'High-speed headful e-commerce marketplace designed for dried fruits and healthy snacks, optimized for fast checkout.',
+    description: 'A direct-to-consumer e-commerce storefront designed for healthy food retail. Features rapid product grids, slide-out cart drawers, Google OAuth credentials logins, and Indian payment gateway checkout forms.',
+    technologies: ['Next.js', 'Supabase', 'Upstash Redis', 'Razorpay', 'Resend', 'Zustand', 'Tailwind CSS', 'TypeScript'],
+    status: 'Live',
     year: '2026',
-    image: '/images/projects/constructionos.webp',
-    role: 'Backend & System Architect',
-    period: 'Dec 2025 - Feb 2026',
+    image: '/images/projects/ecommerce-brand.webp',
+    liveUrl: 'https://www.driedhub.in/',
+    role: 'Co-Developer (Collaboration)',
+    period: 'May 2026 - Jul 2026',
+    client: 'Pitbull Corporation (Driedhub)',
     metrics: [
-      { label: 'Inventory Sync', value: '99.9%' },
-      { label: 'Cost Savings', value: '15%' },
-      { label: 'Daily Field Logs', value: '450+' }
+      { label: 'Payment Gateway', value: 'Razorpay SDK' },
+      { label: 'Mail Dispatcher', value: 'Resend API' },
+      { label: 'Backend Database', value: 'Supabase DB' }
     ],
-    problem: 'On-site construction managers suffered from frequent sync conflicts, missing safety compliance logs, and slow inventory ledger computations across multiple remote sites.',
-    whyBuilt: 'This system was built to provide a secure multi-tenant scheduling node that streamlines Indian construction logistics, labor laws audit trails, and inventory compliance.',
-    solution: 'Designed high-concurrency Go microservices, an offline-first indexedDB storage interface with CRDT synchronization, and a Redis WAL synchronization layer.',
+    problem: 'Traditional wholesale channels restricted distribution scope for direct agricultural goods, requiring a high-speed DTC storefront.',
+    whyBuilt: 'Built to establish a direct-to-consumer digital marketplace for premium dried fruits and healthy snacks with a fast checkout flow.',
+    solution: 'Designed a high-performance Next.js storefront integrated with Razorpay payment overlays, Resend notification templates, and Supabase data layers.',
     features: [
-      'Multi-tenant project control panel with secure role-based workflows.',
-      'Offline-first labor attendance registry with digital signature support.',
-      'Real-time inventory ledger tracking steel, cement, and aggregates.',
-      'Compliance alerts and immutable audit logs checking local labor laws.'
+      'Optimized direct-to-consumer product catalog grids.',
+      'Cart management state client-side using Zustand.',
+      'Razorpay payment checkout overlay Integration.',
+      'Automatic transactional order confirmation notifications via Resend.'
     ],
-    architecture: 'Backend utilizes high-performance Go microservices communicating via gRPC. Frontend is standard Next.js utilizing static layouts, connecting via WebSockets for real-time status boards.',
-    dbBackendLogic: 'PostgreSQL holds normalized tables for tenants, inventory logs, and compliance audits. Writes feed into Redis logs for real-time stats updates, and sync triggers run checks against CRDT formats.',
+    architecture: 'Storefront is built on Next.js 16 App Router. Zustand handles front-end cart state management. Razorpay libraries handle client transactions securely.',
+    dbBackendLogic: 'Supabase PostgreSQL tables host inventories, orders lists, and customer profiles, checking stock levels before approving payment checkouts.',
     uiScreens: [
-      { title: 'Tenant Control Room', description: 'Lists multi-site project summaries, active concrete volumes, and compliance tickers.' },
-      { title: 'Labor Attendance Tracker', description: 'Tablet-friendly page with offline synchronization for worker logs.' },
-      { title: 'Audit Logs Feed', description: 'An unalterable log monitoring safety reports and material transfers.' }
+      { title: 'Product Catalog Grid', description: 'Lists active categories and weights with typography elements.' },
+      { title: 'Frictionless Checkout Form', description: 'Checks buyer credentials and launches Razorpay overlay frames.' },
+      { title: 'Client Account Console', description: 'Allows customers to view invoice details and tracking logs.' }
     ],
     challenges: [
       {
-        problem: 'On-site connectivity was spotty, resulting in lost daily logs and sync conflicts.',
-        solution: 'Developed an offline-first indexedDB storage layer using CRDTs (Conflict-free Replicated Data Types) to merge conflicting offline inputs seamlessly.'
-      },
-      {
-        problem: 'PostgreSQL database query response degraded when calculating real-time inventory values across 80 sites.',
-        solution: 'Created material aggregates inside Redis caching layers, updating asynchronously via PostgreSQL write-ahead logs (WAL) through Debezium.'
+        problem: 'Managing real-time stock allocation and processing high checkout transactions during sales surges crashed database instances.',
+        solution: 'Utilized Upstash Redis caching to store active inventories and serialize checkout transaction requests.'
       }
     ],
-    whatILearned: 'Acquired advanced expertise in writing fast Go microservices, multi-tenant database partitioning, and sync conflict resolution algorithms.',
+    whatILearned: 'Gained experience in payment gateway webhook verification, configuring secure customer sessions with Supabase SSR, and caching catalog lookups.',
     futureImprovements: [
-      'Develop automatic image parsing to count steel bars using computer vision models.',
-      'Add geofencing alerts to prevent worker check-ins outside site coordinate radiuses.'
+      'Add user purchase history and personalized order suggestions.',
+      'Integrate dynamic shipping costs calculations based on postal codes.'
     ],
     featured: true
+  },
+  {
+    slug: 'driedhub-admin-dashboard',
+    title: 'Driedhub Admin Dashboard',
+    category: 'Dashboards',
+    shortDescription: 'Internal ERP and metrics dashboard for Driedhub, tracking sales, shipping logs, inventory, and refunds.',
+    description: 'An internal administration backoffice managing product catalogs, sales logs, and inventory updates. Features drag-and-drop showcase reordering arrays and SVG reporting charts.',
+    technologies: ['Next.js', 'Supabase', 'dnd-kit', 'Recharts', 'Tailwind CSS', 'TypeScript'],
+    status: 'Live',
+    year: '2026',
+    image: '/images/projects/ecommerce-dash.webp',
+    liveUrl: 'https://admin-dashboard-dried-hub.vercel.app/',
+    role: 'Co-Developer (Collaboration)',
+    period: 'May 2026 - Jul 2026',
+    client: 'Pitbull Corporation (Driedhub)',
+    metrics: [
+      { label: 'Reordering Engine', value: 'dnd-kit Sortable' },
+      { label: 'Fulfillment Metrics', value: 'Recharts Grids' },
+      { label: 'Auth Control', value: 'Supabase Auth' }
+    ],
+    problem: 'Store managers had to edit database records manually to update product queues and calculate sales reports.',
+    whyBuilt: 'Built to provide a clean administration backoffice for Driedhub store managers to track order details and rearrange home showcase layouts.',
+    solution: 'Built a Next.js admin dashboard utilizing Recharts for metrics reporting, dnd-kit for layout reordering, and Supabase for backend integration.',
+    features: [
+      'Sales analytics charts tracking net revenue and order categories.',
+      'Order logs tracking invoice details and client shipments.',
+      'Drag-and-drop sortable lists to rearrange active catalog showcases.',
+      'Secure role-based authentication via Supabase Auth.'
+    ],
+    architecture: 'Built on Next.js communicating with Supabase PostgreSQL databases using client wrappers. Drag-and-drop sort coordinates are processed client-side before update requests.',
+    dbBackendLogic: 'Tables track order registers, stock balances, and content arrangements. Database triggers adjust stock counts during shipping changes.',
+    uiScreens: [
+      { title: 'Revenues Analytics Panel', description: 'Displays sales metrics, net profits, and order summaries.' },
+      { title: 'Stock Coordinator Sheets', description: 'Lists active inventory units, unit rates, and discount settings.' },
+      { title: 'Showcase Layout Rearranger', description: 'Drag-and-drop interface grid to order items visually.' }
+    ],
+    challenges: [
+      {
+        problem: 'Updating showcase sort orders dynamically for many items was slow and generated redundant database queries.',
+        solution: 'Implemented client-side drag easing with dnd-kit and queued update updates in a single batch RPC database transaction.'
+      }
+    ],
+    whatILearned: 'Learned about drag-and-drop event cycles, building complex charts using SVG Recharts, and optimizing bulk PostgreSQL updates.',
+    futureImprovements: [
+      'Incorporate bulk CSV import tools for new catalog inventory lines.',
+      'Add shipment provider API tracking overlays.'
+    ],
+    featured: false
+  },
+  {
+    slug: 'marea-website',
+    title: 'Marea Luxury Fashion Storefront',
+    category: 'Websites',
+    shortDescription: 'Cinematic, high-fidelity luxury fashion e-commerce storefront utilizing advanced physics-based scroll and text reveals.',
+    description: 'A high-end editorial fashion storefront featuring smooth scroll kinematics, typographic reveal timelines, custom screen cursors, and responsive shopping grids.',
+    technologies: ['Next.js', 'Supabase', 'GSAP', 'Lenis Scroll', 'Upstash Redis', 'Resend', 'Tailwind CSS', 'TypeScript'],
+    status: 'Live',
+    year: '2026',
+    image: '/images/projects/marea.webp',
+    liveUrl: 'https://marea-website-beta.vercel.app/',
+    role: 'Co-Developer (Collaboration)',
+    period: 'May 2026 - Jun 2026',
+    client: 'Pitbull Corporation (Marea)',
+    metrics: [
+      { label: 'Viewport Scrolling', value: 'Lenis Physics' },
+      { label: 'Interface Animation', value: 'GSAP Timelines' },
+      { label: 'Auth System', value: 'Supabase Client' }
+    ],
+    problem: 'Luxury fashion brands require a distinct, highly immersive, editorial digital presence that standard rigid templates cannot provide.',
+    whyBuilt: 'Built to construct a cinematic, scroll-driven visual identity for Marea, linking high-fidelity layouts with account details.',
+    solution: 'Developed a high-end editorial storefront utilizing GSAP scroll-driven animation timelines, Lenis smooth scroll physics, and a custom catalog manager dashboard.',
+    features: [
+      'Editorial landing page with smooth scroll parallax grids.',
+      'Typographic reveal animations and custom cursor trackers.',
+      'Product catalogs and shopping carts synced with Supabase.',
+      'Secured user authentication credentials.'
+    ],
+    architecture: 'Built on Next.js 16 App Router. Custom scroll interactions are bound to Lenis scroll engines and GSAP layout animations client-side.',
+    dbBackendLogic: 'PostgreSQL catalog tables list active collection details, variants options, and user details, secured by Row Level Security.',
+    uiScreens: [
+      { title: 'Cinematic Editorial Feed', description: 'Landing page showing scroll-driven typography reveals.' },
+      { title: 'Products Catalog Grids', description: 'Grid layouts displaying sizing options and zoom coordinates.' },
+      { title: 'User Account Dashboard', description: 'Tracks order items, invoices, and shipping details.' }
+    ],
+    challenges: [
+      {
+        problem: 'Combining heavy graphics and scroll-triggered GSAP timelines caused visual stutter and frame drops on mobile viewports.',
+        solution: 'Optimized scrolling using passive scroll listeners, hardware-accelerated transforms, and Lenis easing mechanics to maintain 60fps.'
+      }
+    ],
+    whatILearned: 'Mastered GSAP timeline orchestrations, managing smooth scroll physics in Next.js layouts, and animating SVG canvas elements.',
+    futureImprovements: [
+      'Add size recommender logic based on standard measurements.',
+      'Integrate real-time inventory checks during checkout selection.'
+    ],
+    featured: true
+  },
+  {
+    slug: 'marea-admin-dashboard',
+    title: 'Marea Admin Dashboard',
+    category: 'Dashboards',
+    shortDescription: 'Operational administration dashboard and content management system for Marea luxury fashion storefront.',
+    description: 'An internal control panel designed to manage high-end fashion catalogs. Features WYSIWYG rich text document editors, drag-and-drop sort lists, and advanced data tables.',
+    technologies: ['Next.js', 'Supabase', 'TanStack Table', 'TipTap Editor', 'dnd-kit', 'Recharts', 'Tailwind CSS', 'TypeScript'],
+    status: 'Live',
+    year: '2026',
+    image: '/images/projects/marea-admin.webp',
+    liveUrl: 'https://marea-dashboard.vercel.app/',
+    role: 'Co-Developer (Collaboration)',
+    period: 'Jun 2026 - Jul 2026',
+    client: 'Pitbull Corporation (Marea)',
+    metrics: [
+      { label: 'Product Table', value: 'TanStack Table' },
+      { label: 'Description Text', value: 'TipTap WYSIWYG' },
+      { label: 'Catalog Reordering', value: 'dnd-kit Sortable' }
+    ],
+    problem: 'Marea designers and editors struggled to layout blog posts and drag-reorder home product lists using static SQL tables.',
+    whyBuilt: 'Built to provide an administrative content manager panel supporting rich text descriptions, drag sorting, and client invoice records.',
+    solution: 'Built an admin panel integrating TanStack Table for sorting, TipTap for catalog descriptions, and dnd-kit for layout ordering.',
+    features: [
+      'Rich text WYSIWYG workspace using TipTap.',
+      'Drag-and-drop showcase product queue sorting.',
+      'Sortable and filterable data tables built with TanStack Table.',
+      'Live dashboard metrics tracking orders.'
+    ],
+    architecture: 'Built on Next.js 14, communicating with Supabase database schemas. The editor imports TipTap modules, rendering sanitized HTML scripts to text tables.',
+    dbBackendLogic: 'Audit tables track administrative changes. Custom database RPC functions perform batch sorting coordinates synchronization.',
+    uiScreens: [
+      { title: 'Products Data Sheet', description: 'Lists active items with filterable TanStack columns.' },
+      { title: 'TipTap Content Creator', description: 'WYSIWYG document board supporting typography styles.' },
+      { title: 'Fulfillment Console', description: 'Order details and client invoice tracking panel.' }
+    ],
+    challenges: [
+      {
+        problem: 'Updating detailed catalog descriptions and styling sequences required raw HTML inputs from admin staff.',
+        solution: 'Built a dashboard editor integrating the TipTap rich text editor with HTML sanitization layers using DOMPurify.'
+      }
+    ],
+    whatILearned: 'Gained experience in WYSIWYG editor configuration, building data tables with complex filters, and securing backend queries.',
+    futureImprovements: [
+      'Add image compression hooks on file uploads.',
+      'Integrate automated order shipment tags generator.'
+    ],
+    featured: false
   },
   {
     slug: 'surendra-bus-body',
     title: 'Surendra & Co. Website',
     category: 'Websites',
     shortDescription: 'Premium business website for a bus body builder and coach manufacturer, featuring an interactive configuration board.',
-    description: 'A customer-facing presentation and business portal built for Surendra & Co. Bus Body Builders. The application allows fleet operators to configure custom bus chassis options, seating layout styles, and request customized manufacturing estimates.',
-    technologies: ['Next.js', 'TypeScript', 'Three.js', 'Framer Motion', 'Tailwind CSS', 'Zod'],
-    status: 'Live',
-    year: '2025',
-    image: '/images/projects/surendra.webp',
-    role: 'Lead Developer',
-    period: 'Aug 2025 - Sep 2025',
-    client: 'Surendra & Co.',
-    metrics: [
-      { label: 'Unique Visitors', value: '150,000+' },
-      { label: 'Lead Conversion', value: '4.2x' },
-      { label: 'LCP Load Time', value: '< 1.2s' }
-    ],
-    problem: 'Surendra & Co. lacked a modern web presence and had to manually explain coach configurations to B2B fleet clients over phone calls.',
-    whyBuilt: 'This portal was built to establish a cinematic digital brand identity and allow clients to submit structured chassis configuration parameters.',
-    solution: 'Designed a Next.js landing page with high-performance 3D seat layout configurations, smooth scroll effects, and Zod-validated input pipelines.',
-    features: [
-      'Premium business landing page with cinematic parallax scrolling.',
-      'B2B estimation request router checking dynamic seat counts.',
-      'Draco-compressed 3D bus interior viewer powered by Three.js.',
-      'Manufacturing capabilities layout showing production lines.'
-    ],
-    architecture: 'Static Next.js pages optimized for maximal speed. Interactive elements load dynamically in the browser, communicating with a lightweight Serverless Contact API routing leads to an internal CRM.',
-    dbBackendLogic: 'Serverless API route parses specifications, maps parameters to predefined configuration templates, validates models using Zod, and routes files to email handlers.',
-    uiScreens: [
-      { title: 'Cinematic Landing Page', description: 'Features smooth scrolling and interactive grids of manufactured buses.' },
-      { title: 'Interior Configurator Console', description: 'A slider interface letting buyers choose seat patterns and chassis dimensions in 3D.' },
-      { title: 'Technical Capability Hub', description: 'Highlights sheet metal bending, paint shops, and assembly lines.' }
-    ],
-    challenges: [
-      {
-        problem: 'Initial loading of 3D models took 15+ seconds, leading to a high user bounce rate.',
-        solution: 'Optimized the 3D assets pipeline by implementing Draco compression and lazy-loading models based on viewport intersections.'
-      }
-    ],
-    whatILearned: 'Gained expertise in rendering Three.js geometries efficiently, loading Draco buffers, and writing responsive fluid CSS layouts.',
-    futureImprovements: [
-      'Add real-time pricing indicators that adjust as buyers toggle luxury seat materials.',
-      'Support full exterior bus painting customization preview options.'
-    ],
-    featured: false
-  },
-  {
-    slug: 'ecommerce-brand-websites',
-    title: 'E-commerce Brand Websites',
-    category: 'E-commerce',
-    shortDescription: 'High-speed headless e-commerce architectures designed to scale conversion rates and maximize performance.',
-    description: 'A collection of bespoke headless e-commerce sites developed for high-end local DTC brands. Engineered for sub-second page loads, custom cart logic, and high conversion checkouts integrated with local payment Gateways.',
-    technologies: ['Next.js', 'GraphQL', 'Shopify Storefront API', 'Tailwind CSS', 'Radix UI', 'Stripe'],
-    status: 'Live',
-    year: '2025',
-    image: '/images/projects/ecommerce-brand.webp',
-    role: 'Full-Stack Developer',
-    period: 'Ongoing',
-    metrics: [
-      { label: 'Conversion Lift', value: '28%' },
-      { label: 'LCP Load Time', value: '< 1.1s' },
-      { label: 'Orders Processed', value: '50,000+' }
-    ],
-    problem: 'Clients using standard templates suffered from slow loading speeds, high cart drop-off rates, and rigid custom checkout constraints.',
-    whyBuilt: 'These headless platforms were designed to optimize Core Web Vitals, maximize mobile conversion rates, and allow unique customized checkout paths.',
-    solution: 'Replaced standard shop platforms with a fast React/Next.js frontend that fetches product details dynamically via GraphQL, caching static catalog indices.',
-    features: [
-      'Incremental Static Regeneration (ISR) ensuring instantly cached product pages.',
-      'Optimized checkout flow with local payment gateways (Razorpay/Stripe).',
-      'Unified search engine utilizing Algolia for instant typo-tolerant results.',
-      'Highly custom promotion and discount logic computed client-side and verified server-side.'
-    ],
-    architecture: 'Headless Next.js storefront querying Shopify APIs using GraphQL. Real-time updates utilize Serverless Next.js edge functions. Analytics are tracked securely on Vercel Edge.',
-    dbBackendLogic: 'Bypasses standard database lookup limits by querying cached Shopify products tables. Local API routines handle cart sessions using secure serverless cookies.',
-    uiScreens: [
-      { title: 'Interactive Product Catalog', description: 'A fast filtering page that updates catalogs instantly on key press.' },
-      { title: 'Bespoke Cart Console', description: 'Slide-out cart showing dynamic discount updates and shipping targets.' },
-      { title: 'Headless Checkout Page', description: 'A single-step form checking user coordinates and routing checkouts.' }
-    ],
-    challenges: [
-      {
-        problem: 'DTC client had 10,000+ variants resulting in Next.js build timeouts during static generation.',
-        solution: 'Implemented hybrid rendering, statically pre-rendering top 10% selling items and lazy-generating the remaining products upon request.'
-      }
-    ],
-    whatILearned: 'Mastered headless commerce API integrations, writing clean GraphQL schemas, and writing sub-second checkouts.',
-    futureImprovements: [
-      'Integrate AI-driven product cross-selling modules inside the slide-out cart.',
-      'Add support for multi-currency pricing tables matching local buyer geo-locations.'
-    ],
-    featured: true
-  },
-  {
-    slug: 'ecommerce-business-dashboards',
-    title: 'E-commerce Business Dashboards',
-    category: 'Dashboards',
-    shortDescription: 'Internal dashboards for e-commerce businesses to manage products, orders, customers, inventory, and business performance.',
-    description: 'A premium SaaS analytics dashboard that aggregates orders, shipping data, ad accounts (Facebook, Google), and computes true profitability in real-time. Designed as a unified control center for e-commerce operators.',
-    technologies: ['Next.js', 'TypeScript', 'Supabase', 'Recharts', 'Tailwind CSS', 'OAuth 2.0'],
+    description: 'A business portal designed for coach manufacturers. Highlights B2B fleet manufacturing capabilities, vehicle categories, and configures estimation forms routed to sales teams.',
+    technologies: ['Next.js', 'Tailwind CSS', 'Framer Motion', 'Lenis Scroll', 'Resend'],
     status: 'Live',
     year: '2026',
-    image: '/images/projects/ecommerce-dash.webp',
-    role: 'Creator & Lead Developer',
-    period: 'Jan 2026 - Present',
+    image: '/images/projects/surendra.webp',
+    liveUrl: 'https://surendra-xi.vercel.app/',
+    role: 'Co-Developer (Collaboration)',
+    period: 'Jun 2026 - Jul 2026',
+    client: 'Pitbull Corporation (Surendra & Co.)',
     metrics: [
-      { label: 'Query Latency', value: '< 180ms' },
-      { label: 'Sync Delay', value: '< 30s' },
-      { label: 'API Integrations', value: '5 APIs' }
+      { label: 'Interface Scroll', value: 'Lenis Easing' },
+      { label: 'Contact Dispatch', value: 'Resend Mailing' },
+      { label: 'Fluid Animation', value: 'Framer Motion' }
     ],
-    problem: 'E-commerce operators had to manually compile spreadsheets from Shopify, Stripe, and ad accounts to compute true net profits, losing critical hours every week.',
-    whyBuilt: 'This panel was designed to automate profit calculations, monitor real-time fulfillment logs, and alert operators about running low on inventory.',
-    solution: 'Built an aggregation engine querying ad platform metrics and order data, calculating ad spend efficiency, margins, and customer lifetime value cohorts.',
+    problem: 'A commercial coach builder lacked a modern digital portal to present manufacturing capabilities and configuration layouts to fleet clients.',
+    whyBuilt: 'Built to establish a clean web presence showcase for Surendra & Co. Coach Builders, allowing B2B clients to submit structured design specifications.',
+    solution: 'Built a clean Next.js presentation site with Lenis smooth scrolling, Framer Motion animations, and Resend email forms for custom fleet quotes.',
     features: [
-      'Interactive cohort analysis charts tracking Customer Lifetime Value (LTV).',
-      'Real-time webhook ingestion engine from multiple shop providers.',
-      'Ad Spend ROI tracking directly overlaid with sales chart grids.',
-      'Inventory depletion warnings driven by basic forecasting algorithms.'
+      'Cinematic capabilities showcase showcasing manufacturing yards.',
+      'Structured fleet chassis configuration form.',
+      'Resend integration to route fleet requests to company mailboxes.'
     ],
-    architecture: 'Next.js App Router for frontend layouts. Supabase PostgreSQL serves as the primary data store with schema level row-security. Chart components are built with Recharts, optimized for responsive screens.',
-    dbBackendLogic: 'Calculates data aggregates inside Supabase SQL views, indexing order timestamps, payment payouts, and marketing costs to compute true metrics instantly.',
+    architecture: 'High-performance static Next.js pages. B2B configuration forms collect client request details and forward payload states to Resend mail scripts.',
+    dbBackendLogic: 'Serverless routes parse request forms, compile options details, and trigger secure dispatches to company mail servers.',
     uiScreens: [
-      { title: 'Profit Control Board', description: 'Displays live net sales, ad spends, blends ROAS, and inventory health rates.' },
-      { title: 'Cohort Analytics Engine', description: 'Recharts line charts showing customer retention profiles.' },
-      { title: 'Fulfillment Control Desk', description: 'Monitor incoming orders, shipping categories, and package tracking logs.' }
+      { title: 'Manufacturing Showcase', description: 'Scroll-driven gallery showing manufacturing processes.' },
+      { title: 'Chassis Configurator Form', description: 'Form checklist capturing seat options and length requirements.' },
+      { title: 'Lead Receipt Confirmation', description: 'Displays message confirmations and sends notifications.' }
     ],
     challenges: [
       {
-        problem: 'Combining high-volume API requests from Facebook Ads, Google Ads, and Shopify caused extreme API rate-limiting issues.',
-        solution: 'Built an asynchronous queue system using BullMQ and Redis, fetching data in batches using randomized jitter offsets.'
+        problem: 'Heavy image asset directories led to high LCP page loading latency for mobile clients.',
+        solution: 'Optimized image pipelines by utilizing modern WebP formatting, responsive sizing ratios, and lazy-loading viewports.'
       }
     ],
-    whatILearned: 'Gained advanced knowledge of writing PostgreSQL aggregation queries, optimizing SVG chart rendering, and handling OAuth 2.0 token refreshes.',
+    whatILearned: 'Learned about responsive layout structures, optimizing asset delivery, and configuring custom animation easings.',
     futureImprovements: [
-      'Incorporate machine learning forecasting models to predict inventory depletion dates.',
-      'Add automated Slack notifications warning managers about ROI drops.'
+      'Add interactive 3D coach model visualizer.',
+      'Incorporate client request history tracker.'
     ],
     featured: false
-  },
-  {
-    slug: 'nf-lrd-regime-discovery',
-    title: 'NF-LRD',
-    category: 'Quant Research',
-    shortDescription: 'NIFTY 50 Latent Market Regime Discovery and Risk Intelligence Platform using machine learning models to detect structural market regimes.',
-    description: 'A proprietary quantitative analysis dashboard built to classify NIFTY 50 price movements into structural regimes (bullish, bearish, high-volatility, low-volatility) using statistical models, allowing for adaptive algorithm allocation.',
-    technologies: ['Python', 'Pandas', 'Scikit-learn', 'Next.js', 'TypeScript', 'FastAPI', 'Plotly'],
-    status: 'Live',
-    year: '2025',
-    image: '/images/projects/nflrd.webp',
-    role: 'Quant Developer / Researcher',
-    period: 'Sep 2025 - Nov 2025',
-    metrics: [
-      { label: 'Information Ratio Lift', value: '+0.68' },
-      { label: 'Regime Classifications', value: '12 Classes' },
-      { label: 'Backtest Validity', value: '99.9%' }
-    ],
-    problem: 'Trading algorithms optimized for calm markets lose significant capital during high-volatility regime shifts, requiring automatic model reallocation.',
-    whyBuilt: 'This platform was designed to dynamically segment historical market regimes using Hidden Markov Models (HMM), allowing for automated portfolio risk profiling.',
-    solution: 'Built a modular Python service running Pandas feature engineering pipelines, predicting regime transitions, and displaying simulations on a React frontend.',
-    features: [
-      'Hidden Markov Models (HMM) running on historic NIFTY 50 daily returns data.',
-      'Dynamic trading rule allocations based on predicted regime transitions.',
-      'Interactive backtesting suite with slippage and transaction cost calculators.',
-      'Volatility clustering analysis using GARCH models.'
-    ],
-    architecture: 'Python-based compute layer exposed through FastAPI endpoints. The Next.js dashboard visualizes the probability density curves and historical regime charts using custom interactive plotting.',
-    dbBackendLogic: 'Uses lightweight database stores to save historical close metrics. Compute pipelines run directly in-memory using numpy array vectors for performance.',
-    uiScreens: [
-      { title: 'Regime Probability Plot', description: 'Line charts mapping structural market regime probabilities over time.' },
-      { title: 'Backtester Suite Panel', description: 'Run simulations checking returns curves vs buy-and-hold benchmarks.' },
-      { title: 'Risk Indicators Console', description: 'Displays volatility, correlations matrix, and GARCH forecast values.' }
-    ],
-    challenges: [
-      {
-        problem: 'Standard Python statistical libraries were slow when running multi-decade walk-forward optimization runs.',
-        solution: 'Vectorized historical calculations using NumPy and leveraged Numba to compile hot loops into machine code, resulting in a 25x speedup.'
-      }
-    ],
-    whatILearned: 'Developed a deep understanding of Hidden Markov Models, mathematical matrix vectorizations, and options Greeks pricing metrics.',
-    futureImprovements: [
-      'Extend models to classify international indices (like SPY or QQQ) in real-time.',
-      'Implement deep learning LSTM models to cross-reference regime classifications.'
-    ],
-    featured: true
   },
   {
     slug: 'mspe-volatility-engine',
-    title: 'MSPE',
+    title: 'MSPE Greeks & Volatility Engine',
     category: 'Quant Research',
     shortDescription: 'Real-time option implied volatility surface visualizer, portfolio risk modeler, and probability-based projection engine.',
-    description: 'An option pricing and volatility surface modeling tool. It computes real-time Black-Scholes implied volatilities, interpolates missing option chain data using cubic splines, and visualizes the volatility skew and smile in 3D.',
-    technologies: ['React', 'TypeScript', 'Three.js', 'WebAssembly (C++)', 'Tailwind CSS', 'Recharts'],
+    description: 'An options pricing and volatility surface analysis dashboard. It computes Option Greeks, forecasts historical volatility clusters using statistical models, and visualizes the volatility smile in 3D Plots.',
+    technologies: ['Next.js', 'FastAPI', 'Pandas', 'NumPy', 'Plotly.js', 'GARCH (arch)', 'XGBoost', 'scikit-learn'],
     status: 'Live',
     year: '2025',
     image: '/images/projects/mspe.webp',
-    role: 'Solo Developer',
+    liveUrl: 'https://mspe.vercel.app/',
+    role: 'Solo Developer (100% Personal Project)',
     period: 'Oct 2025 - Dec 2025',
+    client: 'Personal Project',
     metrics: [
-      { label: 'Greeks Calculated', value: '5000+ /sec' },
-      { label: 'Surface Render Delay', value: '< 45ms' },
-      { label: 'Accuracy vs. Market', value: '99.98%' }
+      { label: 'Volatility Model', value: 'GARCH Forecast' },
+      { label: 'Machine Learning', value: 'XGBoost Regressor' },
+      { label: 'Visualization Layer', value: 'Plotly 3D Skew' }
     ],
-    problem: 'Computing options implied volatility skew surfaces is mathematically expensive, causing browser interfaces to lag during high-frequency data streams.',
-    whyBuilt: 'Vraj built MSPE to visualize options implied volatility smile surfaces in 3D, calculate options Greeks instantly, and run portfolio risk projection matrices.',
-    solution: 'Designed a high-speed C++ engine compiled to WebAssembly, running calculations in background web workers, rendered using Three.js.',
+    problem: 'Implied option volatility calculations require root-finding numerical solvers which lag when processing large option books.',
+    whyBuilt: 'Built to forecast historical volatility clusters, calculate option Greeks, and visualize the volatility smile skew in 3D.',
+    solution: 'Built an options pricing and volatility forecasting platform using Next.js and Plotly.js, backed by a FastAPI engine running GARCH and XGBoost volatility projections.',
     features: [
-      'High-performance WebAssembly engine calculating options Greeks (Delta, Gamma, Vega, Theta).',
-      'Real-time 3D implied volatility surface plotting using Three.js.',
-      'Cubic spline interpolation to fill gaps in options lists.',
-      'Volatility smile tracking against strike prices and expirations.'
+      'Option Greeks calculator (Delta, Gamma, Vega, Theta).',
+      'Volatility smile skew tracking.',
+      'GARCH statistical forecasting models.',
+      'XGBoost model training pipeline for volatility forecasting.',
+      'Interactive 3D mesh rendering of skew surfaces using Plotly.'
     ],
-    architecture: 'Next.js rendering with specialized canvas contexts. The core mathematical solver is compiled from C++ to a WASM binary, loaded dynamically at runtime. Rendering leverages Three.js libraries.',
-    dbBackendLogic: 'Retrieves stock price indexes via WebSockets, streaming calculations directly to client-side memory structures, bypassing standard database layers to keep latency sub-millisecond.',
+    architecture: 'Next.js App Router renders Plotly chart boards. Calculations are processed on FastAPI Python servers utilizing optimized NumPy and Pandas arrays.',
+    dbBackendLogic: 'Option chain indices and historical assets parameters are updated and cached, streaming forecast results dynamically.',
     uiScreens: [
-      { title: '3D Volatility Surface Map', description: 'An interactive 3D mesh rendering the implied volatility surface across strikes and expiries.' },
-      { title: 'Volatility Smile Chart', description: 'A Recharts line plot illustrating the classic options implied volatility smile.' },
-      { title: 'Option Greeks Chain', description: 'Lists real-time bids, asks, delta, gamma, vega, and computed volatilities.' }
+      { title: '3D Skew Mesh Viewer', description: 'Plotly 3D mesh rendering options skews across strikes.' },
+      { title: 'GARCH Forecast Panel', description: 'Line charts displaying historical volatility clusters.' },
+      { title: 'Option Greeks Table', description: 'Grid displaying delta, gamma, and vega variables.' }
     ],
     challenges: [
       {
-        problem: 'Numerical root-finding algorithms (Newton-Raphson) for implied volatility were lagging when processing raw option chains in pure JS.',
-        solution: 'Wrote option chain calculations in C++ and compiled them to WebAssembly, running calculations in parallel using Web Workers.'
+        problem: 'Calculating historical volatility profiles using standard regression algorithms failed to capture volatility clustering.',
+        solution: 'Applied GARCH statistical modeling using the Python `arch` library to forecast volatility variance and regime parameters.'
+      },
+      {
+        problem: 'Rendering complex 3D implied volatility skew surfaces degraded browser frame rates during user rotation interactions.',
+        solution: 'Offloaded 3D mesh rendering to Plotly.js canvas with hardware-acceleration, plotting strike-to-expiry skew structures dynamically.'
       }
     ],
-    whatILearned: 'Gained expertise in linking C++ modules to React WebAssembly interfaces, utilizing Web Workers, and rendering custom 3D web surfaces.',
+    whatILearned: 'Deepened knowledge of quantitative options pricing math, volatility clustering models, and connecting Python data engines to Next.js visualization boards.',
     futureImprovements: [
-      'Incorporate Sabr Volatility modeling to match market skews during extreme stress events.',
-      'Add historical volatility comparison curves overlays.'
+      'Integrate live options chains feeds via WebSockets.',
+      'Incorporate SABR volatility modeling.'
+    ],
+    featured: true
+  },
+  {
+    slug: 'nf-lrd-regime-discovery',
+    title: 'NF-LRD Nifty 50 Regime Discovery',
+    category: 'Quant Research',
+    shortDescription: 'NIFTY 50 Latent Market Regime Discovery and Risk Intelligence Platform using machine learning models to detect structural market regimes.',
+    description: 'A quantitative analytics dashboard designed to identify hidden market states (bullish, bearish, high-volatility) in Nifty 50 close histories. Runs Hidden Markov Models to backtest adaptive strategies.',
+    technologies: ['Streamlit', 'Python', 'Pandas', 'NumPy', 'hmmlearn', 'Plotly', 'yfinance', 'scikit-learn'],
+    status: 'Live',
+    year: '2025',
+    image: '/images/projects/nflrd.webp',
+    liveUrl: 'https://nf-lrd.streamlit.app/',
+    role: 'Solo Developer (100% Personal Project)',
+    period: 'Sep 2025 - Nov 2025',
+    client: 'Personal Project',
+    metrics: [
+      { label: 'Regime Classifier', value: 'Gaussian HMM' },
+      { label: 'Numerical Solver', value: 'scipy + numpy' },
+      { label: 'Dashboard Engine', value: 'Streamlit App' }
+    ],
+    problem: 'Trading strategies optimized for calm regimes lose capital during sudden high-volatility regime shifts.',
+    whyBuilt: 'Built to detect latent market regimes in historical NIFTY 50 returns data using statistical models.',
+    solution: 'Developed a quantitative Streamlit dashboard running Gaussian Hidden Markov Models (HMM) to classify NIFTY 50 price movements into latent regimes.',
+    features: [
+      'Hidden Markov Model (HMM) regime segmentation.',
+      'Dynamic trading backtest suite comparing returns to benchmark.',
+      'Drawdown analysis metrics.',
+      'Plotly regime segmentation plots.'
+    ],
+    architecture: 'Python analytics engine using Streamlit for dashboard rendering. Computations are processed in-memory using NumPy matrices.',
+    dbBackendLogic: 'Nifty 50 daily index updates are fetched via APIs, cached locally, and vectorized to generate returns arrays.',
+    uiScreens: [
+      { title: 'Market Regime Segmentation', description: 'Plotly chart tracking market index close colors by active regime.' },
+      { title: 'Probability Matrix Output', description: 'Displays transition matrices and state likelihoods.' },
+      { title: 'Returns Backtester Console', description: 'Charts strategy returns against buy-and-hold curves.' }
+    ],
+    challenges: [
+      {
+        problem: 'Raw market close datasets from finance APIs contained anomalies and gaps that skewed statistical model fitting.',
+        solution: 'Implemented data preprocessing pipelines using Pandas to align timeline series, forward-fill missing indices, and compute log returns.'
+      },
+      {
+        problem: 'Plotting multi-regime backtests side-by-side with benchmark returns created cluttered UI layouts.',
+        solution: 'Engineered interactive multi-trace Plotly charts letting research analysts toggle regime overlays and inspect drawdown periods.'
+      }
+    ],
+    whatILearned: 'Gained hands-on experience in statistical time series analysis, regime-switching models, and vector backtesting with NumPy.',
+    futureImprovements: [
+      'Add walk-forward optimization framework for HMM model parameters.',
+      'Incorporate international indices comparison metrics.'
     ],
     featured: true
   },
   {
     slug: 'btc-algo-trading',
-    title: 'BTC-ALGO',
+    title: 'BTC-ALGO Signals Board',
     category: 'Quant Research',
     shortDescription: 'Bitcoin algorithmic trading dashboard displaying live signal generation, backtesting metrics, and risk monitoring.',
-    description: 'An execution dashboard displaying real-time cryptocurrency signals generated by a custom momentum-trend algorithmic model. Tracks trade entries, exits, win-rate, drawdown metrics, and live portfolio distribution.',
-    technologies: ['Next.js', 'TypeScript', 'Node.js', 'PostgreSQL', 'WebSockets', 'Binance API', 'Tailwind CSS'],
+    description: 'A Bitcoin trading signal dashboard. Tracks candlestick patterns, moving average crossovers, drawdown statistics, and displays active buy, sell, or hold indicators.',
+    technologies: ['Streamlit', 'Python', 'Pandas', 'NumPy', 'Plotly', 'requests', 'streamlit-autorefresh'],
     status: 'Live',
     year: '2026',
     image: '/images/projects/btcalgo.webp',
-    role: 'Quant Developer',
+    liveUrl: 'https://btc-algo-dashboard.onrender.com/',
+    role: 'Solo Developer (100% Personal Project)',
     period: 'Nov 2025 - Jan 2026',
+    client: 'Personal Project',
     metrics: [
-      { label: 'Alpha vs. BTC HODL', value: '+24.8%' },
-      { label: 'Signal Latency', value: '< 100ms' },
-      { label: 'Winning Trades', value: '62.4%' }
+      { label: 'Signal Strategy', value: 'Trend Momentum' },
+      { label: 'Vector Compute', value: 'Pandas + NumPy' },
+      { label: 'Dashboard Engine', value: 'Streamlit App' }
     ],
-    problem: 'Retail crypto traders lack clean tools to inspect algorithmic signals, backtest strategies with transaction slippage, and track risk metrics in real-time.',
-    whyBuilt: 'BTC-ALGO was built to visualize a custom Bitcoin momentum strategy, backtest options, and stream live signals directly from exchanges.',
-    solution: 'Designed a Node.js daemon tracking live prices via Binance WebSockets, running statistical signals calculations, and streaming values to a Next.js board.',
+    problem: 'Retail traders lack lightweight dashboards to monitor trend-momentum signals and risk metrics in real-time.',
+    whyBuilt: 'Built to calculate technical indicators and display trading signal triggers dynamically.',
+    solution: 'Created a Bitcoin trading signals dashboard using Streamlit and Pandas, calculating moving average crossovers and tracking drawdowns.',
     features: [
-      'Live trading signal dispatching with Telegram integration.',
-      'WebSocket connection to Binance and Bybit feeds for microsecond charts.',
-      'Automated risk management checking maximum drawdown and position sizes.',
-      'Historical performance breakdown with detailed Sharpe and Sortino ratios.'
+      'Real-time indicators calculation.',
+      'Autorefresh data updates.',
+      'Visual performance charts.'
     ],
-    architecture: 'Signals are calculated by a background worker service in Node.js connected to a PostgreSQL database. The Next.js frontend connects via secure WebSockets to display live telemetry and positions.',
-    dbBackendLogic: 'PostgreSQL stores historical signal records, trade entries, and drawdowns. Relational indexes enable fast aggregations to compute Sharpe ratios on-the-fly.',
+    architecture: 'Streamlit dashboard executing Python computational blocks.Candlestick histories are parsed using Pandas indicator methods.',
+    dbBackendLogic: 'Caches recent close ticks and calculates metrics in-memory, updating outputs dynamically on frontend updates.',
     uiScreens: [
-      { title: 'Live Signals Board', description: 'Shows BTC/USDT price feeds overlaid with dynamic buy, sell, or hold labels.' },
-      { title: 'Strategy Backtester Desk', description: 'Inputs to adjust strategy parameters (moving averages, thresholds) and plot curves.' },
-      { title: 'Risk & Allocation Dashboard', description: 'Aggregates open positions sizes, risk limits, and historical drawdowns.' }
+      { title: 'Active Signal Status', description: 'Highlights current asset signals (Buy/Sell/Hold).' },
+      { title: 'Performance Metrics Chart', description: 'Plotly lines charting strategy growth and drawdowns.' },
+      { title: 'Parameters Configuration', description: 'Sidebar selectors to override indicator length constants.' }
     ],
     challenges: [
       {
-        problem: 'Signal execution was delayed due to latency spikes in webhook delivery during volatile market events.',
-        solution: 'Migrated the signal dispatcher to AWS API Gateway with edge routes, setting up WebSocket listeners in Next.js to push live updates directly.'
+        problem: 'API fetch timeouts from public crypto exchanges frequently delayed signal computations.',
+        solution: 'Integrated a connection retry handler using python `requests` and enabled `streamlit-autorefresh` to poll price feeds.'
       }
     ],
-    whatILearned: 'Learned about WebSockets scalability constraints, Binance API rate limits, and risk metrics math calculations.',
+    whatILearned: 'Learned about stream polling constraints, rate limiting, and standard indicators math.',
     futureImprovements: [
-      'Add support for multi-asset strategy models (including ETH, SOL) on the same platform.',
-      'Integrate direct trading execution via exchange API credentials.'
+      'Integrate WebSockets endpoints for live tick data.',
+      'Add backtesting simulation panel with slippage inputs.'
     ],
     featured: false
-  },
-  {
-    slug: 'ai-cold-email-automation',
-    title: 'AI Cold Email Automation',
-    category: 'AI Automation',
-    shortDescription: 'Autonomous outbound campaign engine leveraging LLMs to scrape leads, personalize copy, and schedule outreach.',
-    description: 'An AI-powered B2B automation platform that automates lead nurturing. It reads candidate LinkedIn/Company pages, synthesizes custom emails matching their specific challenges, runs smart warmups, and dispatches email sequences.',
-    technologies: ['Next.js', 'TypeScript', 'Gemini API', 'LangChain', 'Supabase', 'Cron Jobs', 'Zod'],
-    status: 'Live',
-    year: '2026',
-    image: '/images/projects/coldemail.webp',
-    role: 'Solo Creator',
-    period: 'Feb 2026 - Apr 2026',
-    metrics: [
-      { label: 'Email Open Rate', value: '68%' },
-      { label: 'Outbox Scale', value: '15,000+' },
-      { label: 'Leads to Demos', value: '22%' }
-    ],
-    problem: 'Generic B2B cold outreach campaigns suffer from low open rates because emails lack real personalization and trigger spam filters.',
-    whyBuilt: 'Built to automate personalized outreach by scraping target websites, identifying technical bugs, and generating tailored copy using LLMs.',
-    solution: 'Designed a Next.js/LangChain worker script that crawls target sites, parses pages using Gemini, checks validations using Zod, and schedules Gmail dispatches.',
-    features: [
-      'Multi-model LLM routing to optimize token costs (Gemini Flash vs. Pro).',
-      'Dynamic email personalization engine using company-specific context.',
-      'Deliverability scanner checking SPF, DKIM, and IP blacklist status.',
-      'Automated calendar booking integration.'
-    ],
-    architecture: 'Next.js API routes trigger LangChain pipelines. Supabase manages lead tables, email sequences, and outreach logs. Recurring cron jobs trigger email dispatches asynchronously.',
-    dbBackendLogic: 'Supabase PostgreSQL holds tables tracking campaign structures, leads lists, email logs, and queue dispatching times. Triggers handle rate limits checks.',
-    uiScreens: [
-      { title: 'Outbound Dashboard', description: 'Monitor sent counts, open rates, click ratios, and positive responses.' },
-      { title: 'Prompt Workspace', description: 'Configure system templates, Gemini temperature params, and check variables mappings.' },
-      { title: 'Leads Directory', description: 'Lists target contacts, linked company URLs, and generated email drafts.' }
-    ],
-    challenges: [
-      {
-        problem: 'LLMs occasionally generated email copy with format inconsistencies, which ruined the personalization look.',
-        solution: 'Utilized Zod schemas with Gemini Structured Output mode, forcing the model to return exactly parsed JSON payloads.'
-      },
-      {
-        problem: 'Spam filters flagged bulk outbound campaigns.',
-        solution: 'Implemented a dynamic throttle scheduler with random delay offsets and integrated mailbox warm-up routines.'
-      }
-    ],
-    whatILearned: 'Gained hands-on experience in writing LLM chain prompts, structural JSON validations using Zod, and configuring cron job pipelines.',
-    futureImprovements: [
-      'Incorporate multi-channel sequencing integrating automatic LinkedIn connection notes.',
-      'Add semantic leads scoring using vector embeddings to prioritize prospects.'
-    ],
-    featured: true
   }
 ];
 

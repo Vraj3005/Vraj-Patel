@@ -23,7 +23,7 @@ export async function GET(req: NextRequest) {
           user_ip: '127.0.0.1',
           messages: [
             { role: 'user', content: 'Who is Vraj Patel?' },
-            { role: 'assistant', content: 'Vraj Patel is a 4th-year CSE student at Nirma University. He builds full-stack applications, ERP systems, dashboards, and quantitative research platforms.' }
+            { role: 'assistant', content: 'Vraj Patel is a 3rd-year CSE student at Nirma University. He builds full-stack applications, ERP systems, dashboards, and quantitative research platforms.' }
           ]
         },
         {
