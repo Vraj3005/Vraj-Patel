@@ -7,9 +7,9 @@ vi.mock('@/lib/ai/gemini', () => ({
   askVrajAIStream: vi.fn(),
 }));
 
-vi.mock('@/lib/supabase/server', () => ({
+vi.mock('@/lib/supabase/simple', () => ({
   isSupabaseConfigured: false,
-  createServerSupabaseClient: vi.fn(),
+  createSimpleSupabaseClient: vi.fn(),
 }));
 
 describe('Ask Route API', () => {

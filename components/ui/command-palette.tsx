@@ -126,12 +126,23 @@ export default function CommandPalette({ isOpen, onClose }: CommandPaletteProps)
       icon: <FileText className="h-4 w-4 text-blue-400" />,
     },
     {
-      id: 'act-github',
-      label: 'View GitHub Profile',
-      description: 'Open Vraj\'s public GitHub profile in a new window.',
+      id: 'act-github-personal',
+      label: 'View Personal GitHub Profile',
+      description: 'Open Vraj\'s main public GitHub profile (@Vraj3005) in a new tab.',
       category: 'Actions',
       action: () => {
-        window.open('https://github.com', '_blank');
+        window.open('https://github.com/Vraj3005', '_blank');
+        onClose();
+      },
+      icon: <Github className="h-4 w-4 text-cyan-400" />,
+    },
+    {
+      id: 'act-github-debug',
+      label: 'View Debug/Academic GitHub Profile',
+      description: 'Open Vraj\'s academic and debug GitHub profile (@23bce377-debug) in a new tab.',
+      category: 'Actions',
+      action: () => {
+        window.open('https://github.com/23bce377-debug', '_blank');
         onClose();
       },
       icon: <Github className="h-4 w-4 text-indigo-400" />,

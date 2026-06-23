@@ -163,8 +163,9 @@ export default function InteractiveTerminal() {
         { text: '  Email:    patelvrajpatel30@gmail.com', type: 'output' },
         { text: '  Phone:    +91 79902 51191', type: 'output' },
         { text: '  Location: Gujarat, India', type: 'output' },
-        { text: '  GitHub:   https://github.com', type: 'output' },
-        { text: '  LinkedIn: https://linkedin.com', type: 'output' },
+        { text: '  GitHub (Personal): https://github.com/Vraj3005', type: 'output' },
+        { text: '  GitHub (Academic): https://github.com/23bce377-debug', type: 'output' },
+        { text: '  LinkedIn:          https://www.linkedin.com/in/vraj-patel-9502a6285', type: 'output' },
         { text: '', type: 'output' }
       ]);
       return;

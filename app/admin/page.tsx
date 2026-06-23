@@ -12,6 +12,7 @@ import { Badge } from '@/components/ui/badge';
 import { isSupabaseConfigured, supabase } from '@/lib/supabase/client';
 import { formatDate } from '@/lib/utils';
 import { motion, AnimatePresence } from 'framer-motion';
+import DeveloperConsole from '@/components/console/developer-console';
 import {
   LayoutDashboard,
   Briefcase,
@@ -1315,43 +1316,12 @@ export default function AdminDashboard() {
           <div className="flex flex-col gap-6">
             <div className="border-b border-card-border pb-4">
               <h1 className="text-xl font-mono text-foreground flex items-center gap-2">
-                <Activity className="h-5 w-5 text-secondary" /> Event Stream Analytics ({analyticsList.length})
+                <Activity className="h-5 w-5 text-secondary" /> Unified Operations Console
               </h1>
-              <p className="text-xs text-secondary mt-1">Real-time audit log of page navigations, clicks, and widget triggers.</p>
+              <p className="text-xs text-secondary mt-1 font-mono">Real-time telemetry stream including system logs, security audits, and admin activity metrics.</p>
             </div>
 
-            {analyticsList.length > 0 ? (
-              <div className="border border-card-border rounded-xl overflow-hidden bg-card-bg/60">
-                <table className="w-full text-left font-mono text-xs border-collapse">
-                  <thead>
-                    <tr className="border-b border-card-border bg-foreground/[0.02] text-secondary">
-                      <th className="p-4">Event Name</th>
-                      <th className="p-4">IP Address</th>
-                      <th className="p-4">Parameters</th>
-                      <th className="p-4 text-right">Timestamp</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {analyticsList.map((e) => (
-                      <tr key={e.id} className="border-b border-card-border hover:bg-foreground/[0.01]">
-                        <td className="p-4 font-bold text-foreground">{e.event_name}</td>
-                        <td className="p-4 text-secondary">{e.session_ip || '127.0.0.1'}</td>
-                        <td className="p-4 text-secondary max-w-xs truncate" title={JSON.stringify(e.event_data)}>
-                          {e.event_data ? JSON.stringify(e.event_data) : 'None'}
-                        </td>
-                        <td className="p-4 text-right text-secondary">{formatDate(e.created_at)}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            ) : (
-              <Card className="py-20 text-center border-dashed border-card-border flex flex-col items-center justify-center">
-                <Activity className="h-10 w-10 text-secondary mb-3 animate-pulse" />
-                <h4 className="text-xs font-bold text-foreground font-mono uppercase">No telemetry events logged</h4>
-                <p className="text-xs text-secondary mt-1 max-w-xs font-medium">Page telemetry actions record dynamically during sessions.</p>
-              </Card>
-            )}
+            <DeveloperConsole adminMode={true} />
           </div>
         )}
       </div>

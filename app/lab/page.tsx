@@ -10,12 +10,14 @@ import {
   Tooltip, ResponsiveContainer 
 } from 'recharts';
 import { 
-  Beaker, Sun, TrendingUp, Activity, Calculator, Play, Sliders, ShieldCheck 
+  Beaker, Sun, TrendingUp, Activity, Calculator, Play, Sliders, ShieldCheck, Network 
 } from 'lucide-react';
+import SystemVisualizer from '@/components/visualizers/system-visualizer';
+import DataFlowExplorer from '@/components/visualizers/data-flow-explorer';
 
 export default function Lab() {
   const { theme } = useTheme();
-  const [activeTab, setActiveTab] = useState<'solar' | 'quant' | 'sandbox'>('solar');
+  const [activeTab, setActiveTab] = useState<'solar' | 'quant' | 'sandbox' | 'visualizer'>('solar');
 
   // --- Solar Simulator States ---
   const [panelCapacity, setPanelCapacity] = useState(450); // Watts
@@ -236,6 +238,17 @@ export default function Lab() {
         >
           <Activity className="h-4 w-4" /> Quant Strategy Sandbox
           {activeTab === 'sandbox' && (
+            <motion.div layoutId="labTabUnderline" className="absolute bottom-0 left-0 right-0 h-[2px] bg-primary" />
+          )}
+        </button>
+        <button
+          onClick={() => setActiveTab('visualizer')}
+          className={`pb-3.5 text-xs md:text-sm font-semibold tracking-wide flex items-center gap-2 cursor-pointer transition-colors relative shrink-0 ${
+            activeTab === 'visualizer' ? 'text-foreground font-bold' : 'text-secondary hover:text-foreground'
+          }`}
+        >
+          <Network className="h-4 w-4" /> System Visualizer
+          {activeTab === 'visualizer' && (
             <motion.div layoutId="labTabUnderline" className="absolute bottom-0 left-0 right-0 h-[2px] bg-primary" />
           )}
         </button>
@@ -830,6 +843,32 @@ export default function Lab() {
                 </Card>
 
               </div>
+            </div>
+          </div>
+        )}
+
+        {activeTab === 'visualizer' && (
+          <div className="flex flex-col gap-8 w-full">
+            <div className="flex flex-col gap-1 border-b border-card-border pb-4">
+              <h2 className="text-xl font-medium font-serif text-foreground tracking-tight flex items-center gap-2">
+                <Network className="h-5 w-5 text-primary" /> System Architect & Data Flow Sandbox
+              </h2>
+              <p className="text-xs text-secondary leading-relaxed max-w-2xl font-medium">
+                Explore the interactive multi-layer topology architectures and step-by-step transaction pipelines mapping Vraj&apos;s production deployments.
+              </p>
+            </div>
+            <SystemVisualizer allowProjectSwitching={true} />
+
+            <div className="border-t border-card-border pt-8 mt-4">
+              <div className="flex flex-col gap-1 mb-6">
+                <h3 className="text-lg font-medium font-serif text-foreground tracking-tight flex items-center gap-2">
+                  <Activity className="h-4.5 w-4.5 text-secondary animate-pulse" /> Data Flow Pipeline Explorer
+                </h3>
+                <p className="text-xs text-secondary leading-relaxed max-w-2xl font-medium">
+                  Select a workflow pipeline below to watch transaction payloads mutate through inputs validation, secure API routes, models compute, and databases logs.
+                </p>
+              </div>
+              <DataFlowExplorer allowFlowSwitching={true} />
             </div>
           </div>
         )}

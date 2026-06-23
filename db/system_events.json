@@ -1,0 +1,918 @@
+[
+  {
+    "id": "47068478-496b-4376-a95f-599f2f4b97b0",
+    "created_at": "2026-06-23T20:52:54.794Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /dashboard",
+    "metadata": {
+      "path": "/dashboard",
+      "referrer": "http://localhost:3000/dashboard",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "74a96c18-9e8c-4922-ac7d-406481a75bf6",
+    "created_at": "2026-06-23T20:53:10.205Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /dashboard",
+    "metadata": {
+      "path": "/dashboard",
+      "referrer": "http://localhost:3000/dashboard",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "d438074a-62db-48e0-b571-cd8159e472d4",
+    "created_at": "2026-06-23T20:54:59.139Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /projects",
+    "metadata": {
+      "path": "/projects",
+      "referrer": "http://localhost:3000/dashboard",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "39e2f128-9ce6-4bea-a846-3f71aa7ce645",
+    "created_at": "2026-06-23T20:54:59.453Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /dashboard",
+    "metadata": {
+      "path": "/dashboard",
+      "referrer": "http://localhost:3000/dashboard",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "c89d5376-a974-4af5-a584-acb159db84fd",
+    "created_at": "2026-06-23T20:55:09.467Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /resume",
+    "metadata": {
+      "path": "/resume",
+      "referrer": "http://localhost:3000/dashboard",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "fba2c0b4-69c6-4778-a6ba-90b563c6d8ca",
+    "created_at": "2026-06-23T20:55:22.072Z",
+    "event_type": "portfolio",
+    "severity": "success",
+    "message": "Resume PDF print/save action triggered.",
+    "metadata": {
+      "referral": "http://localhost:3000/dashboard"
+    },
+    "is_public": true
+  },
+  {
+    "id": "95c6e75c-ca73-49f0-8eef-9f610a8dcae4",
+    "created_at": "2026-06-23T20:55:38.229Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /ask-vraj",
+    "metadata": {
+      "path": "/ask-vraj",
+      "referrer": "http://localhost:3000/dashboard",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "89372687-fa92-406a-953b-cb0d4d15b159",
+    "created_at": "2026-06-23T20:55:48.810Z",
+    "event_type": "ask-vraj",
+    "severity": "success",
+    "message": "Processed Ask Vraj AI query: \"Is Vraj suitable for quant or ...\"",
+    "metadata": {
+      "promptLength": 44,
+      "sessionId": "c653ec34-b5f2-48a0-9644-6a85e2296c18"
+    },
+    "is_public": true
+  },
+  {
+    "id": "76f4ad1b-6db4-4962-8382-b0d0e3dca5d1",
+    "created_at": "2026-06-23T20:55:56.576Z",
+    "event_type": "ask-vraj",
+    "severity": "success",
+    "message": "Processed Ask Vraj AI query: \"Explain Driedhub Marketplace....\"",
+    "metadata": {
+      "promptLength": 29,
+      "sessionId": "c653ec34-b5f2-48a0-9644-6a85e2296c18"
+    },
+    "is_public": true
+  },
+  {
+    "id": "9e93e5dc-49fc-4c6a-89f4-fe0e45614294",
+    "created_at": "2026-06-23T20:56:09.367Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /dashboard",
+    "metadata": {
+      "path": "/dashboard",
+      "referrer": "http://localhost:3000/dashboard",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "47aa4ec8-79e9-467b-b60c-fba64de5f954",
+    "created_at": "2026-06-23T20:56:40.796Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /lab",
+    "metadata": {
+      "path": "/lab",
+      "referrer": "http://localhost:3000/dashboard",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "345da400-04f8-4856-8a95-00f101baa0d0",
+    "created_at": "2026-06-23T20:56:43.461Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /dashboard",
+    "metadata": {
+      "path": "/dashboard",
+      "referrer": "http://localhost:3000/dashboard",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "1dc4a3f4-0838-4caf-94a8-23903d1fa573",
+    "created_at": "2026-06-23T20:57:10.638Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /",
+    "metadata": {
+      "path": "/",
+      "referrer": "http://localhost:3000/dashboard",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "030ddae7-0bea-410e-8cf1-4c639b0a778c",
+    "created_at": "2026-06-23T21:04:29.621Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /",
+    "metadata": {
+      "path": "/",
+      "referrer": "http://localhost:3000/",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "7a320616-4002-483b-858d-c0c94179acd1",
+    "created_at": "2026-06-23T21:06:07.234Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /",
+    "metadata": {
+      "path": "/",
+      "referrer": "http://localhost:3000/",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "321c147f-3e88-4510-bbb3-2309ead823c3",
+    "created_at": "2026-06-23T21:07:08.134Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /contact",
+    "metadata": {
+      "path": "/contact",
+      "referrer": "http://localhost:3000/",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "6e74e109-6458-433a-9121-ba596e00147c",
+    "created_at": "2026-06-23T21:07:27.586Z",
+    "event_type": "contact",
+    "severity": "success",
+    "message": "Contact inquiry cataloged successfully: \"demo...\"",
+    "metadata": {
+      "subjectPreview": "demo"
+    },
+    "is_public": true
+  },
+  {
+    "id": "97ebf2ef-78f6-40ca-9801-fb8d316181c8",
+    "created_at": "2026-06-23T21:07:32.069Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /dashboard",
+    "metadata": {
+      "path": "/dashboard",
+      "referrer": "http://localhost:3000/",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "2f539b5f-c69a-4370-b043-b446f5116b64",
+    "created_at": "2026-06-23T21:07:37.723Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /about",
+    "metadata": {
+      "path": "/about",
+      "referrer": "http://localhost:3000/",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "ce091bbc-b23b-4bb6-aee8-fdc02f840715",
+    "created_at": "2026-06-23T21:07:39.607Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /",
+    "metadata": {
+      "path": "/",
+      "referrer": "http://localhost:3000/",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "21e1bd17-bcd9-479a-ad7c-6d0087781c32",
+    "created_at": "2026-06-23T21:17:23.653Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /",
+    "metadata": {
+      "path": "/",
+      "referrer": "",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "25b5c504-b5d4-4c6d-af5d-70525eafef5a",
+    "created_at": "2026-06-23T21:17:40.746Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /projects",
+    "metadata": {
+      "path": "/projects",
+      "referrer": "",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "99d2e0f6-3e13-4023-9113-d444df596fcd",
+    "created_at": "2026-06-23T21:18:18.033Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /resume",
+    "metadata": {
+      "path": "/resume",
+      "referrer": "",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "b7447518-013f-41b2-a9e5-38a872bd666a",
+    "created_at": "2026-06-23T21:18:19.155Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /terminal",
+    "metadata": {
+      "path": "/terminal",
+      "referrer": "",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "da48de19-26d1-4774-9a2d-522be01222e1",
+    "created_at": "2026-06-23T21:18:22.417Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /ask-vraj",
+    "metadata": {
+      "path": "/ask-vraj",
+      "referrer": "",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "1e247bed-bd95-464c-8082-115c22c33417",
+    "created_at": "2026-06-23T21:18:25.026Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /lab",
+    "metadata": {
+      "path": "/lab",
+      "referrer": "",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "144c0137-5d13-43e8-9b29-0dff2eb89dfb",
+    "created_at": "2026-06-23T21:18:29.651Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /dashboard",
+    "metadata": {
+      "path": "/dashboard",
+      "referrer": "",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "fc7661ec-37de-4af7-800f-25a4bf761496",
+    "created_at": "2026-06-23T21:18:54.310Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /projects",
+    "metadata": {
+      "path": "/projects",
+      "referrer": "",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "27907903-5845-4c79-ad3c-4939a1ba9356",
+    "created_at": "2026-06-23T21:18:57.666Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /projects/enermass-solar-calculator",
+    "metadata": {
+      "path": "/projects/enermass-solar-calculator",
+      "referrer": "",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "3ea70978-d4d0-4d73-8968-91a2f47d310d",
+    "created_at": "2026-06-23T21:19:30.067Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /projects",
+    "metadata": {
+      "path": "/projects",
+      "referrer": "",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "6de4b503-f39e-4270-9ce6-3fdb8b48d68f",
+    "created_at": "2026-06-23T21:19:31.582Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /projects/outreachops-ai",
+    "metadata": {
+      "path": "/projects/outreachops-ai",
+      "referrer": "",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "880c1571-e3da-48fa-ac60-f37010e77255",
+    "created_at": "2026-06-23T21:20:18.517Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /projects",
+    "metadata": {
+      "path": "/projects",
+      "referrer": "",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "11c1d592-c12d-46c8-819f-a217d00c1741",
+    "created_at": "2026-06-23T21:20:22.199Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /projects/driedhub-admin-dashboard",
+    "metadata": {
+      "path": "/projects/driedhub-admin-dashboard",
+      "referrer": "",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "9de00481-e425-456f-90c5-445a5f10d04f",
+    "created_at": "2026-06-23T21:24:59.612Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /projects/driedhub-admin-dashboard",
+    "metadata": {
+      "path": "/projects/driedhub-admin-dashboard",
+      "referrer": "http://localhost:3000/projects/driedhub-admin-dashboard",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "685d6be4-7132-4331-a53d-e8cc1abbd2df",
+    "created_at": "2026-06-23T21:25:01.450Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /",
+    "metadata": {
+      "path": "/",
+      "referrer": "",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "6ec4357a-d355-42da-a898-3798922a71c1",
+    "created_at": "2026-06-23T21:25:11.092Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /projects",
+    "metadata": {
+      "path": "/projects",
+      "referrer": "",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "48db687b-bed9-4c2e-b420-6a22ca80fb11",
+    "created_at": "2026-06-23T21:25:50.237Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /projects/enermass-solar-calculator",
+    "metadata": {
+      "path": "/projects/enermass-solar-calculator",
+      "referrer": "",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "90bdcd7d-04ea-40f4-8be1-5cdd0fc1c338",
+    "created_at": "2026-06-23T21:26:28.497Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /dashboard",
+    "metadata": {
+      "path": "/dashboard",
+      "referrer": "",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "16687677-a7cb-4c4a-b1d5-ec1615ee550e",
+    "created_at": "2026-06-23T21:26:52.946Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /ask-vraj",
+    "metadata": {
+      "path": "/ask-vraj",
+      "referrer": "",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "91224a6e-d20d-42ed-90c6-5e622d09d9f0",
+    "created_at": "2026-06-23T21:27:14.533Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /systems",
+    "metadata": {
+      "path": "/systems",
+      "referrer": "",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "21d96beb-d7e2-4ba4-bb01-aebe3107df13",
+    "created_at": "2026-06-23T21:34:39.596Z",
+    "event_type": "ask-vraj",
+    "severity": "warning",
+    "message": "AI Assistant input validation failed.",
+    "metadata": {
+      "errors": {
+        "prompt": [
+          "Prompt is required."
+        ]
+      }
+    },
+    "is_public": true
+  },
+  {
+    "id": "a834dc55-4e55-4ced-b0fd-c153227d926e",
+    "created_at": "2026-06-23T21:34:39.614Z",
+    "event_type": "ask-vraj",
+    "severity": "success",
+    "message": "Processed Ask Vraj AI query: \"Who is Vraj?...\"",
+    "metadata": {
+      "promptLength": 12,
+      "sessionId": "cd968c7a-b094-462d-867a-6db8a8155229"
+    },
+    "is_public": true
+  },
+  {
+    "id": "4370735a-7b6e-4f3c-9a65-9c92ee24f781",
+    "created_at": "2026-06-23T21:34:39.835Z",
+    "event_type": "contact",
+    "severity": "warning",
+    "message": "Contact form input validation failed.",
+    "metadata": {
+      "errors": {
+        "message": [
+          "Message must be at least 10 characters."
+        ]
+      }
+    },
+    "is_public": true
+  },
+  {
+    "id": "64539275-9429-4f88-a244-b33e46130473",
+    "created_at": "2026-06-23T21:34:39.855Z",
+    "event_type": "contact",
+    "severity": "success",
+    "message": "Contact inquiry cataloged successfully: \"Full-stack Position...\"",
+    "metadata": {
+      "subjectPreview": "Full-stack Position"
+    },
+    "is_public": true
+  },
+  {
+    "id": "953fd29a-9975-4a75-a83f-e69dd433687b",
+    "created_at": "2026-06-23T21:35:04.658Z",
+    "event_type": "ask-vraj",
+    "severity": "warning",
+    "message": "AI Assistant input validation failed.",
+    "metadata": {
+      "errors": {
+        "prompt": [
+          "Prompt is required."
+        ]
+      }
+    },
+    "is_public": true
+  },
+  {
+    "id": "2c6d473f-ccdc-4bd1-8b38-df2eeb13e7fe",
+    "created_at": "2026-06-23T21:35:04.667Z",
+    "event_type": "ask-vraj",
+    "severity": "success",
+    "message": "Processed Ask Vraj AI query: \"Who is Vraj?...\"",
+    "metadata": {
+      "promptLength": 12,
+      "sessionId": "e49cae85-9723-45a2-b5a8-1e6ef6bc17bb"
+    },
+    "is_public": true
+  },
+  {
+    "id": "1571e227-919e-45f2-83d2-80229d74eec7",
+    "created_at": "2026-06-23T21:35:04.699Z",
+    "event_type": "contact",
+    "severity": "warning",
+    "message": "Contact form input validation failed.",
+    "metadata": {
+      "errors": {
+        "message": [
+          "Message must be at least 10 characters."
+        ]
+      }
+    },
+    "is_public": true
+  },
+  {
+    "id": "90f07a58-0db5-4258-9913-e8169e720465",
+    "created_at": "2026-06-23T21:35:04.716Z",
+    "event_type": "contact",
+    "severity": "success",
+    "message": "Contact inquiry cataloged successfully: \"Full-stack Position...\"",
+    "metadata": {
+      "subjectPreview": "Full-stack Position"
+    },
+    "is_public": true
+  },
+  {
+    "id": "557ea338-e5a4-478e-89f7-65b64237b45a",
+    "created_at": "2026-06-23T21:35:13.089Z",
+    "event_type": "ask-vraj",
+    "severity": "warning",
+    "message": "AI Assistant input validation failed.",
+    "metadata": {
+      "errors": {
+        "prompt": [
+          "Prompt is required."
+        ]
+      }
+    },
+    "is_public": true
+  },
+  {
+    "id": "9cc1053c-16d2-4e4a-8be7-41b53bddab51",
+    "created_at": "2026-06-23T21:35:13.098Z",
+    "event_type": "ask-vraj",
+    "severity": "success",
+    "message": "Processed Ask Vraj AI query: \"Who is Vraj?...\"",
+    "metadata": {
+      "promptLength": 12,
+      "sessionId": "dced7297-e350-4a3f-8cae-5f491d656c0b"
+    },
+    "is_public": true
+  },
+  {
+    "id": "be6286e9-e152-45a7-b773-a93617df921b",
+    "created_at": "2026-06-23T21:35:13.203Z",
+    "event_type": "contact",
+    "severity": "warning",
+    "message": "Contact form input validation failed.",
+    "metadata": {
+      "errors": {
+        "message": [
+          "Message must be at least 10 characters."
+        ]
+      }
+    },
+    "is_public": true
+  },
+  {
+    "id": "9c475b7f-253d-400b-9f23-c8186ac78ba6",
+    "created_at": "2026-06-23T21:35:13.218Z",
+    "event_type": "contact",
+    "severity": "success",
+    "message": "Contact inquiry cataloged successfully: \"Full-stack Position...\"",
+    "metadata": {
+      "subjectPreview": "Full-stack Position"
+    },
+    "is_public": true
+  },
+  {
+    "id": "d7dcab18-25e3-4d61-8568-f668f8976ba2",
+    "created_at": "2026-06-23T21:38:40.173Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /systems",
+    "metadata": {
+      "path": "/systems",
+      "referrer": "",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "8cbe2138-08fe-4f1e-a6c7-6039c8e4c734",
+    "created_at": "2026-06-23T21:38:41.999Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /",
+    "metadata": {
+      "path": "/",
+      "referrer": "",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "b97480ac-4582-47c5-9877-41942741bd09",
+    "created_at": "2026-06-23T21:38:56.111Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /projects",
+    "metadata": {
+      "path": "/projects",
+      "referrer": "",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "9538975c-f20f-4af2-82bf-ddf1fb704260",
+    "created_at": "2026-06-23T21:39:17.887Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /projects/outreachops-ai",
+    "metadata": {
+      "path": "/projects/outreachops-ai",
+      "referrer": "",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "fc72248e-d575-4a62-8d0d-50f511e3f871",
+    "created_at": "2026-06-23T21:40:24.642Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /dashboard",
+    "metadata": {
+      "path": "/dashboard",
+      "referrer": "",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "8738ad87-bf62-4929-95d6-6a6247a5f907",
+    "created_at": "2026-06-23T21:40:49.287Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /projects/enermass-solar-calculator",
+    "metadata": {
+      "path": "/projects/enermass-solar-calculator",
+      "referrer": "",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "3428a6b0-ec43-4bc6-9834-de58c2802d4e",
+    "created_at": "2026-06-23T21:41:20.403Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /lab",
+    "metadata": {
+      "path": "/lab",
+      "referrer": "",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "3b6de898-12b2-4033-90c3-9dddcb6d7701",
+    "created_at": "2026-06-23T21:41:31.500Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /ask-vraj",
+    "metadata": {
+      "path": "/ask-vraj",
+      "referrer": "",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "12b910f8-1d18-45ac-a63b-4e1f208fd4bc",
+    "created_at": "2026-06-23T21:41:34.643Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /terminal",
+    "metadata": {
+      "path": "/terminal",
+      "referrer": "",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "6ca4ed7e-4f1a-4be8-bb74-2ab2aea061f0",
+    "created_at": "2026-06-23T21:41:35.988Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /resume",
+    "metadata": {
+      "path": "/resume",
+      "referrer": "",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "bfce0025-a3d4-4928-bb52-f43f2f5988db",
+    "created_at": "2026-06-23T21:41:40.789Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /terminal",
+    "metadata": {
+      "path": "/terminal",
+      "referrer": "",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "ef327a7d-a8cc-4870-8b34-91b8c71d2662",
+    "created_at": "2026-06-23T21:41:58.869Z",
+    "event_type": "cli",
+    "severity": "warning",
+    "message": "CLI Command: 'open /systems' (duration 1ms, success: false)",
+    "metadata": {
+      "success": false,
+      "duration": 1
+    },
+    "is_public": true
+  },
+  {
+    "id": "744c7566-0eda-4d6f-85fa-afe9f3649dca",
+    "created_at": "2026-06-23T21:42:03.743Z",
+    "event_type": "cli",
+    "severity": "success",
+    "message": "CLI Command: 'help' (duration 2ms, success: true)",
+    "metadata": {
+      "success": true,
+      "duration": 2
+    },
+    "is_public": true
+  },
+  {
+    "id": "651fa705-9377-44b4-990e-722c41964ae8",
+    "created_at": "2026-06-23T21:42:23.324Z",
+    "event_type": "cli",
+    "severity": "success",
+    "message": "CLI Command: 'skills' (duration 0ms, success: true)",
+    "metadata": {
+      "success": true,
+      "duration": 0
+    },
+    "is_public": true
+  },
+  {
+    "id": "bf6316c8-75e3-49ee-9b74-15d21a24f708",
+    "created_at": "2026-06-23T21:42:38.886Z",
+    "event_type": "cli",
+    "severity": "success",
+    "message": "CLI Command: 'resume' (duration 0ms, success: true)",
+    "metadata": {
+      "success": true,
+      "duration": 0
+    },
+    "is_public": true
+  },
+  {
+    "id": "406381e9-293b-4218-a97c-fd717e4c0f3f",
+    "created_at": "2026-06-23T21:42:41.501Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /resume",
+    "metadata": {
+      "path": "/resume",
+      "referrer": "",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "709fcb42-925d-4c49-bf0d-28260ba2fcf9",
+    "created_at": "2026-06-23T21:43:00.778Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /about",
+    "metadata": {
+      "path": "/about",
+      "referrer": "",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "6495c0b2-0a4d-4a68-a2e4-b1cf89b58a1d",
+    "created_at": "2026-06-23T21:43:03.182Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /projects",
+    "metadata": {
+      "path": "/projects",
+      "referrer": "",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "3111d1ce-85b5-4c3f-a476-9f91f0687917",
+    "created_at": "2026-06-23T21:43:10.486Z",
+    "event_type": "admin",
+    "severity": "info",
+    "message": "Admin dashboard path accessed: /admin",
+    "metadata": {
+      "path": "/admin",
+      "referrer": "",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": false
+  }
+]

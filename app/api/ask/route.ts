@@ -2,13 +2,21 @@ import { NextRequest, NextResponse } from 'next/server';
 import { askVrajAI, askVrajAIStream } from '@/lib/ai/gemini';
 import { isRateLimited } from '@/lib/security/rate-limiter';
 import { aiChatInputSchema } from '@/lib/security/zod-schemas';
-import { createSimpleSupabaseClient, isSupabaseConfigured } from '@/lib/supabase/server';
+import { createSimpleSupabaseClient, isSupabaseConfigured } from '@/lib/supabase/simple';
+import { ServerLogger } from '@/lib/telemetry/server-logger';
 
 export async function POST(req: NextRequest) {
   const ip = req.headers.get('x-forwarded-for') || '127.0.0.1';
 
   // Limit AI requests to 10 queries per minute per client IP
   if (isRateLimited(ip, 10, 60 * 1000)) {
+    await ServerLogger.logEvent(
+      'ask-vraj',
+      'warning',
+      'Rate limit triggered on Ask Vraj AI endpoint.',
+      { ipHash: ip.substring(0, 10) },
+      true
+    );
     return NextResponse.json(
       { error: 'Too many requests. Please throttle your inquiries.' },
       { status: 429 }
@@ -20,6 +28,13 @@ export async function POST(req: NextRequest) {
     const result = aiChatInputSchema.safeParse(body);
 
     if (!result.success) {
+      await ServerLogger.logEvent(
+        'ask-vraj',
+        'warning',
+        'AI Assistant input validation failed.',
+        { errors: result.error.flatten().fieldErrors },
+        true
+      );
       return NextResponse.json(
         { error: 'Invalid payload values.', details: result.error.flatten().fieldErrors },
         { status: 400 }
@@ -53,6 +68,15 @@ export async function POST(req: NextRequest) {
     if (!activeSessionId) {
       activeSessionId = crypto.randomUUID();
     }
+
+    // Log successful telemetry query
+    await ServerLogger.logEvent(
+      'ask-vraj',
+      'success',
+      `Processed Ask Vraj AI query: "${prompt.substring(0, 30)}..."`,
+      { promptLength: prompt.length, sessionId: activeSessionId },
+      true
+    );
 
     // 2. Handle streaming
     if (stream) {
@@ -168,6 +192,13 @@ export async function POST(req: NextRequest) {
     });
   } catch (error) {
     console.error('API Error in /api/ask:', error);
+    await ServerLogger.logEvent(
+      'ask-vraj',
+      'error',
+      `AI Assistant query failed: ${error instanceof Error ? error.message : String(error)}`,
+      { error: String(error) },
+      false
+    );
     return NextResponse.json({ error: 'Failed to process AI query.' }, { status: 500 });
   }
 }

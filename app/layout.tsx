@@ -7,6 +7,7 @@ import Footer from '@/components/sections/footer';
 import GridBackground from '@/components/ui/grid-background';
 import Particles from '@/components/ui/particles';
 import AIWidget from '@/components/ui/ai-widget';
+import TelemetryTracker from '@/components/telemetry-tracker';
 
 const fontSans = Inter({
   variable: '--font-sans',
@@ -42,6 +43,7 @@ export default function RootLayout({
           </main>
           <Footer />
           <AIWidget />
+          <TelemetryTracker />
         </Providers>
       </body>
     </html>

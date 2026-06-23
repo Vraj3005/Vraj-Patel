@@ -14,7 +14,24 @@ import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import dynamic from 'next/dynamic';
 import ArchitectureViewer from '@/components/ui/architecture-viewer';
+
+// Dynamically lazy-load large visualizers inside case studies
+const SystemVisualizer = dynamic(() => import('@/components/visualizers/system-visualizer'), {
+  ssr: false,
+  loading: () => <div className="py-8 text-center text-xs font-mono text-secondary">Initializing System visualization...</div>
+});
+
+const DataFlowExplorer = dynamic(() => import('@/components/visualizers/data-flow-explorer'), {
+  ssr: false,
+  loading: () => <div className="py-8 text-center text-xs font-mono text-secondary">Initializing Data flow tracker...</div>
+});
+
+const SecurityVisualizer = dynamic(() => import('@/components/security/security-visualizer'), {
+  ssr: false,
+  loading: () => <div className="py-8 text-center text-xs font-mono text-secondary">Initializing Security stack profile...</div>
+});
 
 interface ProjectPageProps {
   params: Promise<{ slug: string }> | { slug: string };
@@ -319,7 +336,25 @@ export default function ProjectCaseStudy({ params }: ProjectPageProps) {
         <p className="text-xs md:text-sm text-secondary leading-relaxed font-medium max-w-3xl">
           {project.architecture}
         </p>
-        <ArchitectureViewer slug={project.slug} />
+        <SystemVisualizer projectSlug={project.slug} />
+        
+        {/* Render Data Flow Explorer if project has matching flow */}
+        {['enermass-solar-calculator', 'bhagwati-interior-erp', 'outreachops-ai', 'driedhub-marketplace', 'mspe-volatility-engine', 'nf-lrd-regime-discovery', 'btc-algo-trading'].includes(project.slug) && (
+          <div className="mt-4 pt-4 border-t border-card-border">
+            <span className="text-[10px] font-mono text-secondary uppercase font-bold tracking-wider select-none mb-3 block">System Transaction Flow Progression</span>
+            <DataFlowExplorer projectSlug={project.slug} allowFlowSwitching={false} />
+          </div>
+        )}
+
+        <div className="mt-4 pt-4 border-t border-card-border">
+          <span className="text-[10px] font-mono text-secondary uppercase font-bold tracking-wider select-none mb-3 block">Alternative Static Tabbed Spec Matrix</span>
+          <ArchitectureViewer slug={project.slug} />
+        </div>
+
+        <div className="mt-4 pt-4 border-t border-card-border">
+          <span className="text-[10px] font-mono text-secondary uppercase font-bold tracking-wider select-none mb-3 block">Active Security Layer Stack Architecture</span>
+          <SecurityVisualizer projectSlug={project.slug} />
+        </div>
       </div>
 
       {/* 7. Database / Backend Logic & 5. Key Features */}

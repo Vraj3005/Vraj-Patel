@@ -481,6 +481,240 @@ export interface Database {
           note_body?: string;
         };
       };
+      system_events: {
+        Row: {
+          id: string;
+          created_at: string;
+          event_type: string;
+          severity: string;
+          message: string;
+          metadata: Json;
+          is_public: boolean;
+        };
+        Insert: {
+          id?: string;
+          created_at?: string;
+          event_type: string;
+          severity: string;
+          message: string;
+          metadata?: Json;
+          is_public?: boolean;
+        };
+        Update: {
+          id?: string;
+          created_at?: string;
+          event_type?: string;
+          severity?: string;
+          message?: string;
+          metadata?: Json;
+          is_public?: boolean;
+        };
+      };
+      request_traces: {
+        Row: {
+          id: string;
+          created_at: string;
+          path: string;
+          method: string;
+          status_code: number;
+          duration_ms: number;
+          ip_hash: string;
+          steps: Json;
+        };
+        Insert: {
+          id?: string;
+          created_at?: string;
+          path: string;
+          method: string;
+          status_code: number;
+          duration_ms: number;
+          ip_hash: string;
+          steps?: Json;
+        };
+        Update: {
+          id?: string;
+          created_at?: string;
+          path?: string;
+          method?: string;
+          status_code?: number;
+          duration_ms?: number;
+          ip_hash?: string;
+          steps?: Json;
+        };
+      };
+      project_architectures: {
+        Row: {
+          id: string;
+          created_at: string;
+          updated_at: string;
+          project_slug: string;
+          nodes: Json;
+          edges: Json;
+        };
+        Insert: {
+          id?: string;
+          created_at?: string;
+          updated_at?: string;
+          project_slug: string;
+          nodes?: Json;
+          edges?: Json;
+        };
+        Update: {
+          id?: string;
+          created_at?: string;
+          updated_at?: string;
+          project_slug?: string;
+          nodes?: Json;
+          edges?: Json;
+        };
+      };
+      project_data_flows: {
+        Row: {
+          id: string;
+          created_at: string;
+          project_slug: string;
+          flow_name: string;
+          steps: Json;
+        };
+        Insert: {
+          id?: string;
+          created_at?: string;
+          project_slug: string;
+          flow_name: string;
+          steps?: Json;
+        };
+        Update: {
+          id?: string;
+          created_at?: string;
+          project_slug?: string;
+          flow_name?: string;
+          steps?: Json;
+        };
+      };
+      security_layers: {
+        Row: {
+          id: string;
+          created_at: string;
+          name: string;
+          description: string;
+          layer_order: number;
+          status: string;
+          metrics: Json;
+        };
+        Insert: {
+          id?: string;
+          created_at?: string;
+          name: string;
+          description: string;
+          layer_order: number;
+          status?: string;
+          metrics?: Json;
+        };
+        Update: {
+          id?: string;
+          created_at?: string;
+          name?: string;
+          description?: string;
+          layer_order?: number;
+          status?: string;
+          metrics?: Json;
+        };
+      };
+      metrics_snapshots: {
+        Row: {
+          id: string;
+          created_at: string;
+          metric_name: string;
+          metric_value: number;
+          tags: Json;
+        };
+        Insert: {
+          id?: string;
+          created_at?: string;
+          metric_name: string;
+          metric_value: number;
+          tags?: Json;
+        };
+        Update: {
+          id?: string;
+          created_at?: string;
+          metric_name?: string;
+          metric_value?: number;
+          tags?: Json;
+        };
+      };
+      github_contributions_cache: {
+        Row: {
+          id: string;
+          updated_at: string;
+          username: string;
+          contribution_data: Json;
+        };
+        Insert: {
+          id?: string;
+          updated_at?: string;
+          username: string;
+          contribution_data?: Json;
+        };
+        Update: {
+          id?: string;
+          updated_at?: string;
+          username?: string;
+          contribution_data?: Json;
+        };
+      };
+      cli_command_logs: {
+        Row: {
+          id: string;
+          created_at: string;
+          command: string;
+          args: string[];
+          success: boolean;
+          execution_time_ms: number;
+        };
+        Insert: {
+          id?: string;
+          created_at?: string;
+          command: string;
+          args?: string[];
+          success?: boolean;
+          execution_time_ms: number;
+        };
+        Update: {
+          id?: string;
+          created_at?: string;
+          command?: string;
+          args?: string[];
+          success?: boolean;
+          execution_time_ms?: number;
+        };
+      };
+      dashboard_widgets: {
+        Row: {
+          id: string;
+          created_at: string;
+          name: string;
+          widget_type: string;
+          layout_config: Json;
+          is_public: boolean;
+        };
+        Insert: {
+          id?: string;
+          created_at?: string;
+          name: string;
+          widget_type: string;
+          layout_config?: Json;
+          is_public?: boolean;
+        };
+        Update: {
+          id?: string;
+          created_at?: string;
+          name?: string;
+          widget_type?: string;
+          layout_config?: Json;
+          is_public?: boolean;
+        };
+      };
     };
   };
 }

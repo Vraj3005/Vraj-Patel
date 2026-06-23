@@ -14,8 +14,9 @@ export const PORTFOLIO_CONTEXT = {
     contact: {
       email: 'patelvrajpatel30@gmail.com',
       phone: '+91 79902 51191',
-      github: 'https://github.com',
-      linkedin: 'https://linkedin.com'
+      githubPersonal: 'https://github.com/Vraj3005',
+      githubAcademic: 'https://github.com/23bce377-debug',
+      linkedin: 'https://www.linkedin.com/in/vraj-patel-9502a6285'
     },
     relocation: 'Open to relocation',
     noticePeriod: 'Immediate / open'

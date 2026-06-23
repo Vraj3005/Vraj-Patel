@@ -10,16 +10,25 @@ export default function Footer() {
 
         <div className="flex items-center gap-3">
           <a
-            href="https://github.com"
+            href="https://github.com/Vraj3005"
             target="_blank"
             rel="noopener noreferrer"
             className="h-9 w-9 rounded-lg border border-card-border bg-card-bg hover:bg-white/5 flex items-center justify-center text-secondary hover:text-foreground transition-colors cursor-pointer"
-            title="GitHub"
+            title="GitHub (Personal)"
           >
             <Github className="h-4 w-4" />
           </a>
           <a
-            href="https://linkedin.com"
+            href="https://github.com/23bce377-debug"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="h-9 w-9 rounded-lg border border-cyan-500/20 bg-cyan-950/10 hover:bg-cyan-900/20 flex items-center justify-center text-cyan-400 hover:text-cyan-300 transition-colors cursor-pointer"
+            title="GitHub (Academic/Debug)"
+          >
+            <Github className="h-4 w-4" />
+          </a>
+          <a
+            href="https://www.linkedin.com/in/vraj-patel-9502a6285"
             target="_blank"
             rel="noopener noreferrer"
             className="h-9 w-9 rounded-lg border border-card-border bg-card-bg hover:bg-white/5 flex items-center justify-center text-secondary hover:text-foreground transition-colors cursor-pointer"

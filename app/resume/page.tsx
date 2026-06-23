@@ -4,12 +4,32 @@ import { useState } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Printer, Mail, Phone, MapPin } from 'lucide-react';
+import { supabase, isSupabaseConfigured } from '@/lib/supabase/client';
+import { EventBus } from '@/lib/events/event-bus';
 
 export default function Resume() {
   const [copyStatus, setCopyStatus] = useState<string | null>(null);
 
-  const handlePrint = () => {
+  const handlePrint = async () => {
     window.print();
+    try {
+      if (isSupabaseConfigured) {
+        const supabaseClient = supabase as any;
+        await supabaseClient.from('resume_downloads').insert({
+          user_ip: 'anonymous',
+          referral_source: document.referrer || 'direct'
+        });
+      }
+      
+      await EventBus.publish(
+        'portfolio',
+        'success',
+        'Resume PDF print/save action triggered.',
+        { referral: document.referrer || 'direct' }
+      );
+    } catch (err) {
+      console.warn('Failed to log resume download telemetry:', err);
+    }
   };
 
   const handleCopySummary = (label: string, text: string) => {
