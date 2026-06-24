@@ -21,7 +21,7 @@ export type ContactMessageStatus = 'new' | 'reviewed' | 'replied' | 'archived';
 
 export type ChatMessageRole = 'user' | 'assistant' | 'system';
 
-export type SkillProficiency = 'expert' | 'advanced' | 'intermediate';
+export type SkillProficiency = 'beginner' | 'intermediate' | 'advanced' | 'expert';
 
 export interface Database {
   public: {

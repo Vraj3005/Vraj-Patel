@@ -46,16 +46,20 @@ export async function POST(req: NextRequest) {
         const content = fs.readFileSync(localPath, 'utf-8');
         const localMessages = JSON.parse(content || '[]');
         if (Array.isArray(localMessages)) {
-          // Map fields if local messages have slightly different keys
-          const normalizedLocal = localMessages.map((m: any) => ({
-            id: m.id,
-            name: m.name,
-            email: m.email,
-            subject: m.subject,
-            message: m.message,
-            status: m.status || 'new',
-            created_at: m.createdAt || m.created_at || new Date().toISOString()
-          }));
+          const normalizedLocal = localMessages.map((m: any) => {
+            let status = m.status || 'new';
+            if (status === 'unread') status = 'new';
+            if (status === 'read') status = 'reviewed';
+            return {
+              id: m.id,
+              name: m.name,
+              email: m.email,
+              subject: m.subject,
+              message: m.message,
+              status,
+              created_at: m.createdAt || m.created_at || new Date().toISOString()
+            };
+          });
           
           // Merge local and remote data, deduplicate by email + subject + created_at combinations if needed,
           // or just merge if supabase failed. If supabase worked, we might want to display both or combine.

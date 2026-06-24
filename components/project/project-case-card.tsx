@@ -7,6 +7,7 @@ import { Project } from '@/types';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { getCategoryLabel } from '@/lib/formatters/labels';
 
 interface ProjectCaseCardProps {
   project: Project;
@@ -74,7 +75,7 @@ export default function ProjectCaseCard({ project }: ProjectCaseCardProps) {
         <div className="flex flex-col gap-3 relative z-10">
           <div className="flex items-center justify-between">
             <span className="text-[10px] font-bold uppercase tracking-widest text-gray-450">
-              {project.category}
+              {getCategoryLabel(project.category)}
             </span>
             <Badge variant="outline" className="text-[9px] uppercase tracking-wide">
               {project.role}

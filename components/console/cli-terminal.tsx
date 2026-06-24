@@ -17,6 +17,7 @@ import { Card } from '@/components/ui/card';
 import { supabase } from '@/lib/supabase/client';
 import { EventBus } from '@/lib/events/event-bus';
 import { HeatmapCell } from '@/types/advanced';
+import { getCategoryLabel } from '@/lib/formatters/labels';
 
 interface LogLine {
   id: string;
@@ -730,7 +731,7 @@ export default function CLITerminal() {
               {projects.map(p => (
                 <tr key={p.slug} className="hover:bg-white/2 transition-colors">
                   <td className="py-2 px-3 text-white">{p.title}</td>
-                  <td className="py-2 px-3 text-secondary">{p.category}</td>
+                  <td className="py-2 px-3 text-secondary">{getCategoryLabel(p.category)}</td>
                   <td className="py-2 px-3 font-bold">
                     <button 
                       onClick={() => { setInputValue(`project tech ${p.slug}`); focusInput(); }}
@@ -754,7 +755,7 @@ export default function CLITerminal() {
     let filtered = projects;
     if (cat === 'client') filtered = projects.filter(p => p.client !== 'Personal Project');
     else if (cat === 'erp') filtered = projects.filter(p => p.title.toLowerCase().includes('erp') || p.title.toLowerCase().includes('calculator') || p.slug.includes('dashboard'));
-    else if (cat === 'quant') filtered = projects.filter(p => p.category === 'Quant Research');
+    else if (cat === 'quant') filtered = projects.filter(p => p.category === 'quant_research');
     else if (cat === 'ai') filtered = projects.filter(p => p.technologies.some(t => t.toLowerCase().includes('gemini') || t.toLowerCase().includes('ai')));
     else if (cat === 'dashboard') filtered = projects.filter(p => p.title.toLowerCase().includes('dashboard') || p.title.toLowerCase().includes('board'));
     else if (cat === 'website') filtered = projects.filter(p => p.title.toLowerCase().includes('website') || p.title.toLowerCase().includes('portal') || p.slug.includes('marea-website') || p.slug.includes('surendra'));

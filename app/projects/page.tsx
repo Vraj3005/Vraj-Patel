@@ -5,12 +5,13 @@ import { motion, Variants } from 'framer-motion';
 import { projects, categories } from '@/lib/data/projects';
 import ProjectCard from '@/components/project/project-card';
 import { Search, FolderGit2, X } from 'lucide-react';
+import { getCategoryLabel } from '@/lib/formatters/labels';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 
 export default function Projects() {
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState<string>('All');
+  const [selectedCategory, setSelectedCategory] = useState<string>('all');
 
   // Parse category parameter on client mount
   useEffect(() => {
@@ -36,7 +37,7 @@ export default function Projects() {
       project.technologies.some((t) => t.toLowerCase().includes(searchQuery.toLowerCase()));
 
     const matchesCategory =
-      selectedCategory === 'All' || project.category === selectedCategory;
+      selectedCategory === 'all' || project.category === selectedCategory;
 
     return matchesSearch && matchesCategory;
   });
@@ -111,7 +112,7 @@ export default function Projects() {
                   : 'border-card-border bg-card-bg text-secondary hover:border-foreground/15 hover:text-foreground'
               }`}
             >
-              {category}
+              {category === 'all' ? 'All' : getCategoryLabel(category)}
             </button>
           );
         })}

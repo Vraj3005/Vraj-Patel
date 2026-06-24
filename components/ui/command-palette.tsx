@@ -10,6 +10,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { projects, categories } from '@/lib/data/projects';
+import { getCategoryLabel } from '@/lib/formatters/labels';
 
 interface CommandItem {
   id: string;
@@ -91,13 +92,12 @@ export default function CommandPalette({ isOpen, onClose }: CommandPaletteProps)
     },
   ];
 
-  // Category filter commands
   const categoryFilterCommands: CommandItem[] = categories
-    .filter(cat => cat !== 'All')
+    .filter(cat => cat !== 'all')
     .map(cat => ({
       id: `filter-${cat.toLowerCase().replace(/\s+/g, '-')}`,
-      label: `Filter projects: ${cat}`,
-      description: `View Vraj's portfolio filtered by ${cat}.`,
+      label: `Filter projects: ${getCategoryLabel(cat)}`,
+      description: `View Vraj's portfolio filtered by ${getCategoryLabel(cat)}.`,
       category: 'Project Categories' as const,
       action: () => {
         router.push(`/projects?category=${encodeURIComponent(cat)}`);

@@ -9,6 +9,7 @@ import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { AnimatedCounter } from '@/components/ui/animated-elements';
+import { getCategoryLabel } from '@/lib/formatters/labels';
 import dynamic from 'next/dynamic';
 
 const InteractiveTerminal = dynamic(() => import('@/components/ui/interactive-terminal'), {
@@ -307,7 +308,7 @@ export default function Home() {
                 <div className="card-interactive p-6 flex flex-col gap-4 h-full group-hover:border-[#444]">
                   <div className="flex items-center justify-between">
                     <Badge variant="secondary" className="text-[10px] font-mono">
-                      {project.category}
+                      {getCategoryLabel(project.category)}
                     </Badge>
                     <motion.div
                       className="h-6 w-6 rounded-md bg-white/[0.03] border border-card-border flex items-center justify-center text-muted"

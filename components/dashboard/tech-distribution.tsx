@@ -3,6 +3,7 @@
 import React from 'react';
 import { Card } from '@/components/ui/card';
 import { projects } from '@/lib/data/projects';
+import { getCategoryLabel } from '@/lib/formatters/labels';
 import {
   BarChart,
   Bar,
@@ -50,8 +51,9 @@ export default function TechDistribution({
   });
 
   const categoryData = Object.entries(categoryMap).map(([name, value]) => ({
-    name,
-    value
+    name: getCategoryLabel(name),
+    value,
+    rawName: name
   }));
 
   // Sleek glassmorphic chart palette
@@ -69,11 +71,12 @@ export default function TechDistribution({
   };
 
   const handlePieClick = (data: any) => {
-    if (data && data.name) {
-      if (selectedCategory === data.name) {
+    const rawCategoryName = data?.rawName || data?.payload?.rawName || categoryData.find(c => c.name === data?.name)?.rawName;
+    if (rawCategoryName) {
+      if (selectedCategory === rawCategoryName) {
         onSelectCategory(null); // toggle off
       } else {
-        onSelectCategory(data.name);
+        onSelectCategory(rawCategoryName);
         onSelectTech(null); // prioritize category filter
       }
     }
@@ -108,7 +111,7 @@ export default function TechDistribution({
                 className="cursor-pointer"
               >
                 {categoryData.map((entry, index) => {
-                  const isSelected = selectedCategory === entry.name;
+                  const isSelected = selectedCategory === entry.rawName;
                   return (
                     <Cell
                       key={`cell-${index}`}
@@ -138,13 +141,13 @@ export default function TechDistribution({
                 iconType="circle"
                 iconSize={8}
                 formatter={(value, entry: any) => {
-                  const isSelected = selectedCategory === value;
+                  const isSelected = selectedCategory === entry.payload?.rawName;
                   return (
                     <span
                       className={`text-[10px] font-mono transition-colors cursor-pointer ${
                         isSelected ? 'text-cyan-400 font-bold' : 'text-secondary hover:text-foreground'
                       }`}
-                      onClick={() => handlePieClick({ name: value })}
+                      onClick={() => handlePieClick(entry.payload)}
                     >
                       {value}
                     </span>

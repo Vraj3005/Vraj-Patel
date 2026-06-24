@@ -4,7 +4,7 @@ export const projects: Project[] = [
   {
     slug: 'enermass-solar-calculator',
     title: 'Enermass Solar Calculator & ERP',
-    category: 'ERP Systems',
+    category: 'erp_system',
     shortDescription: 'Client-side solar modeling engine and resource planning ERP that generates precise solar quotes and optimizes project materials.',
     description: 'An enterprise-grade pricing and materials catalog application built for solar installers. It includes a custom Indian state coefficient matrix to determine solar irradiance parameters and state-specific subsidy rules, generating print-optimized PDF brochures.',
     technologies: ['Next.js', 'React', 'Zustand', 'Tailwind CSS', 'TypeScript', 'Drizzle ORM', 'Upstash Redis', 'PostgreSQL'],
@@ -58,7 +58,7 @@ export const projects: Project[] = [
   {
     slug: 'outreachops-ai',
     title: 'OutreachOps AI (AI Coldmail)',
-    category: 'AI Automation',
+    category: 'ai_automation',
     shortDescription: 'Autonomous outbound campaign engine leveraging LLMs to scrape leads, personalize copy, audit drafts, and schedule outreach.',
     description: 'OutreachOps AI is an automated outreach personalization and email marketing software. It crawls target company websites, parses page content using the Gemini API, generates personalized ERP sales pitches, and automates outbound drafts queue management.',
     technologies: ['Next.js', 'FastAPI', 'Google GenAI SDK', 'Google Sheets API', 'Gmail API', 'Supabase', 'Tailwind CSS', 'TypeScript'],
@@ -110,7 +110,7 @@ export const projects: Project[] = [
   {
     slug: 'bhagwati-interior-erp',
     title: 'Bhagwati Interior ERP',
-    category: 'ERP Systems',
+    category: 'erp_system',
     shortDescription: 'Custom client and project management software for interior architecture studios, tracking budgets, materials, and invoicing.',
     description: 'A custom enterprise planning system built for interior design operations. It manages material inventory databases, client layouts tracking pipelines, automated GST billing estimates, and designer task queues.',
     technologies: ['Next.js', 'Prisma ORM', 'PostgreSQL', 'NextAuth.js', 'Google Gemini API', 'Upstash Redis', 'QStash Queue', 'Tailwind CSS', 'Nodemailer'],
@@ -162,7 +162,7 @@ export const projects: Project[] = [
   {
     slug: 'driedhub-marketplace',
     title: 'Driedhub Marketplace',
-    category: 'E-commerce',
+    category: 'ecommerce',
     shortDescription: 'High-speed headful e-commerce marketplace designed for dried fruits and healthy snacks, optimized for fast checkout.',
     description: 'A direct-to-consumer e-commerce storefront designed for healthy food retail. Features rapid product grids, slide-out cart drawers, Google OAuth credentials logins, and Indian payment gateway checkout forms.',
     technologies: ['Next.js', 'Supabase', 'Upstash Redis', 'Razorpay', 'Resend', 'Zustand', 'Tailwind CSS', 'TypeScript'],
@@ -210,7 +210,7 @@ export const projects: Project[] = [
   {
     slug: 'driedhub-admin-dashboard',
     title: 'Driedhub Admin Dashboard',
-    category: 'Dashboards',
+    category: 'dashboard',
     shortDescription: 'Internal ERP and metrics dashboard for Driedhub, tracking sales, shipping logs, inventory, and refunds.',
     description: 'An internal administration backoffice managing product catalogs, sales logs, and inventory updates. Features drag-and-drop showcase reordering arrays and SVG reporting charts.',
     technologies: ['Next.js', 'Supabase', 'dnd-kit', 'Recharts', 'Tailwind CSS', 'TypeScript'],
@@ -258,7 +258,7 @@ export const projects: Project[] = [
   {
     slug: 'marea-website',
     title: 'Marea Luxury Fashion Storefront',
-    category: 'Websites',
+    category: 'website',
     shortDescription: 'Cinematic, high-fidelity luxury fashion e-commerce storefront utilizing advanced physics-based scroll and text reveals.',
     description: 'A high-end editorial fashion storefront featuring smooth scroll kinematics, typographic reveal timelines, custom screen cursors, and responsive shopping grids.',
     technologies: ['Next.js', 'Supabase', 'GSAP', 'Lenis Scroll', 'Upstash Redis', 'Resend', 'Tailwind CSS', 'TypeScript'],
@@ -306,7 +306,7 @@ export const projects: Project[] = [
   {
     slug: 'marea-admin-dashboard',
     title: 'Marea Admin Dashboard',
-    category: 'Dashboards',
+    category: 'dashboard',
     shortDescription: 'Operational administration dashboard and content management system for Marea luxury fashion storefront.',
     description: 'An internal control panel designed to manage high-end fashion catalogs. Features WYSIWYG rich text document editors, drag-and-drop sort lists, and advanced data tables.',
     technologies: ['Next.js', 'Supabase', 'TanStack Table', 'TipTap Editor', 'dnd-kit', 'Recharts', 'Tailwind CSS', 'TypeScript'],
@@ -354,7 +354,7 @@ export const projects: Project[] = [
   {
     slug: 'surendra-bus-body',
     title: 'Surendra & Co. Website',
-    category: 'Websites',
+    category: 'website',
     shortDescription: 'Premium business website for a bus body builder and coach manufacturer, featuring an interactive configuration board.',
     description: 'A business portal designed for coach manufacturers. Highlights B2B fleet manufacturing capabilities, vehicle categories, and configures estimation forms routed to sales teams.',
     technologies: ['Next.js', 'Tailwind CSS', 'Framer Motion', 'Lenis Scroll', 'Resend'],
@@ -401,7 +401,7 @@ export const projects: Project[] = [
   {
     slug: 'mspe-volatility-engine',
     title: 'MSPE Greeks & Volatility Engine',
-    category: 'Quant Research',
+    category: 'quant_research',
     shortDescription: 'Real-time option implied volatility surface visualizer, portfolio risk modeler, and probability-based projection engine.',
     description: 'An options pricing and volatility surface analysis dashboard. It computes Option Greeks, forecasts historical volatility clusters using statistical models, and visualizes the volatility smile in 3D Plots.',
     technologies: ['Next.js', 'FastAPI', 'Pandas', 'NumPy', 'Plotly.js', 'GARCH (arch)', 'XGBoost', 'scikit-learn'],
@@ -454,7 +454,7 @@ export const projects: Project[] = [
   {
     slug: 'nf-lrd-regime-discovery',
     title: 'NF-LRD Nifty 50 Regime Discovery',
-    category: 'Quant Research',
+    category: 'quant_research',
     shortDescription: 'NIFTY 50 Latent Market Regime Discovery and Risk Intelligence Platform using machine learning models to detect structural market regimes.',
     description: 'A quantitative analytics dashboard designed to identify hidden market states (bullish, bearish, high-volatility) in Nifty 50 close histories. Runs Hidden Markov Models to backtest adaptive strategies.',
     technologies: ['Streamlit', 'Python', 'Pandas', 'NumPy', 'hmmlearn', 'Plotly', 'yfinance', 'scikit-learn'],
@@ -506,7 +506,7 @@ export const projects: Project[] = [
   {
     slug: 'btc-algo-trading',
     title: 'BTC-ALGO Signals Board',
-    category: 'Quant Research',
+    category: 'quant_research',
     shortDescription: 'Bitcoin algorithmic trading dashboard displaying live signal generation, backtesting metrics, and risk monitoring.',
     description: 'A Bitcoin trading signal dashboard. Tracks candlestick patterns, moving average crossovers, drawdown statistics, and displays active buy, sell, or hold indicators.',
     technologies: ['Streamlit', 'Python', 'Pandas', 'NumPy', 'Plotly', 'requests', 'streamlit-autorefresh'],
@@ -553,12 +553,12 @@ export const projects: Project[] = [
 ];
 
 export const categories = [
-  'All',
-  'Client Software',
-  'ERP Systems',
-  'E-commerce',
-  'AI Automation',
-  'Quant Research',
-  'Websites',
-  'Dashboards'
+  'all',
+  'client_software',
+  'erp_system',
+  'ecommerce',
+  'ai_automation',
+  'quant_research',
+  'website',
+  'dashboard'
 ] as const;

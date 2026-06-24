@@ -6,6 +6,7 @@ import { projects } from '@/lib/data/projects';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { ArrowUpRight, Code2, Link2, ExternalLink } from 'lucide-react';
+import { getCategoryLabel } from '@/lib/formatters/labels';
 
 interface FeaturedSummaryProps {
   selectedCategory: string | null;
@@ -20,8 +21,8 @@ export default function FeaturedSummary({
 }: FeaturedSummaryProps) {
   // Filter projects based on selectedCategory or selectedTech
   const filteredProjects = projects.filter((project) => {
-    if (selectedCategory && selectedCategory !== 'All') {
-      if (project.category.toLowerCase() !== selectedCategory.toLowerCase()) {
+    if (selectedCategory && selectedCategory !== 'all') {
+      if (project.category !== selectedCategory) {
         return false;
       }
     }
@@ -73,7 +74,7 @@ export default function FeaturedSummary({
                       {project.title}
                     </span>
                     <span className="text-[8px] font-mono text-secondary uppercase">
-                      {project.category} {project.client ? `| ${project.client}` : ''}
+                      {getCategoryLabel(project.category)} {project.client ? `| ${project.client}` : ''}
                     </span>
                   </div>
                   <div className="flex items-center gap-1.5">

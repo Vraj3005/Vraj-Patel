@@ -1,4 +1,5 @@
 import { projects } from '@/lib/data/projects';
+import { getCategoryLabel } from '../formatters/labels';
 
 export const PORTFOLIO_CONTEXT = {
   profile: {
@@ -30,7 +31,7 @@ export const PORTFOLIO_CONTEXT = {
   },
   projects: projects.map(p => ({
     title: p.title,
-    category: p.category,
+    category: getCategoryLabel(p.category),
     status: p.status,
     year: p.year,
     role: p.role,

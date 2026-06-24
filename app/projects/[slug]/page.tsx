@@ -14,6 +14,7 @@ import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { getCategoryLabel } from '@/lib/formatters/labels';
 import dynamic from 'next/dynamic';
 import ArchitectureViewer from '@/components/ui/architecture-viewer';
 
@@ -187,7 +188,7 @@ export default function ProjectCaseStudy({ params }: ProjectPageProps) {
           <div className="lg:col-span-7 flex flex-col gap-4">
             <div className="flex flex-wrap items-center gap-2">
               <span className="text-xs font-bold uppercase tracking-wider text-secondary font-mono">
-                {project.category}
+                {getCategoryLabel(project.category)}
               </span>
               <span className="text-secondary font-mono text-xs">•</span>
               <span className="text-secondary font-mono text-xs font-semibold">{project.period}</span>
@@ -633,7 +634,7 @@ export default function ProjectCaseStudy({ params }: ProjectPageProps) {
             '@type': 'SoftwareApplication',
             'name': project.title,
             'operatingSystem': 'All',
-            'applicationCategory': project.category === 'Quant Research' ? 'FinanceApplication' : 'BusinessApplication',
+            'applicationCategory': project.category === 'quant_research' ? 'FinanceApplication' : 'BusinessApplication',
             'description': project.shortDescription || project.description.substring(0, 160)
           })
         }}

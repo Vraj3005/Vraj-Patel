@@ -8,6 +8,7 @@ import { Project } from '@/types';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { useTheme } from '../theme-provider';
+import { getCategoryLabel } from '@/lib/formatters/labels';
 
 interface ProjectCardProps {
   project: Project;
@@ -104,7 +105,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           {/* Category & Status */}
           <div className="flex items-center justify-between">
             <span className="text-[10px] font-bold uppercase tracking-wider text-secondary font-mono">
-              {project.category} • {project.year}
+              {getCategoryLabel(project.category)} • {project.year}
             </span>
             <Badge
               variant={

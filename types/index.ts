@@ -16,7 +16,7 @@ export interface UIScreen {
 export interface Project {
   slug: string;
   title: string;
-  category: 'Client Software' | 'ERP Systems' | 'E-commerce' | 'AI Automation' | 'Quant Research' | 'Websites' | 'Dashboards';
+  category: 'client_software' | 'erp_system' | 'ecommerce' | 'ai_automation' | 'quant_research' | 'website' | 'dashboard';
   shortDescription: string;
   description: string;
   technologies: string[];
@@ -68,12 +68,12 @@ export interface ContactInquiry {
   email: string;
   subject: string;
   message: string;
-  status: 'unread' | 'read' | 'archived';
+  status: 'new' | 'reviewed' | 'replied' | 'archived';
   createdAt: string;
 }
 
 export interface TechSkill {
   name: string;
-  level: 'Expert' | 'Advanced' | 'Intermediate';
+  level: 'beginner' | 'intermediate' | 'advanced' | 'expert';
   category: 'frontend' | 'backend' | 'database' | 'ai-devops' | 'quant-finance';
 }
