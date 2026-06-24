@@ -66,12 +66,42 @@ export async function POST(req: NextRequest) {
           if (messages.length === 0) {
             messages = normalizedLocal;
           } else {
-            // Deduplicate by comparing keys
-            const keySet = new Set(messages.map(m => `${m.email}-${m.subject}-${m.created_at?.substring(0, 16)}`));
+            // Deduplicate by comparing keys (ID first if stable, then fallback to email + subject + created_at)
+            const idSet = new Set(messages.filter(m => m.id).map(m => String(m.id)));
+            const keySet = new Set();
+            messages.forEach(m => {
+              if (m.email && m.subject && m.created_at) {
+                const dateObj = new Date(m.created_at);
+                if (dateObj && !isNaN(dateObj.getTime())) {
+                  keySet.add(`${m.email.toLowerCase()}-${m.subject.toLowerCase()}-${dateObj.toISOString().substring(0, 16)}`);
+                }
+              }
+            });
+
             normalizedLocal.forEach((m: any) => {
-              const key = `${m.email}-${m.subject}-${m.created_at?.substring(0, 16)}`;
+              // 1. If stable ID matches an existing database message, skip
+              if (m.id && idSet.has(String(m.id))) {
+                return;
+              }
+              
+              // 2. If it has no valid created_at, do NOT collapse/deduplicate it, just push it
+              if (!m.created_at) {
+                messages.push(m);
+                return;
+              }
+              const dateObj = new Date(m.created_at);
+              if (isNaN(dateObj.getTime())) {
+                messages.push(m);
+                return;
+              }
+              
+              const dateStr = dateObj.toISOString();
+              const key = `${m.email.toLowerCase()}-${m.subject.toLowerCase()}-${dateStr.substring(0, 16)}`;
+              
+              // 3. Deduplicate based on email + subject + created_at
               if (!keySet.has(key)) {
                 messages.push(m);
+                keySet.add(key);
               }
             });
           }

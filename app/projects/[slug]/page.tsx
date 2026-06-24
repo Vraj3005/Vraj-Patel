@@ -53,8 +53,7 @@ export default function ProjectCaseStudy({ params }: ProjectPageProps) {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [prevImage, setPrevImage] = useState('');
-  const [imgSrc, setImgSrc] = useState('');
+  const [imgErrorSlug, setImgErrorSlug] = useState<string | null>(null);
   const feedRef = useRef<HTMLDivElement>(null);
 
   // Unwrap params safely and initialize welcome message
@@ -75,11 +74,10 @@ export default function ProjectCaseStudy({ params }: ProjectPageProps) {
   }, [params]);
 
   const project = projects.find((p) => p.slug === slug);
-
-  if (project?.image && project.image !== prevImage) {
-    setPrevImage(project.image);
-    setImgSrc(project.image);
-  }
+  const isImgError = imgErrorSlug === slug;
+  const imgSrc = (isImgError && project?.image)
+    ? 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="50" viewBox="0 0 100 50" style="background:%23000;"><text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" fill="%23333" font-family="sans-serif" font-size="10">Vraj Patel Portfolio</text></svg>'
+    : project?.image || '';
 
   // Auto-scroll chat thread to bottom
   const scrollToBottom = () => {
@@ -236,14 +234,16 @@ export default function ProjectCaseStudy({ params }: ProjectPageProps) {
             {project.image && (
               <div className="relative aspect-video w-full overflow-hidden rounded-2xl border border-card-border shadow-md bg-foreground/5">
                 <Image 
-                  src={imgSrc || project.image} 
+                  src={imgSrc} 
                   alt={project.title}
                   fill
                   priority
                   sizes="(max-width: 1024px) 100vw, 40vw"
                   className="object-cover"
                   onError={() => {
-                    setImgSrc('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="50" viewBox="0 0 100 50" style="background:%23000;"><text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" fill="%23333" font-family="sans-serif" font-size="10">Vraj Patel Portfolio</text></svg>');
+                    if (slug) {
+                      setImgErrorSlug(slug);
+                    }
                   }}
                 />
               </div>

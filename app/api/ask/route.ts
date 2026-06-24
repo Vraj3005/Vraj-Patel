@@ -78,7 +78,13 @@ export async function POST(req: NextRequest) {
     );
 
     // 2. Handle streaming
-    if (stream) {
+    const shouldStream = !!(
+      stream ||
+      req.headers.get('accept')?.includes('text/event-stream') ||
+      req.headers.get('accept')?.includes('text/plain')
+    );
+
+    if (shouldStream) {
       const streamResult = await askVrajAIStream(prompt, history || []);
 
       let responseStream: ReadableStream;
@@ -149,7 +155,6 @@ export async function POST(req: NextRequest) {
 
       const headers = new Headers({
         'Content-Type': 'text/plain; charset=utf-8',
-        'Transfer-Encoding': 'chunked',
       });
       if (activeSessionId) {
         headers.set('x-session-id', activeSessionId);

@@ -21,6 +21,7 @@ export default function Particles() {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
+    let active = true;
     let animationId: number;
     const particles: Particle[] = [];
     const maxParticles = 30;
@@ -49,6 +50,7 @@ export default function Particles() {
     }
 
     const drawParticles = () => {
+      if (!active) return;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       particles.forEach((p, idx) => {
@@ -71,6 +73,7 @@ export default function Particles() {
     drawParticles();
 
     return () => {
+      active = false;
       window.removeEventListener('resize', handleResize);
       cancelAnimationFrame(animationId);
     };

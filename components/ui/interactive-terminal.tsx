@@ -247,10 +247,11 @@ export default function InteractiveTerminal() {
             cumulativeText += chunk;
             
             setHistory(prev => {
-              const next = [...prev];
-              // Update last line
-              next[next.length - 1] = { text: cumulativeText, type: 'output' };
-              return next;
+              if (prev.length === 0) return prev;
+              return [
+                ...prev.slice(0, -1),
+                { text: cumulativeText, type: 'output' }
+              ];
             });
           }
         }
