@@ -14,6 +14,7 @@ const RecruiterModal = dynamic(() => import('@/components/ui/recruiter-modal'), 
 const navItems = [
   { label: 'About', path: '/about' },
   { label: 'Projects', path: '/projects' },
+  { label: 'Systems', path: '/systems' },
   { label: 'Dashboard', path: '/dashboard' },
   { label: 'Lab', path: '/lab' },
   { label: 'Ask AI', path: '/ask-vraj' },

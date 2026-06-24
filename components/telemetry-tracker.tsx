@@ -15,24 +15,17 @@ export default function TelemetryTracker() {
 
     const logNavigation = async () => {
       try {
-        const isAdminPath = pathname.startsWith('/admin');
-        const source = isAdminPath ? 'admin' : 'portfolio';
-        const isPublic = !isAdminPath;
-        const message = isAdminPath
-          ? `Admin dashboard path accessed: ${pathname}`
-          : `Page visit recorded: ${pathname}`;
-
         // Send navigation trace to the telemetry logger
         await EventBus.publish(
-          source,
+          'portfolio',
           'info',
-          message,
+          `Page visit recorded: ${pathname}`,
           {
             path: pathname,
             referrer: typeof document !== 'undefined' ? document.referrer : '',
             userAgent: typeof navigator !== 'undefined' ? navigator.userAgent.substring(0, 100) : '',
           },
-          isPublic
+          true
         );
       } catch (err) {
         console.warn('Telemetry page navigation logging failed:', err);

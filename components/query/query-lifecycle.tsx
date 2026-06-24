@@ -53,15 +53,16 @@ const STATIC_WORKFLOWS: Record<string, StaticWorkflow> = {
 });`
       },
       {
-        name: 'IP Rate Limiting (Redis Check)',
+        name: 'IP Rate Limiting (In-Memory Check)',
         component: 'Middleware Layer',
         durationMs: 28,
         status: 'success',
-        recruiterExplanation: 'Limits IP addresses to 5 questions per minute to manage API costs and prevent spam.',
-        technicalExplanation: 'Intercepts route, fetching Upstash Redis tokens and returning HTTP 429 if threshold is reached.',
+        recruiterExplanation: 'Limits IP addresses to 10 queries per minute to manage API costs and prevent spam.',
+        technicalExplanation: 'API route checks in-memory Map counters, blocking client IP addresses from proceeding on limits overflow.',
         language: 'typescript',
-        codeSnippet: `const { success } = await ratelimit.limit(\`ip:\${ip}\`);
-if (!success) return NextResponse.json({ error: "Limit reached" }, { status: 429 });`
+        codeSnippet: `if (isRateLimited(ip, 10, 60 * 1000)) {
+  return NextResponse.json({ error: "Too many requests" }, { status: 429 });
+}`
       },
       {
         name: 'Context Enrichment assembly',
@@ -105,10 +106,10 @@ const systemPrompt = \`\${basePrompt}\\n\\nContext:\\n\${context}\`;`
   contact: {
     id: 'contact',
     title: 'Contact Form Submission',
-    description: 'Traces client-side messages through input sanitization, database insert, and SMTP email forwarding.',
+    description: 'Traces client-side messages through input sanitization, database insert, and server telemetry logging.',
     method: 'POST',
     path: '/api/contact',
-    totalDurationMs: 698,
+    totalDurationMs: 268,
     stages: [
       {
         name: 'Input Sanitization',
@@ -136,19 +137,20 @@ CREATE POLICY "Allow public submission insertions" ON contact_messages
   FOR INSERT WITH CHECK (true);`
       },
       {
-        name: 'SMTP Encrypted Dispatch',
-        component: 'Nodemailer Mail Server',
-        durationMs: 445,
+        name: 'Server Telemetry Logging',
+        component: 'Server Observability Logger',
+        durationMs: 15,
         status: 'success',
-        recruiterExplanation: 'Sends direct email alerts to Vraj using encrypted TLS mail tunnels to prevent interceptions.',
-        technicalExplanation: 'Nodemailer uses authenticated mail ports to forward details, verifying host certificates.',
+        recruiterExplanation: 'Records the successful contact form submission to system event logs for administration dashboards.',
+        technicalExplanation: 'Executes ServerLogger.logEvent helper to write transaction records into database audit tables.',
         language: 'typescript',
-        codeSnippet: `const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST,
-  port: 465,
-  secure: true,
-  auth: { user: smtpUser, pass: smtpPass }
-});`
+        codeSnippet: `await ServerLogger.logEvent(
+  'contact',
+  'success',
+  \`Contact inquiry cataloged successfully: "\${subject.substring(0, 30)}..."\`,
+  { subjectPreview: subject.substring(0, 30) },
+  true
+);`
       },
       {
         name: 'Browser UI success update',
@@ -280,6 +282,7 @@ export default function QueryLifecycle() {
   const [activeTraceId, setActiveTraceId] = useState<string | null>(null);
   const [loadingTraces, setLoadingTraces] = useState(false);
   const [activeTraceStepIndex, setActiveTraceStepIndex] = useState<number>(0);
+  const [isDemoMode, setIsDemoMode] = useState(false);
 
   // Fetch real traces when Tracer mode is selected
   useEffect(() => {
@@ -308,6 +311,7 @@ export default function QueryLifecycle() {
           setTraces(parsed);
           setActiveTraceId(parsed[0].id);
           setActiveTraceStepIndex(0);
+          setIsDemoMode(false);
         } else {
           // Local fallback seeded trace data
           const defaultTraces: RequestTraceRecord[] = [
@@ -321,7 +325,7 @@ export default function QueryLifecycle() {
               steps: [
                 { name: 'init_request', durationMs: 0, status: 'success', timestamp: new Date(Date.now() - 1005).toISOString(), metadata: { message: 'Trace started.' } },
                 { name: 'validate_inputs_zod', durationMs: 5, status: 'success', timestamp: new Date(Date.now() - 1000).toISOString() },
-                { name: 'query_ip_rate_limit_redis', durationMs: 30, status: 'success', timestamp: new Date(Date.now() - 970).toISOString() },
+                { name: 'query_ip_rate_limit_memory', durationMs: 30, status: 'success', timestamp: new Date(Date.now() - 970).toISOString() },
                 { name: 'load_context_data', durationMs: 120, status: 'success', timestamp: new Date(Date.now() - 850).toISOString(), metadata: { file: 'portfolioContext.ts' } },
                 { name: 'call_google_genai_api', durationMs: 850, status: 'success', timestamp: new Date(Date.now() - 0).toISOString(), metadata: { model: 'gemini-1.5-flash' } }
               ]
@@ -337,13 +341,14 @@ export default function QueryLifecycle() {
                 { name: 'init_request', durationMs: 0, status: 'success', timestamp: new Date(Date.now() - 60278).toISOString() },
                 { name: 'validate_inputs_zod', durationMs: 12, status: 'success', timestamp: new Date(Date.now() - 60266).toISOString() },
                 { name: 'insert_contact_message', durationMs: 240, status: 'success', timestamp: new Date(Date.now() - 60026).toISOString() },
-                { name: 'dispatch_resend_email', durationMs: 26, status: 'success', timestamp: new Date(Date.now() - 60000).toISOString() }
+                { name: 'server_telemetry_logging', durationMs: 26, status: 'success', timestamp: new Date(Date.now() - 60000).toISOString() }
               ]
             }
           ];
           setTraces(defaultTraces);
           setActiveTraceId(defaultTraces[0].id);
           setActiveTraceStepIndex(0);
+          setIsDemoMode(true);
         }
       } catch (err) {
         console.error('Failed to query request traces from Supabase:', err);
@@ -379,7 +384,7 @@ export default function QueryLifecycle() {
         <div className="flex items-center gap-2">
           <Activity className="h-4 w-4 text-cyan-400" />
           <h3 className="text-sm font-bold text-foreground font-mono uppercase tracking-wider">
-            Query Lifecycle Tracer
+            Query Lifecycle Tracer {mode === 'tracer' && isDemoMode && '(Demo Mode)'}
           </h3>
         </div>
 

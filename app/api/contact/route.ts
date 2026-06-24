@@ -3,6 +3,7 @@ import { contactMessageSchema } from '@/lib/security/zod-schemas';
 import { isRateLimited } from '@/lib/security/rate-limiter';
 import { createServerSupabaseClient, isSupabaseConfigured } from '@/lib/supabase/server';
 import { ServerLogger } from '@/lib/telemetry/server-logger';
+import { MetricsCollector } from '@/lib/metrics/metrics-collector';
 import fs from 'fs';
 import path from 'path';
 
@@ -39,6 +40,7 @@ function saveMessageLocally(messageData: { name: string; email: string; subject:
 }
 
 export async function POST(req: NextRequest) {
+  const startTime = Date.now();
   const ip = req.headers.get('x-forwarded-for') || '127.0.0.1';
 
   // Rate Limiting Gate (3 inquiries per 5 minutes)
@@ -119,6 +121,7 @@ export async function POST(req: NextRequest) {
       true
     );
 
+    await MetricsCollector.recordApiLatency('/api/contact', Date.now() - startTime);
     return NextResponse.json({
       success: true,
       message: 'Message successfully cataloged. Vraj will respond shortly.',
@@ -132,6 +135,7 @@ export async function POST(req: NextRequest) {
       { error: String(error) },
       false
     );
+    await MetricsCollector.recordApiLatency('/api/contact', Date.now() - startTime);
     return NextResponse.json(
       { error: 'Database synchronization failed. Please try again.' },
       { status: 500 }

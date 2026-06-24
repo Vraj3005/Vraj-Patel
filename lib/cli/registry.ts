@@ -50,6 +50,7 @@ export const COMMANDS: CommandDefinition[] = [
   { name: 'open /ask-vraj', category: 'navigation', description: 'Route user to the dedicated Ask Vraj AI chat thread.', usage: 'open /ask-vraj' },
   { name: 'open /resume', category: 'navigation', description: 'Navigate user to Vraj Patel\'s Interactive CV.', usage: 'open /resume' },
   { name: 'open /contact', category: 'navigation', description: 'Route browser to the communication form page.', usage: 'open /contact' },
+  { name: 'open /inbox', category: 'navigation', description: 'Navigate user to the secure contact inquiries inbox.', usage: 'open /inbox' },
 
   // Advanced telemetry/systems visualizers
   { name: 'show metrics', category: 'advanced', description: 'Render high-fidelity operational metrics blocks.', usage: 'show metrics' },

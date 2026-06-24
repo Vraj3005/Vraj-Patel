@@ -133,24 +133,27 @@ const aiQuerySchema = z.object({
       },
       {
         id: 'a-2',
-        name: 'Redis Token-Bucket Rate Limiting',
+        name: 'In-Memory Sliding-Window Rate Limiting',
         status: 'active',
         mitigatedThreats: ['API Abuse', 'Resource Exhaustion', 'Denial of Service'],
-        recruiterExplanation: 'Limits visitors to a max of 5 questions per minute to prevent system overload and manage API costs.',
-        technicalExplanation: 'Middleware records request volumes by client IP in Upstash Redis cache via a sliding window pattern.',
+        recruiterExplanation: 'Limits visitors to a max of 10 questions per minute to prevent system overload and manage API costs.',
+        technicalExplanation: 'Tracks request counters per client IP dynamically using an in-memory Map structure, resetting count on window expiry.',
         language: 'typescript',
-        codeSnippet: `import { Ratelimit } from "@upstash/ratelimit";
-import { Redis } from "@upstash/redis";
+        codeSnippet: `// lib/security/rate-limiter.ts
+const ipCache = new Map<string, { count: number; resetTime: number }>();
 
-const ratelimit = new Ratelimit({
-  redis: Redis.fromEnv(),
-  limiter: Ratelimit.tokenBucket(5, "60 s", 5), // Max 5 calls per minute
-  analytics: true
-});
+export function isRateLimited(ip: string, limit = 5, windowMs = 60 * 1000): boolean {
+  const now = Date.now();
+  const record = ipCache.get(ip);
 
-// Inside api route handler
-const { success } = await ratelimit.limit(\`ip:\${ip}\`);
-if (!success) return NextResponse.json({ error: "Rate limit hit" }, { status: 429 });`
+  if (!record || now > record.resetTime) {
+    ipCache.set(ip, { count: 1, resetTime: now + windowMs });
+    return false;
+  }
+
+  record.count += 1;
+  return record.count > limit;
+}`
       },
       {
         id: 'a-3',
@@ -246,146 +249,62 @@ CREATE POLICY "Restrict selections to admin authenticated session" ON contact_me
       },
       {
         id: 'c-4',
-        name: 'Enforced TLS SMTP Mail Transport',
+        name: 'Anti-Spam Honeypot Field Check',
         status: 'active',
-        mitigatedThreats: ['Eavesdropping', 'Email Spoofing'],
-        recruiterExplanation: 'Transports contact alerts to Vraj using TLS-encrypted mail connections to prevent snooping.',
-        technicalExplanation: 'Transporter checks host SSL certificates and rejects unauthorized connections using secure port tunnels.',
+        mitigatedThreats: ['Automated Bot Submissions', 'Spam Ingestion'],
+        recruiterExplanation: 'Uses a hidden honeypot form field that humans cannot see, but bot scripts automatically fill out, allowing immediate rejection.',
+        technicalExplanation: 'The API checks the hidden "honeypot" field parameter. If it contains any value, the request is flagged as an automated bot spam attempt and blocked.',
         language: 'typescript',
-        codeSnippet: `// SMTP transport configuration implementing TLS tunnels
-const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST,
-  port: 465,
-  secure: true, // SSL/TLS tunnel active
-  auth: {
-    user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASS
-  },
-  tls: { rejectUnauthorized: true } // Reject self-signed certs
-});`
+        codeSnippet: `// app/api/contact/route.ts - Honeypot check
+const { name, email, subject, message, honeypot } = result.data;
+
+if (honeypot) {
+  await ServerLogger.logEvent('contact', 'warning', 'Spam validation Honeypot check triggered');
+  return NextResponse.json(
+    { error: 'Spam validation check failed.' },
+    { status: 400 }
+  );
+}`
       }
     ]
   },
-  admin: {
-    id: 'admin',
-    title: 'Secure Admin Dashboard',
-    description: 'Path route middle layers, authenticated user validations, and immutable log writes.',
+  inbox: {
+    id: 'inbox',
+    title: 'Secure Inquiries Inbox',
+    description: 'Private message console gated by passcode hashes and serverless environment variables.',
     layers: [
       {
-        id: 'ad-1',
-        name: 'JWT Session Verification',
+        id: 'ib-1',
+        name: 'Passcode Verification Gate',
         status: 'active',
-        mitigatedThreats: ['Session Hijacking', 'Brute Force Session Access'],
-        recruiterExplanation: 'Requires cookies containing a cryptographically signed signature to authenticate dashboard requests.',
-        technicalExplanation: 'Route middleware intercepts actions, inspecting signed JWT tokens and redirecting unauthorized sessions.',
+        mitigatedThreats: ['Unauthorized Access', 'Data Leaks', 'Brute Force'],
+        recruiterExplanation: 'Requires a secure environment-defined passcode to view incoming message logs.',
+        technicalExplanation: 'The API compares the client-submitted passcode header against the INBOX_PASSCODE secret stored securely in environment variables.',
         language: 'typescript',
-        codeSnippet: `// middleware.ts - Route protection guard mapping
-import { withAuth } from "next-auth/middleware";
-
-export default withAuth({
-  callbacks: {
-    authorized: ({ token }) => token?.role === "admin"
-  }
-});
-
-export const config = { matcher: ["/admin/:path*", "/api/admin/:path*"] };`
+        codeSnippet: `// app/api/contact/inbox/route.ts
+const expectedPasscode = process.env.INBOX_PASSCODE;
+if (!expectedPasscode) {
+  return NextResponse.json({ error: "Inbox passcode unconfigured on server" }, { status: 500 });
+}
+if (inputPasscode !== expectedPasscode) {
+  return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+}`
       },
       {
-        id: 'ad-2',
-        name: 'Two-Factor Authentication (TOTP)',
-        status: 'planned',
-        mitigatedThreats: ['Credential Theft', 'Phishing Attacks'],
-        recruiterExplanation: 'Adds a secondary security layer requiring a dynamic authenticator code from Vraj\'s phone during login.',
-        technicalExplanation: 'Validates temporary codes using standardized TOTP validation scripts on the server.',
+        id: 'ib-2',
+        name: 'Cookie-Less Transient State',
+        status: 'active',
+        mitigatedThreats: ['Brute Force Access', 'Replay Attacks'],
+        recruiterExplanation: 'Prevents database lookups and potential session hijacking by validating checks on-demand.',
+        technicalExplanation: 'Uses request headers to pass auth states on a single page lifecycle, keeping sessions stateless and secure.',
         language: 'typescript',
-        codeSnippet: `// OTP code verification module (Planned Update)
-import { authenticator } from 'otplib';
-
-const userSecret = process.env.ADMIN_2FA_SECRET || '';
-const isValid = authenticator.verify({
-  token: clientSubmitted2FAToken,
-  secret: userSecret
-});
-if (!isValid) throw new Error("Verification challenge failed");`
-      },
-      {
-        id: 'ad-3',
-        name: 'Immutable Telemetry Logging',
-        status: 'active',
-        mitigatedThreats: ['Audit Tampering', 'Log Deletion', 'Action Obfuscation'],
-        recruiterExplanation: 'Guarantees admin activities are recorded in a write-only log database that cannot be modified or cleared by anyone.',
-        technicalExplanation: 'Database triggers intercept operations, blocking delete and update queries on telemetry tables.',
-        language: 'sql',
-        codeSnippet: `-- Plpgsql trigger ensuring read-only append tracking
-CREATE OR REPLACE FUNCTION protect_admin_audit_logs()
-RETURNS TRIGGER AS $$
-BEGIN
-  IF (TG_OP = 'UPDATE' OR TG_OP = 'DELETE') THEN
-    RAISE EXCEPTION 'Telemetry database entries are immutable. Operation blocked.';
-  END IF;
-  RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;`
-      }
-    ]
-  },
-  'construction-os': {
-    id: 'construction-os',
-    title: 'ConstructionOS ERP',
-    description: 'Multi-tenant database segregation, role-based scope checks, and session refresh timeouts.',
-    layers: [
-      {
-        id: 'co-1',
-        name: 'PostgreSQL Multi-Tenant RLS Policy',
-        status: 'active',
-        mitigatedThreats: ['Tenant Data Bleeds', 'Inter-Company Data Access'],
-        recruiterExplanation: 'Isolates project estimations so users from one building company can never view invoices from another company.',
-        technicalExplanation: 'Database RLS policies filter rows dynamically by parsing tenant ID metadata encoded inside client JWT structures.',
-        language: 'sql',
-        codeSnippet: `-- Tenant security check policy mappings
-ALTER TABLE estimates ENABLE ROW LEVEL SECURITY;
-
-CREATE POLICY "Estimators can only query matching tenant_id" ON estimates
-  FOR ALL TO authenticated
-  USING (tenant_id = (auth.jwt() ->> 'tenant_id')::uuid)
-  WITH CHECK (tenant_id = (auth.jwt() ->> 'tenant_id')::uuid);`
-      },
-      {
-        id: 'co-2',
-        name: 'Fine-Grained RBAC Permission Scope Check',
-        status: 'active',
-        mitigatedThreats: ['Unauthorized Mutations', 'Privilege Escalation'],
-        recruiterExplanation: 'Limits access scopes so site workers can only log hours, estimators can update bids, and only executives can view margins.',
-        technicalExplanation: 'Server APIs verify user scopes before triggering database procedures or controller functions.',
-        language: 'typescript',
-        codeSnippet: `// API route permissions checker implementation
-const userScopes = session.user.scopes; // e.g. ["estimate:read", "estimate:write"]
-
-const verifyScope = (requiredScope: string) => {
-  if (!userScopes.includes(requiredScope)) {
-    return NextResponse.json(
-      { error: "Access Denied: Insufficient scope" }, 
-      { status: 403 }
-    );
-  }
+        codeSnippet: `// app/inbox/page.tsx - React client request
+const fetchInquiries = async (passcode: string) => {
+  const res = await fetch('/api/contact/inbox', {
+    headers: { 'x-inbox-passcode': passcode }
+  });
+  return res.json();
 };`
-      },
-      {
-        id: 'co-3',
-        name: 'HttpOnly Strict Cookie Session',
-        status: 'active',
-        mitigatedThreats: ['Session Token Theft', 'XSS Token Interceptions'],
-        recruiterExplanation: 'Stores session tokens in browser cookies flagged as invisible to JavaScript, preventing malware script theft.',
-        technicalExplanation: 'Enforces cryptographic cookie signing using httpOnly, secure, and strict SameSite properties.',
-        language: 'typescript',
-        codeSnippet: `// Server response cookie generation parameters mapping
-res.setHeader('Set-Cookie', serialize('token', jwt, {
-  httpOnly: true, // Invisible to JS scripts
-  secure: process.env.NODE_ENV === 'production',
-  sameSite: 'strict',
-  maxAge: 900, // 15 Minute session lifetime
-  path: '/'
-}));`
       }
     ]
   },
@@ -506,9 +425,9 @@ const PROJECT_SLUG_MAP: Record<string, string> = {
   'outreachops-ai': 'ask-vraj',
   'bhagwati-interior-erp': 'bhagwati-erp',
   'driedhub-marketplace': 'portfolio',
-  'driedhub-admin-dashboard': 'admin',
+  'driedhub-admin-dashboard': 'inbox',
   'marea-website': 'portfolio',
-  'marea-admin-dashboard': 'admin',
+  'marea-admin-dashboard': 'inbox',
   'surendra-bus-body': 'portfolio',
   'mspe-volatility-engine': 'portfolio',
   'nf-lrd-regime-discovery': 'portfolio',

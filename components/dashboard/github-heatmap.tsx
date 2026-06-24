@@ -16,6 +16,7 @@ export default function GithubHeatmap({ username }: GithubHeatmapProps) {
   const [data, setData] = useState<HeatmapCell[]>([]);
   const [loading, setLoading] = useState(true);
   const [syncing, setSyncing] = useState(false);
+  const [isDemoMode, setIsDemoMode] = useState(false);
   const [hoveredCell, setHoveredCell] = useState<{
     date: string;
     count: number;
@@ -37,6 +38,7 @@ export default function GithubHeatmap({ username }: GithubHeatmapProps) {
       })
       .then((payload) => {
         setData(payload.data || []);
+        setIsDemoMode(!!payload.isDemoMode);
       })
       .catch((err) => {
         console.error('Error fetching contributions:', err);
@@ -163,6 +165,11 @@ export default function GithubHeatmap({ username }: GithubHeatmapProps) {
         <div className="flex items-center gap-2">
           <Github className="h-4 w-4 text-cyan-400" />
           <h3 className="text-sm font-bold text-foreground font-mono uppercase tracking-wider">GitHub Activity Pipeline</h3>
+          {isDemoMode && (
+            <span className="text-[9px] font-mono bg-amber-500/10 text-amber-400 border border-amber-500/20 px-2 py-0.5 rounded ml-2">
+              Demo Mode
+            </span>
+          )}
           {syncing && <RefreshCw className="h-3.5 w-3.5 animate-spin text-cyan-400/80 ml-1" />}
         </div>
         
@@ -189,8 +196,8 @@ export default function GithubHeatmap({ username }: GithubHeatmapProps) {
       </div>
 
       {/* SVG Heatmap Grid with dynamic HTML tooltips */}
-      <div className="w-full overflow-x-auto scrollbar-none py-2 relative z-10">
-        <svg width="735" height="110" className="mx-auto select-none overflow-visible">
+      <div className="w-full overflow-x-auto md:overflow-x-visible scrollbar-none py-2 relative z-10">
+        <svg viewBox="0 0 735 110" className="w-full max-w-[735px] h-auto mx-auto select-none overflow-visible">
           <g transform="translate(40, 25)">
             {/* Month labels at top */}
             {monthLabels.map((lbl, i) => (

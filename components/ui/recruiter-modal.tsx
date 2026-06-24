@@ -46,41 +46,41 @@ export default function RecruiterModal({ isOpen, onClose }: RecruiterModalProps)
       icon: <Code className="h-4 w-4 text-sky-400" />,
       title: 'Full-Stack Development',
       subtitle: 'CSE Candidate at Nirma University',
-      text: 'Architects robust responsive SPAs and high-concurrency microservices. Fluent in TypeScript, Python, Go (Golang), C++, and Next.js.'
+      text: 'Architects robust responsive SPAs and full-stack applications. Fluent in TypeScript, Python, and Next.js.'
     },
     {
       icon: <Terminal className="h-4 w-4 text-emerald-450" />,
       title: 'ERP & Client Software Builder',
       subtitle: 'Enermass Solar Calculator & Bhagwati Interior ERP',
-      text: 'Built customized pricing engines. Sped up 3D roof shading estimations from 4.8s to <80ms via WebGL shaders. Saved designers 65% quote times.'
+      text: 'Built customized pricing engines. Sped up tilt & shading estimations via Zustand state calculations. Saved designers 65% quote times.'
     },
     {
       icon: <Bot className="h-4 w-4 text-cyan-400" />,
       title: 'Autonomous AI Automation',
       subtitle: 'Lead Crawler Scrapers & Sequence Workers',
-      text: 'Created multi-agent scraping workflows using Gemini API and LangChain. Implemented strict Zod schemas for structured JSON output integrity.'
+      text: 'Created multi-agent scraping workflows using Google GenAI SDK. Implemented strict Zod schemas for structured JSON output integrity.'
     },
     {
       icon: <TrendingUp className="h-4 w-4 text-amber-500" />,
       title: 'Quantitative Finance Research',
       subtitle: 'HMM Market Regime discovery & Implied Volatility skews',
-      text: 'Designed statistical Hidden Markov Model (HMM) backtesters in Python (Numba compiled, 25x speed loops) and C++ WebAssembly options solvers.'
+      text: 'Designed statistical Hidden Markov Model (HMM) backtesters in Python and Black-Scholes options pricing mathematics.'
     },
     {
       icon: <ShieldCheck className="h-4 w-4 text-rose-400" />,
       title: 'Production Mindset & Security',
       subtitle: 'Bottlenecks Optimization & Row-Level database policies',
-      text: 'Integrates Redis caching layers, Debezium Postgres WAL logs, and enforces strict PostgreSQL Row Level Security (RLS) query constraints.'
+      text: 'Integrates client-side Zod validators, simple server rate limiters, and enforces strict PostgreSQL Row Level Security (RLS) query constraints.'
     }
   ];
 
   const handleCopySummary = () => {
     const summaryText = `Vraj Patel — Recruiter Summary Checklist:
-1. Full-Stack Development: CSE Undergrad at Nirma University. Fluent in TypeScript, Next.js, Python, Go, and C++.
-2. ERP & Client Software: Built Enermass Solar ERP and Bhagwati Interior ERP. Optimized WebGL shading engine from 4.8s to <80ms.
-3. AI Automation: Programmed outbound scrapers utilizing Gemini API, LangChain, and Zod structured JSON schemas.
-4. Quant Finance: Built HMM market regime analyzers (Numba optimized, 25x speedup) and C++ WASM options calculators.
-5. Production Mindset: Focuses on performance tuning (BullMQ Redis, WAL logs) and database security (Supabase RLS).`;
+1. Full-Stack Development: CSE Undergrad at Nirma University. Fluent in TypeScript, Next.js, and Python.
+2. ERP & Client Software: Built Enermass Solar ERP and Bhagwati Interior ERP. Optimized calculations using Zustand state.
+3. AI Automation: Programmed outbound scrapers utilizing Google GenAI SDK and Zod structured JSON schemas.
+4. Quant Finance: Built HMM market regime analyzers in Python and Black-Scholes options pricing mathematics.
+5. Production Mindset: Focuses on database security (Supabase RLS) and simple in-memory rate limiting.`;
 
     navigator.clipboard.writeText(summaryText);
     setCopied(true);

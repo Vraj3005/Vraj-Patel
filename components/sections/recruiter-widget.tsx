@@ -23,7 +23,7 @@ const recruiterQAs: QAPair[] = [
   },
   {
     question: 'What is his core tech stack expertise?',
-    answer: 'Full-stack engineering: Next.js/React on the frontend; Go (Golang), Node.js, and FastAPI (Python) on the backend; coupled with PostgreSQL, Redis, and Supabase for caching/data layers.',
+    answer: 'Full-stack engineering: Next.js/React on the frontend; Node.js and FastAPI (Python) on the backend; coupled with PostgreSQL and Supabase for data layers.',
   },
   {
     question: 'What sets Vraj apart from standard computer science graduates?',

@@ -1,0 +1,614 @@
+[
+  {
+    "id": "6a1bd561-75bd-4016-a112-210098c2860a",
+    "created_at": "2026-06-24T18:13:24.248Z",
+    "metric_name": "api_latency_ms",
+    "metric_value": 2,
+    "tags": {
+      "path": "/api/ask"
+    }
+  },
+  {
+    "id": "75dfdcfc-056d-4bea-9046-8689a69dd649",
+    "created_at": "2026-06-24T18:13:24.349Z",
+    "metric_name": "api_latency_ms",
+    "metric_value": 5,
+    "tags": {
+      "path": "/api/contact"
+    }
+  },
+  {
+    "id": "b4723163-c156-48d8-a983-004eff4c637a",
+    "created_at": "2026-06-24T18:14:24.290Z",
+    "metric_name": "api_latency_ms",
+    "metric_value": 1276,
+    "tags": {
+      "path": "/api/github/contributions"
+    }
+  },
+  {
+    "id": "a9f204f3-f06e-4a44-8cb3-d8f3d7a001b7",
+    "created_at": "2026-06-24T18:14:27.500Z",
+    "metric_name": "api_latency_ms",
+    "metric_value": 2918,
+    "tags": {
+      "path": "/api/github/contributions"
+    }
+  },
+  {
+    "id": "676c5475-60d4-4167-8df3-ab54166b93ce",
+    "created_at": "2026-06-24T18:15:10.388Z",
+    "metric_name": "api_latency_ms",
+    "metric_value": 611,
+    "tags": {
+      "path": "/api/github/contributions"
+    }
+  },
+  {
+    "id": "f37d902f-f5dd-46f0-8222-d0618a05fc93",
+    "created_at": "2026-06-24T18:17:05.004Z",
+    "metric_name": "api_latency_ms",
+    "metric_value": 570,
+    "tags": {
+      "path": "/api/github/contributions"
+    }
+  },
+  {
+    "id": "55136156-faed-48cf-912e-f4c09d4eb6ac",
+    "created_at": "2026-06-24T18:17:05.619Z",
+    "metric_name": "api_latency_ms",
+    "metric_value": 480,
+    "tags": {
+      "path": "/api/github/contributions"
+    }
+  },
+  {
+    "id": "6df1d144-0a3e-4d25-93a1-97a48998620a",
+    "created_at": "2026-06-24T18:19:56.714Z",
+    "metric_name": "api_latency_ms",
+    "metric_value": 1,
+    "tags": {
+      "path": "/api/ask"
+    }
+  },
+  {
+    "id": "17de3f15-539a-4c38-8457-128c988d6438",
+    "created_at": "2026-06-24T18:19:56.771Z",
+    "metric_name": "api_latency_ms",
+    "metric_value": 2,
+    "tags": {
+      "path": "/api/contact"
+    }
+  },
+  {
+    "id": "58223c49-05e8-4a5a-bd9e-e9de15ea9ac3",
+    "created_at": "2026-06-24T18:20:12.178Z",
+    "metric_name": "api_latency_ms",
+    "metric_value": 2,
+    "tags": {
+      "path": "/api/ask"
+    }
+  },
+  {
+    "id": "4d1ee08b-9f48-4d3c-a041-e10f950b7f90",
+    "created_at": "2026-06-24T18:20:12.224Z",
+    "metric_name": "api_latency_ms",
+    "metric_value": 2,
+    "tags": {
+      "path": "/api/contact"
+    }
+  },
+  {
+    "id": "f13f0010-d8ad-4a87-9320-737803c82056",
+    "created_at": "2026-06-24T18:21:04.262Z",
+    "metric_name": "api_latency_ms",
+    "metric_value": 825,
+    "tags": {
+      "path": "/api/github/contributions"
+    }
+  },
+  {
+    "id": "8872df51-7ac9-415a-a6c2-a05c9ebb08c4",
+    "created_at": "2026-06-24T18:21:05.036Z",
+    "metric_name": "api_latency_ms",
+    "metric_value": 611,
+    "tags": {
+      "path": "/api/github/contributions"
+    }
+  },
+  {
+    "id": "06aa6a69-c348-42d2-a693-c2fcd9c6e641",
+    "created_at": "2026-06-24T18:21:33.513Z",
+    "metric_name": "api_latency_ms",
+    "metric_value": 633,
+    "tags": {
+      "path": "/api/github/contributions"
+    }
+  },
+  {
+    "id": "99072896-615f-4a5a-aa95-bb2fedea4499",
+    "created_at": "2026-06-24T18:21:34.117Z",
+    "metric_name": "api_latency_ms",
+    "metric_value": 433,
+    "tags": {
+      "path": "/api/github/contributions"
+    }
+  },
+  {
+    "id": "fa6efe97-8b8c-43a4-b389-474ae1861e3b",
+    "created_at": "2026-06-24T18:28:38.691Z",
+    "metric_name": "api_latency_ms",
+    "metric_value": 1214,
+    "tags": {
+      "path": "/api/github/contributions"
+    }
+  },
+  {
+    "id": "6bba36e5-c9cf-4696-8ee9-04eb3b9c97af",
+    "created_at": "2026-06-24T18:28:39.789Z",
+    "metric_name": "api_latency_ms",
+    "metric_value": 933,
+    "tags": {
+      "path": "/api/github/contributions"
+    }
+  },
+  {
+    "id": "8a03da7c-603e-41f1-b578-f5b3c6e846a6",
+    "created_at": "2026-06-24T18:28:40.834Z",
+    "metric_name": "api_latency_ms",
+    "metric_value": 848,
+    "tags": {
+      "path": "/api/github/contributions"
+    }
+  },
+  {
+    "id": "9df948c6-7c06-4947-9418-db1cf84c80ae",
+    "created_at": "2026-06-24T18:28:55.081Z",
+    "metric_name": "api_latency_ms",
+    "metric_value": 967,
+    "tags": {
+      "path": "/api/github/contributions"
+    }
+  },
+  {
+    "id": "c68bf0a6-7661-4386-a1fb-e511581b25ad",
+    "created_at": "2026-06-24T18:29:15.855Z",
+    "metric_name": "api_latency_ms",
+    "metric_value": 1023,
+    "tags": {
+      "path": "/api/github/contributions"
+    }
+  },
+  {
+    "id": "c485804e-cb37-4250-a3b5-027c1c8c07b2",
+    "created_at": "2026-06-24T18:29:16.922Z",
+    "metric_name": "api_latency_ms",
+    "metric_value": 906,
+    "tags": {
+      "path": "/api/github/contributions"
+    }
+  },
+  {
+    "id": "04f7e9c5-a147-40d9-a41d-97508c4cb79c",
+    "created_at": "2026-06-24T18:30:15.677Z",
+    "metric_name": "api_latency_ms",
+    "metric_value": 1866,
+    "tags": {
+      "path": "/api/github/contributions"
+    }
+  },
+  {
+    "id": "5e7c5cae-60aa-49e3-b168-4eed144188f9",
+    "created_at": "2026-06-24T18:30:21.807Z",
+    "metric_name": "api_latency_ms",
+    "metric_value": 2491,
+    "tags": {
+      "path": "/api/github/contributions"
+    }
+  },
+  {
+    "id": "dafd27f0-90ff-48b2-bd96-b07a4b6256a4",
+    "created_at": "2026-06-24T18:30:23.059Z",
+    "metric_name": "api_latency_ms",
+    "metric_value": 914,
+    "tags": {
+      "path": "/api/github/contributions"
+    }
+  },
+  {
+    "id": "376c0f01-1c54-471d-9ee5-94573dace82e",
+    "created_at": "2026-06-24T18:30:58.561Z",
+    "metric_name": "api_latency_ms",
+    "metric_value": 3594,
+    "tags": {
+      "path": "/api/contact"
+    }
+  },
+  {
+    "id": "e93b9411-c7e0-4036-b921-a3bd78da2f32",
+    "created_at": "2026-06-24T18:35:30.830Z",
+    "metric_name": "api_latency_ms",
+    "metric_value": 10233,
+    "tags": {
+      "path": "/api/github/contributions"
+    }
+  },
+  {
+    "id": "e3daa947-e452-4eee-8199-b38aca6a9a36",
+    "created_at": "2026-06-24T18:35:41.956Z",
+    "metric_name": "api_latency_ms",
+    "metric_value": 9734,
+    "tags": {
+      "path": "/api/github/contributions"
+    }
+  },
+  {
+    "id": "ca0465b6-870e-4978-af6c-c6fe21fc3b6d",
+    "created_at": "2026-06-24T18:35:58.266Z",
+    "metric_name": "api_latency_ms",
+    "metric_value": 15406,
+    "tags": {
+      "path": "/api/github/contributions"
+    }
+  },
+  {
+    "id": "f39fba80-83de-4b8b-8529-f455337023b9",
+    "created_at": "2026-06-24T18:36:04.627Z",
+    "metric_name": "api_latency_ms",
+    "metric_value": 4984,
+    "tags": {
+      "path": "/api/github/contributions"
+    }
+  },
+  {
+    "id": "78e8d680-976c-4658-bc49-9d8b2bb2dc36",
+    "created_at": "2026-06-24T18:36:06.480Z",
+    "metric_name": "api_latency_ms",
+    "metric_value": 13033,
+    "tags": {
+      "path": "/api/github/contributions"
+    }
+  },
+  {
+    "id": "23c83bad-882f-44d3-b1fa-96508badfc93",
+    "created_at": "2026-06-24T18:36:09.113Z",
+    "metric_name": "api_latency_ms",
+    "metric_value": 7668,
+    "tags": {
+      "path": "/api/github/contributions"
+    }
+  },
+  {
+    "id": "d4184ac3-4b03-4b78-abdb-7c926daf632e",
+    "created_at": "2026-06-24T18:36:30.529Z",
+    "metric_name": "api_latency_ms",
+    "metric_value": 9572,
+    "tags": {
+      "path": "/api/github/contributions"
+    }
+  },
+  {
+    "id": "d9598a10-e3e5-4de3-8954-5ab75960cf02",
+    "created_at": "2026-06-24T18:36:36.344Z",
+    "metric_name": "api_latency_ms",
+    "metric_value": 914,
+    "tags": {
+      "path": "/api/github/contributions"
+    }
+  },
+  {
+    "id": "9e08a203-28ab-4642-8f0e-26e71de9b3ab",
+    "created_at": "2026-06-24T18:36:39.843Z",
+    "metric_name": "api_latency_ms",
+    "metric_value": 1900,
+    "tags": {
+      "path": "/api/github/contributions"
+    }
+  },
+  {
+    "id": "6946287a-d09b-4036-881e-16c59cd779d3",
+    "created_at": "2026-06-24T18:36:47.391Z",
+    "metric_name": "api_latency_ms",
+    "metric_value": 4416,
+    "tags": {
+      "path": "/api/github/contributions"
+    }
+  },
+  {
+    "id": "ed92d216-3fa4-4148-ab06-0e3ec18bb6da",
+    "created_at": "2026-06-24T18:37:57.065Z",
+    "metric_name": "api_latency_ms",
+    "metric_value": 1846,
+    "tags": {
+      "path": "/api/github/contributions"
+    }
+  },
+  {
+    "id": "be755814-5afd-4e60-8573-9d9c07590a38",
+    "created_at": "2026-06-24T18:38:00.045Z",
+    "metric_name": "api_latency_ms",
+    "metric_value": 1495,
+    "tags": {
+      "path": "/api/github/contributions"
+    }
+  },
+  {
+    "id": "d8f411d2-5c04-4b57-af65-c926096edc55",
+    "created_at": "2026-06-24T18:41:05.152Z",
+    "metric_name": "api_latency_ms",
+    "metric_value": 14726,
+    "tags": {
+      "path": "/api/github/contributions"
+    }
+  },
+  {
+    "id": "27a963db-6715-4804-a885-9a090020eb4c",
+    "created_at": "2026-06-24T18:41:08.066Z",
+    "metric_name": "api_latency_ms",
+    "metric_value": 2765,
+    "tags": {
+      "path": "/api/github/contributions"
+    }
+  },
+  {
+    "id": "92ef6a59-0708-4815-854a-b31b992b7d6d",
+    "created_at": "2026-06-24T18:41:14.180Z",
+    "metric_name": "api_latency_ms",
+    "metric_value": 5,
+    "tags": {
+      "path": "/api/contact"
+    }
+  },
+  {
+    "id": "c191bc01-7919-4808-979f-98be15a797bd",
+    "created_at": "2026-06-24T18:41:48.595Z",
+    "metric_name": "api_latency_ms",
+    "metric_value": 4,
+    "tags": {
+      "path": "/api/ask"
+    }
+  },
+  {
+    "id": "a7c40479-11fe-48c0-8f3f-d9612c9dc161",
+    "created_at": "2026-06-24T18:41:48.596Z",
+    "metric_name": "api_latency_ms",
+    "metric_value": 7,
+    "tags": {
+      "path": "/api/contact"
+    }
+  },
+  {
+    "id": "14f50f1e-ff9a-4092-acae-bb74f492c538",
+    "created_at": "2026-06-24T18:42:36.288Z",
+    "metric_name": "api_latency_ms",
+    "metric_value": 7,
+    "tags": {
+      "path": "/api/contact"
+    }
+  },
+  {
+    "id": "d4531e4d-f4a6-4a73-bae1-d5c366ea6233",
+    "created_at": "2026-06-24T18:43:22.583Z",
+    "metric_name": "api_latency_ms",
+    "metric_value": 2,
+    "tags": {
+      "path": "/api/ask"
+    }
+  },
+  {
+    "id": "40da8c6a-b0f1-44e4-ab49-32ab253594e0",
+    "created_at": "2026-06-24T18:43:22.584Z",
+    "metric_name": "api_latency_ms",
+    "metric_value": 3,
+    "tags": {
+      "path": "/api/contact"
+    }
+  },
+  {
+    "id": "331969ad-fa2b-4544-8757-ac812b5b331c",
+    "created_at": "2026-06-24T18:46:42.951Z",
+    "metric_name": "api_latency_ms",
+    "metric_value": 1342,
+    "tags": {
+      "path": "/api/github/contributions"
+    }
+  },
+  {
+    "id": "35b5ed21-915b-4c50-9f79-e2016b958cdf",
+    "created_at": "2026-06-24T18:46:43.838Z",
+    "metric_name": "api_latency_ms",
+    "metric_value": 763,
+    "tags": {
+      "path": "/api/github/contributions"
+    }
+  },
+  {
+    "id": "1a014c19-985a-4a2f-82bb-94a0da2a4ab4",
+    "created_at": "2026-06-24T18:47:00.220Z",
+    "metric_name": "api_latency_ms",
+    "metric_value": 697,
+    "tags": {
+      "path": "/api/github/contributions"
+    }
+  },
+  {
+    "id": "3e27bb81-4d0f-4dad-8792-5cbbfe5e9ee1",
+    "created_at": "2026-06-24T18:47:00.800Z",
+    "metric_name": "api_latency_ms",
+    "metric_value": 442,
+    "tags": {
+      "path": "/api/github/contributions"
+    }
+  },
+  {
+    "id": "46a1ac70-4a04-403a-91ab-286f79738065",
+    "created_at": "2026-06-24T18:47:16.192Z",
+    "metric_name": "api_latency_ms",
+    "metric_value": 1800,
+    "tags": {
+      "path": "/api/ask"
+    }
+  },
+  {
+    "id": "84356679-cc98-4dda-b44e-9e5be55ab0c6",
+    "created_at": "2026-06-24T18:48:39.053Z",
+    "metric_name": "api_latency_ms",
+    "metric_value": 697,
+    "tags": {
+      "path": "/api/github/contributions"
+    }
+  },
+  {
+    "id": "fe3be7f9-adfa-458c-9535-32d807ab0b75",
+    "created_at": "2026-06-24T18:48:39.844Z",
+    "metric_name": "api_latency_ms",
+    "metric_value": 622,
+    "tags": {
+      "path": "/api/github/contributions"
+    }
+  },
+  {
+    "id": "9f5d9a35-4288-43c6-878f-d445549ff3c8",
+    "created_at": "2026-06-24T19:16:40.838Z",
+    "metric_name": "api_latency_ms",
+    "metric_value": 7,
+    "tags": {
+      "path": "/api/contact"
+    }
+  },
+  {
+    "id": "94653726-4071-4a62-a4ef-e5546307c963",
+    "created_at": "2026-06-24T19:17:22.972Z",
+    "metric_name": "api_latency_ms",
+    "metric_value": 2,
+    "tags": {
+      "path": "/api/contact"
+    }
+  },
+  {
+    "id": "df8d54bd-edae-45b5-bac1-68772baf02c2",
+    "created_at": "2026-06-24T19:17:22.986Z",
+    "metric_name": "api_latency_ms",
+    "metric_value": 2,
+    "tags": {
+      "path": "/api/ask"
+    }
+  },
+  {
+    "id": "f6635a29-bf4f-4ba1-98cb-67231da6ad57",
+    "created_at": "2026-06-24T19:19:44.179Z",
+    "metric_name": "api_latency_ms",
+    "metric_value": 607,
+    "tags": {
+      "path": "/api/github/contributions"
+    }
+  },
+  {
+    "id": "37cdf335-275f-4583-aecf-6f5237ead353",
+    "created_at": "2026-06-24T19:39:39.818Z",
+    "metric_name": "api_latency_ms",
+    "metric_value": 4015,
+    "tags": {
+      "path": "/api/github/contributions"
+    }
+  },
+  {
+    "id": "105fd7cc-b346-4b2c-906c-42427d4dd173",
+    "created_at": "2026-06-24T19:41:48.130Z",
+    "metric_name": "api_latency_ms",
+    "metric_value": 7683,
+    "tags": {
+      "path": "/api/github/contributions"
+    }
+  },
+  {
+    "id": "3edd85c3-a70d-4aed-9390-c0b0c2a9ca8a",
+    "created_at": "2026-06-24T19:41:49.007Z",
+    "metric_name": "api_latency_ms",
+    "metric_value": 568,
+    "tags": {
+      "path": "/api/github/contributions"
+    }
+  },
+  {
+    "id": "8dcd71e5-1ba0-47ba-af17-4e21c1e23894",
+    "created_at": "2026-06-24T19:42:05.867Z",
+    "metric_name": "api_latency_ms",
+    "metric_value": 609,
+    "tags": {
+      "path": "/api/github/contributions"
+    }
+  },
+  {
+    "id": "3b8858e1-40b3-4cfb-830d-7a47da222b2c",
+    "created_at": "2026-06-24T19:42:07.076Z",
+    "metric_name": "api_latency_ms",
+    "metric_value": 712,
+    "tags": {
+      "path": "/api/github/contributions"
+    }
+  },
+  {
+    "id": "d6ab3ffd-8357-4827-a747-2abab3ab5bb8",
+    "created_at": "2026-06-24T19:43:01.185Z",
+    "metric_name": "api_latency_ms",
+    "metric_value": 759,
+    "tags": {
+      "path": "/api/github/contributions"
+    }
+  },
+  {
+    "id": "47577578-357d-4907-9f4d-210e14afe4c2",
+    "created_at": "2026-06-24T19:43:47.614Z",
+    "metric_name": "api_latency_ms",
+    "metric_value": 748,
+    "tags": {
+      "path": "/api/github/contributions"
+    }
+  },
+  {
+    "id": "9339c7ec-0660-49b2-abab-bd50aa4adf76",
+    "created_at": "2026-06-24T19:43:48.481Z",
+    "metric_name": "api_latency_ms",
+    "metric_value": 594,
+    "tags": {
+      "path": "/api/github/contributions"
+    }
+  },
+  {
+    "id": "cbfd025e-57e0-4015-848e-004ebd3b207c",
+    "created_at": "2026-06-24T19:43:55.787Z",
+    "metric_name": "api_latency_ms",
+    "metric_value": 6,
+    "tags": {
+      "path": "/api/ask"
+    }
+  },
+  {
+    "id": "d45f1e63-8dc9-4096-b305-410b7e9cc46a",
+    "created_at": "2026-06-24T19:43:55.798Z",
+    "metric_name": "api_latency_ms",
+    "metric_value": 14,
+    "tags": {
+      "path": "/api/contact"
+    }
+  },
+  {
+    "id": "312e219d-f0b6-46ee-a831-b973baace6ac",
+    "created_at": "2026-06-24T19:44:00.468Z",
+    "metric_name": "api_latency_ms",
+    "metric_value": 711,
+    "tags": {
+      "path": "/api/github/contributions"
+    }
+  },
+  {
+    "id": "80844eab-e653-4ad6-be94-df403b368ae2",
+    "created_at": "2026-06-24T19:44:01.398Z",
+    "metric_name": "api_latency_ms",
+    "metric_value": 686,
+    "tags": {
+      "path": "/api/github/contributions"
+    }
+  }
+]

@@ -62,6 +62,16 @@ export default function DashboardPage() {
     setSelectedTech(null);
   };
 
+  const formatEventTime = (timestamp: string) => {
+    try {
+      const d = new Date(timestamp);
+      if (isNaN(d.getTime())) return 'N/A';
+      return d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    } catch {
+      return 'N/A';
+    }
+  };
+
   const getSeverityColor = (severity: string) => {
     switch (severity.toLowerCase()) {
       case 'success':
@@ -200,7 +210,7 @@ export default function DashboardPage() {
                               {event.severity.toUpperCase()}
                             </span>
                             <span className="text-muted text-[8px]">
-                              {new Date(event.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
+                              {formatEventTime(event.timestamp)}
                             </span>
                           </div>
                           <span className="text-secondary truncate mt-0.5" title={event.message}>

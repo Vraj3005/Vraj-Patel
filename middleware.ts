@@ -45,33 +45,6 @@ export async function middleware(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser();
 
-  const isAdminPath = request.nextUrl.pathname.startsWith('/admin');
-  const isLoginPath = request.nextUrl.pathname === '/admin/login';
-  
-  if (isAdminPath) {
-    if (!user) {
-      if (!isLoginPath) {
-        const url = request.nextUrl.clone();
-        url.pathname = '/admin/login';
-        return NextResponse.redirect(url);
-      }
-    } else {
-      const isAdmin = user.email === 'patelvrajpatel30@gmail.com';
-      if (!isAdmin) {
-        // Sign out non-admin users by routing back to home page
-        const url = request.nextUrl.clone();
-        url.pathname = '/';
-        return NextResponse.redirect(url);
-      }
-      
-      if (isLoginPath) {
-        const url = request.nextUrl.clone();
-        url.pathname = '/admin';
-        return NextResponse.redirect(url);
-      }
-    }
-  }
-
   return supabaseResponse;
 }
 

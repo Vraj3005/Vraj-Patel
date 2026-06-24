@@ -44,10 +44,18 @@ export default function CommandPalette({ isOpen, onClose }: CommandPaletteProps)
     {
       id: 'nav-projects',
       label: 'Go to Projects',
-      description: 'Search and inspect Vraj\'s 10 major project cases.',
+      description: 'Search and inspect Vraj\'s 11 major project cases.',
       category: 'Navigation',
       action: () => { router.push('/projects'); onClose(); },
       icon: <Folder className="h-4 w-4 text-secondary" />,
+    },
+    {
+      id: 'nav-systems',
+      label: 'Go to Systems',
+      description: 'View interactive architecture visualizers, security shields, and operation console logs.',
+      category: 'Navigation',
+      action: () => { router.push('/systems'); onClose(); },
+      icon: <ShieldCheck className="h-4 w-4 text-cyan-400" />,
     },
     {
       id: 'nav-lab',

@@ -15,6 +15,8 @@ export default function MetricsDashboard() {
   const [latencyData, setLatencyData] = useState<MetricSnapshot[]>([]);
   const [memoryData, setMemoryData] = useState<MetricSnapshot[]>([]);
   const [loading, setLoading] = useState(true);
+  const [isLatencyDemo, setIsLatencyDemo] = useState(false);
+  const [isMemoryDemo, setIsMemoryDemo] = useState(false);
 
   useEffect(() => {
     const supabaseClient = supabase as any;
@@ -37,6 +39,7 @@ export default function MetricsDashboard() {
             value: Number(m.metric_value)
           }));
           setLatencyData(formatted);
+          setIsLatencyDemo(false);
         } else {
           // Fallback static metrics points
           setLatencyData([
@@ -46,6 +49,7 @@ export default function MetricsDashboard() {
             { time: '18:40', value: 120 },
             { time: '18:50', value: 118 }
           ]);
+          setIsLatencyDemo(true);
         }
 
         // 2. Fetch memory allocation snapshots
@@ -62,6 +66,7 @@ export default function MetricsDashboard() {
             value: Number(m.metric_value)
           }));
           setMemoryData(formatted);
+          setIsMemoryDemo(false);
         } else {
           // Fallback static metrics points
           setMemoryData([
@@ -71,6 +76,7 @@ export default function MetricsDashboard() {
             { time: '18:40', value: 45.2 },
             { time: '18:50', value: 44.9 }
           ]);
+          setIsMemoryDemo(true);
         }
       } catch (err) {
         console.error('Failed to query metrics snapshots:', err);
@@ -97,6 +103,11 @@ export default function MetricsDashboard() {
         <div className="flex items-center gap-2 border-b border-card-border pb-3 mb-2 relative z-10">
           <Activity className="h-4 w-4 text-cyan-400" />
           <h3 className="text-sm font-bold text-foreground font-mono uppercase tracking-wider">API Response Latency</h3>
+          {isLatencyDemo && (
+            <span className="text-[9px] font-mono bg-amber-500/10 text-amber-400 border border-amber-500/20 px-2 py-0.5 rounded ml-auto">
+              Demo Mode
+            </span>
+          )}
         </div>
         <div className="w-full h-48 relative z-10">
           <ResponsiveContainer width="100%" height="100%">
@@ -125,6 +136,11 @@ export default function MetricsDashboard() {
         <div className="flex items-center gap-2 border-b border-card-border pb-3 mb-2 relative z-10">
           <Server className="h-4 w-4 text-cyan-400" />
           <h3 className="text-sm font-bold text-foreground font-mono uppercase tracking-wider">Memory Allocation (Heap)</h3>
+          {isMemoryDemo && (
+            <span className="text-[9px] font-mono bg-amber-500/10 text-amber-400 border border-amber-500/20 px-2 py-0.5 rounded ml-auto">
+              Demo Mode
+            </span>
+          )}
         </div>
         <div className="w-full h-48 relative z-10">
           <ResponsiveContainer width="100%" height="100%">

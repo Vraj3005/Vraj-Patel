@@ -49,13 +49,17 @@ export async function GET(req: NextRequest) {
       try {
         const supabase = await createServerSupabaseClient();
         const { data: { user } } = await supabase.auth.getUser();
-        isAdmin = !!user && user.email === 'patelvrajpatel30@gmail.com';
+        if (user) {
+          const { data: adminUser } = await (supabase as any)
+            .from('admin_users')
+            .select('id')
+            .eq('id', user.id)
+            .maybeSingle();
+          isAdmin = !!adminUser;
+        }
       } catch (e) {
         // Safe catch
       }
-    } else {
-      const cookies = req.headers.get('cookie') || '';
-      isAdmin = cookies.includes('sb-mock-session=true');
     }
 
     // 2. Fetch logs from either database or JSON file fallback

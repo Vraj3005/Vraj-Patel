@@ -45,7 +45,7 @@ export default function TerminalLogs() {
         break;
       case 'skills':
         newLines.push({
-          text: 'Core technology competencies:\n- Languages : Go (Golang), TypeScript, Python, C++\n- Front-end : Next.js, React, Tailwind, Framer Motion, Three.js\n- Back-end  : Node.js, Express, FastAPI, gRPC, REST APIs\n- Databases : PostgreSQL, Redis, Supabase, MongoDB Atlas\n- AI/Quant  : Gemini SDK, LangChain, Black-Scholes Greek modeling',
+          text: 'Core technology competencies:\n- Languages : TypeScript, JavaScript, Python, SQL\n- Front-end : Next.js, React, Tailwind, Framer Motion, Three.js\n- Back-end  : Node.js, Express, FastAPI, REST APIs\n- Databases : PostgreSQL, Supabase, MongoDB Atlas\n- AI/Quant  : Gemini SDK, Black-Scholes Greek modeling',
           type: 'output',
         });
         break;

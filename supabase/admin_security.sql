@@ -29,13 +29,13 @@ CREATE POLICY "Allow anonymous message inserts" ON contact_messages
   FOR INSERT TO public WITH CHECK (true);
 
 CREATE POLICY "Allow admin to read contact messages" ON contact_messages 
-  FOR SELECT TO authenticated USING (auth.jwt() ->> 'email' = 'patelvrajpatel30@gmail.com');
+  FOR SELECT TO authenticated USING (exists (select 1 from public.admin_users where id = auth.uid()));
 
 CREATE POLICY "Allow admin to update contact messages" ON contact_messages 
-  FOR UPDATE TO authenticated USING (auth.jwt() ->> 'email' = 'patelvrajpatel30@gmail.com');
+  FOR UPDATE TO authenticated USING (exists (select 1 from public.admin_users where id = auth.uid()));
 
 CREATE POLICY "Allow admin to delete contact messages" ON contact_messages 
-  FOR DELETE TO authenticated USING (auth.jwt() ->> 'email' = 'patelvrajpatel30@gmail.com');
+  FOR DELETE TO authenticated USING (exists (select 1 from public.admin_users where id = auth.uid()));
 
 -- --------------------------------------------------------------------
 -- 3. AI Chat Sessions (ai_chat_sessions)
@@ -50,10 +50,10 @@ CREATE POLICY "Allow anonymous chat session inserts" ON ai_chat_sessions
   FOR INSERT TO public WITH CHECK (true);
 
 CREATE POLICY "Allow admin to read chat sessions" ON ai_chat_sessions 
-  FOR SELECT TO authenticated USING (auth.jwt() ->> 'email' = 'patelvrajpatel30@gmail.com');
+  FOR SELECT TO authenticated USING (exists (select 1 from public.admin_users where id = auth.uid()));
 
 CREATE POLICY "Allow admin to manage chat sessions" ON ai_chat_sessions 
-  FOR ALL TO authenticated USING (auth.jwt() ->> 'email' = 'patelvrajpatel30@gmail.com');
+  FOR ALL TO authenticated USING (exists (select 1 from public.admin_users where id = auth.uid()));
 
 -- --------------------------------------------------------------------
 -- 4. AI Chat Messages (ai_chat_messages)
@@ -68,10 +68,10 @@ CREATE POLICY "Allow anonymous chat message inserts" ON ai_chat_messages
   FOR INSERT TO public WITH CHECK (true);
 
 CREATE POLICY "Allow admin to read chat messages" ON ai_chat_messages 
-  FOR SELECT TO authenticated USING (auth.jwt() ->> 'email' = 'patelvrajpatel30@gmail.com');
+  FOR SELECT TO authenticated USING (exists (select 1 from public.admin_users where id = auth.uid()));
 
 CREATE POLICY "Allow admin to manage chat messages" ON ai_chat_messages 
-  FOR ALL TO authenticated USING (auth.jwt() ->> 'email' = 'patelvrajpatel30@gmail.com');
+  FOR ALL TO authenticated USING (exists (select 1 from public.admin_users where id = auth.uid()));
 
 -- --------------------------------------------------------------------
 -- 5. Analytics Events & Telemetry Logs (analytics_events)
@@ -86,10 +86,10 @@ CREATE POLICY "Allow anonymous event inserts" ON analytics_events
   FOR INSERT TO public WITH CHECK (true);
 
 CREATE POLICY "Allow admin to read events" ON analytics_events 
-  FOR SELECT TO authenticated USING (auth.jwt() ->> 'email' = 'patelvrajpatel30@gmail.com');
+  FOR SELECT TO authenticated USING (exists (select 1 from public.admin_users where id = auth.uid()));
 
 CREATE POLICY "Allow admin to manage events" ON analytics_events 
-  FOR ALL TO authenticated USING (auth.jwt() ->> 'email' = 'patelvrajpatel30@gmail.com');
+  FOR ALL TO authenticated USING (exists (select 1 from public.admin_users where id = auth.uid()));
 
 -- --------------------------------------------------------------------
 -- 6. Resume Download Trackers (resume_downloads)
@@ -102,7 +102,7 @@ CREATE POLICY "Allow anonymous downloads logging" ON resume_downloads
   FOR INSERT TO public WITH CHECK (true);
 
 CREATE POLICY "Allow admin to read downloads" ON resume_downloads 
-  FOR SELECT TO authenticated USING (auth.jwt() ->> 'email' = 'patelvrajpatel30@gmail.com');
+  FOR SELECT TO authenticated USING (exists (select 1 from public.admin_users where id = auth.uid()));
 
 -- --------------------------------------------------------------------
 -- 7. Public Content Tables (projects, skills, blog_posts)
@@ -115,14 +115,14 @@ DROP POLICY IF EXISTS "Allow public read projects" ON projects;
 DROP POLICY IF EXISTS "Allow admin manage projects" ON projects;
 CREATE POLICY "Allow public read projects" ON projects FOR SELECT TO public USING (true);
 CREATE POLICY "Allow admin manage projects" ON projects FOR ALL TO authenticated 
-  USING (auth.jwt() ->> 'email' = 'patelvrajpatel30@gmail.com');
+  USING (exists (select 1 from public.admin_users where id = auth.uid()));
 
 -- B. Skills
 DROP POLICY IF EXISTS "Allow public read skills" ON skills;
 DROP POLICY IF EXISTS "Allow admin manage skills" ON skills;
 CREATE POLICY "Allow public read skills" ON skills FOR SELECT TO public USING (true);
 CREATE POLICY "Allow admin manage skills" ON skills FOR ALL TO authenticated 
-  USING (auth.jwt() ->> 'email' = 'patelvrajpatel30@gmail.com');
+  USING (exists (select 1 from public.admin_users where id = auth.uid()));
 
 -- C. Blog Posts (Research Notes)
 DROP POLICY IF EXISTS "Allow public read published blogs" ON blog_posts;
@@ -134,11 +134,11 @@ CREATE POLICY "Allow public read published blogs" ON blog_posts
 
 CREATE POLICY "Allow admin read all blogs" ON blog_posts 
   FOR SELECT TO authenticated 
-  USING (auth.jwt() ->> 'email' = 'patelvrajpatel30@gmail.com');
+  USING (exists (select 1 from public.admin_users where id = auth.uid()));
 
 CREATE POLICY "Allow admin manage blogs" ON blog_posts 
   FOR ALL TO authenticated 
-  USING (auth.jwt() ->> 'email' = 'patelvrajpatel30@gmail.com');
+  USING (exists (select 1 from public.admin_users where id = auth.uid()));
 
 -- --------------------------------------------------------------------
 -- 8. Audit Log Automation Trigger (Optional Setup)
@@ -155,6 +155,6 @@ CREATE TABLE IF NOT EXISTS admin_audit_logs (
 
 ALTER TABLE admin_audit_logs ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "Allow admin read logs" ON admin_audit_logs 
-  FOR SELECT TO authenticated USING (auth.jwt() ->> 'email' = 'patelvrajpatel30@gmail.com');
+  FOR SELECT TO authenticated USING (exists (select 1 from public.admin_users where id = auth.uid()));
 CREATE POLICY "Allow admin insert logs" ON admin_audit_logs 
-  FOR INSERT TO authenticated WITH CHECK (auth.jwt() ->> 'email' = 'patelvrajpatel30@gmail.com');
+  FOR INSERT TO authenticated WITH CHECK (exists (select 1 from public.admin_users where id = auth.uid()));

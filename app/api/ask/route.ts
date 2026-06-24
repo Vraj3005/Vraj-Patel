@@ -2,10 +2,12 @@ import { NextRequest, NextResponse } from 'next/server';
 import { askVrajAI, askVrajAIStream } from '@/lib/ai/gemini';
 import { isRateLimited } from '@/lib/security/rate-limiter';
 import { aiChatInputSchema } from '@/lib/security/zod-schemas';
-import { createSimpleSupabaseClient, isSupabaseConfigured } from '@/lib/supabase/simple';
+import { supabaseAdmin, isSupabaseAdminConfigured } from '@/lib/supabase/admin';
 import { ServerLogger } from '@/lib/telemetry/server-logger';
+import { MetricsCollector } from '@/lib/metrics/metrics-collector';
 
 export async function POST(req: NextRequest) {
+  const startTime = Date.now();
   const ip = req.headers.get('x-forwarded-for') || '127.0.0.1';
 
   // Limit AI requests to 10 queries per minute per client IP
@@ -46,12 +48,9 @@ export async function POST(req: NextRequest) {
     // 1. Establish or lookup the session ID context
     let activeSessionId = sessionId;
 
-    if (isSupabaseConfigured && !activeSessionId) {
+    if (isSupabaseAdminConfigured && !activeSessionId) {
       try {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const supabase = createSimpleSupabaseClient() as any;
-        
-        const { data: sessionData, error: sessionErr } = await supabase
+        const { data: sessionData, error: sessionErr } = await (supabaseAdmin as any)
           .from('ai_chat_sessions')
           .insert([{ title: `Query: ${prompt.substring(0, 30)}...`, user_ip: ip }])
           .select()
@@ -101,11 +100,9 @@ export async function POST(req: NextRequest) {
               controller.close();
 
               // Log to database AFTER streaming completes
-              if (isSupabaseConfigured && activeSessionId) {
+              if (isSupabaseAdminConfigured && activeSessionId) {
                 try {
-                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                  const supabase = createSimpleSupabaseClient() as any;
-                  await supabase.from('ai_chat_messages').insert([
+                  await (supabaseAdmin as any).from('ai_chat_messages').insert([
                     { session_id: activeSessionId, role: 'user', content: prompt },
                     { session_id: activeSessionId, role: 'assistant', content: fullText }
                   ]);
@@ -133,11 +130,9 @@ export async function POST(req: NextRequest) {
               controller.close();
 
               // Log to database AFTER streaming completes
-              if (isSupabaseConfigured && activeSessionId) {
+              if (isSupabaseAdminConfigured && activeSessionId) {
                 try {
-                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                  const supabase = createSimpleSupabaseClient() as any;
-                  await supabase.from('ai_chat_messages').insert([
+                  await (supabaseAdmin as any).from('ai_chat_messages').insert([
                     { session_id: activeSessionId, role: 'user', content: prompt },
                     { session_id: activeSessionId, role: 'assistant', content: fullText }
                   ]);
@@ -160,17 +155,16 @@ export async function POST(req: NextRequest) {
         headers.set('x-session-id', activeSessionId);
       }
 
+      await MetricsCollector.recordApiLatency('/api/ask', Date.now() - startTime);
       return new Response(responseStream, { headers });
     }
 
     // 3. Fallback standard JSON response (non-streaming, e.g. for homepage preview)
     const aiResponse = await askVrajAI(prompt, history || []);
 
-    if (isSupabaseConfigured && activeSessionId) {
+    if (isSupabaseAdminConfigured && activeSessionId) {
       try {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const supabase = createSimpleSupabaseClient() as any;
-        await supabase.from('ai_chat_messages').insert([
+        await (supabaseAdmin as any).from('ai_chat_messages').insert([
           { session_id: activeSessionId, role: 'user', content: prompt },
           { session_id: activeSessionId, role: 'assistant', content: aiResponse }
         ]);
@@ -186,6 +180,7 @@ export async function POST(req: NextRequest) {
       headers['x-session-id'] = activeSessionId;
     }
 
+    await MetricsCollector.recordApiLatency('/api/ask', Date.now() - startTime);
     return new Response(JSON.stringify({ response: aiResponse, sessionId: activeSessionId }), {
       status: 200,
       headers,
@@ -199,6 +194,7 @@ export async function POST(req: NextRequest) {
       { error: String(error) },
       false
     );
+    await MetricsCollector.recordApiLatency('/api/ask', Date.now() - startTime);
     return NextResponse.json({ error: 'Failed to process AI query.' }, { status: 500 });
   }
 }

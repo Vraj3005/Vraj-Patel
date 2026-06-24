@@ -22,11 +22,11 @@ export const PORTFOLIO_CONTEXT = {
     noticePeriod: 'Immediate / open'
   },
   skills: {
-    languages: ['TypeScript', 'JavaScript', 'Python', 'Go (Golang)', 'C++', 'SQL'],
+    languages: ['TypeScript', 'JavaScript', 'Python', 'SQL'],
     frontend: ['Next.js', 'React', 'Tailwind CSS', 'Framer Motion', 'Three.js', 'Recharts', 'Redux Toolkit'],
-    backend: ['Node.js', 'Express', 'FastAPI', 'gRPC microservices', 'RESTful APIs', 'Zod validation'],
-    databases: ['PostgreSQL', 'Redis caching', 'Supabase', 'MongoDB Atlas', 'AWS S3', 'Docker'],
-    quantCore: ['Black-Scholes Greek modeling', 'Hidden Markov Models', 'Regime switching', 'options market structure']
+    backend: ['Node.js', 'Express', 'FastAPI', 'RESTful APIs', 'Zod validation'],
+    databases: ['PostgreSQL', 'Supabase', 'MongoDB Atlas', 'AWS S3', 'Docker'],
+    quantCore: ['Black-Scholes options pricing mathematics', 'Hidden Markov Models', 'Regime switching', 'options market structure']
   },
   projects: projects.map(p => ({
     title: p.title,

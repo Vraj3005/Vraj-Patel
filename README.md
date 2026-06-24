@@ -14,8 +14,8 @@ The UI uses a custom-tuned, dark glassmorphism design built using Tailwind CSS v
 | **Styling & Motion** | Tailwind CSS (v4.0.x), Framer Motion (v12.x), Lucide Icons |
 | **State & Forms** | React Hook Form, Zod schema validation, TanStack Query |
 | **Backend & DB** | Supabase PostgreSQL Client (with local JSON filesystem fallback) |
-| **Intelligence Layer** | Google Gemini API (`gemini-2.5-flash`), LangChain, Zod structured output |
-| **Options & Math Engine** | WebAssembly (C++ WASM options pricing engine), Numba-compiled Python backtesters |
+| **Intelligence Layer** | Google Gemini API (`gemini-2.5-flash`), Zod structured output |
+| **Options & Math Engine** | Options pricing mathematical models, Python backtesters |
 | **Visualization** | Recharts (drawdowns, equity curves, Monte Carlo curves), Custom SVG network graph |
 | **Testing** | Vitest testing framework (lightweight headless unit & route integration tests) |
 
@@ -29,7 +29,7 @@ The UI uses a custom-tuned, dark glassmorphism design built using Tailwind CSS v
 4. **Quant Strategy Playground (`/lab`)**: Includes a Strategy Simulator (leverage/slippage drag parameters), Position Risk Calculator, and Monte Carlo Equity Curves simulator.
 5. **Project Architecture Viewer (`/projects/[slug]`)**: Tabbed breakdown outlining Frontend, Backend, Database, AI/Math Layer, Deployment, and Security details for all 10 projects.
 6. **Ask Vraj Assistant (`/ask-vraj` & Widget)**: Conversational page and floating widget allowing queries about Vraj's background, education, and projects, backed by the Gemini API.
-7. **Admin Dashboard (`/admin`)**: A secure dashboard displaying incoming lead messages, analytics, client data, and letting Vraj manage projects, skills, and research notes.
+7. **Inquiries Inbox (`/inbox`)**: A secure, passcode-gated console for Vraj to inspect contact inquiries.
 
 ---
 
@@ -120,23 +120,14 @@ The backend API route in [app/api/ask/route.ts](file:///c:/Users/vishv/OneDrive/
 
 ---
 
-## 📊 3. Admin Dashboard Usage Guide
+## 📬 3. Inquiries Inbox Usage Guide
 
-The administrative console (`/admin`) serves as Vraj's remote management dashboard.
+The inbox console (`/inbox`) serves as Vraj's private message center.
 
-### Accessing the Dashboard
-1. Navigate to `/admin` in your browser.
-2. If unauthorized, you will be redirected to the secure login page `/admin/login`.
-3. Provide the security credential matching the `ADMIN_PASSCODE` defined in your environment variables.
-4. Once authenticated, a secure token is saved to local session cookies, enabling access to dashboard paths.
-
-### Management Controls
-- **Overview Stat Cards**: Monitor overall metrics, contact form inquiries counts, active projects stats, and recent activities telemetry.
-- **Projects Manager**: Create, modify, delete, and toggle visibility states (Published vs. Draft/Private) for portfolio case studies.
-- **Skills Catalog**: Manage technology name entries, category designations, and proficiency levels (Expert, Advanced, Intermediate).
-- **Research logs / Blogs**: Draft, write, and archive research articles (like option pricing algorithms or HMM market regime reports).
-- **Recruiter Inbox**: Read incoming contact form inquiries and delete spam logs.
-- **AI Telemetry Viewer**: Audit conversations generated between users and the AI assistant, tracking sessions grouped by client IP.
+### Accessing the Inbox
+1. Navigate to `/inbox` in your browser.
+2. Provide the passcode matching the `INBOX_PASSCODE` defined in the server environment.
+3. If valid, the browser retrieves form submissions directly from Supabase (or fallback local files) without cookies or persistent storage.
 
 ---
 
@@ -153,8 +144,8 @@ SUPABASE_SERVICE_ROLE_KEY=your-supabase-service-role-key
 # Gemini API Key (Get this from Google AI Studio)
 GEMINI_API_KEY=your-gemini-api-key
 
-# Admin Dashboard Access Passcode
-ADMIN_PASSCODE=your-secure-passcode
+# Secure Inquiries Inbox Passcode
+INBOX_PASSCODE=your-secure-passcode
 ```
 
 ---
@@ -227,6 +218,6 @@ The project is structured to deploy on **Vercel** with minimal configuration.
 ## 📈 9. Future Roadmap
 
 1. **Geospatial Pre-mapping (Enermass Solar ERP)**: Integrate Google Solar API and satellite mapping tools to automatically pre-calculate building shade profiles before a site survey.
-2. **Advanced Volatility Analytics (MSPE WASM)**: Update the C++ options pricing engine to support SABR Volatility models and compute implied probability distribution curves dynamically.
+2. **Advanced Volatility Analytics**: Update options pricing metrics models to support SABR Volatility models and compute implied probability distribution curves dynamically.
 3. **Smart CRM Dispatching**: Connect recruiter form submissions directly to automated email workflows that respond with customizable, profile-matched resume files.
 4. **Outbox Semantic scoring (AI outreach)**: Utilize vector embeddings to analyze leads lists, sorting outreach prioritizations based on relevance matches.

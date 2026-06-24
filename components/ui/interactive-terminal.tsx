@@ -89,7 +89,7 @@ export default function InteractiveTerminal() {
         { text: 'Name: Vraj Patel', type: 'system' },
         { text: 'Role: Full-Stack Architect / Quant Research / AI Automation Engineer', type: 'output' },
         { text: 'Academics: CSE Undergrad (3rd year) at Nirma University | CGPA: 7.98', type: 'output' },
-        { text: 'Core Focus: Building performant ERP engines, full-stack SPAs, offline synchronization layers, and volatility calculators.', type: 'output' },
+        { text: 'Core Focus: Building performant ERP engines, full-stack SPAs, offline synchronization layers, and options volatility math models.', type: 'output' },
         { text: '', type: 'output' }
       ]);
       return;
@@ -112,8 +112,8 @@ export default function InteractiveTerminal() {
         setHistory(prev => [
           ...prev,
           { text: 'Quantitative Research Implementations:', type: 'system' },
-          { text: '1. NF-LRD (Live) - NIFTY 50 latent market regime segments classification. Hidden Markov Models with Numba vectorized optimization (25x speedup).', type: 'output' },
-          { text: '2. MSPE (Live) - Volatility smile mesh visualizer. Root-finding Black-Scholes implied volatilities solver written in C++ WebAssembly.', type: 'output' },
+          { text: '1. NF-LRD (Live) - NIFTY 50 latent market regime segments classification. Hidden Markov Models with vectorized optimization.', type: 'output' },
+          { text: '2. MSPE (Live) - Volatility smile mesh visualizer. Root-finding Black-Scholes implied volatilities options calculator.', type: 'output' },
           { text: '3. BTC-ALGO (Live) - Bitcoin trend-momentum algorithmic signals execution panel connected to exchange WebSockets feeds.', type: 'output' },
           { text: '', type: 'output' }
         ]);
@@ -133,9 +133,9 @@ export default function InteractiveTerminal() {
         setHistory(prev => [
           ...prev,
           { text: 'Full-Stack competency matrix:', type: 'system' },
-          { text: '  Languages: TypeScript, JavaScript, Python, Go, C++, SQL', type: 'output' },
-          { text: '  Frameworks: Next.js (App Router), React, Node.js, Express, FastAPI, gRPC, Tailwind CSS, Recharts', type: 'output' },
-          { text: '  Infrastructure: PostgreSQL, Redis cache layers, Supabase backend databases, MongoDB Atlas, AWS S3/EC2, Docker containerization', type: 'output' },
+          { text: '  Languages: TypeScript, JavaScript, Python, SQL', type: 'output' },
+          { text: '  Frameworks: Next.js (App Router), React, Node.js, Express, FastAPI, Tailwind CSS, Recharts', type: 'output' },
+          { text: '  Infrastructure: PostgreSQL, Supabase backend databases, MongoDB Atlas, AWS S3/EC2, Docker containerization', type: 'output' },
           { text: '', type: 'output' }
         ]);
       } else if (arg === '--ai') {
@@ -143,7 +143,7 @@ export default function InteractiveTerminal() {
           ...prev,
           { text: 'AI & Automation tools stack:', type: 'system' },
           { text: '  Models: Gemini Pro/Flash API integration, OpenAI GPT models, Anthropic Claude, custom model embeddings', type: 'output' },
-          { text: '  Orchestration: LangChain pipelines, strict Zod schemas for Structured JSON verification, scheduled CRON outreach sequences', type: 'output' },
+          { text: '  Orchestration: Google GenAI SDK, strict Zod schemas for Structured JSON verification, scheduled CRON outreach sequences', type: 'output' },
           { text: '', type: 'output' }
         ]);
       } else {

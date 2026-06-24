@@ -33,12 +33,12 @@ const specialties: SpecialtyCard[] = [
   {
     icon: <Calculator className="h-5 w-5 text-white" />,
     title: 'Quotation Calculators',
-    description: 'Fast mathematical calculators compiled to WebGL shaders for instant quote generation.',
+    description: 'Fast mathematical calculators driven by Zustand LocalState persistent calculations for instant quote generation.',
   },
   {
     icon: <Cpu className="h-5 w-5 text-white" />,
     title: 'AI Automation Tools',
-    description: 'Outbound campaigns driven by structured LLM outputs, LangChain, and Zod parsers.',
+    description: 'Outbound campaigns driven by structured LLM outputs, Google GenAI SDK, and Zod parsers.',
   },
   {
     icon: <LineChart className="h-5 w-5 text-white" />,

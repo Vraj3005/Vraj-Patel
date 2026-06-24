@@ -40,7 +40,7 @@ export default function Resume() {
 
   const shortSummaryText = `Highly technical CSE student at Nirma University. Architects robust web applications, custom pricing ERP platforms (Enermass, Bhagwati), and quantitative market research tools (regime discovery, options pricing engines).`;
 
-  const fullStackSummaryText = `Computer Science Undergrad with proven expertise building client ERP architectures. Experienced shipping next-generation full-stack solutions, custom pricing matrices, and database query optimizations. Proficient with Next.js, Express, FastAPI, PostgreSQL, Redis, and Supabase RLS policies.`;
+  const fullStackSummaryText = `Computer Science Undergrad with proven expertise building client ERP architectures. Experienced shipping next-generation full-stack solutions, custom pricing matrices, and database query optimizations. Proficient with Next.js, Express, FastAPI, PostgreSQL, and Supabase RLS policies.`;
 
   const aiSummaryText = `AI/Automation developer specialized in Google GenAI SDK integrations and LLM workflow operations. Experienced scraping target company pages using Gemini API with structured JSON output configurations. Proficient configuring robust async background task handlers.`;
 
@@ -155,7 +155,7 @@ export default function Resume() {
               Professional Profile
             </h3>
             <p className="text-xs md:text-sm text-secondary print:text-gray-750 leading-relaxed font-medium">
-              Highly technical Computer Science and Engineering student at Nirma University, specialized in architecting and shipping production-level business ERP models, high-concurrency Node/Go APIs, and quantitative research projection tools. Skilled in system performance tuning, structured AI multi-agent prompts, database optimizations, and client communication.
+              Highly technical Computer Science and Engineering student at Nirma University, specialized in architecting and shipping production-level business ERP models, high-performance Next.js and Node.js APIs, and quantitative research projection tools. Skilled in system performance tuning, structured AI multi-agent prompts, database optimizations, and client communication.
             </p>
           </div>
 
@@ -264,13 +264,13 @@ export default function Resume() {
               <div className="flex flex-col gap-1.5">
                 <span className="text-secondary print:text-gray-650 font-bold uppercase text-[9px] tracking-wide font-mono">Systems & Languages:</span>
                 <span className="text-foreground print:text-black font-semibold">
-                  TypeScript, Go (Golang), Python, SQL, C++, HTML/CSS
+                  TypeScript, Python, SQL, JavaScript, HTML/CSS
                 </span>
               </div>
               <div className="flex flex-col gap-1.5">
                 <span className="text-secondary print:text-gray-650 font-bold uppercase text-[9px] tracking-wide font-mono">Frameworks & Tools:</span>
                 <span className="text-foreground print:text-black font-semibold">
-                  Next.js, Node.js, Express, FastAPI, PostgreSQL, Redis, MongoDB Atlas, Docker
+                  Next.js, Node.js, Express, FastAPI, PostgreSQL, MongoDB Atlas, Docker
                 </span>
               </div>
             </div>

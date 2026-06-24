@@ -270,7 +270,7 @@ export default function CLITerminal() {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-white/80">
                 <div className="flex flex-col gap-1 p-2 bg-white/[0.01] border border-white/2 rounded-lg">
                   <span className="text-secondary font-black block text-[10px] mb-1">LANGUAGES</span>
-                  TypeScript, JavaScript, Python, C++, Go, HTML/CSS, SQL (PostgreSQL, SQLite)
+                  TypeScript, JavaScript, Python, HTML/CSS, SQL (PostgreSQL, SQLite)
                 </div>
                 <div className="flex flex-col gap-1 p-2 bg-white/[0.01] border border-white/2 rounded-lg">
                   <span className="text-secondary font-black block text-[10px] mb-1">FRONTEND & FRAMEWORKS</span>
@@ -278,7 +278,7 @@ export default function CLITerminal() {
                 </div>
                 <div className="flex flex-col gap-1 p-2 bg-white/[0.01] border border-white/2 rounded-lg">
                   <span className="text-secondary font-black block text-[10px] mb-1">BACKEND & DATA</span>
-                  FastAPI, Node.js, Express, Supabase APIs, Upstash Redis, Drizzle ORM, WebSockets
+                  FastAPI, Node.js, Express, Supabase APIs, Drizzle ORM, WebSockets
                 </div>
               </div>
             </div>
@@ -448,7 +448,7 @@ export default function CLITerminal() {
               <p className="text-white/85 text-[11.5px] leading-relaxed">
                 Vraj Patel is an enterprise software engineer with validated, real-world project portfolios deployed on Vercel. 
                 He specializes in building scalable frontend solutions (Next.js App Router, Zustand, React-Hook-Form) 
-                integrated with secure backends (Supabase PostgreSQL, Upstash Redis caching, FastAPI, and Row-Level Security policies).
+                integrated with secure backends (Supabase PostgreSQL, FastAPI, and Row-Level Security policies).
               </p>
               <div className="flex flex-col gap-1.5 text-[11px] mt-1">
                 <div>💥 <strong>Real Clients Deployed:</strong> Enermass, Bhagwati Interiors, Driedhub, Marea.</div>
@@ -496,6 +496,12 @@ export default function CLITerminal() {
           outputElement = <span className="text-cyan-400 font-bold">Redirecting browser to /contact card...</span>;
           isNav = true;
           router.push('/contact');
+          break;
+
+        case 'open /inbox':
+          outputElement = <span className="text-cyan-400 font-bold">Opening Secure Inquiries Inbox Gateway...</span>;
+          isNav = true;
+          router.push('/inbox');
           break;
 
         // Advanced Subsystems
@@ -842,7 +848,7 @@ export default function CLITerminal() {
       matches = [
         'Gaussian Hidden Markov Models (HMM) on price vectors',
         'Vectorized backtest metrics in NumPy / Pandas',
-        'C++ WebAssembly Black-Scholes implied volatilities solver',
+        'Black-Scholes options pricing mathematics',
         'Plotly.js dynamic option skew 3D maps coordinate meshes'
       ];
       weaknesses = [
@@ -889,8 +895,8 @@ export default function CLITerminal() {
           </div>
           <div className="bg-white/2 border border-white/5 p-3 rounded-lg flex flex-col gap-1">
             <span className="text-secondary font-black block text-[8px] uppercase">Cache Hit Rate</span>
-            <span className="text-base font-black text-white">94.8%</span>
-            <span className="text-[7.5px] text-emerald-400">Upstash Redis</span>
+            <span className="text-base font-black text-white">N/A</span>
+            <span className="text-[7.5px] text-gray-500">Redis cache inactive</span>
           </div>
           <div className="bg-white/2 border border-white/5 p-3 rounded-lg flex flex-col gap-1">
             <span className="text-secondary font-black block text-[8px] uppercase">Telemetry State</span>

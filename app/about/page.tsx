@@ -41,7 +41,7 @@ const skills = [
   {
     category: 'Languages',
     icon: <Server className="h-4 w-4 text-foreground" />,
-    items: ['TypeScript', 'JavaScript', 'Go (Golang)', 'Python', 'C++', 'SQL'],
+    items: ['TypeScript', 'JavaScript', 'Python', 'SQL'],
   },
   {
     category: 'Frontend Development',
@@ -51,12 +51,12 @@ const skills = [
   {
     category: 'Backend & APIs',
     icon: <Database className="h-4 w-4 text-foreground" />,
-    items: ['Node.js', 'Express', 'FastAPI', 'gRPC microservices', 'RESTful APIs', 'Zod validation'],
+    items: ['Node.js', 'Express', 'FastAPI', 'RESTful APIs', 'Zod validation'],
   },
   {
     category: 'Databases & Systems',
     icon: <Server className="h-4 w-4 text-foreground" />,
-    items: ['PostgreSQL', 'Redis caching', 'Supabase', 'MongoDB Atlas', 'AWS S3', 'Docker'],
+    items: ['PostgreSQL', 'Supabase', 'MongoDB Atlas', 'AWS S3', 'Docker'],
   },
 ];
 

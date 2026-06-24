@@ -31,6 +31,7 @@ interface MetricsChartsProps {
     totalInquiries: number;
     avgLatency: number;
     systemHealth: string;
+    isDemoMode?: boolean;
   } | null;
 }
 
@@ -109,6 +110,11 @@ export default function MetricsCharts({ timelineData, statsData }: MetricsCharts
             <h3 className="text-sm font-bold text-foreground font-serif tracking-tight">
               Engagement & Telemetry Trends (7 Days)
             </h3>
+            {statsData?.isDemoMode && (
+              <span className="text-[9px] font-mono bg-amber-500/10 text-amber-400 border border-amber-500/20 px-2 py-0.5 rounded ml-2">
+                Demo Mode
+              </span>
+            )}
           </div>
           <span className="text-[9px] font-mono text-secondary uppercase">
             Hourly updates synced
@@ -173,7 +179,7 @@ export default function MetricsCharts({ timelineData, statsData }: MetricsCharts
                 Complexity Profile
               </span>
               <h3 className="text-sm font-bold text-foreground font-serif tracking-tight mt-0.5">
-                Architecture Radar Plot
+                Architecture Radar Plot (Self-assessed)
               </h3>
             </div>
             
@@ -225,7 +231,7 @@ export default function MetricsCharts({ timelineData, statsData }: MetricsCharts
               Cross-Platform Benchmarks
             </span>
             <h3 className="text-sm font-bold text-foreground font-serif tracking-tight mt-0.5">
-              Average vs Max Technical Complexity
+              Average vs Max Complexity (Self-assessed)
             </h3>
           </div>
 

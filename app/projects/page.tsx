@@ -76,7 +76,7 @@ export default function Projects() {
           <Search className="absolute left-3.5 top-3.5 h-4 w-4 text-secondary pointer-events-none" />
           <Input
             type="text"
-            placeholder="Search by project name, tech (e.g. Go, WASM)..."
+            placeholder="Search by project name, tech (e.g. Next.js, Python)..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="pl-10 pr-9 py-2.5 bg-foreground/3 text-foreground border-card-border"

@@ -55,7 +55,7 @@ export default function Hero() {
         variants={itemVariants}
         className="text-sm md:text-base text-muted max-w-2xl leading-relaxed font-medium"
       >
-        I design and deploy end-to-end ERP structures for commercial operations, automated multi-agent AI scripts, and real-time WebAssembly-compiled quantitative engines. Currently pursuing my 3rd year in CSE at Nirma University.
+        I design and deploy end-to-end ERP structures for commercial operations, automated multi-agent AI scripts, and GARCH mathematical volatility projection models. Currently pursuing my 3rd year in CSE at Nirma University.
       </motion.p>
 
       {/* CTA Buttons */}
@@ -103,8 +103,8 @@ export default function Hero() {
             <span className="text-[10px] text-accent font-semibold">Headless SSR optimized</span>
           </div>
           <div className="p-6 flex flex-col gap-1.5">
-            <span className="text-xs text-muted font-semibold tracking-wider uppercase">AI Pipelines Running</span>
-            <span className="text-2xl md:text-3xl font-black text-white">15k Sent</span>
+            <span className="text-xs text-muted font-semibold tracking-wider uppercase">AI Automation</span>
+            <span className="text-2xl md:text-3xl font-black text-white">Workflow</span>
             <span className="text-[10px] text-accent font-semibold">With Zod parsing</span>
           </div>
         </div>

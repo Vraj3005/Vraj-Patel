@@ -30,11 +30,11 @@ import {
 } from 'lucide-react';
 
 const techStack = [
-  { category: 'Languages', icon: <Code className="h-3.5 w-3.5" />, items: ['TypeScript', 'JavaScript', 'Python', 'Go', 'C++', 'SQL'] },
+  { category: 'Languages', icon: <Code className="h-3.5 w-3.5" />, items: ['TypeScript', 'JavaScript', 'Python', 'SQL'] },
   { category: 'Web', icon: <Globe className="h-3.5 w-3.5" />, items: ['Next.js', 'React', 'Tailwind CSS', 'Framer Motion', 'Three.js'] },
-  { category: 'Backend', icon: <Server className="h-3.5 w-3.5" />, items: ['Node.js', 'Express', 'FastAPI', 'gRPC', 'REST APIs'] },
-  { category: 'Data & Infra', icon: <Database className="h-3.5 w-3.5" />, items: ['PostgreSQL', 'Redis', 'Supabase', 'MongoDB', 'Docker', 'AWS'] },
-  { category: 'AI / ML', icon: <Cpu className="h-3.5 w-3.5" />, items: ['Gemini API', 'LangChain', 'OpenAI API'] },
+  { category: 'Backend', icon: <Server className="h-3.5 w-3.5" />, items: ['Node.js', 'Express', 'FastAPI', 'REST APIs'] },
+  { category: 'Data & Infra', icon: <Database className="h-3.5 w-3.5" />, items: ['PostgreSQL', 'Supabase', 'MongoDB', 'Docker', 'AWS'] },
+  { category: 'AI / ML', icon: <Cpu className="h-3.5 w-3.5" />, items: ['Gemini API', 'OpenAI API'] },
 ];
 
 export default function Home() {

@@ -11,6 +11,7 @@ interface VitalsData {
   totalInquiries: number;
   avgLatency: number;
   systemHealth: string;
+  isDemoMode?: boolean;
 }
 
 interface DashboardVitalsProps {
@@ -36,40 +37,42 @@ export default function DashboardVitals({ data, loading }: DashboardVitalsProps)
     );
   }
 
+  const isDemo = !!data.isDemoMode;
+
   const cards = [
     {
       title: 'Page Views',
-      value: data.totalViews.toLocaleString(),
+      value: isDemo ? 'Demo Mode' : data.totalViews.toLocaleString(),
       desc: 'Total visitor views',
       icon: <Eye className="h-4 w-4 text-cyan-400" />,
     },
     {
       title: 'AI Queries',
-      value: data.totalAiQueries.toLocaleString(),
+      value: isDemo ? 'Demo Mode' : data.totalAiQueries.toLocaleString(),
       desc: 'Ask Vraj inquiries',
       icon: <Bot className="h-4 w-4 text-cyan-400" />,
     },
     {
       title: 'CV Downloads',
-      value: data.totalResumeDownloads.toLocaleString(),
+      value: isDemo ? 'Demo Mode' : data.totalResumeDownloads.toLocaleString(),
       desc: 'Resume PDF pulls',
       icon: <Download className="h-4 w-4 text-cyan-400" />,
     },
     {
       title: 'Inquiries',
-      value: data.totalInquiries.toLocaleString(),
+      value: isDemo ? 'Demo Mode' : data.totalInquiries.toLocaleString(),
       desc: 'Contact messages',
       icon: <Mail className="h-4 w-4 text-cyan-400" />,
     },
     {
       title: 'API Latency',
-      value: `${data.avgLatency} ms`,
+      value: isDemo ? 'Demo Mode' : `${data.avgLatency} ms`,
       desc: 'Average server speed',
       icon: <Clock className="h-4 w-4 text-cyan-400" />,
     },
     {
       title: 'Health Core',
-      value: data.systemHealth,
+      value: isDemo ? 'Demo Mode' : data.systemHealth,
       desc: 'Operational uptime',
       icon: <ShieldCheck className="h-4 w-4 text-cyan-400" />,
     },
