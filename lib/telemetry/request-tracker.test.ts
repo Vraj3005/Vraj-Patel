@@ -51,4 +51,66 @@ describe('RequestTracker', () => {
     const active = (RequestTracker as any).activeTraces.get(traceId);
     expect(active).toBeUndefined(); // Should be pruned from active map
   });
+
+  it('should evict expired traces and enforce max limit', () => {
+    // 1. Evict expired
+    const activeMap = (RequestTracker as any).activeTraces;
+    activeMap.clear();
+
+    const staleTraceId = RequestTracker.startTrace('/api/stale', 'GET');
+    const staleRecord = activeMap.get(staleTraceId);
+    // Backdate it to 10 minutes ago
+    staleRecord.timestamp = new Date(Date.now() - 10 * 60 * 1000).toISOString();
+
+    const activeTraceId = RequestTracker.startTrace('/api/active', 'GET');
+
+    // Trigger cleanup inside startTrace
+    RequestTracker.startTrace('/api/new', 'GET');
+
+    expect(activeMap.has(staleTraceId)).toBe(false);
+    expect(activeMap.has(activeTraceId)).toBe(true);
+
+    // 2. Enforce absolute limit
+    activeMap.clear();
+    // Fill to capacity (1000 limit)
+    for (let i = 0; i < 1100; i++) {
+      activeMap.set(`trace-${i}`, {
+        id: `trace-${i}`,
+        timestamp: new Date(Date.now() + i).toISOString(),
+        path: '/api/fill',
+        method: 'GET',
+        statusCode: 200,
+        totalDurationMs: 0,
+        steps: []
+      });
+    }
+
+    RequestTracker.startTrace('/api/over', 'GET');
+    expect(activeMap.size).toBeLessThanOrEqual(1000);
+  });
+
+  it('should run runWithTrace wrapper and clean up even on failure', async () => {
+    const activeMap = (RequestTracker as any).activeTraces;
+    activeMap.clear();
+
+    let didRun = false;
+    const result = await RequestTracker.runWithTrace('/api/run', 'POST', async (tid) => {
+      didRun = true;
+      RequestTracker.addStep(tid, 'inner_action', 50);
+      return 'success';
+    });
+
+    expect(result).toBe('success');
+    expect(didRun).toBe(true);
+    expect(activeMap.size).toBe(0); // cleaned up
+
+    // Check error handling
+    await expect(
+      RequestTracker.runWithTrace('/api/run-fail', 'POST', async () => {
+        throw new Error('intentional error');
+      })
+    ).rejects.toThrow('intentional error');
+
+    expect(activeMap.size).toBe(0); // cleaned up
+  });
 });

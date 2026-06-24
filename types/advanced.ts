@@ -61,8 +61,8 @@ export interface DataFlow {
 export interface LiveEventMessage {
   id: string;
   timestamp: string;
-  type: 'portfolio' | 'ask-vraj' | 'contact' | 'metrics' | 'github-sync' | 'cli' | 'analytics' | 'admin';
-  severity: 'info' | 'success' | 'warning' | 'error' | 'trace';
+  type: 'portfolio' | 'ask-vraj' | 'ask_vraj' | 'contact' | 'metrics' | 'github-sync' | 'github_sync' | 'cli' | 'analytics' | 'admin' | 'dashboard';
+  severity: 'info' | 'success' | 'warning' | 'warn' | 'error' | 'trace';
   message: string;
   metadata?: Record<string, any>;
   is_public?: boolean;

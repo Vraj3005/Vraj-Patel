@@ -700,5 +700,59 @@
     "tags": {
       "path": "/api/contact"
     }
+  },
+  {
+    "id": "f00ef581-943a-4fb9-9cab-72a4dacc3a07",
+    "created_at": "2026-06-24T20:44:26.772Z",
+    "metric_name": "api_latency_ms",
+    "metric_value": 1,
+    "tags": {
+      "path": "/api/ask"
+    }
+  },
+  {
+    "id": "70a5acc9-ea55-46ea-8371-ecc389a41917",
+    "created_at": "2026-06-24T20:44:26.850Z",
+    "metric_name": "api_latency_ms",
+    "metric_value": 3,
+    "tags": {
+      "path": "/api/contact"
+    }
+  },
+  {
+    "id": "2b748e49-bb45-4820-acff-378184ec441d",
+    "created_at": "2026-06-24T20:45:48.806Z",
+    "metric_name": "api_latency_ms",
+    "metric_value": 1,
+    "tags": {
+      "path": "/api/ask"
+    }
+  },
+  {
+    "id": "db489b56-3535-4691-b4f5-e2be0d051dfe",
+    "created_at": "2026-06-24T20:45:48.849Z",
+    "metric_name": "api_latency_ms",
+    "metric_value": 5,
+    "tags": {
+      "path": "/api/contact"
+    }
+  },
+  {
+    "id": "fabcb4ab-001d-4452-9220-193f77eb146d",
+    "created_at": "2026-06-24T20:47:26.383Z",
+    "metric_name": "api_latency_ms",
+    "metric_value": 584,
+    "tags": {
+      "path": "/api/github/contributions"
+    }
+  },
+  {
+    "id": "d63a1e4c-3a9d-4f7b-88a0-e6859a1b3ef7",
+    "created_at": "2026-06-24T20:47:27.424Z",
+    "metric_name": "api_latency_ms",
+    "metric_value": 754,
+    "tags": {
+      "path": "/api/github/contributions"
+    }
   }
 ]

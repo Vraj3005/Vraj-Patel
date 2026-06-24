@@ -8,8 +8,8 @@ export class TelemetryClient {
    * Dispatches a POST request to the server telemetry log endpoint.
    */
   public static async logEvent(
-    source: 'portfolio' | 'ask-vraj' | 'contact' | 'metrics' | 'github-sync' | 'cli' | 'analytics' | 'admin',
-    severity: 'info' | 'success' | 'warning' | 'error' | 'trace',
+    source: 'portfolio' | 'ask-vraj' | 'ask_vraj' | 'contact' | 'metrics' | 'github-sync' | 'github_sync' | 'cli' | 'analytics' | 'admin' | 'dashboard',
+    severity: 'info' | 'success' | 'warning' | 'warn' | 'error' | 'trace',
     message: string,
     metadata: Record<string, any> = {},
     isPublic: boolean = true
@@ -38,6 +38,18 @@ export class TelemetryClient {
     metricValue: number,
     tags: Record<string, string> = {}
   ): Promise<void> {
-    // Client-side no-op to ensure compile safety if called from client
+    try {
+      if (typeof window !== 'undefined') {
+        await fetch('/api/telemetry/metric', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ metricName, metricValue, tags }),
+        }).catch((err) => {
+          console.warn('[Telemetry Metric API Dispatch Warning]:', err);
+        });
+      }
+    } catch (err) {
+      console.error('Failed to dispatch telemetry metric event:', err);
+    }
   }
 }

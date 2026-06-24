@@ -7,8 +7,20 @@ import path from 'path';
 import * as z from 'zod';
 
 const telemetryLogSchema = z.object({
-  source: z.enum(['portfolio', 'ask-vraj', 'contact', 'metrics', 'github-sync', 'cli', 'analytics', 'admin']),
-  severity: z.enum(['info', 'success', 'warning', 'error', 'trace']),
+  source: z.enum([
+    'portfolio',
+    'ask-vraj',
+    'ask_vraj',
+    'contact',
+    'metrics',
+    'github-sync',
+    'github_sync',
+    'cli',
+    'analytics',
+    'admin',
+    'dashboard'
+  ]),
+  severity: z.enum(['info', 'success', 'warning', 'warn', 'error', 'trace']),
   message: z.string().min(1),
   metadata: z.record(z.string(), z.any()).optional(),
   isPublic: z.boolean().optional().default(true),

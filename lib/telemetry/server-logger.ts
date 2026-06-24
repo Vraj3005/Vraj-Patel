@@ -1,6 +1,24 @@
-import { createSimpleSupabaseClient, isSupabaseConfigured } from '../supabase/simple';
+import { supabaseAdmin, isSupabaseAdminConfigured } from '../supabase/admin';
 import fs from 'fs';
 import path from 'path';
+
+class Mutex {
+  private queue: Promise<void> = Promise.resolve();
+
+  public async acquire(): Promise<() => void> {
+    let release: () => void;
+    const pending = new Promise<void>((resolve) => {
+      release = resolve;
+    });
+    const current = this.queue;
+    this.queue = current.then(() => pending);
+    await current;
+    return release!;
+  }
+}
+
+const eventMutex = new Mutex();
+const metricMutex = new Mutex();
 
 /**
  * Server-only logger to handle writing telemetry events and metrics
@@ -12,8 +30,8 @@ export class ServerLogger {
    * Log an audit or operational system event
    */
   public static async logEvent(
-    source: 'portfolio' | 'ask-vraj' | 'contact' | 'metrics' | 'github-sync' | 'cli' | 'analytics' | 'admin',
-    severity: 'info' | 'success' | 'warning' | 'error' | 'trace',
+    source: 'portfolio' | 'ask-vraj' | 'ask_vraj' | 'contact' | 'metrics' | 'github-sync' | 'github_sync' | 'cli' | 'analytics' | 'admin' | 'dashboard',
+    severity: 'info' | 'success' | 'warning' | 'warn' | 'error' | 'trace',
     message: string,
     metadata: Record<string, any> = {},
     isPublic: boolean = true
@@ -21,11 +39,10 @@ export class ServerLogger {
     try {
       let supabaseSuccess = false;
 
-      // 1. Try to insert to Supabase system_events
-      if (isSupabaseConfigured) {
+      // 1. Try to insert to Supabase system_events via service role client (admin bypasses RLS)
+      if (isSupabaseAdminConfigured) {
         try {
-          const supabase = createSimpleSupabaseClient() as any;
-          const { error } = await supabase.from('system_events').insert({
+          const { error } = await (supabaseAdmin as any).from('system_events').insert({
             event_type: source,
             severity,
             message,
@@ -34,14 +51,23 @@ export class ServerLogger {
           });
           if (!error) {
             supabaseSuccess = true;
+          } else {
+            console.error('Supabase system_events insert error:', error);
           }
         } catch (dbErr) {
-          console.warn('Supabase system_events logging failed, utilizing local fallback:', dbErr);
+          console.warn('Supabase system_events logging failed:', dbErr);
         }
       }
 
       // 2. Fallback: log to local filesystem database if Supabase fails or is unconfigured
       if (!supabaseSuccess) {
+        // Prevent local JSON file fallback in production environments
+        if (process.env.NODE_ENV === 'production') {
+          console.warn('[Telemetry disabled in Production]: Supabase is not configured or failed to log event.');
+          return;
+        }
+
+        const release = await eventMutex.acquire();
         try {
           const dbPath = path.join(process.cwd(), 'db', 'system_events.json');
           const dir = path.dirname(dbPath);
@@ -76,6 +102,8 @@ export class ServerLogger {
           fs.writeFileSync(dbPath, JSON.stringify(events, null, 2), 'utf-8');
         } catch (localErr) {
           console.error('Failed to log system event to local fallback db:', localErr);
+        } finally {
+          release();
         }
       }
     } catch (err) {
@@ -94,11 +122,10 @@ export class ServerLogger {
     try {
       let supabaseSuccess = false;
 
-      // 1. Try to insert to Supabase metrics_snapshots
-      if (isSupabaseConfigured) {
+      // 1. Try to insert to Supabase metrics_snapshots via service role client (admin bypasses RLS)
+      if (isSupabaseAdminConfigured) {
         try {
-          const supabase = createSimpleSupabaseClient() as any;
-          const { error } = await supabase.from('metrics_snapshots').insert({
+          const { error } = await (supabaseAdmin as any).from('metrics_snapshots').insert({
             metric_name: metricName,
             metric_value: metricValue,
             tags
@@ -113,6 +140,12 @@ export class ServerLogger {
 
       // 2. Fallback: log to local filesystem database for metrics
       if (!supabaseSuccess) {
+        // Prevent local JSON file fallback in production environments
+        if (process.env.NODE_ENV === 'production') {
+          return;
+        }
+
+        const release = await metricMutex.acquire();
         try {
           const dbPath = path.join(process.cwd(), 'db', 'metrics_snapshots.json');
           const dir = path.dirname(dbPath);
@@ -143,6 +176,8 @@ export class ServerLogger {
           fs.writeFileSync(dbPath, JSON.stringify(metrics, null, 2), 'utf-8');
         } catch (localErr) {
           console.error('Failed to log metric to local fallback db:', localErr);
+        } finally {
+          release();
         }
       }
     } catch (err) {

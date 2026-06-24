@@ -24,8 +24,8 @@ export class EventBus {
    * Publish a live telemetry event message to all subscribers and write to database logs
    */
   public static async publish(
-    source: 'portfolio' | 'ask-vraj' | 'contact' | 'metrics' | 'github-sync' | 'cli' | 'analytics' | 'admin',
-    severity: 'info' | 'success' | 'warning' | 'error' | 'trace',
+    source: 'portfolio' | 'ask-vraj' | 'ask_vraj' | 'contact' | 'metrics' | 'github-sync' | 'github_sync' | 'cli' | 'analytics' | 'admin' | 'dashboard',
+    severity: 'info' | 'success' | 'warning' | 'warn' | 'error' | 'trace',
     message: string,
     metadata?: Record<string, any>,
     isPublic: boolean = true
@@ -33,8 +33,8 @@ export class EventBus {
     const event: LiveEventMessage = {
       id: typeof crypto !== 'undefined' && crypto.randomUUID ? crypto.randomUUID() : Math.random().toString(36).substring(2, 11),
       timestamp: new Date().toISOString(),
-      type: source,
-      severity,
+      type: source as any,
+      severity: severity as any,
       message,
       metadata,
       is_public: isPublic
@@ -49,8 +49,13 @@ export class EventBus {
       }
     });
 
-    // Write asynchronously to Supabase public.system_events logs or local fallback
-    await TelemetryClient.logEvent(source, severity, message, metadata, isPublic);
+    // Separated Server and Client paths to prevent silent drops of server events
+    if (typeof window === 'undefined') {
+      const { ServerLogger } = await import('../telemetry/server-logger');
+      await ServerLogger.logEvent(source, severity, message, metadata || {}, isPublic);
+    } else {
+      await TelemetryClient.logEvent(source, severity, message, metadata, isPublic);
+    }
 
     return event;
   }
