@@ -1222,5 +1222,50 @@
     "tags": {
       "path": "/api/contact"
     }
+  },
+  {
+    "id": "921cf2d2-cd6b-4220-a131-ebdbfd67cb1f",
+    "created_at": "2026-06-25T11:10:54.580Z",
+    "metric_name": "api_latency_ms",
+    "metric_value": 5,
+    "tags": {
+      "path": "/api/contact"
+    }
+  },
+  {
+    "id": "96e19841-6354-48c0-9eda-63451da5a7d0",
+    "created_at": "2026-06-25T11:42:47.528Z",
+    "metric_name": "api_latency_ms",
+    "metric_value": 8,
+    "tags": {
+      "path": "/api/contact"
+    }
+  },
+  {
+    "id": "14b2dafb-d8c2-46c0-986b-acaab728a78c",
+    "created_at": "2026-06-25T12:01:25.346Z",
+    "metric_name": "api_latency_ms",
+    "metric_value": 24,
+    "tags": {
+      "path": "/api/contact"
+    }
+  },
+  {
+    "id": "d752181f-6fed-4ccf-9d36-9020c425443d",
+    "created_at": "2026-06-25T12:18:26.448Z",
+    "metric_name": "api_latency_ms",
+    "metric_value": 136,
+    "tags": {
+      "path": "/api/contact"
+    }
+  },
+  {
+    "id": "64426889-4592-4b53-bb2a-dcc4bd89f257",
+    "created_at": "2026-06-25T12:40:36.649Z",
+    "metric_name": "api_latency_ms",
+    "metric_value": 8,
+    "tags": {
+      "path": "/api/contact"
+    }
   }
 ]

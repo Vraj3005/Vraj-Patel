@@ -24,7 +24,7 @@ function saveMessageLocally(messageData: { name: string; email: string; subject:
     }
 
     const newMessage = {
-      id: Math.random().toString(36).substring(2, 11),
+      id: crypto.randomUUID(),
       ...messageData,
       status: 'new',
       createdAt: new Date().toISOString(),
@@ -43,8 +43,17 @@ export async function POST(req: NextRequest) {
   const startTime = Date.now();
   const ip = req.headers.get('x-forwarded-for') || '127.0.0.1';
 
-  // Rate Limiting Gate (3 inquiries per 5 minutes)
-  if (isRateLimited(ip, 3, 5 * 60 * 1000)) {
+  // 1. Payload Size Limit check (64KB max for contact requests)
+  const contentLength = Number(req.headers.get('content-length') || '0');
+  if (contentLength > 65536) {
+    return NextResponse.json(
+      { error: 'Payload too large. Request body must be under 64KB.' },
+      { status: 413 }
+    );
+  }
+
+  // 2. Rate Limiting Gate (3 inquiries per 5 minutes)
+  if (await isRateLimited(ip, 'contact', 3, 5 * 60 * 1000)) {
     await ServerLogger.logEvent(
       'contact',
       'warning',

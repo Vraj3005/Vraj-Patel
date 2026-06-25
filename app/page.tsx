@@ -423,7 +423,6 @@ export default function Home() {
             'name': 'Vraj Patel',
             'url': 'https://vrajpatel.dev',
             'email': 'patelvrajpatel30@gmail.com',
-            'telephone': '+91 79902 51191',
             'jobTitle': 'Full-Stack Architect & Quant Research Developer',
             'alumniOf': {
               '@type': 'CollegeOrUniversity',

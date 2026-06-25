@@ -91,7 +91,7 @@ export class ServerLogger {
           }
 
           const newEvent = {
-            id: typeof crypto !== 'undefined' && crypto.randomUUID ? crypto.randomUUID() : Math.random().toString(36).substring(2, 11),
+            id: crypto.randomUUID(),
             created_at: new Date().toISOString(),
             event_type: source,
             severity,

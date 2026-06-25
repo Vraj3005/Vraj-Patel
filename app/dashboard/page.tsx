@@ -82,7 +82,6 @@ export default function DashboardPage() {
         return 'text-cyan-400 bg-cyan-950/20 border-cyan-800/30';
     }
   };
-
   return (
     <div className="flex flex-col gap-8 py-6 md:py-10 max-w-7xl mx-auto w-full px-4 sm:px-6 md:px-8">
       {/* Dashboard Top Header */}

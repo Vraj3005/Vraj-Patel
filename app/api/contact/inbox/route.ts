@@ -1,56 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { supabaseAdmin, isSupabaseAdminConfigured } from '@/lib/supabase/admin';
-import { cookies } from 'next/headers';
+import { requireAdmin } from '@/lib/auth/require-admin';
 import fs from 'fs';
 import path from 'path';
 
 export async function POST(req: NextRequest) {
   try {
-    const correctPasscode = process.env.INBOX_PASSCODE;
-    if (!correctPasscode) {
-      console.error('Inbox Secure Gate Error: INBOX_PASSCODE is not configured in server environment.');
-      return NextResponse.json({ error: 'System configuration error. Access denied.' }, { status: 500 });
-    }
-
-    let passcode: string | undefined;
-    let lock = false;
-    try {
-      const body = await req.json();
-      if (body) {
-        passcode = body.passcode;
-        lock = !!body.lock;
-      }
-    } catch (_) {
-      // Body may be empty or missing
-    }
-
-    const cookieStore = await cookies();
-
-    // 1. Handle lock/clear request
-    if (lock || passcode === '') {
-      cookieStore.delete('inbox_session');
-      return NextResponse.json({ success: true, messages: [] });
-    }
-
-    // 2. If passcode is provided in payload (login attempt)
-    if (passcode !== undefined) {
-      if (passcode !== correctPasscode) {
-        return NextResponse.json({ error: 'Unauthorized: Invalid passcode.' }, { status: 401 });
-      }
-      // Set HttpOnly secure session cookie
-      cookieStore.set('inbox_session', passcode, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
-        sameSite: 'strict',
-        path: '/',
-        maxAge: 60 * 60 * 2, // 2 hours
-      });
-    } else {
-      // 3. Mount validation (no passcode in body, read from cookie)
-      const sessionValue = cookieStore.get('inbox_session')?.value;
-      if (!sessionValue || sessionValue !== correctPasscode) {
-        return NextResponse.json({ error: 'Unauthorized: Invalid passcode.' }, { status: 401 });
-      }
+    // Enforce administrative authentication check
+    const { admin, error, status } = await requireAdmin();
+    if (error || !admin) {
+      return NextResponse.json({ error: error || 'Unauthorized' }, { status: status || 401 });
     }
 
     let messages: any[] = [];
@@ -58,15 +17,15 @@ export async function POST(req: NextRequest) {
     // 1. Fetch from Supabase if configured
     if (isSupabaseAdminConfigured) {
       try {
-        const { data, error } = await supabaseAdmin
+        const { data, error: dbErr } = await supabaseAdmin
           .from('contact_messages')
           .select('*')
           .order('created_at', { ascending: false });
         
-        if (data && !error) {
+        if (data && !dbErr) {
           messages = data;
-        } else if (error) {
-          console.warn('Supabase query error inside secure inbox API:', error);
+        } else if (dbErr) {
+          console.warn('Supabase query error inside secure inbox API:', dbErr);
         }
       } catch (dbErr) {
         console.warn('Supabase contact_messages query failed inside secure inbox API:', dbErr);
@@ -95,12 +54,10 @@ export async function POST(req: NextRequest) {
             };
           });
           
-          // Merge local and remote data, deduplicate by email + subject + created_at combinations if needed,
-          // or just merge if supabase failed. If supabase worked, we might want to display both or combine.
           if (messages.length === 0) {
             messages = normalizedLocal;
           } else {
-            // Deduplicate by comparing keys (ID first if stable, then fallback to email + subject + created_at)
+            // Deduplicate by comparing keys
             const idSet = new Set(messages.filter(m => m.id).map(m => String(m.id)));
             const keySet = new Set();
             messages.forEach(m => {
@@ -113,12 +70,10 @@ export async function POST(req: NextRequest) {
             });
 
             normalizedLocal.forEach((m: any) => {
-              // 1. If stable ID matches an existing database message, skip
               if (m.id && idSet.has(String(m.id))) {
                 return;
               }
               
-              // 2. If it has no valid created_at, do NOT collapse/deduplicate it, just push it
               if (!m.created_at) {
                 messages.push(m);
                 return;
@@ -132,7 +87,6 @@ export async function POST(req: NextRequest) {
               const dateStr = dateObj.toISOString();
               const key = `${m.email.toLowerCase()}-${m.subject.toLowerCase()}-${dateStr.substring(0, 16)}`;
               
-              // 3. Deduplicate based on email + subject + created_at
               if (!keySet.has(key)) {
                 messages.push(m);
                 keySet.add(key);

@@ -3,14 +3,10 @@ import { POST } from './route';
 import { NextRequest } from 'next/server';
 import fs from 'fs';
 
-const mockCookieStore = {
-  get: vi.fn(),
-  set: vi.fn(),
-  delete: vi.fn(),
-};
-
-vi.mock('next/headers', () => ({
-  cookies: vi.fn(() => Promise.resolve(mockCookieStore)),
+// Mock requireAdmin helper
+const mockRequireAdmin = vi.fn();
+vi.mock('@/lib/auth/require-admin', () => ({
+  requireAdmin: () => mockRequireAdmin(),
 }));
 
 vi.mock('@/lib/supabase/admin', () => ({
@@ -19,46 +15,56 @@ vi.mock('@/lib/supabase/admin', () => ({
 }));
 
 describe('Inbox Route Secure API', () => {
-  const originalEnv = process.env;
-
   beforeEach(() => {
     vi.restoreAllMocks();
-    mockCookieStore.get.mockReset();
-    mockCookieStore.set.mockReset();
-    mockCookieStore.delete.mockReset();
-    process.env = { ...originalEnv };
+    mockRequireAdmin.mockReset();
   });
 
-  it('should return 401 Unauthorized for incorrect passcode', async () => {
-    process.env.INBOX_PASSCODE = 'super-secret';
+  it('should return 401 Unauthorized if requireAdmin returns a 401 error', async () => {
+    mockRequireAdmin.mockResolvedValue({
+      user: null,
+      admin: null,
+      error: 'Authentication required. Please sign in.',
+      status: 401,
+    });
+
     const request = new NextRequest('http://localhost/api/contact/inbox', {
       method: 'POST',
-      body: JSON.stringify({ passcode: 'wrong-passcode' }),
+      body: JSON.stringify({}),
     });
 
     const response = await POST(request);
     expect(response.status).toBe(401);
     const body = await response.json();
-    expect(body.error).toContain('Unauthorized');
+    expect(body.error).toContain('Authentication required');
   });
 
-  it('should return 500 configuration error if INBOX_PASSCODE is not set', async () => {
-    delete process.env.INBOX_PASSCODE;
+  it('should return 403 Forbidden if requireAdmin returns a 403 error', async () => {
+    mockRequireAdmin.mockResolvedValue({
+      user: { id: 'some-user-id' },
+      admin: null,
+      error: 'Access denied: User is not an authorized administrator.',
+      status: 403,
+    });
+
     const request = new NextRequest('http://localhost/api/contact/inbox', {
       method: 'POST',
-      body: JSON.stringify({ passcode: 'any-passcode' }),
+      body: JSON.stringify({}),
     });
 
     const response = await POST(request);
-    expect(response.status).toBe(500);
+    expect(response.status).toBe(403);
     const body = await response.json();
-    expect(body.error).toContain('System configuration error');
+    expect(body.error).toContain('Access denied');
   });
 
-  it('should authenticate successfully and retrieve messages with correct passcode', async () => {
-    process.env.INBOX_PASSCODE = 'super-secret';
+  it('should return 200 with messages if requireAdmin returns successfully', async () => {
+    mockRequireAdmin.mockResolvedValue({
+      user: { id: 'mock-admin-id', email: 'admin@example.com' },
+      admin: { id: 'mock-admin-id', email: 'admin@example.com' },
+    });
     
-    // Mock local db messages if exists, or ensure we fallback
+    // Mock local db messages read
     const spyExists = vi.spyOn(fs, 'existsSync').mockReturnValue(true);
     const mockMessages = [
       {
@@ -75,7 +81,7 @@ describe('Inbox Route Secure API', () => {
 
     const request = new NextRequest('http://localhost/api/contact/inbox', {
       method: 'POST',
-      body: JSON.stringify({ passcode: 'super-secret' }),
+      body: JSON.stringify({}),
     });
 
     const response = await POST(request);
@@ -84,38 +90,8 @@ describe('Inbox Route Secure API', () => {
     expect(body.success).toBe(true);
     expect(body.messages.length).toBe(1);
     expect(body.messages[0].name).toBe('John Doe');
-    expect(mockCookieStore.set).toHaveBeenCalledWith('inbox_session', 'super-secret', expect.any(Object));
 
     spyExists.mockRestore();
     spyRead.mockRestore();
-  });
-
-  it('should authenticate via cookie if no passcode is passed in request body', async () => {
-    process.env.INBOX_PASSCODE = 'super-secret';
-    mockCookieStore.get.mockReturnValue({ value: 'super-secret' });
-
-    const request = new NextRequest('http://localhost/api/contact/inbox', {
-      method: 'POST',
-      body: JSON.stringify({}),
-    });
-
-    const response = await POST(request);
-    expect(response.status).toBe(200);
-    const body = await response.json();
-    expect(body.success).toBe(true);
-    expect(mockCookieStore.get).toHaveBeenCalledWith('inbox_session');
-  });
-
-  it('should delete session cookie if lock is requested', async () => {
-    process.env.INBOX_PASSCODE = 'super-secret';
-
-    const request = new NextRequest('http://localhost/api/contact/inbox', {
-      method: 'POST',
-      body: JSON.stringify({ lock: true }),
-    });
-
-    const response = await POST(request);
-    expect(response.status).toBe(200);
-    expect(mockCookieStore.delete).toHaveBeenCalledWith('inbox_session');
   });
 });

@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { ServerLogger } from '@/lib/telemetry/server-logger';
 import { createServerSupabaseClient } from '@/lib/supabase/server';
 import { isSupabaseConfigured } from '@/lib/supabase/simple';
+import { requireAdmin } from '@/lib/auth/require-admin';
 import fs from 'fs';
 import path from 'path';
 import * as z from 'zod';
@@ -56,32 +57,23 @@ export async function GET(req: NextRequest) {
     const limit = parseInt(searchParams.get('limit') || '100');
 
     // 1. Resolve authorization boundary (check if admin is authenticated)
-    let isAdmin = false;
-    if (isSupabaseConfigured) {
-      try {
-        const supabase = await createServerSupabaseClient();
-        const { data: { user } } = await supabase.auth.getUser();
-        if (user) {
-          const { data: adminUser } = await (supabase as any)
-            .from('admin_users')
-            .select('id')
-            .eq('id', user.id)
-            .maybeSingle();
-          isAdmin = !!adminUser;
-        }
-      } catch (_e) {
-        // Safe catch
-      }
+    let showAllLogs = false;
+    try {
+      const authRes = await requireAdmin();
+      showAllLogs = !!authRes.admin;
+    } catch (e) {
+      console.warn('Authentication check failed, defaulting to public logs:', e);
     }
 
     // 2. Fetch logs from either database or JSON file fallback
     if (isSupabaseConfigured) {
       try {
         const supabase = await createServerSupabaseClient();
-        let query = supabase.from('system_events').select('*');
+        let query = supabase
+          .from('system_events')
+          .select('*');
 
-        // public users are restricted to public logs
-        if (!isAdmin) {
+        if (!showAllLogs) {
           query = query.eq('is_public', true);
         }
 
@@ -119,14 +111,15 @@ export async function GET(req: NextRequest) {
     }
 
     const content = fs.readFileSync(dbPath, 'utf-8');
-    let events = JSON.parse(content || '[]');
+    const events = JSON.parse(content || '[]');
 
-    if (!isAdmin) {
-      events = events.filter((e: any) => e.is_public === true);
-    }
+    // If public log query, filter to return only public events
+    const filteredEvents = showAllLogs
+      ? events
+      : events.filter((e: any) => e.is_public === true);
 
     // Slice last N and map properties
-    const slice = events.slice(-limit);
+    const slice = filteredEvents.slice(-limit);
     const formatted = slice.map((e: any) => ({
       id: e.id,
       timestamp: e.created_at,

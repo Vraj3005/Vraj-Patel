@@ -125,9 +125,9 @@ The backend API route in [app/api/ask/route.ts](file:///c:/Users/vishv/OneDrive/
 The inbox console (`/inbox`) serves as Vraj's private message center.
 
 ### Accessing the Inbox
-1. Navigate to `/inbox` in your browser.
-2. Provide the passcode matching the `INBOX_PASSCODE` defined in the server environment.
-3. If valid, the browser retrieves form submissions directly from Supabase (or fallback local files) without cookies or persistent storage.
+1. Navigate to `/inbox` or `/dashboard` in your browser.
+2. The application will redirect you to `/login`. Sign in using your registered Supabase administrator credentials.
+3. Access is authorized only if your authenticated user ID exists in the `public.admin_users` table in your database.
 
 ---
 
@@ -144,8 +144,12 @@ SUPABASE_SERVICE_ROLE_KEY=your-supabase-service-role-key
 # Gemini API Key (Get this from Google AI Studio)
 GEMINI_API_KEY=your-gemini-api-key
 
-# Secure Inquiries Inbox Passcode
-INBOX_PASSCODE=your-secure-passcode
+# Upstash Redis (For serverless rate limiting)
+UPSTASH_REDIS_REST_URL=your-upstash-redis-rest-url
+UPSTASH_REDIS_REST_TOKEN=your-upstash-redis-rest-token
+
+# GitHub API Credentials (Requires a fine-grained token with read-only scope for contribution/repo metadata only)
+GITHUB_TOKEN=your-github-personal-access-token
 ```
 
 ---

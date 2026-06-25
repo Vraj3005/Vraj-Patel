@@ -52,35 +52,52 @@ export async function askVrajAI(
     });
   }
 
-  try {
-    // Standardize history format for @google/genai chats.create
-    const formattedHistory = (history || []).slice(-10).map((h) => ({
-      role: h.role,
-      parts: h.parts.map((p) => ({ text: p.text })),
-    }));
+  // Sequential model priority list
+  const models = [
+    process.env.GEMINI_MODEL || 'gemini-3.1-flash-lite',
+    'gemini-3.5-flash',
+    'gemini-2.5-flash',
+    'gemini-2.5-flash-lite',
+    'gemini-3.0-flash'
+  ];
 
-    const chat = aiClient.chats.create({
-      model: GEMINI_MODEL,
-      config: {
-        systemInstruction: {
-          parts: [{ text: SYSTEM_INSTRUCTION }],
+  // De-duplicate priority queue
+  const modelsToTry = Array.from(new Set(models));
+
+  const formattedHistory = (history || []).slice(-10).map((h) => ({
+    role: h.role,
+    parts: h.parts.map((p) => ({ text: p.text })),
+  }));
+
+  let lastError: any = null;
+  for (const model of modelsToTry) {
+    try {
+      const chat = aiClient.chats.create({
+        model: model,
+        config: {
+          systemInstruction: {
+            parts: [{ text: SYSTEM_INSTRUCTION }],
+          },
         },
-      },
-      history: formattedHistory,
-    });
+        history: formattedHistory,
+      });
 
-    const result = await chat.sendMessage({
-      message: prompt,
-    });
+      const result = await chat.sendMessage({
+        message: prompt,
+      });
 
-    return result.text || "I couldn't process that query. Please check back later.";
-  } catch (error) {
-    console.error('Gemini API call failed, falling back to mock response:', error);
-    return getMockVrajResponse(prompt);
+      return result.text || "I couldn't process that query. Please check back later.";
+    } catch (error) {
+      console.warn(`Gemini model ${model} failed, trying next fallback...`, error);
+      lastError = error;
+    }
   }
+
+  console.error('All Gemini API models failed, falling back to mock response:', lastError);
+  return getMockVrajResponse(prompt);
 }
 
-// Main streaming API caller using the new @google/genai SDK
+// Main streaming API caller using the new @google/genai SDK with fallbacks
 export async function askVrajAIStream(
   prompt: string,
   history: { role: 'user' | 'model'; parts: { text: string }[] }[] = []
@@ -89,30 +106,46 @@ export async function askVrajAIStream(
     return getMockVrajResponseStream(prompt);
   }
 
-  try {
-    // Standardize history format for @google/genai chats.create
-    const formattedHistory = (history || []).slice(-10).map((h) => ({
-      role: h.role,
-      parts: h.parts.map((p) => ({ text: p.text })),
-    }));
+  const models = [
+    process.env.GEMINI_MODEL || 'gemini-3.1-flash-lite',
+    'gemini-3.5-flash',
+    'gemini-2.5-flash',
+    'gemini-2.5-flash-lite',
+    'gemini-3.0-flash'
+  ];
 
-    const chat = aiClient.chats.create({
-      model: GEMINI_MODEL,
-      config: {
-        systemInstruction: {
-          parts: [{ text: SYSTEM_INSTRUCTION }],
+  // De-duplicate priority queue
+  const modelsToTry = Array.from(new Set(models));
+
+  const formattedHistory = (history || []).slice(-10).map((h) => ({
+    role: h.role,
+    parts: h.parts.map((p) => ({ text: p.text })),
+  }));
+
+  let lastError: any = null;
+  for (const model of modelsToTry) {
+    try {
+      const chat = aiClient.chats.create({
+        model: model,
+        config: {
+          systemInstruction: {
+            parts: [{ text: SYSTEM_INSTRUCTION }],
+          },
         },
-      },
-      history: formattedHistory,
-    });
+        history: formattedHistory,
+      });
 
-    const resultStream = await chat.sendMessageStream({
-      message: prompt,
-    });
+      const resultStream = await chat.sendMessageStream({
+        message: prompt,
+      });
 
-    return resultStream;
-  } catch (error) {
-    console.error('Gemini Stream initiation failed, falling back to mock stream:', error);
-    return getMockVrajResponseStream(prompt);
+      return resultStream;
+    } catch (error) {
+      console.warn(`Gemini stream model ${model} failed, trying next fallback...`, error);
+      lastError = error;
+    }
   }
+
+  console.error('All Gemini stream models failed, falling back to mock stream:', lastError);
+  return getMockVrajResponseStream(prompt);
 }

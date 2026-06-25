@@ -5,11 +5,13 @@ import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { 
-  Lock, Unlock, Mail, User, Clock, Search, ArrowLeft, RefreshCw, KeyRound, AlertCircle, Eye, EyeOff
+  Lock, Unlock, Mail, User, Clock, Search, ArrowLeft, RefreshCw, LogOut
 } from 'lucide-react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { getErrorMessage } from '@/lib/utils';
+import { supabase, isSupabaseConfigured } from '@/lib/supabase/client';
 
 interface Message {
   id: string;
@@ -22,20 +24,19 @@ interface Message {
 }
 
 export default function InboxPage() {
-  const [passcode, setPasscode] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
-  const [isUnlocked, setIsUnlocked] = useState(false);
+  const router = useRouter();
   const [messages, setMessages] = useState<Message[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
+  const [isAuthorized, setIsAuthorized] = useState(false);
 
-  const checkSession = async () => {
+  const fetchMessages = async () => {
     setLoading(true);
     setError(null);
     try {
       const response = await fetch('/api/contact/inbox', {
-        method: 'POST',
+        method: 'POST', // Keep POST for backward compatibility with route tests/handler
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({}),
       });
@@ -43,72 +44,33 @@ export default function InboxPage() {
       if (response.ok) {
         const payload = await response.json();
         setMessages(payload.messages || []);
-        setIsUnlocked(true);
+        setIsAuthorized(true);
       } else {
-        setIsUnlocked(false);
+        const payload = await response.json().catch(() => ({}));
+        setError(payload.error || 'Access denied: You are not authorized.');
+        setIsAuthorized(false);
+        if (response.status === 401) {
+          router.push('/login?redirect=/inbox');
+        }
       }
-    } catch (_) {
-      setIsUnlocked(false);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  // Check if session cookie is valid on mount
-  useEffect(() => {
-    checkSession();
-  }, []);
-
-  const handleUnlockSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!passcode.trim()) {
-      setError('Passcode cannot be empty.');
-      return;
-    }
-    setLoading(true);
-    setError(null);
-    try {
-      const response = await fetch('/api/contact/inbox', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ passcode }),
-      });
-
-      if (!response.ok) {
-        const payload = await response.json();
-        throw new Error(payload.error || 'Failed to authenticate.');
-      }
-
-      const payload = await response.json();
-      setMessages(payload.messages || []);
-      setIsUnlocked(true);
     } catch (err: unknown) {
       setError(getErrorMessage(err));
-      setIsUnlocked(false);
+      setIsAuthorized(false);
     } finally {
       setLoading(false);
     }
   };
 
-  const handleLock = async () => {
-    setLoading(true);
-    try {
-      await fetch('/api/contact/inbox', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ lock: true }),
-      });
-    } catch (_) {
-      // Ignore lock notification failure
-    }
-    setPasscode('');
-    setIsUnlocked(false);
-    setMessages([]);
-    setLoading(false);
-  };
+  useEffect(() => {
+    fetchMessages();
+  }, []);
 
-  const handleRefresh = () => {
-    checkSession();
+  const handleSignOut = async () => {
+    setLoading(true);
+    if (isSupabaseConfigured) {
+      await supabase.auth.signOut();
+    }
+    router.push('/login');
   };
 
   const formatMessageTime = (timestamp: string) => {
@@ -142,9 +104,9 @@ export default function InboxPage() {
     <div className="flex flex-col gap-8 py-6 md:py-10 max-w-5xl mx-auto w-full px-4 sm:px-6 font-sans">
       
       {/* ═══════════════════════════════════════════
-          STATE 1: LOCKED VIEW (GATEWAY)
+          STATE 1: UNAUTHORIZED / ERROR VIEW
           ═══════════════════════════════════════════ */}
-      {!isUnlocked ? (
+      {!isAuthorized ? (
         <div className="flex-1 flex flex-col justify-center items-center py-16 md:py-24">
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
@@ -155,75 +117,32 @@ export default function InboxPage() {
             <Card className="p-8 relative overflow-hidden bg-card-bg/40 border-card-border backdrop-blur-md flex flex-col gap-6 items-center text-center shadow-2xl">
               <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-transparent pointer-events-none" />
               
-              {/* Lock Badge */}
-              <div className="relative flex items-center justify-center h-16 w-16 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 shadow-[0_0_15px_rgba(6,182,212,0.15)] animate-pulse shrink-0">
+              <div className="relative flex items-center justify-center h-16 w-16 rounded-full bg-rose-500/10 border border-rose-500/20 text-rose-400 shadow-[0_0_15px_rgba(244,63,94,0.15)] shrink-0">
                 <Lock className="h-7 w-7" />
               </div>
 
               <div className="flex flex-col gap-2 relative z-10 select-none">
-                <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-secondary">
+                <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-rose-400">
                   Access Restrictions
                 </span>
                 <h1 className="text-2xl font-medium font-serif text-foreground tracking-tight">
                   Inquiries Secure Gate
                 </h1>
                 <p className="text-xs text-secondary leading-relaxed font-semibold max-w-xs mx-auto">
-                  Please enter your admin credentials token below to decrypt and unlock the contact inquiries ledger.
+                  {error || 'Valid administrative authentication session is required to load contact logs.'}
                 </p>
               </div>
 
-              {/* Password Form */}
-              <form onSubmit={handleUnlockSubmit} className="w-full flex flex-col gap-4 relative z-10">
-                <div className="relative flex items-center">
-                  <div className="absolute left-3.5 text-secondary">
-                    <KeyRound className="h-4 w-4" />
-                  </div>
-                  <input
-                    type={showPassword ? 'text' : 'password'}
-                    value={passcode}
-                    onChange={(e) => setPasscode(e.target.value)}
-                    placeholder="Enter decrypt passcode..."
-                    className="w-full pl-10 pr-10 py-2.5 bg-[#0e0e11] border border-card-border hover:border-white/10 focus:border-cyan-500/50 rounded-xl text-white placeholder-muted font-mono text-xs focus:ring-0 focus:outline-none transition-all"
-                    disabled={loading}
-                    autoComplete="current-password"
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 text-secondary hover:text-foreground cursor-pointer focus:outline-none"
-                    title={showPassword ? 'Hide password' : 'Show password'}
-                  >
-                    {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-                  </button>
-                </div>
-
-                {error && (
-                  <div className="flex items-center gap-2 p-3 bg-rose-500/5 border border-rose-500/15 rounded-xl text-[10.5px] text-rose-400 font-mono font-medium text-left">
-                    <AlertCircle className="h-4 w-4 shrink-0" />
-                    <span>{error}</span>
-                  </div>
-                )}
-
+              <div className="w-full flex flex-col gap-3 relative z-10">
                 <Button
-                  type="submit"
+                  onClick={() => router.push('/login?redirect=/inbox')}
                   variant="primary"
                   size="md"
                   className="w-full flex items-center justify-center gap-1.5 font-bold"
-                  disabled={loading}
                 >
-                  {loading ? (
-                    <>
-                      <RefreshCw className="h-4 w-4 animate-spin text-cyan-400" />
-                      <span>Verifying Token...</span>
-                    </>
-                  ) : (
-                    <>
-                      <Unlock className="h-4 w-4" />
-                      <span>Authenticate Credentials</span>
-                    </>
-                  )}
+                  Sign In to Admin Account
                 </Button>
-              </form>
+              </div>
 
               <Link href="/" className="text-[10px] font-mono text-secondary hover:text-foreground transition-colors mt-2 flex items-center gap-1">
                 <ArrowLeft className="h-3 w-3" /> Back to Portfolio Home
@@ -234,7 +153,7 @@ export default function InboxPage() {
       ) : (
         
         // ═══════════════════════════════════════════
-        // STATE 2: UNLOCKED VIEW (INBOX)
+        // STATE 2: AUTHORIZED VIEW (INBOX)
         // ═══════════════════════════════════════════
         <motion.div
           initial={{ opacity: 0, y: 10 }}
@@ -252,14 +171,14 @@ export default function InboxPage() {
                 Contact Inquiries Inbox
               </h1>
               <p className="text-xs text-secondary leading-relaxed max-w-xl font-medium select-none">
-                Review visitor messages submitted through the portfolio contact form. Database is loaded dynamically in memory.
+                Review visitor messages submitted through the portfolio contact form.
               </p>
             </div>
 
             {/* Actions */}
             <div className="flex items-center gap-2.5">
               <button
-                onClick={handleRefresh}
+                onClick={fetchMessages}
                 disabled={loading}
                 className="p-2 border border-card-border bg-card-bg rounded-lg hover:bg-white/5 text-secondary hover:text-foreground transition-all cursor-pointer"
                 title="Refresh messages"
@@ -268,10 +187,11 @@ export default function InboxPage() {
               </button>
 
               <button
-                onClick={handleLock}
+                onClick={handleSignOut}
+                disabled={loading}
                 className="px-4 py-2 border border-rose-500/20 bg-rose-950/15 hover:bg-rose-900/30 text-rose-400 hover:text-rose-300 text-xs font-mono font-bold rounded-lg transition-all cursor-pointer flex items-center gap-1.5"
               >
-                <Lock className="h-3.5 w-3.5" /> Lock Console
+                <LogOut className="h-3.5 w-3.5" /> Sign Out
               </button>
             </div>
           </div>

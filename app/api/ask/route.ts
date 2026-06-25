@@ -15,8 +15,6 @@ function sanitizeOutput(text: string): string {
   let sanitized = text;
   
   const sensitiveKeys = [
-    process.env.ADMIN_PASSCODE,
-    process.env.INBOX_PASSCODE,
     process.env.GEMINI_API_KEY,
     process.env.NEXT_PUBLIC_SUPABASE_KEY,
     process.env.SUPABASE_SERVICE_ROLE_KEY,
@@ -37,8 +35,17 @@ export async function POST(req: NextRequest) {
   const startTime = Date.now();
   const ip = req.headers.get('x-forwarded-for') || '127.0.0.1';
 
-  // Limit AI requests to 10 queries per minute per client IP
-  if (isRateLimited(ip, 10, 60 * 1000)) {
+  // 1. Check content length limit (128KB max)
+  const contentLength = Number(req.headers.get('content-length') || '0');
+  if (contentLength > 131072) {
+    return NextResponse.json(
+      { error: 'Payload too large. Request body must be under 128KB.' },
+      { status: 413 }
+    );
+  }
+
+  // 2. Limit AI requests to 10 queries per minute per client IP
+  if (await isRateLimited(ip, 'ai', 10, 60 * 1000)) {
     await ServerLogger.logEvent(
       'ask-vraj',
       'warning',
