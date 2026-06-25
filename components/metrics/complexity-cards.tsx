@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { Card } from '@/components/ui/card';
-import { Network, Database, Cpu, Sparkles } from 'lucide-react';
 
 export default function ComplexityCards() {
   const architectures = [

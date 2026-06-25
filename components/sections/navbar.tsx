@@ -109,14 +109,14 @@ export default function Navbar() {
             className="p-2 text-cyan-400 hover:text-cyan-300 cursor-pointer"
             title="Recruiter Mode"
           >
-            <Briefcase className="h-4.5 w-4.5 text-cyan-400" />
+            <Briefcase className="h-[18px] w-[18px] text-cyan-400" />
           </button>
           <button
             onClick={() => setIsCmdOpen(true)}
             className="p-2 text-secondary hover:text-foreground cursor-pointer"
             title="Search"
           >
-            <Search className="h-4.5 w-4.5" />
+            <Search className="h-[18px] w-[18px]" />
           </button>
           <button
             onClick={() => setIsOpen(!isOpen)}

@@ -57,7 +57,7 @@ export default function TerminalLogs() {
         break;
       case 'contact':
         newLines.push({
-          text: 'Communication routes active:\n- Primary Mailbox: contact@vraj.io\n- Direct Message : Navigate to the "/contact" form to send a pipeline lead.\n- AI Agent Helper: Challenge my Gemini Flash bot in the "/ask-vraj" portal.',
+          text: 'Communication routes active:\n- Primary Mailbox: patelvrajpatel30@gmail.com\n- Direct Message : Navigate to the "/contact" form to send a pipeline lead.\n- AI Agent Helper: Challenge my Gemini Flash bot in the "/ask-vraj" portal.',
           type: 'output',
         });
         break;

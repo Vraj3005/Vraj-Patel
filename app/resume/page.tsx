@@ -70,7 +70,7 @@ export default function Resume() {
         <div className="flex items-center justify-between border-b border-white/5 pb-2.5 relative z-10">
           <span className="text-[10px] text-muted font-mono uppercase font-bold tracking-wider">Resume Intelligence Console</span>
           {copyStatus && (
-            <span className="text-[10px] text-emerald-450 font-mono font-bold animate-pulse">
+            <span className="text-[10px] text-emerald-400 font-mono font-bold animate-pulse">
               ✓ {copyStatus} copied to clipboard!
             </span>
           )}
@@ -154,7 +154,7 @@ export default function Resume() {
             <h3 className="text-xs font-bold uppercase tracking-wider text-foreground print:text-black border-b border-card-border pb-1 font-mono">
               Professional Profile
             </h3>
-            <p className="text-xs md:text-sm text-secondary print:text-gray-750 leading-relaxed font-medium">
+            <p className="text-xs md:text-sm text-secondary print:text-gray-700 leading-relaxed font-medium">
               Highly technical Computer Science and Engineering student at Nirma University, specialized in architecting and shipping production-level business ERP models, high-performance Next.js and Node.js APIs, and quantitative research projection tools. Skilled in system performance tuning, structured AI multi-agent prompts, database optimizations, and client communication.
             </p>
           </div>
@@ -196,7 +196,7 @@ export default function Resume() {
                   <span>May 2026 - Jul 2026</span>
                 </div>
               </div>
-              <p className="text-xs text-secondary print:text-gray-650 leading-relaxed font-medium">
+              <p className="text-xs text-secondary print:text-gray-600 leading-relaxed font-medium">
                 Engineered and delivered core client ERP systems and B2B layouts (Bhagwati Interior ERP, Enermass Solar Calculator, Driedhub, Marea, and Surendra website). Built performant data sync logic, automated GST invoice pipelines, and optimized Three.js/scroll rendering interfaces.
               </p>
             </div>
@@ -262,13 +262,13 @@ export default function Resume() {
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-medium">
               <div className="flex flex-col gap-1.5">
-                <span className="text-secondary print:text-gray-650 font-bold uppercase text-[9px] tracking-wide font-mono">Systems & Languages:</span>
+                <span className="text-secondary print:text-gray-600 font-bold uppercase text-[9px] tracking-wide font-mono">Systems & Languages:</span>
                 <span className="text-foreground print:text-black font-semibold">
                   TypeScript, Python, SQL, JavaScript, HTML/CSS
                 </span>
               </div>
               <div className="flex flex-col gap-1.5">
-                <span className="text-secondary print:text-gray-650 font-bold uppercase text-[9px] tracking-wide font-mono">Frameworks & Tools:</span>
+                <span className="text-secondary print:text-gray-600 font-bold uppercase text-[9px] tracking-wide font-mono">Frameworks & Tools:</span>
                 <span className="text-foreground print:text-black font-semibold">
                   Next.js, Node.js, Express, FastAPI, PostgreSQL, MongoDB Atlas, Docker
                 </span>

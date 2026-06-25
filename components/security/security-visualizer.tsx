@@ -3,8 +3,8 @@
 import React, { useState } from 'react';
 import { Card } from '@/components/ui/card';
 import { 
-  Shield, ShieldAlert, ShieldCheck, Code, Eye, Lock, 
-  UserCheck, AlertTriangle, ChevronRight, CheckCircle2, AlertCircle 
+  Shield, ShieldCheck, Code, Eye, Lock, 
+  UserCheck, AlertTriangle, ChevronRight, AlertCircle 
 } from 'lucide-react';
 
 // Definitions for the Security Layer Schema
@@ -478,7 +478,7 @@ export default function SecurityVisualizer({ projectSlug }: SecurityVisualizerPr
   const getStatusBadgeClass = (status: SecurityLayer['status']) => {
     switch (status) {
       case 'active':
-        return 'bg-emerald-500/10 text-emerald-450 border-emerald-500/20';
+        return 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20';
       case 'planned':
         return 'bg-amber-500/10 text-amber-500 border-amber-500/20';
       case 'conceptual':
@@ -651,7 +651,7 @@ export default function SecurityVisualizer({ projectSlug }: SecurityVisualizerPr
                 </div>
               ) : (
                 <div className="p-4 bg-emerald-500/5 border border-emerald-500/10 rounded-xl flex items-start gap-3">
-                  <UserCheck className="h-5 w-5 text-emerald-450 shrink-0 mt-0.5" />
+                  <UserCheck className="h-5 w-5 text-emerald-400 shrink-0 mt-0.5" />
                   <div className="flex flex-col gap-0.5">
                     <span className="text-[11px] font-bold text-foreground">Compliance Sign-off</span>
                     <p className="text-[10px] text-secondary leading-relaxed font-medium">

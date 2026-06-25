@@ -52,7 +52,15 @@ export class ServerLogger {
           if (!error) {
             supabaseSuccess = true;
           } else {
-            console.error('Supabase system_events insert error:', error);
+            if (error.code === 'PGRST205' || error.code === 'PGRST204' || error.code === '42703') {
+              console.warn(
+                `[Supabase Warning] Table or columns (e.g. 'is_public') in 'system_events' are missing from schema cache (${error.code}). ` +
+                `Please execute the SQL migration scripts in 'supabase/migrations/' inside your Supabase project SQL Editor. ` +
+                `Using local fallback datastore.`
+              );
+            } else {
+              console.error('Supabase system_events insert error:', error);
+            }
           }
         } catch (dbErr) {
           console.warn('Supabase system_events logging failed:', dbErr);
@@ -133,7 +141,7 @@ export class ServerLogger {
           if (!error) {
             supabaseSuccess = true;
           }
-        } catch (dbErr) {
+        } catch (_dbErr) {
           // ignore
         }
       }

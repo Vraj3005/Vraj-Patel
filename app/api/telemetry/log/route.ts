@@ -69,7 +69,7 @@ export async function GET(req: NextRequest) {
             .maybeSingle();
           isAdmin = !!adminUser;
         }
-      } catch (e) {
+      } catch (_e) {
         // Safe catch
       }
     }
@@ -103,8 +103,12 @@ export async function GET(req: NextRequest) {
         }));
 
         return NextResponse.json({ data: formatted.reverse() });
-      } catch (dbErr) {
-        console.warn('Supabase telemetry query failed, falling back to local JSON datastore:', dbErr);
+      } catch (dbErr: any) {
+        if (dbErr && (dbErr.code === 'PGRST205' || dbErr.code === 'PGRST204' || dbErr.code === '42703')) {
+          console.warn('Supabase telemetry query failed: system_events table or columns are missing. Using local datastore fallback.');
+        } else {
+          console.warn('Supabase telemetry query failed, falling back to local JSON datastore:', dbErr?.message || dbErr);
+        }
       }
     }
 
@@ -122,7 +126,7 @@ export async function GET(req: NextRequest) {
     }
 
     // Slice last N and map properties
-    let slice = events.slice(-limit);
+    const slice = events.slice(-limit);
     const formatted = slice.map((e: any) => ({
       id: e.id,
       timestamp: e.created_at,

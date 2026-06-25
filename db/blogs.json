@@ -1,1 +1,20 @@
-[]
+[
+  {
+    "slug": "implied-volatility-smile-modeling",
+    "title": "Modeling Implied Volatility Smiles using Black-Scholes and GARCH",
+    "summary": "An in-depth look at options pricing theory, root-finding numerical solvers, and GARCH statistical modeling for forecasting volatility clustering.",
+    "content": "Deep-dive into option Greeks, implied volatility smiles, and building real-time quantitative visualizers using Python FastAPI and Plotly.js...",
+    "cover_image_url": "/images/blog/volatility.webp",
+    "status": "published",
+    "created_at": "2026-06-15T10:00:00.000Z"
+  },
+  {
+    "slug": "nextjs-server-actions-erp",
+    "title": "Building Production-Grade ERP Systems with Next.js Server Actions",
+    "summary": "How to structure type-safe Server Actions with Zod validations, Upstash Redis caching, and QStash worker queues for enterprise workflows.",
+    "content": "A case study on developing scalable client management and material logging platforms, leveraging Next.js Edge handlers and Supabase telemetry streams...",
+    "cover_image_url": "/images/blog/erp.webp",
+    "status": "published",
+    "created_at": "2026-06-20T12:00:00.000Z"
+  }
+]

@@ -82,7 +82,7 @@ export default function Particles() {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 -z-45 pointer-events-none opacity-30"
+      className="fixed inset-0 -z-[45] pointer-events-none opacity-30"
     />
   );
 }

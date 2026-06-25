@@ -8,12 +8,12 @@ export const isGeminiConfigured = !!(apiKey && apiKey !== 'your-gemini-api-key')
 const genAI = isGeminiConfigured ? new GoogleGenerativeAI(apiKey) : null;
 
 // Rule-based fallback response engine for offline testing
-function getMockVrajResponse(prompt: string): string {
+function getMockVrajResponse(_prompt: string): string {
   return "AI assistant is temporarily unavailable. You can still view Vraj’s projects, skills, and resume on the portfolio.";
 }
 
 // Helper to return a mock stream
-export function getMockVrajResponseStream(prompt: string): ReadableStream<Uint8Array> {
+export function getMockVrajResponseStream(_prompt: string): ReadableStream<Uint8Array> {
   const fullText = "AI assistant is temporarily unavailable. You can still view Vraj’s projects, skills, and resume on the portfolio.";
   const encoder = new TextEncoder();
   const chunks = fullText.split(/(\s+)/);

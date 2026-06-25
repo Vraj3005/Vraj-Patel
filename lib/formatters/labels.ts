@@ -1,5 +1,3 @@
-import { CanonicalProjectCategory } from '../constants/categories';
-import { CanonicalContactStatus } from '../constants/status';
 
 export function getCategoryLabel(category: string): string {
   switch (category) {

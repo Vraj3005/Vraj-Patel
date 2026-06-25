@@ -113,7 +113,7 @@ export const projects: Project[] = [
     category: 'erp_system',
     shortDescription: 'Custom client and project management software for interior architecture studios, tracking budgets, materials, and invoicing.',
     description: 'A custom enterprise planning system built for interior design operations. It manages material inventory databases, client layouts tracking pipelines, automated GST billing estimates, and designer task queues.',
-    technologies: ['Next.js', 'Prisma ORM', 'PostgreSQL', 'NextAuth.js', 'Google Gemini API', 'Upstash Redis', 'QStash Queue', 'Tailwind CSS', 'Nodemailer'],
+    technologies: ['Next.js', 'Drizzle ORM', 'PostgreSQL', 'NextAuth.js', 'Google Gemini API', 'Upstash Redis', 'QStash Queue', 'Tailwind CSS', 'Nodemailer'],
     status: 'Live',
     year: '2026',
     image: '/images/projects/bhagwati.webp',
@@ -122,20 +122,20 @@ export const projects: Project[] = [
     period: 'May 2026 - Jun 2026',
     client: 'Pitbull Corporation (Bhagwati Interior)',
     metrics: [
-      { label: 'Database Access', value: 'Prisma ORM' },
+      { label: 'Database Access', value: 'Drizzle ORM' },
       { label: 'Auth Provider', value: 'NextAuth.js' },
       { label: 'Queue Scheduler', value: 'Upstash QStash' }
     ],
     problem: 'Interior design projects suffered from budget overruns because material selections, wood grades, and labor costs were not tracked in real-time.',
     whyBuilt: 'Built to reconcile interior design choices with client budgets instantly, automate GST quotation generation, and streamline task delegations.',
-    solution: 'Created a Next.js ERP panel using Prisma ORM to track designer catalog items, client site logs, and auto-compile GST quotes and invoice proposals.',
+    solution: 'Created a Next.js ERP panel using Drizzle ORM to track designer catalog items, client site logs, and auto-compile GST quotes and invoice proposals.',
     features: [
       'Material catalog pricing registers with search filters.',
       'Client lead status boards tracking active designs, approvals, and invoice states.',
       'Unified admin credentials gateway powered by NextAuth.js.',
       'Background tasks queuing for notifications via Upstash QStash.'
     ],
-    architecture: 'Client runs a Next.js dashboard panel. The database connector is powered by Prisma ORM communicating with PostgreSQL. Background tasks use Upstash Redis queue systems.',
+    architecture: 'Client runs a Next.js dashboard panel. The database connector is powered by Drizzle ORM communicating with PostgreSQL. Background tasks use Upstash Redis queue systems.',
     dbBackendLogic: 'Relational PostgreSQL schemas hold material logs, client data, and user states, ensuring transactions remain integrated during concurrent updates.',
     uiScreens: [
       { title: 'Material catalog Sheets', description: 'Lists active wood grades, laminates, hardware costs, and markup scales.' },
@@ -152,7 +152,7 @@ export const projects: Project[] = [
         solution: 'Designed print-optimized CSS rules allowing standard web pages to render perfect, letterhead-branded invoices directly via browser PDF generation (window.print).'
       }
     ],
-    whatILearned: 'Gained hands-on experience in schema migrations using Prisma, caching database queries with Redis, and integrating background queues.',
+    whatILearned: 'Gained hands-on experience in schema migrations using Drizzle, caching database queries with Redis, and integrating background queues.',
     futureImprovements: [
       'Add client-accessible approval dashboard for live design confirmations.',
       'Integrate automatic WhatsApp webhook reminders for billing status alerts.'
@@ -547,6 +547,53 @@ export const projects: Project[] = [
     futureImprovements: [
       'Integrate WebSockets endpoints for live tick data.',
       'Add backtesting simulation panel with slippage inputs.'
+    ],
+    featured: false
+  },
+  {
+    slug: 'ask-vraj',
+    title: 'Ask Vraj AI Assistant',
+    category: 'ai_automation',
+    shortDescription: 'Interactive conversational interface and floating widget powered by Google Gemini and Supabase for answering recruiter queries about Vraj.',
+    description: 'An AI assistant built to answer queries about Vraj\'s skills, projects, and work history. It features an interactive CLI-like chat playground and floating widget, integrating Google Gemini API for streaming responses and Supabase telemetry logs.',
+    technologies: ['Next.js', 'React', 'Google Gemini API', 'Supabase', 'Framer Motion', 'Zod', 'Tailwind CSS', 'TypeScript'],
+    status: 'Live',
+    year: '2026',
+    image: '/images/projects/ask-vraj.webp',
+    liveUrl: '/ask-vraj',
+    role: 'Solo Developer',
+    period: 'Jun 2026',
+    client: 'Personal Project',
+    metrics: [
+      { label: 'LLM Latency', value: 'Streaming' },
+      { label: 'Model', value: 'Gemini 1.5 Flash' },
+      { label: 'Logging', value: 'Supabase DB' }
+    ],
+    problem: 'Recruiters and visitors have to manually read through multiple project listings and resumes to evaluate candidate fit, which is slow and tedious.',
+    whyBuilt: 'Built to provide an interactive, instant chatbot that handles natural language questions about Vraj\'s expertise and backgrounds with direct data answers.',
+    solution: 'Implemented a chat interface with Framer Motion animations that streams response blocks from Next.js Edge handlers invoking Google GenAI SDK, backed by Supabase logging.',
+    features: [
+      'Natural language conversational playground matching Vraj\'s background.',
+      'Edge runtime handler streaming tokens to minimize response latency.',
+      'Client-side local storage chat session history persistence.',
+      'Supabase analytics logging to track recruiter interest areas.'
+    ],
+    architecture: 'Frontend chat UI triggers Next.js Edge POST routes. Edge functions validate requests with Zod, invoke the Gemini Flash model, and write anonymous telemetry logs to Supabase PostgreSQL.',
+    dbBackendLogic: 'No sessions are stored server-side. LocalStorage caches active chat threads, while request and response events are logged directly via Supabase anonymous insert RPCs.',
+    uiScreens: [
+      { title: 'Dedicated Chat Playground', description: 'Immersive terminal-like screen with quick queries presets.' },
+      { title: 'AI Assistant Floating Widget', description: 'Fixed corner chat widget accessible from any portfolio route.' }
+    ],
+    challenges: [
+      {
+        problem: 'Cold startup latency and slow responses from deep LLM models degraded chatbot user experience.',
+        solution: 'Used Next.js Edge Runtime to stream Gemini text chunks in real-time, reducing initial token latency to sub-second times.'
+      }
+    ],
+    whatILearned: 'Gained expertise in Edge Runtime restrictions, response streaming, prompt conditioning, and privacy-preserving telemetry.',
+    futureImprovements: [
+      'Add vector database for dynamic context retrieval (RAG).',
+      'Integrate voice input commands.'
     ],
     featured: false
   }

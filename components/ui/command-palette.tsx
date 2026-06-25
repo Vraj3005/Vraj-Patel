@@ -165,7 +165,7 @@ export default function CommandPalette({ isOpen, onClose }: CommandPaletteProps)
         onClose();
         alert('Caches cleared.');
       },
-      icon: <Terminal className="h-4 w-4 text-rose-450" />,
+      icon: <Terminal className="h-4 w-4 text-rose-500" />,
     },
   ];
 
@@ -246,7 +246,7 @@ export default function CommandPalette({ isOpen, onClose }: CommandPaletteProps)
           >
             {/* Input Line */}
             <div className="relative border-b border-white/5 bg-white/2 p-3.5 flex items-center gap-3">
-              <Search className="h-4.5 w-4.5 text-muted shrink-0 ml-1" />
+              <Search className="h-[18px] w-[18px] text-muted shrink-0 ml-1" />
               <Input
                 type="text"
                 placeholder="Search actions, categories, or projects (e.g. Solar, HMM)..."

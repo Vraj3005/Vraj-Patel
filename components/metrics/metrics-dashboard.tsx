@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { Card } from '@/components/ui/card';
 import { supabase } from '@/lib/supabase/client';
 import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
-import { Activity, Database, Server } from 'lucide-react';
+import { Activity, Server } from 'lucide-react';
 
 interface MetricSnapshot {
   time: string;
@@ -12,11 +12,16 @@ interface MetricSnapshot {
 }
 
 export default function MetricsDashboard() {
+  const [mounted, setMounted] = useState(false);
   const [latencyData, setLatencyData] = useState<MetricSnapshot[]>([]);
   const [memoryData, setMemoryData] = useState<MetricSnapshot[]>([]);
   const [loading, setLoading] = useState(true);
   const [isLatencyDemo, setIsLatencyDemo] = useState(false);
   const [isMemoryDemo, setIsMemoryDemo] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     const supabaseClient = supabase as any;
@@ -110,8 +115,9 @@ export default function MetricsDashboard() {
           )}
         </div>
         <div className="w-full h-48 relative z-10">
-          <ResponsiveContainer width="100%" height="100%">
-            <AreaChart data={latencyData}>
+          {mounted ? (
+            <ResponsiveContainer width="100%" height="100%" minWidth={0}>
+              <AreaChart data={latencyData}>
               <defs>
                 <linearGradient id="colorLatency" x1="0" y1="0" x2="0" y2="1">
                   <stop offset="5%" stopColor="#22d3ee" stopOpacity={0.2} />
@@ -128,6 +134,9 @@ export default function MetricsDashboard() {
               <Area type="monotone" dataKey="value" stroke="#22d3ee" fillOpacity={1} fill="url(#colorLatency)" />
             </AreaChart>
           </ResponsiveContainer>
+          ) : (
+            <div className="h-full w-full bg-white/2 rounded-xl animate-pulse" />
+          )}
         </div>
       </Card>
 
@@ -143,8 +152,9 @@ export default function MetricsDashboard() {
           )}
         </div>
         <div className="w-full h-48 relative z-10">
-          <ResponsiveContainer width="100%" height="100%">
-            <AreaChart data={memoryData}>
+          {mounted ? (
+            <ResponsiveContainer width="100%" height="100%" minWidth={0}>
+              <AreaChart data={memoryData}>
               <defs>
                 <linearGradient id="colorMemory" x1="0" y1="0" x2="0" y2="1">
                   <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.2} />
@@ -161,6 +171,9 @@ export default function MetricsDashboard() {
               <Area type="monotone" dataKey="value" stroke="#3b82f6" fillOpacity={1} fill="url(#colorMemory)" />
             </AreaChart>
           </ResponsiveContainer>
+          ) : (
+            <div className="h-full w-full bg-white/2 rounded-xl animate-pulse" />
+          )}
         </div>
       </Card>
     </div>

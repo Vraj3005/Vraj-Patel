@@ -562,7 +562,7 @@ export const DATA_FLOWS: DataFlow[] = [
     name: 'Contact Form Submission Pipeline',
     description: 'Traces the data flow of a user sending an inquiry via the contact form: validation checks, Supabase database storage, and Nodemailer SMTP admin alerts.',
     accentColor: '#3b82f6', // Blue
-    projectSlug: 'portfolio-contact',
+    isSystemLevel: true,
     steps: [
       {
         sequence: 1,
@@ -1457,6 +1457,467 @@ export const DATA_FLOWS: DataFlow[] = [
           title: 'Interactive Options Plotting',
           description: 'Compiles interactive Plotly charts, outputting clean signals plots.',
           metric: 'Plotly.js Chart overlays'
+        }
+      }
+    ]
+  },
+  {
+    id: 'driedhub-admin-dashboard',
+    name: 'Driedhub Admin ERP Workflow',
+    description: 'Traces how administrative inventory modifications are session-checked, routed via API endpoints, and committed to the Supabase database.',
+    accentColor: '#ec4899', // Pink/Rose
+    projectSlug: 'driedhub-admin-dashboard',
+    steps: [
+      {
+        sequence: 1,
+        nodeId: 'user',
+        title: 'Admin Stock Update',
+        description: 'Administrator adjusts stock levels or catalog pricing details on the inventory control panel.',
+        input: 'Product ID, New Stock Count, Price Adjustment.',
+        action: 'Admin Panel inputs captured and bundled into request body.',
+        output: 'Sanitized update payload.',
+        securityNote: 'Strict client-side input validation to reject negative values.',
+        businessView: {
+          title: 'Admin Interface Intake',
+          description: 'Store manager edits catalog data. Immediate validation prevents pricing entry errors.',
+          metric: 'User Update'
+        },
+        technicalView: {
+          title: 'Client Form Intake',
+          description: 'Collects fields using local react-hook-form bindings.',
+          metric: 'handleSubmit()'
+        },
+        recruiterView: {
+          title: 'Admin Controls Interface',
+          description: 'Enables catalog updates to streamline store logistics.',
+          metric: 'ERP Console'
+        }
+      },
+      {
+        sequence: 2,
+        nodeId: 'auth',
+        title: 'Service Role Session Guard',
+        description: 'Validates admin session scopes and credentials before routing the request.',
+        input: 'Request cookies and authorization headers.',
+        action: 'Decrypts session headers and verifies administrative permissions.',
+        output: 'Authorized session scopes details.',
+        securityNote: 'Enforces strict cookie validation and token check rules.',
+        businessView: {
+          title: 'Access Control Gate',
+          description: 'Ensures only authenticated admin users can modify catalog records.',
+          metric: 'Session Check'
+        },
+        technicalView: {
+          title: 'Supabase Session Verify',
+          description: 'Decrypts JWT token to check user role permissions.',
+          metric: 'supabase.auth.getSession()'
+        },
+        recruiterView: {
+          title: 'Role-Based Auth Guard',
+          description: 'Protects backend operations behind secure user access validations.',
+          metric: 'Role Protection'
+        }
+      },
+      {
+        sequence: 3,
+        nodeId: 'api',
+        title: 'Inventory Route Handler',
+        description: 'Processes the incoming update request on the Next.js API server.',
+        input: 'Admin update payload object.',
+        action: 'Server routes request to endpoint handler and validates payload structures using Zod schemas.',
+        output: 'Sanitized database write parameters.',
+        securityNote: 'Server-side validation checks block malformed data payloads.',
+        businessView: {
+          title: 'API Payload Audits',
+          description: 'API router processes values, verifying data formatting criteria.',
+          metric: 'API Handlers'
+        },
+        technicalView: {
+          title: 'Zod Payload Parsing',
+          description: 'Executes z.object().safeParse() verification steps.',
+          metric: 'zodSchema.safeParse()'
+        },
+        recruiterView: {
+          title: 'API Gateway Sanitization',
+          description: 'Uses server-side schema validations to guarantee data integrity.',
+          metric: 'Next.js API'
+        }
+      },
+      {
+        sequence: 4,
+        nodeId: 'db',
+        title: 'PostgreSQL Database Commit',
+        description: 'Commits data updates to the Supabase database.',
+        input: 'Sanitized catalog update values.',
+        action: 'Executes updates transaction to flush stock details to PostgreSQL database.',
+        output: 'Database write confirmation logs.',
+        securityNote: 'Row Level Security policies prevent unauthorized write queries.',
+        businessView: {
+          title: 'Database Updates',
+          description: 'Saves adjustments to PostgreSQL database instances.',
+          metric: 'Supabase Write'
+        },
+        technicalView: {
+          title: 'Supabase DB Write',
+          description: 'Triggers database update request on the products table.',
+          metric: 'supabase.from().update()'
+        },
+        recruiterView: {
+          title: 'Secure Database Commit',
+          description: 'Executes relational transactions on the backend database.',
+          metric: 'Supabase DB'
+        }
+      }
+    ]
+  },
+  {
+    id: 'marea-website',
+    name: 'Marea Checkout Integration Pipeline',
+    description: 'Traces how customer cart selections are processed through Next.js endpoints, Stripe checkout redirects, and Supabase order transactions.',
+    accentColor: '#a855f7', // Purple
+    projectSlug: 'marea-website',
+    steps: [
+      {
+        sequence: 1,
+        nodeId: 'user',
+        title: 'Select Collection Item',
+        description: 'Customer browses the luxury apparel catalog and adds selected items to the shopping cart.',
+        input: 'Product Slug, Size Selection, Quantity.',
+        action: 'Zustand store updates current checkout selections list.',
+        output: 'Updated customer shopping cart array.',
+        securityNote: 'Sanitizes inputs before committing state to prevent local state corruption.',
+        businessView: {
+          title: 'Shopping Cart Selection',
+          description: 'Buyer selects luxury products. Clean state management reduces cart abandonment.',
+          metric: 'Cart Update'
+        },
+        technicalView: {
+          title: 'Zustand Cart Actions',
+          description: 'Updates cart selections array in Zustand store state.',
+          metric: 'addItemToCart()'
+        },
+        recruiterView: {
+          title: 'Immersive Catalog Shopping',
+          description: 'Tracks client-side items selections instantly without network delay.',
+          metric: 'Client State'
+        }
+      },
+      {
+        sequence: 2,
+        nodeId: 'cms',
+        title: 'TipTap Content Hydration',
+        description: 'Hydrates custom rich text styling layouts and description elements for products.',
+        input: 'Serialized product content string.',
+        action: 'TipTap parser converts description details to HTML blocks.',
+        output: 'Sanitized HTML layout arrays.',
+        securityNote: 'Runs HTML sanitization layers using DOMPurify.sanitize().',
+        businessView: {
+          title: 'Description Hydration',
+          description: 'Displays rich layouts, product details, and sizing instructions.',
+          metric: 'Content Render'
+        },
+        technicalView: {
+          title: 'DOMPurify HTML Sanitizer',
+          description: 'Parses database content and sanitizes script tags to block XSS threats.',
+          metric: 'DOMPurify.sanitize()'
+        },
+        recruiterView: {
+          title: 'Sanitized Editorial Display',
+          description: 'Renders dynamic rich text documentation with full security audits.',
+          metric: 'TipTap Engine'
+        }
+      },
+      {
+        sequence: 3,
+        nodeId: 'api',
+        title: 'Checkout Session Initialization',
+        description: 'Next.js server initializes standard Stripe billing redirects.',
+        input: 'Cart items list and customer details.',
+        action: 'API route computes order pricing levels and requests Stripe session parameters.',
+        output: 'Stripe session redirect URL.',
+        securityNote: 'Price variables verified against database records to prevent pricing bypass.',
+        businessView: {
+          title: 'Session Creation',
+          description: 'Computes net cost parameters and initiates Stripe gateways.',
+          metric: 'Session Build'
+        },
+        technicalView: {
+          title: 'Stripe Session Create',
+          description: 'POST handler contacts Stripe API and returns redirect parameters.',
+          metric: 'stripe.checkout.sessions.create()'
+        },
+        recruiterView: {
+          title: 'Gateway Integration API',
+          description: 'Triggers secure third-party checkout flows with server-side audits.',
+          metric: 'Checkout POST'
+        }
+      },
+      {
+        sequence: 4,
+        nodeId: 'stripe',
+        title: 'Stripe Payment Verification',
+        description: 'Stripe processes customer card credentials and routes webhook transactions.',
+        input: 'Card details and Stripe session tokens.',
+        action: 'Stripe processes transactions and dispatches event signature headers to webhook endpoints.',
+        output: 'Payment verification webhook payload.',
+        securityNote: 'Uses cryptographic signature header checks to verify Stripe identity.',
+        businessView: {
+          title: 'Card Processing Gate',
+          description: 'Customer completes secure payment. Webhooks trigger backend alerts.',
+          metric: 'Stripe Checkout'
+        },
+        technicalView: {
+          title: 'Stripe Webhook Listen',
+          description: 'API route listens for checkout.session.completed event signatures.',
+          metric: 'stripe.webhooks.constructEvent()'
+        },
+        recruiterView: {
+          title: 'Webhook Verification Gate',
+          description: 'Listens for Stripe signatures to confirm successful transactions.',
+          metric: 'Cryptographic Auth'
+        }
+      },
+      {
+        sequence: 5,
+        nodeId: 'db',
+        title: 'Order Invoice Logging',
+        description: 'Supabase logs customer invoice details and updates inventory records.',
+        input: 'Verified Stripe webhook transaction.',
+        action: 'Inserts order registry items and triggers stock updates.',
+        output: 'Database write indicators.',
+        securityNote: 'Row Level Security verifies webhook origin parameters.',
+        businessView: {
+          title: 'Invoice Registry Log',
+          description: 'Saves invoice records and reduces inventory count metrics.',
+          metric: 'Inventory Sync'
+        },
+        technicalView: {
+          title: 'Supabase Invoice Insert',
+          description: 'Executes inserts query on orders and inventory database tables.',
+          metric: 'supabase.from("orders").insert()'
+        },
+        recruiterView: {
+          title: 'Asynchronous DB Storage',
+          description: 'Logs payment confirmations, completing the DTC sales lifecycle.',
+          metric: 'Relational Update'
+        }
+      }
+    ]
+  },
+  {
+    id: 'marea-admin-dashboard',
+    name: 'Marea Showcase Reordering Workflow',
+    description: 'Traces how custom home product layouts are rearranged with drag-and-drop actions, authenticated, and updated in database records.',
+    accentColor: '#a855f7', // Purple
+    projectSlug: 'marea-admin-dashboard',
+    steps: [
+      {
+        sequence: 1,
+        nodeId: 'user',
+        title: 'Drag catalog Item',
+        description: 'Store operator drag-reorders homepage fashion catalog categories on the workspace.',
+        input: 'Active list items, Drag coordinates, Sort order index.',
+        action: 'dnd-kit hooks calculate item swaps indices.',
+        output: 'Updated list arrangement array.',
+        securityNote: 'Coordinate checks prevent out-of-bounds array operations.',
+        businessView: {
+          title: 'Catalog Arrangement',
+          description: 'Manager updates homepage layout. Swaps occur visually on grid boxes.',
+          metric: 'Layout Order'
+        },
+        technicalView: {
+          title: 'dnd-kit Sensors',
+          description: 'Swaps items positions locally inside component state.',
+          metric: 'onDragEnd()'
+        },
+        recruiterView: {
+          title: 'Drag-and-Drop Operations',
+          description: 'Provides visual reordering tools to manage homepage content.',
+          metric: 'dnd-kit Sort'
+        }
+      },
+      {
+        sequence: 2,
+        nodeId: 'auth',
+        title: 'Access Scope Check',
+        description: 'Supabase checks session tokens before routing order mutations.',
+        input: 'Authentication session headers.',
+        action: 'Verifies session token is active and checks roles permissions.',
+        output: 'Authorized user session data.',
+        securityNote: 'Restricts write mutations to administrators only.',
+        businessView: {
+          title: 'Admin Credentials Check',
+          description: 'Ensures only store operators can override design orders.',
+          metric: 'Access Check'
+        },
+        technicalView: {
+          title: 'Auth Context Check',
+          description: 'Decrypts JWT token to check user role permissions.',
+          metric: 'supabase.auth.getSession()'
+        },
+        recruiterView: {
+          title: 'Secure Admin Guard',
+          description: 'Protects content updates behind JWT authentication checks.',
+          metric: 'Session Security'
+        }
+      },
+      {
+        sequence: 3,
+        nodeId: 'api',
+        title: 'Layout Sync Request',
+        description: 'Admin API endpoint receives rearranged catalog IDs list.',
+        input: 'Array of item IDs in new order.',
+        action: 'POST endpoint processes array and structures batch updates payload.',
+        output: 'Batch update parameters.',
+        securityNote: 'Zod verifies array contents are valid UUID strings.',
+        businessView: {
+          title: 'Batch Request Build',
+          description: 'API routes compile reordering list, verifying schema parameters.',
+          metric: 'Request Sync'
+        },
+        technicalView: {
+          title: 'Zod Array Validation',
+          description: 'Validates UUID items list before dispatching db queries.',
+          metric: 'z.array(z.string().uuid())'
+        },
+        recruiterView: {
+          title: 'Structured Array Validator',
+          description: 'Validates inputs using strict schemas, preventing injection inputs.',
+          metric: 'API Post'
+        }
+      },
+      {
+        sequence: 4,
+        nodeId: 'db',
+        title: 'Batch Sort Write',
+        description: 'Updates sort columns in the collections table.',
+        input: 'Batch reordered items IDs.',
+        action: 'Invokes database RPC function to synchronize all sorting values in a single transaction.',
+        output: 'Database update indicators.',
+        securityNote: 'Batch updates run inside single database transactions.',
+        businessView: {
+          title: 'Database Catalog Update',
+          description: 'Saves new sequence layout directly, updating frontend grids.',
+          metric: 'Batch Transaction'
+        },
+        technicalView: {
+          title: 'Supabase RPC Execute',
+          description: 'Calls custom Postgres function to batch update sort columns.',
+          metric: 'supabase.rpc("update_sort_order")'
+        },
+        recruiterView: {
+          title: 'Transaction Batch Update',
+          description: 'Invokes PostgreSQL RPC functions, optimizing database performance.',
+          metric: 'PostgreSQL RPC'
+        }
+      }
+    ]
+  },
+  {
+    id: 'surendra-bus-body',
+    name: 'Surendra Fleet Inquiry Pipeline',
+    description: 'Traces how client fleet requirements are validated, formatted, and routed to sales mailboxes using Nodemailer.',
+    accentColor: '#3b82f6', // Blue
+    projectSlug: 'surendra-bus-body',
+    steps: [
+      {
+        sequence: 1,
+        nodeId: 'user',
+        title: 'Submit Inquiry Form',
+        description: 'Fleet buyer fills out the customized bus body configuration checklist form.',
+        input: 'Customer Name, Email Address, Chassis Details, Seating Option.',
+        action: 'Form capture captures user options settings.',
+        output: 'Raw inputs parameters object.',
+        securityNote: 'Client-side inputs filters reject script tags.',
+        businessView: {
+          title: 'Inquiry Capture',
+          description: 'Client configures bus chassis options, submitting fleet detail cards.',
+          metric: 'Inquiry Capture'
+        },
+        technicalView: {
+          title: 'Form Data Capture',
+          description: 'Tracks field properties using react-hook-form bindings.',
+          metric: 'register()'
+        },
+        recruiterView: {
+          title: 'Fleet Options Intake',
+          description: 'Provides responsive configuration checklists, capturing details.',
+          metric: 'Client Form'
+        }
+      },
+      {
+        sequence: 2,
+        nodeId: 'validation',
+        title: 'Client Schema check',
+        description: 'Validates inputs formats using React Hook Form resolver checks.',
+        input: 'Raw form configuration parameters.',
+        action: 'Parses fields, verifying contact formats and selections.',
+        output: 'Validated data inputs payload.',
+        securityNote: 'Zod checks reject negative values or malformed parameters.',
+        businessView: {
+          title: 'Inputs Format Check',
+          description: 'Validates that contact emails and numbers match required standards.',
+          metric: 'Inputs Validate'
+        },
+        technicalView: {
+          title: 'Zod Validation Parse',
+          description: 'Resolves schemas logic to block incorrect entry layouts.',
+          metric: 'resolver: zodResolver()'
+        },
+        recruiterView: {
+          title: 'Typesafe Form Verifier',
+          description: 'Checks field structures before sending requests to routes.',
+          metric: 'Zod Schema Check'
+        }
+      },
+      {
+        sequence: 3,
+        nodeId: 'api',
+        title: 'Nodemailer Route Handler',
+        description: 'Next.js route builds HTML email templates and triggers SMTP dispatches.',
+        input: 'Sanitized inquiry details.',
+        action: 'POST endpoint processes payload and configures SMTP nodemailer mail settings.',
+        output: 'Nodemailer send confirmation status.',
+        securityNote: 'Honeypot form fields block automated spam submissions.',
+        businessView: {
+          title: 'Mailing Template Build',
+          description: 'Generates branded HTML email templates showing customer specifications.',
+          metric: 'API Processing'
+        },
+        technicalView: {
+          title: 'SMTP Mail Configuration',
+          description: 'Compiles Nodemailer options, sending mail via SMTP transports.',
+          metric: 'transporter.sendMail()'
+        },
+        recruiterView: {
+          title: 'Server Mail Forwarder',
+          description: 'Server routes form entries to Nodemailer transports dynamically.',
+          metric: 'Nodemailer API'
+        }
+      },
+      {
+        sequence: 4,
+        nodeId: 'mail',
+        title: 'Deliver Lead Alert',
+        description: 'Sends automated fleet details to the company inbox.',
+        input: 'HTML email alert showpage.',
+        action: 'Company mail server logs receipt of lead update notification.',
+        output: 'Delivery confirmation log.',
+        securityNote: 'TLS encryption secures email delivery routes.',
+        businessView: {
+          title: 'Lead Notification Alert',
+          description: 'Sales representatives receive structured customer lead cards.',
+          metric: 'Inbox Deliver'
+        },
+        technicalView: {
+          title: 'SMTP Receipt Check',
+          description: 'Verifies email delivery, completing request pipeline loops.',
+          metric: 'Delivery success'
+        },
+        recruiterView: {
+          title: 'Automated Lead Alerting',
+          description: 'Sends client specifications directly to sales representatives.',
+          metric: 'Inbox Receipt'
         }
       }
     ]

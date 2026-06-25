@@ -49,7 +49,7 @@ export default function RecruiterModal({ isOpen, onClose }: RecruiterModalProps)
       text: 'Architects robust responsive SPAs and full-stack applications. Fluent in TypeScript, Python, and Next.js.'
     },
     {
-      icon: <Terminal className="h-4 w-4 text-emerald-450" />,
+      icon: <Terminal className="h-4 w-4 text-emerald-400" />,
       title: 'ERP & Client Software Builder',
       subtitle: 'Enermass Solar Calculator & Bhagwati Interior ERP',
       text: 'Built customized pricing engines. Sped up tilt & shading estimations via Zustand state calculations. Saved designers 65% quote times.'

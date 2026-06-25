@@ -4,8 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { projects } from '@/lib/data/projects';
 import { Card } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { ArrowUpRight, Code2, Link2, ExternalLink } from 'lucide-react';
+import { ArrowUpRight, ExternalLink } from 'lucide-react';
 import { getCategoryLabel } from '@/lib/formatters/labels';
 
 interface FeaturedSummaryProps {

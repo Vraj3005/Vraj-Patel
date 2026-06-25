@@ -5,11 +5,11 @@ import Link from 'next/link';
 import { projects } from '@/lib/data/projects';
 import AIPreview from '@/components/sections/ai-preview';
 import GitTelemetry from '@/components/sections/git-telemetry';
+import { getCategoryLabel } from '@/lib/formatters/labels';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { AnimatedCounter } from '@/components/ui/animated-elements';
-import { getCategoryLabel } from '@/lib/formatters/labels';
 import dynamic from 'next/dynamic';
 
 const InteractiveTerminal = dynamic(() => import('@/components/ui/interactive-terminal'), {
@@ -25,9 +25,9 @@ const TechStackGraph = dynamic(() => import('@/components/ui/tech-stack-graph'),
 const RecruiterModal = dynamic(() => import('@/components/ui/recruiter-modal'), { ssr: false });
 import { motion, Variants } from 'framer-motion';
 import {
+  Code, Database, Server, Cpu, Globe,
   ArrowRight, Download, MapPin, Github, Mail, Linkedin,
-  GraduationCap, Code, Database, Server, Layout, Cpu, Globe,
-  ArrowUpRight, Terminal, Briefcase
+  GraduationCap, Layout, ArrowUpRight, Terminal, Briefcase
 } from 'lucide-react';
 
 const techStack = [

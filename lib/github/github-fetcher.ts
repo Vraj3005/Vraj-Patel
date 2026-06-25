@@ -2,6 +2,7 @@ import { createSimpleSupabaseClient } from '../supabase/simple';
 import { supabaseAdmin, isSupabaseAdminConfigured } from '../supabase/admin';
 import { HeatmapCell } from '@/types/advanced';
 import { EventBus } from '../events/event-bus';
+import { getErrorMessage } from '../utils';
 
 /**
  * Service to fetch, compile, and cache GitHub contributions history blocks
@@ -88,15 +89,16 @@ export class GithubFetcher {
       );
 
       return { data: rawData, isDemoMode: false };
-    } catch (err: any) {
+    } catch (err: unknown) {
+      const errMsg = getErrorMessage(err);
       console.error(`GitHub contributions fetcher error for mode "${mode}":`, err);
 
       // 6. Write a safe error event to system_events
       await EventBus.publish(
         'github_sync',
         'error',
-        `Failed to sync GitHub contributions for account context "${mode}": ${err.message}`,
-        { mode, error: err.message }
+        `Failed to sync GitHub contributions for account context "${mode}": ${errMsg}`,
+        { mode, error: errMsg }
       );
 
       // 7. If API fails, fall back to cached data (even if expired)

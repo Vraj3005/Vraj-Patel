@@ -10,7 +10,7 @@ export async function GET(req: NextRequest) {
     const result = await GithubFetcher.getContributions(mode);
     await MetricsCollector.recordApiLatency('/api/github/contributions', Date.now() - startTime);
     return NextResponse.json(result);
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error('Error fetching GitHub contributions:', err);
     await MetricsCollector.recordApiLatency('/api/github/contributions', Date.now() - startTime);
     return NextResponse.json({ error: 'Failed to fetch contributions' }, { status: 500 });

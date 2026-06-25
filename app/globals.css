@@ -40,6 +40,11 @@
   50% { transform: translateY(15px) scale(1); }
 }
 
+@keyframes gridFade {
+  0%, 100% { opacity: 0.15; }
+  50% { opacity: 0.35; }
+}
+
 @keyframes shimmer {
   0% { background-position: -200% 0; }
   100% { background-position: 200% 0; }

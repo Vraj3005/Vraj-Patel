@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { DataFlow, DataFlowStep } from '@/types/advanced';
+import { DataFlow } from '@/types/advanced';
 import { DATA_FLOWS } from '@/lib/visualizer/flow-data';
 import { 
   Play, Pause, RotateCcw, ArrowRight, ArrowLeft, ShieldAlert, 
@@ -631,7 +631,7 @@ export default function DataFlowExplorer({
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-card-border pb-4 gap-3 z-10 select-none">
         <div className="flex flex-col gap-1">
           <h3 className="text-sm font-bold text-foreground font-mono uppercase tracking-wider flex items-center gap-2">
-            <Activity className="h-4.5 w-4.5 animate-pulse" style={{ color: currentFlowAccentColor }} /> Transaction Data Flow Explorer
+            <Activity className="h-[18px] w-[18px] animate-pulse" style={{ color: currentFlowAccentColor }} /> Transaction Data Flow Explorer
           </h3>
           <span className="text-[10px] font-mono text-secondary">
             Trace step-by-step pipeline transformations and validations
@@ -845,12 +845,12 @@ export default function DataFlowExplorer({
                   </div>
                 )}
                 {(viewMode === 'recruiter' && activeStep.recruiterView?.metric) && (
-                  <div className="text-[9.5px] font-mono text-emerald-450 bg-emerald-950/10 border border-emerald-900/30 p-2.5 rounded-lg select-none">
+                  <div className="text-[9.5px] font-mono text-emerald-400 bg-emerald-950/10 border border-emerald-900/30 p-2.5 rounded-lg select-none">
                     <strong>Recruiter Impact:</strong> {activeStep.recruiterView.metric}
                   </div>
                 )}
                 {(viewMode === 'overview' && activeStep.businessView?.metric) && (
-                  <div className="text-[9.5px] font-mono text-amber-500 bg-amber-955/10 border border-amber-900/30 p-2.5 rounded-lg select-none">
+                  <div className="text-[9.5px] font-mono text-amber-500 bg-amber-950/10 border border-amber-900/30 p-2.5 rounded-lg select-none">
                     <strong>Overview Insight:</strong> {activeStep.businessView.metric}
                   </div>
                 )}
@@ -858,7 +858,7 @@ export default function DataFlowExplorer({
                 {/* Security Audit Notations Footer */}
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-t border-card-border/40 pt-4">
                   <div className="flex items-center gap-2 text-[9px] font-mono text-secondary">
-                    <ShieldAlert className="h-4 w-4 text-amber-550 shrink-0" />
+                    <ShieldAlert className="h-4 w-4 text-amber-500 shrink-0" />
                     <span className="font-semibold text-left">
                       <strong>Security Protocol:</strong> {activeStep.securityNote}
                     </span>
@@ -981,7 +981,7 @@ export default function DataFlowExplorer({
             >
               <div className="flex items-center justify-between border-b border-card-border pb-4">
                 <div className="flex items-center gap-2">
-                  <Terminal className="h-4.5 w-4.5 text-cyan-400" />
+                  <Terminal className="h-[18px] w-[18px] text-cyan-400" />
                   <span className="font-mono text-xs font-bold text-foreground uppercase tracking-wider">Transaction Data Ledger</span>
                 </div>
                 <button 
@@ -1028,7 +1028,7 @@ export default function DataFlowExplorer({
                 <div className="flex flex-col gap-2 p-3.5 bg-black/45 border border-card-border rounded-lg text-secondary">
                   <span className="text-[8px] font-bold text-foreground uppercase tracking-widest">Transaction Security Validation Audit</span>
                   <p className="leading-relaxed text-[9.5px]">
-                    This transaction represents verified payloads processed during system runtimes. To protect Vraj Patel\'s portfolio integrity, security filters are evaluated on server components.
+                    This transaction represents verified payloads processed during system runtimes. To protect Vraj Patel&apos;s portfolio integrity, security filters are evaluated on server components.
                   </p>
                   <ul className="list-disc list-inside text-[9.5px] flex flex-col gap-1 mt-1 pl-1">
                     <li>Cross-Site Scripting (XSS) Sanitization on input frames</li>

@@ -9,6 +9,7 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import { getErrorMessage } from '@/lib/utils';
 
 interface Message {
   id: string;
@@ -29,15 +30,6 @@ export default function InboxPage() {
   const [error, setError] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
 
-  // Check if session has passcode stored on mount
-  useEffect(() => {
-    const saved = sessionStorage.getItem('vraj_inbox_passcode');
-    if (saved) {
-      setPasscode(saved);
-      attemptUnlock(saved);
-    }
-  }, []);
-
   const attemptUnlock = async (codeToTry: string) => {
     setLoading(true);
     setError(null);
@@ -57,14 +49,23 @@ export default function InboxPage() {
       setMessages(payload.messages || []);
       setIsUnlocked(true);
       sessionStorage.setItem('vraj_inbox_passcode', codeToTry);
-    } catch (err: any) {
-      setError(err.message || 'Verification challenge failed.');
+    } catch (err: unknown) {
+      setError(getErrorMessage(err));
       sessionStorage.removeItem('vraj_inbox_passcode');
       setIsUnlocked(false);
     } finally {
       setLoading(false);
     }
   };
+
+  // Check if session has passcode stored on mount
+  useEffect(() => {
+    const saved = sessionStorage.getItem('vraj_inbox_passcode');
+    if (saved) {
+      setPasscode(saved);
+      attemptUnlock(saved);
+    }
+  }, []);
 
   const handleUnlockSubmit = (e: React.FormEvent) => {
     e.preventDefault();

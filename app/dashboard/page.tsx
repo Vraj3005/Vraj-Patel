@@ -9,16 +9,12 @@ import MetricsCharts from '@/components/metrics/metrics-charts';
 import ComplexityCards from '@/components/metrics/complexity-cards';
 import GithubHeatmap from '@/components/dashboard/github-heatmap';
 import { Card } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
 import {
   LayoutDashboard,
   BarChart3,
   Network,
   Terminal,
   Bot,
-  Briefcase,
-  ExternalLink,
   ChevronRight,
   RefreshCw,
   FolderKanban

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card } from '@/components/ui/card';
 import { projects } from '@/lib/data/projects';
 import {
@@ -16,11 +16,9 @@ import {
   PolarRadiusAxis,
   Radar,
   BarChart,
-  Bar,
-  CartesianGrid
+  Bar
 } from 'recharts';
-import { LineChart, Line } from 'recharts';
-import { Activity, Star, BarChart3, TrendingUp } from 'lucide-react';
+import { TrendingUp } from 'lucide-react';
 
 interface MetricsChartsProps {
   timelineData: any[];
@@ -58,6 +56,11 @@ const projectComplexities: Record<string, {
 
 export default function MetricsCharts({ timelineData, statsData }: MetricsChartsProps) {
   const [selectedSlug, setSelectedSlug] = useState<string>('enermass-solar-calculator');
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Prepare radar chart data for selected project
   const currentComplexity = projectComplexities[selectedSlug] || { ui: 50, backend: 50, db: 50, ai: 50, quant: 50 };
@@ -122,8 +125,9 @@ export default function MetricsCharts({ timelineData, statsData }: MetricsCharts
         </div>
 
         <div className="h-64 w-full relative z-10">
-          <ResponsiveContainer width="100%" height="100%">
-            <AreaChart data={timelineData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+          {mounted ? (
+            <ResponsiveContainer width="100%" height="100%" minWidth={0}>
+              <AreaChart data={timelineData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
               <defs>
                 <linearGradient id="colorViews" x1="0" y1="0" x2="0" y2="1">
                   <stop offset="5%" stopColor="#22d3ee" stopOpacity={0.2} />
@@ -165,6 +169,9 @@ export default function MetricsCharts({ timelineData, statsData }: MetricsCharts
               />
             </AreaChart>
           </ResponsiveContainer>
+          ) : (
+            <div className="h-full w-full bg-white/2 rounded-xl animate-pulse" />
+          )}
         </div>
       </Card>
 
@@ -198,28 +205,32 @@ export default function MetricsCharts({ timelineData, statsData }: MetricsCharts
           </div>
 
           <div className="h-64 w-full relative z-10 flex items-center justify-center">
-            <ResponsiveContainer width="100%" height="100%">
-              <RadarChart cx="50%" cy="50%" outerRadius="70%" data={radarData}>
-                <PolarGrid stroke="rgba(255,255,255,0.05)" />
-                <PolarAngleAxis dataKey="subject" stroke="#9ca3af" fontSize={8} tickLine={false} />
-                <PolarRadiusAxis angle={30} domain={[0, 100]} stroke="rgba(255,255,255,0.1)" fontSize={8} />
-                <Radar
-                  name="Complexity Score"
-                  dataKey="score"
-                  stroke="#22d3ee"
-                  fill="#22d3ee"
-                  fillOpacity={0.2}
-                />
-                <Tooltip
-                  contentStyle={{
-                    background: '#0a0a0a',
-                    border: '1px solid rgba(255,255,255,0.08)',
-                    borderRadius: '8px'
-                  }}
-                  itemStyle={{ color: '#22d3ee', fontSize: '11px', fontFamily: 'monospace' }}
-                />
-              </RadarChart>
-            </ResponsiveContainer>
+            {mounted ? (
+              <ResponsiveContainer width="100%" height="100%" minWidth={0}>
+                <RadarChart cx="50%" cy="50%" outerRadius="70%" data={radarData}>
+                  <PolarGrid stroke="rgba(255,255,255,0.05)" />
+                  <PolarAngleAxis dataKey="subject" stroke="#9ca3af" fontSize={8} tickLine={false} />
+                  <PolarRadiusAxis angle={30} domain={[0, 100]} stroke="rgba(255,255,255,0.1)" fontSize={8} />
+                  <Radar
+                    name="Complexity Score"
+                    dataKey="score"
+                    stroke="#22d3ee"
+                    fill="#22d3ee"
+                    fillOpacity={0.2}
+                  />
+                  <Tooltip
+                    contentStyle={{
+                      background: '#0a0a0a',
+                      border: '1px solid rgba(255,255,255,0.08)',
+                      borderRadius: '8px'
+                    }}
+                    itemStyle={{ color: '#22d3ee', fontSize: '11px', fontFamily: 'monospace' }}
+                  />
+                </RadarChart>
+              </ResponsiveContainer>
+            ) : (
+              <div className="h-full w-full bg-white/2 rounded-xl animate-pulse" />
+            )}
           </div>
         </Card>
 
@@ -236,22 +247,26 @@ export default function MetricsCharts({ timelineData, statsData }: MetricsCharts
           </div>
 
           <div className="h-64 w-full relative z-10">
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={averageComplexityData} margin={{ top: 10, right: 10, left: -25, bottom: 0 }}>
-                <XAxis dataKey="name" stroke="#6b7280" fontSize={9} tickLine={false} />
-                <YAxis stroke="#6b7280" fontSize={9} tickLine={false} domain={[0, 100]} />
-                <Tooltip
-                  contentStyle={{
-                    background: '#0a0a0a',
-                    border: '1px solid rgba(255,255,255,0.08)',
-                    borderRadius: '8px'
-                  }}
-                  itemStyle={{ fontSize: '11px', fontFamily: 'monospace' }}
-                />
-                <Bar dataKey="Average" fill="#3b82f6" radius={[4, 4, 0, 0]} opacity={0.8} />
-                <Bar dataKey="Max" fill="#8b5cf6" radius={[4, 4, 0, 0]} opacity={0.8} />
-              </BarChart>
-            </ResponsiveContainer>
+            {mounted ? (
+              <ResponsiveContainer width="100%" height="100%" minWidth={0}>
+                <BarChart data={averageComplexityData} margin={{ top: 10, right: 10, left: -25, bottom: 0 }}>
+                  <XAxis dataKey="name" stroke="#6b7280" fontSize={9} tickLine={false} />
+                  <YAxis stroke="#6b7280" fontSize={9} tickLine={false} domain={[0, 100]} />
+                  <Tooltip
+                    contentStyle={{
+                      background: '#0a0a0a',
+                      border: '1px solid rgba(255,255,255,0.08)',
+                      borderRadius: '8px'
+                    }}
+                    itemStyle={{ fontSize: '11px', fontFamily: 'monospace' }}
+                  />
+                  <Bar dataKey="Average" fill="#3b82f6" radius={[4, 4, 0, 0]} opacity={0.8} />
+                  <Bar dataKey="Max" fill="#8b5cf6" radius={[4, 4, 0, 0]} opacity={0.8} />
+                </BarChart>
+              </ResponsiveContainer>
+            ) : (
+              <div className="h-full w-full bg-white/2 rounded-xl animate-pulse" />
+            )}
           </div>
         </Card>
       </div>

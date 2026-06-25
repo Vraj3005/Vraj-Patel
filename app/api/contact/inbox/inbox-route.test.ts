@@ -2,7 +2,6 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { POST } from './route';
 import { NextRequest } from 'next/server';
 import fs from 'fs';
-import path from 'path';
 
 vi.mock('@/lib/supabase/admin', () => ({
   isSupabaseAdminConfigured: false,

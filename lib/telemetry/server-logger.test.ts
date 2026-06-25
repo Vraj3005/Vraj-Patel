@@ -1,7 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { ServerLogger } from './server-logger';
 import fs from 'fs';
-import path from 'path';
 
 // Mock Supabase Admin client helper
 vi.mock('../supabase/admin', () => ({
@@ -10,8 +9,6 @@ vi.mock('../supabase/admin', () => ({
 }));
 
 describe('ServerLogger Event Ingestion Fallbacks & RLS Mock Checks', () => {
-  const originalEnv = process.env.NODE_ENV;
-
   beforeEach(() => {
     vi.restoreAllMocks();
     (process.env as any).NODE_ENV = 'development';

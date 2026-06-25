@@ -4,15 +4,15 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
-  Terminal, ChevronRight, CornerDownLeft, Info, HelpCircle, 
-  CheckCircle2, XCircle, Play, RotateCcw, AlertTriangle, ShieldCheck, 
-  ExternalLink, Github, ArrowRight, Activity, Calendar, Cpu, ArrowUpRight, Lock, 
-  Server, Database, Code, Shield
+  Terminal, ChevronRight, CornerDownLeft, 
+  CheckCircle2, XCircle, AlertTriangle, ShieldCheck, 
+  ExternalLink, Github, ArrowUpRight
 } from 'lucide-react';
 import { projects } from '@/lib/data/projects';
 import { DATA_FLOWS } from '@/lib/visualizer/flow-data';
 import { parseCommand, getSuggestions, COMMANDS, CommandDefinition } from '@/lib/cli/registry';
 import { Badge } from '@/components/ui/badge';
+import { getErrorMessage } from '@/lib/utils';
 import { Card } from '@/components/ui/card';
 import { supabase } from '@/lib/supabase/client';
 import { EventBus } from '@/lib/events/event-bus';
@@ -45,6 +45,17 @@ export default function CLITerminal() {
   const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
+  const handleCommandRef = useRef<(rawInput: string) => Promise<void>>(async () => {});
+  const renderHelpRef = useRef<() => React.ReactNode>(() => null);
+  const renderProjectListRef = useRef<() => React.ReactNode>(() => null);
+  const renderFilteredProjectsRef = useRef<(cat: string) => React.ReactNode>(() => null);
+  const renderProjectFlowRef = useRef<(flow: typeof DATA_FLOWS[0]) => React.ReactNode>(() => null);
+  const renderRoleFitRef = useRef<(role: 'fullstack' | 'ai' | 'quant') => React.ReactNode>(() => null);
+  const renderMetricsRef = useRef<() => React.ReactNode>(() => null);
+  const renderHeatmapRef = useRef<() => React.ReactNode>(() => null);
+  const renderSecurityChecklistRef = useRef<(project: typeof projects[0]) => React.ReactNode>(() => null);
+  const renderTraceLogsRef = useRef<(flow: typeof DATA_FLOWS[0]) => React.ReactNode>(() => null);
+
   useEffect(() => {
     // Asynchronously pre-fetch combined GitHub contributions
     fetch('/api/github/contributions')
@@ -68,11 +79,11 @@ export default function CLITerminal() {
   }, [history, scrollToBottom]);
 
   // Focus helper
-  const focusInput = () => {
+  const focusInput = useCallback(() => {
     if (inputRef.current && !isStreaming) {
       inputRef.current.focus();
     }
-  };
+  }, [isStreaming]);
 
   useEffect(() => {
     focusInput();
@@ -91,7 +102,7 @@ export default function CLITerminal() {
   }, [inputValue]);
 
   // Helper: log to database & dispatch Operations Console event
-  const logTelemetry = async (cmdText: string, success: boolean, durationMs: number) => {
+  const logTelemetry = useCallback(async (cmdText: string, success: boolean, durationMs: number) => {
     try {
       // 1. Log to supabase
       const cmdName = cmdText.split(' ')[0] || 'unknown';
@@ -114,10 +125,10 @@ export default function CLITerminal() {
     } catch (err) {
       console.warn('CLI logging failed:', err);
     }
-  };
+  }, []);
 
   // Helper to execute commands
-  const handleCommand = async (rawInput: string) => {
+  const handleCommand = useCallback(async (rawInput: string) => {
     const trimmed = rawInput.trim();
     if (!trimmed) return;
 
@@ -146,7 +157,7 @@ export default function CLITerminal() {
 
     let outputElement: React.ReactNode = null;
     let type: LogLine['type'] = 'output';
-    let isNav = false;
+    let _isNav = false;
 
     try {
       switch (cmd) {
@@ -155,7 +166,7 @@ export default function CLITerminal() {
           return;
 
         case 'help':
-          outputElement = renderHelp();
+          outputElement = renderHelpRef.current();
           break;
 
         case 'whoami':
@@ -242,20 +253,20 @@ export default function CLITerminal() {
         case 'projects':
           const filterArg = args[0] || '';
           if (filterArg.startsWith('--')) {
-            outputElement = renderFilteredProjects(filterArg.replace('--', ''));
+            outputElement = renderFilteredProjectsRef.current(filterArg.replace('--', ''));
           } else {
             outputElement = (
               <div className="flex flex-col gap-2">
                 <span className="text-cyan-400 font-bold">PROJECTS DIRECTORY</span>
-                <p className="text-white/85">Vraj has built 11 production ERPs, e-commerce stores, and quantitative analytics engines.</p>
+                <p className="text-white/85">Vraj has built {projects.length} production ERPs, e-commerce stores, and quantitative analytics engines.</p>
                 <div className="flex flex-wrap gap-2 mt-1">
-                  <button onClick={() => handleCommand('project list')} className="text-[10px] bg-white/5 border border-white/10 hover:border-cyan-400 text-secondary hover:text-white px-2.5 py-1 rounded-md cursor-pointer transition-colors">
+                  <button onClick={() => handleCommandRef.current('project list')} className="text-[10px] bg-white/5 border border-white/10 hover:border-cyan-400 text-secondary hover:text-white px-2.5 py-1 rounded-md cursor-pointer transition-colors">
                     project list 📋
                   </button>
-                  <button onClick={() => handleCommand('projects --client')} className="text-[10px] bg-white/5 border border-white/10 hover:border-cyan-400 text-secondary hover:text-white px-2.5 py-1 rounded-md cursor-pointer transition-colors">
+                  <button onClick={() => handleCommandRef.current('projects --client')} className="text-[10px] bg-white/5 border border-white/10 hover:border-cyan-400 text-secondary hover:text-white px-2.5 py-1 rounded-md cursor-pointer transition-colors">
                     projects --client 💼
                   </button>
-                  <button onClick={() => handleCommand('projects --quant')} className="text-[10px] bg-white/5 border border-white/10 hover:border-cyan-400 text-secondary hover:text-white px-2.5 py-1 rounded-md cursor-pointer transition-colors">
+                  <button onClick={() => handleCommandRef.current('projects --quant')} className="text-[10px] bg-white/5 border border-white/10 hover:border-cyan-400 text-secondary hover:text-white px-2.5 py-1 rounded-md cursor-pointer transition-colors">
                     projects --quant 📊
                   </button>
                 </div>
@@ -288,7 +299,7 @@ export default function CLITerminal() {
 
         // Project Commands
         case 'project list':
-          outputElement = renderProjectList();
+          outputElement = renderProjectListRef.current();
           break;
 
         case 'project open':
@@ -303,7 +314,7 @@ export default function CLITerminal() {
               type = 'error';
             } else {
               outputElement = <span className="text-cyan-400 font-bold">Routing to /projects/{openSlug}...</span>;
-              isNav = true;
+              _isNav = true;
               router.push(`/projects/${openSlug}`);
             }
           }
@@ -394,7 +405,7 @@ export default function CLITerminal() {
               outputElement = <span className="text-rose-400">Error: No transaction data flow mapped for slug &quot;{flowSlug}&quot;.</span>;
               type = 'error';
             } else {
-              outputElement = renderProjectFlow(found);
+              outputElement = renderProjectFlowRef.current(found);
             }
           }
           break;
@@ -438,7 +449,7 @@ export default function CLITerminal() {
         case 'projects --ai':
         case 'projects --dashboard':
         case 'projects --website':
-          outputElement = renderFilteredProjects(cmd.replace('projects --', ''));
+          outputElement = renderFilteredProjectsRef.current(cmd.replace('projects --', ''));
           break;
 
         // AI Recruiter Commands
@@ -463,13 +474,13 @@ export default function CLITerminal() {
         case 'role-fit':
           const fitArg = args[0] ? args[0].toLowerCase() : '';
           if (fitArg === 'fullstack') {
-            outputElement = renderRoleFit('fullstack');
+            outputElement = renderRoleFitRef.current('fullstack');
           } else if (fitArg === 'ai') {
-            outputElement = renderRoleFit('ai');
+            outputElement = renderRoleFitRef.current('ai');
           } else if (fitArg === 'quant') {
-            outputElement = renderRoleFit('quant');
+            outputElement = renderRoleFitRef.current('quant');
           } else {
-            outputElement = <span className="text-rose-450">Error: Invalid role-fit target. Use: &quot;role-fit fullstack&quot;, &quot;role-fit ai&quot;, or &quot;role-fit quant&quot;.</span>;
+            outputElement = <span className="text-rose-500">Error: Invalid role-fit target. Use: &quot;role-fit fullstack&quot;, &quot;role-fit ai&quot;, or &quot;role-fit quant&quot;.</span>;
             type = 'error';
           }
           break;
@@ -477,41 +488,41 @@ export default function CLITerminal() {
         // Navigation
         case 'open /projects':
           outputElement = <span className="text-cyan-400 font-bold">Navigating to /projects directory...</span>;
-          isNav = true;
+          _isNav = true;
           router.push('/projects');
           break;
 
         case 'open /ask-vraj':
           outputElement = <span className="text-cyan-400 font-bold">Routing browser to /ask-vraj AI portal...</span>;
-          isNav = true;
+          _isNav = true;
           router.push('/ask-vraj');
           break;
 
         case 'open /resume':
-          outputElement = <span className="text-cyan-400 font-bold">Opening Vraj Patel\'s Interactive CV...</span>;
-          isNav = true;
+          outputElement = <span className="text-cyan-400 font-bold">Opening Vraj Patel&apos;s Interactive CV...</span>;
+          _isNav = true;
           router.push('/resume');
           break;
 
         case 'open /contact':
           outputElement = <span className="text-cyan-400 font-bold">Redirecting browser to /contact card...</span>;
-          isNav = true;
+          _isNav = true;
           router.push('/contact');
           break;
 
         case 'open /inbox':
           outputElement = <span className="text-cyan-400 font-bold">Opening Secure Inquiries Inbox Gateway...</span>;
-          isNav = true;
+          _isNav = true;
           router.push('/inbox');
           break;
 
         // Advanced Subsystems
         case 'show metrics':
-          outputElement = renderMetrics();
+          outputElement = renderMetricsRef.current();
           break;
 
         case 'show heatmap':
-          outputElement = renderHeatmap();
+          outputElement = renderHeatmapRef.current();
           break;
 
         case 'show security':
@@ -525,7 +536,7 @@ export default function CLITerminal() {
               outputElement = <span className="text-rose-400">Error: Project slug &quot;{secSlug}&quot; not found.</span>;
               type = 'error';
             } else {
-              outputElement = renderSecurityChecklist(found);
+              outputElement = renderSecurityChecklistRef.current(found);
             }
           }
           break;
@@ -541,7 +552,7 @@ export default function CLITerminal() {
               outputElement = <span className="text-rose-400">Error: Pipeline flow &quot;{traceFlow}&quot; not found.</span>;
               type = 'error';
             } else {
-              outputElement = renderTraceLogs(found);
+              outputElement = renderTraceLogsRef.current(found);
             }
           }
           break;
@@ -602,13 +613,14 @@ export default function CLITerminal() {
               // Finished clean. Log telemetry logs
               await logTelemetry(trimmed, true, Date.now() - startMs);
 
-            } catch (err: any) {
+            } catch (err: unknown) {
+              const errMsg = getErrorMessage(err);
               console.error('AI streaming error in terminal:', err);
               setHistory((prev) => {
                 const base = prev.filter(l => l.id !== `ai-wait-${uniqueId}`);
                 return [
                   ...base,
-                  { id: `ai-err-${uniqueId}`, type: 'error', content: `Streaming Error: ${err.message || 'Stream connection closed unexpectedly.'}` }
+                  { id: `ai-err-${uniqueId}`, type: 'error', content: `Streaming Error: ${errMsg || 'Stream connection closed unexpectedly.'}` }
                 ];
               });
               await logTelemetry(trimmed, false, Date.now() - startMs);
@@ -620,12 +632,12 @@ export default function CLITerminal() {
           break;
 
         default:
-          outputElement = <span className="text-rose-450 font-mono">Error: Command &quot;{cmd}&quot; is not recognized. Type &quot;help&quot; to review valid inputs list.</span>;
+          outputElement = <span className="text-rose-500 font-mono">Error: Command &quot;{cmd}&quot; is not recognized. Type &quot;help&quot; to review valid inputs list.</span>;
           type = 'error';
           break;
       }
-    } catch (err: any) {
-      outputElement = <span className="text-rose-400">Execution Error: {err.message || 'Internal pipeline execution failure.'}</span>;
+    } catch (err: unknown) {
+      outputElement = <span className="text-rose-400">Execution Error: {getErrorMessage(err) || 'Internal pipeline execution failure.'}</span>;
       type = 'error';
     }
 
@@ -638,7 +650,7 @@ export default function CLITerminal() {
       ...prev,
       { id: `output-${Math.random().toString(36).substring(2, 9)}`, type, command: cmd, content: outputElement }
     ]);
-  };
+  }, [logTelemetry, router]);
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (isStreaming) return;
@@ -681,7 +693,7 @@ export default function CLITerminal() {
   };
 
   // Structured Renderer 1: HELP COMMAND
-  const renderHelp = () => {
+  function renderHelp() {
     const categories: Record<CommandDefinition['category'], CommandDefinition[]> = {
       general: [], project: [], category: [], ai: [], navigation: [], advanced: []
     };
@@ -714,7 +726,7 @@ export default function CLITerminal() {
   };
 
   // Structured Renderer 2: PROJECT LIST COMMAND
-  const renderProjectList = () => {
+  function renderProjectList() {
     return (
       <div className="flex flex-col gap-2 font-mono text-[10.5px] text-left select-none">
         <span className="text-cyan-400 font-bold uppercase tracking-wider block">Portfolio Slugs Register</span>
@@ -751,7 +763,7 @@ export default function CLITerminal() {
   };
 
   // Structured Renderer 3: FILTERED PROJECTS LIST
-  const renderFilteredProjects = (cat: string) => {
+  function renderFilteredProjects(cat: string) {
     let filtered = projects;
     if (cat === 'client') filtered = projects.filter(p => p.client !== 'Personal Project');
     else if (cat === 'erp') filtered = projects.filter(p => p.title.toLowerCase().includes('erp') || p.title.toLowerCase().includes('calculator') || p.slug.includes('dashboard'));
@@ -784,7 +796,7 @@ export default function CLITerminal() {
   };
 
   // Structured Renderer 4: PROJECT DATA FLOW STEP-BY-STEP
-  const renderProjectFlow = (flow: typeof DATA_FLOWS[0]) => {
+  function renderProjectFlow(flow: typeof DATA_FLOWS[0]) {
     return (
       <div className="flex flex-col gap-3 font-mono text-[10.5px] text-left select-none w-full">
         <span className="text-cyan-400 font-bold uppercase tracking-wider block">{flow.name} Pipeline Mappings</span>
@@ -813,7 +825,7 @@ export default function CLITerminal() {
   };
 
   // Structured Renderer 5: ROLE FIT ANALYSIS
-  const renderRoleFit = (role: 'fullstack' | 'ai' | 'quant') => {
+  function renderRoleFit(role: 'fullstack' | 'ai' | 'quant') {
     let title = '';
     let description = '';
     let matches: string[] = [];
@@ -884,7 +896,7 @@ export default function CLITerminal() {
   };
 
   // Structured Renderer 6: METRICS
-  const renderMetrics = () => {
+  function renderMetrics() {
     return (
       <div className="flex flex-col gap-3 font-mono text-[10.5px] text-left select-none w-full">
         <span className="text-cyan-400 font-bold uppercase tracking-wider block">Operational Telemetry Vitals</span>
@@ -915,7 +927,7 @@ export default function CLITerminal() {
   };
 
   // Structured Renderer 7: HEATMAP
-  const renderHeatmap = () => {
+  function renderHeatmap() {
     const cols = 24;
     const rows = 7;
     
@@ -976,7 +988,7 @@ export default function CLITerminal() {
   };
 
   // Structured Renderer 8: SECURITY AUDIT CHECKLIST
-  const renderSecurityChecklist = (project: typeof projects[0]) => {
+  function renderSecurityChecklist(project: typeof projects[0]) {
     // Generate secure features checklist based on project slug parameters
     const specs = [
       { id: 'sec-1', label: 'SSL/HTTPS Active Gateway configurations', passed: true },
@@ -1011,7 +1023,7 @@ export default function CLITerminal() {
   };
 
   // Structured Renderer 9: PIPELINE TRANSACTION TRACE
-  const renderTraceLogs = (flow: typeof DATA_FLOWS[0]) => {
+  function renderTraceLogs(flow: typeof DATA_FLOWS[0]) {
     return (
       <div className="flex flex-col gap-2.5 font-mono text-[10.5px] text-left select-none max-w-xl">
         <span className="text-cyan-400 font-bold uppercase tracking-wider">{flow.name} Execution Trace logs</span>
@@ -1031,6 +1043,19 @@ export default function CLITerminal() {
       </div>
     );
   };
+
+  useEffect(() => {
+    handleCommandRef.current = handleCommand;
+    renderHelpRef.current = renderHelp;
+    renderProjectListRef.current = renderProjectList;
+    renderFilteredProjectsRef.current = renderFilteredProjects;
+    renderProjectFlowRef.current = renderProjectFlow;
+    renderRoleFitRef.current = renderRoleFit;
+    renderMetricsRef.current = renderMetrics;
+    renderHeatmapRef.current = renderHeatmap;
+    renderSecurityChecklistRef.current = renderSecurityChecklist;
+    renderTraceLogsRef.current = renderTraceLogs;
+  }, [handleCommand]);
 
   return (
     <Card className="p-0 overflow-hidden bg-black/60 border border-white/10 rounded-2xl shadow-xl flex flex-col font-mono text-xs text-gray-300 relative h-[500px]">

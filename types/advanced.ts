@@ -54,6 +54,7 @@ export interface DataFlow {
   description: string;
   accentColor: string; // hex color e.g., '#06b6d4'
   projectSlug?: string;
+  isSystemLevel?: boolean;
   steps: DataFlowStep[];
 }
 

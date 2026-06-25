@@ -1,1 +1,18 @@
-[]
+[
+  {
+    "category": "Languages",
+    "items": ["TypeScript", "JavaScript", "Python", "SQL"]
+  },
+  {
+    "category": "Frontend Development",
+    "items": ["Next.js", "React", "Tailwind CSS", "Framer Motion", "Three.js", "Recharts", "Redux Toolkit"]
+  },
+  {
+    "category": "Backend & APIs",
+    "items": ["Node.js", "Express", "FastAPI", "RESTful APIs", "Zod validation"]
+  },
+  {
+    "category": "Databases & Systems",
+    "items": ["PostgreSQL", "Supabase", "MongoDB Atlas", "AWS S3", "Docker"]
+  }
+]

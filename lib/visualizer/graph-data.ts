@@ -10,8 +10,7 @@ export class GraphDataResolver {
    * Fetch nodes and edges layout lists for the System Visualizer
    */
   public static async getArchitectureGraph(
-    projectSlug: string,
-    layer: 'overview' | 'technical' | 'recruiter' = 'overview'
+    projectSlug: string
   ): Promise<{ nodes: VisualNode[]; edges: VisualEdge[] }> {
     // Serve high-fidelity static configurations directly for performance and reliability
     return this.generateStaticGraph(projectSlug);

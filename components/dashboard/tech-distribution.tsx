@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card } from '@/components/ui/card';
 import { projects } from '@/lib/data/projects';
 import { getCategoryLabel } from '@/lib/formatters/labels';
@@ -30,6 +30,12 @@ export default function TechDistribution({
   selectedCategory,
   selectedTech
 }: TechDistributionProps) {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   // 1. Calculate Technology frequencies
   const techMap: Record<string, number> = {};
   projects.forEach((p) => {
@@ -97,19 +103,20 @@ export default function TechDistribution({
         </div>
 
         <div className="h-64 w-full relative z-10 flex items-center justify-center">
-          <ResponsiveContainer width="100%" height="100%">
-            <PieChart>
-              <Pie
-                data={categoryData}
-                cx="50%"
-                cy="45%"
-                innerRadius={60}
-                outerRadius={80}
-                paddingAngle={4}
-                dataKey="value"
-                onClick={handlePieClick}
-                className="cursor-pointer"
-              >
+          {mounted ? (
+            <ResponsiveContainer width="100%" height="100%" minWidth={0}>
+              <PieChart>
+                <Pie
+                  data={categoryData}
+                  cx="50%"
+                  cy="45%"
+                  innerRadius={60}
+                  outerRadius={80}
+                  paddingAngle={4}
+                  dataKey="value"
+                  onClick={handlePieClick}
+                  className="cursor-pointer"
+                >
                 {categoryData.map((entry, index) => {
                   const isSelected = selectedCategory === entry.rawName;
                   return (
@@ -156,6 +163,9 @@ export default function TechDistribution({
               />
             </PieChart>
           </ResponsiveContainer>
+          ) : (
+            <div className="h-full w-full bg-white/2 rounded-xl animate-pulse" />
+          )}
         </div>
       </Card>
 
@@ -172,48 +182,52 @@ export default function TechDistribution({
         </div>
 
         <div className="h-64 w-full relative z-10">
-          <ResponsiveContainer width="100%" height="100%">
-            <BarChart
-              data={techData}
-              layout="vertical"
-              margin={{ top: 5, right: 15, left: 35, bottom: 5 }}
-            >
-              <XAxis type="number" stroke="#6b7280" fontSize={9} tickLine={false} axisLine={false} />
-              <YAxis
-                type="category"
-                dataKey="name"
-                stroke="#9ca3af"
-                fontSize={9}
-                tickLine={false}
-                axisLine={false}
-              />
-              <Tooltip
-                contentStyle={{
-                  background: '#0a0a0a',
-                  border: '1px solid rgba(255,255,255,0.08)',
-                  borderRadius: '8px'
-                }}
-                labelStyle={{ color: '#9ca3af', fontSize: '10px', fontFamily: 'monospace' }}
-                itemStyle={{ color: '#22d3ee', fontSize: '11px', fontFamily: 'monospace' }}
-              />
-              <Bar dataKey="value" onClick={handleBarClick} className="cursor-pointer">
-                {techData.map((entry, index) => {
-                  const isSelected = selectedTech === entry.name;
-                  return (
-                    <Cell
-                      key={`cell-${index}`}
-                      fill="#22d3ee"
-                      opacity={selectedTech ? (isSelected ? 1 : 0.3) : 0.75}
-                      style={{
-                        filter: isSelected ? 'drop-shadow(0 0 6px rgba(34, 211, 238, 0.5))' : 'none',
-                        transition: 'all 0.2s ease'
-                      }}
-                    />
-                  );
-                })}
-              </Bar>
-            </BarChart>
-          </ResponsiveContainer>
+          {mounted ? (
+            <ResponsiveContainer width="100%" height="100%" minWidth={0}>
+              <BarChart
+                data={techData}
+                layout="vertical"
+                margin={{ top: 5, right: 15, left: 35, bottom: 5 }}
+              >
+                <XAxis type="number" stroke="#6b7280" fontSize={9} tickLine={false} axisLine={false} />
+                <YAxis
+                  type="category"
+                  dataKey="name"
+                  stroke="#9ca3af"
+                  fontSize={9}
+                  tickLine={false}
+                  axisLine={false}
+                />
+                <Tooltip
+                  contentStyle={{
+                    background: '#0a0a0a',
+                    border: '1px solid rgba(255,255,255,0.08)',
+                    borderRadius: '8px'
+                  }}
+                  labelStyle={{ color: '#9ca3af', fontSize: '10px', fontFamily: 'monospace' }}
+                  itemStyle={{ color: '#22d3ee', fontSize: '11px', fontFamily: 'monospace' }}
+                />
+                <Bar dataKey="value" onClick={handleBarClick} className="cursor-pointer">
+                  {techData.map((entry, index) => {
+                    const isSelected = selectedTech === entry.name;
+                    return (
+                      <Cell
+                        key={`cell-${index}`}
+                        fill="#22d3ee"
+                        opacity={selectedTech ? (isSelected ? 1 : 0.3) : 0.75}
+                        style={{
+                          filter: isSelected ? 'drop-shadow(0 0 6px rgba(34, 211, 238, 0.5))' : 'none',
+                          transition: 'all 0.2s ease'
+                        }}
+                      />
+                    );
+                  })}
+                </Bar>
+              </BarChart>
+            </ResponsiveContainer>
+          ) : (
+            <div className="h-full w-full bg-white/2 rounded-xl animate-pulse" />
+          )}
         </div>
       </Card>
     </div>

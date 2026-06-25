@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -18,6 +18,11 @@ import DataFlowExplorer from '@/components/visualizers/data-flow-explorer';
 export default function Lab() {
   const { theme } = useTheme();
   const [activeTab, setActiveTab] = useState<'solar' | 'quant' | 'sandbox' | 'visualizer'>('solar');
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // --- Solar Simulator States ---
   const [panelCapacity, setPanelCapacity] = useState(450); // Watts
@@ -435,26 +440,30 @@ export default function Lab() {
                   <TrendingUp className="h-4 w-4 text-foreground" /> Options Implied Volatility Smile Skew
                 </h3>
                 <div className="h-64 w-full">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <LineChart data={volChartData} margin={{ top: 5, right: 20, left: -20, bottom: 5 }}>
-                      <CartesianGrid strokeDasharray="3 3" stroke={gridColor} />
-                      <XAxis dataKey="strike" stroke={axisColor} fontSize={10} />
-                      <YAxis stroke={axisColor} domain={['auto', 'auto']} fontSize={10} unit="%" />
-                      <Tooltip
-                        contentStyle={{ backgroundColor: tooltipBg, borderColor: tooltipBorder, borderRadius: '12px' }}
-                        labelStyle={{ color: tooltipTextColor, fontSize: '12px', fontWeight: 'bold' }}
-                        itemStyle={{ color: tooltipTextColor }}
-                      />
-                      <Line
-                        type="monotone"
-                        dataKey="volatility"
-                        stroke={lineColor}
-                        strokeWidth={2}
-                        dot={{ r: 4, stroke: lineColor, strokeWidth: 1.5, fill: dotColor }}
-                        name="Implied Volatility"
-                      />
-                    </LineChart>
-                  </ResponsiveContainer>
+                  {mounted ? (
+                    <ResponsiveContainer width="100%" height="100%" minWidth={0}>
+                      <LineChart data={volChartData} margin={{ top: 5, right: 20, left: -20, bottom: 5 }}>
+                        <CartesianGrid strokeDasharray="3 3" stroke={gridColor} />
+                        <XAxis dataKey="strike" stroke={axisColor} fontSize={10} />
+                        <YAxis stroke={axisColor} domain={['auto', 'auto']} fontSize={10} unit="%" />
+                        <Tooltip
+                          contentStyle={{ backgroundColor: tooltipBg, borderColor: tooltipBorder, borderRadius: '12px' }}
+                          labelStyle={{ color: tooltipTextColor, fontSize: '12px', fontWeight: 'bold' }}
+                          itemStyle={{ color: tooltipTextColor }}
+                        />
+                        <Line
+                          type="monotone"
+                          dataKey="volatility"
+                          stroke={lineColor}
+                          strokeWidth={2}
+                          dot={{ r: 4, stroke: lineColor, strokeWidth: 1.5, fill: dotColor }}
+                          name="Implied Volatility"
+                        />
+                      </LineChart>
+                    </ResponsiveContainer>
+                  ) : (
+                    <div className="h-full w-full bg-white/2 rounded-xl animate-pulse" />
+                  )}
                 </div>
               </Card>
 
@@ -575,7 +584,7 @@ export default function Lab() {
               <Card className="p-6 flex flex-col justify-between gap-5">
                 <div className="flex flex-col gap-3.5">
                   <h3 className="text-xs font-bold text-foreground font-mono uppercase tracking-wider border-b border-card-border pb-2 flex items-center gap-1.5">
-                    <Calculator className="h-4 w-4 text-emerald-450" /> Position Risk Calculator
+                    <Calculator className="h-4 w-4 text-emerald-400" /> Position Risk Calculator
                   </h3>
 
                   {/* Sliders grid */}
@@ -612,7 +621,7 @@ export default function Lab() {
                       />
                     </div>
                     <div className="flex flex-col gap-1">
-                      <span className="text-[9px] text-secondary font-mono uppercase text-rose-350">Stop Loss ($)</span>
+                      <span className="text-[9px] text-secondary font-mono uppercase text-rose-400">Stop Loss ($)</span>
                       <input 
                         type="number" 
                         value={stopLoss}
@@ -621,7 +630,7 @@ export default function Lab() {
                       />
                     </div>
                     <div className="flex flex-col gap-1">
-                      <span className="text-[9px] text-secondary font-mono uppercase text-emerald-450">Take Profit ($)</span>
+                      <span className="text-[9px] text-secondary font-mono uppercase text-emerald-400">Take Profit ($)</span>
                       <input 
                         type="number" 
                         value={takeProfit}
@@ -648,7 +657,7 @@ export default function Lab() {
                   </div>
                   <div className="bg-foreground/[0.02] border border-card-border rounded-lg py-1.5 flex flex-col">
                     <span className="text-[8px] text-secondary uppercase font-bold leading-none mb-1">Target Profit</span>
-                    <span className="text-emerald-450 font-bold">${targetProfit}</span>
+                    <span className="text-emerald-400 font-bold">${targetProfit}</span>
                   </div>
                 </div>
               </Card>
@@ -732,25 +741,29 @@ export default function Lab() {
                     <Badge variant="outline" className="text-[8px] tracking-widest font-mono">MONTE CARLO</Badge>
                   </div>
                   <div className="h-56 w-full">
-                    <ResponsiveContainer width="100%" height="100%">
-                      <LineChart data={monteCarloData} margin={{ top: 5, right: 10, left: -20, bottom: 5 }}>
-                        <CartesianGrid strokeDasharray="3 3" stroke={gridColor} />
-                        <XAxis dataKey="trade" stroke={axisColor} fontSize={9} />
-                        <YAxis stroke={axisColor} fontSize={9} tickFormatter={(v) => `$${(v/1000).toFixed(0)}k`} />
-                        <Tooltip
-                          contentStyle={{ backgroundColor: tooltipBg, borderColor: tooltipBorder, borderRadius: '12px' }}
-                          labelStyle={{ color: tooltipTextColor, fontSize: '11px', fontWeight: 'bold' }}
-                          itemStyle={{ color: tooltipTextColor, fontSize: '10px' }}
-                          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                          formatter={(value: any) => [`$${Number(value ?? 0).toLocaleString()}`]}
-                        />
-                        <Line type="monotone" dataKey="Optimal HMM" stroke="#a855f7" strokeWidth={2} dot={false} name="Adaptive HMM" />
-                        <Line type="monotone" dataKey="Standard Momentum" stroke="#38bdf8" strokeWidth={1.25} dot={false} name="Trend-Follower" />
-                        <Line type="monotone" dataKey="Mean Reversion" stroke="#fbbf24" strokeWidth={1.25} dot={false} name="Mean-Reversion" />
-                        <Line type="monotone" dataKey="Path 4" stroke="#34d399" strokeWidth={1} strokeDasharray="4 4" dot={false} name="Path 4 (Noise)" />
-                        <Line type="monotone" dataKey="Path 5" stroke="#f43f5e" strokeWidth={1} strokeDasharray="4 4" dot={false} name="Path 5 (Noise)" />
-                      </LineChart>
-                    </ResponsiveContainer>
+                    {mounted ? (
+                      <ResponsiveContainer width="100%" height="100%" minWidth={0}>
+                        <LineChart data={monteCarloData} margin={{ top: 5, right: 10, left: -20, bottom: 5 }}>
+                          <CartesianGrid strokeDasharray="3 3" stroke={gridColor} />
+                          <XAxis dataKey="trade" stroke={axisColor} fontSize={9} />
+                          <YAxis stroke={axisColor} fontSize={9} tickFormatter={(v) => `$${(v/1000).toFixed(0)}k`} />
+                          <Tooltip
+                            contentStyle={{ backgroundColor: tooltipBg, borderColor: tooltipBorder, borderRadius: '12px' }}
+                            labelStyle={{ color: tooltipTextColor, fontSize: '11px', fontWeight: 'bold' }}
+                            itemStyle={{ color: tooltipTextColor, fontSize: '10px' }}
+                            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                            formatter={(value: any) => [`$${Number(value ?? 0).toLocaleString()}`]}
+                          />
+                          <Line type="monotone" dataKey="Optimal HMM" stroke="#a855f7" strokeWidth={2} dot={false} name="Adaptive HMM" />
+                          <Line type="monotone" dataKey="Standard Momentum" stroke="#38bdf8" strokeWidth={1.25} dot={false} name="Trend-Follower" />
+                          <Line type="monotone" dataKey="Mean Reversion" stroke="#fbbf24" strokeWidth={1.25} dot={false} name="Mean-Reversion" />
+                          <Line type="monotone" dataKey="Path 4" stroke="#34d399" strokeWidth={1} strokeDasharray="4 4" dot={false} name="Path 4 (Noise)" />
+                          <Line type="monotone" dataKey="Path 5" stroke="#f43f5e" strokeWidth={1} strokeDasharray="4 4" dot={false} name="Path 5 (Noise)" />
+                        </LineChart>
+                      </ResponsiveContainer>
+                    ) : (
+                      <div className="h-full w-full bg-white/2 rounded-xl animate-pulse" />
+                    )}
                   </div>
                 </Card>
 
@@ -761,27 +774,31 @@ export default function Lab() {
                     <span className="text-[10px] text-rose-400 font-bold font-mono">Max Drawdown Visible</span>
                   </div>
                   <div className="h-28 w-full">
-                    <ResponsiveContainer width="100%" height="100%">
-                      <AreaChart data={monteCarloData} margin={{ top: 5, right: 10, left: -20, bottom: 5 }}>
-                        <CartesianGrid strokeDasharray="3 3" stroke={gridColor} />
-                        <XAxis dataKey="trade" stroke={axisColor} fontSize={9} />
-                        <YAxis stroke={axisColor} fontSize={9} unit="%" domain={[-100, 0]} />
-                        <Tooltip
-                          contentStyle={{ backgroundColor: tooltipBg, borderColor: tooltipBorder, borderRadius: '12px' }}
-                          labelStyle={{ color: tooltipTextColor, fontSize: '11px', fontWeight: 'bold' }}
-                          itemStyle={{ color: tooltipTextColor, fontSize: '10px' }}
-                          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                          formatter={(value: any) => [`${value ?? 0}%`]}
-                        />
-                        <Area 
-                          type="monotone" 
-                          dataKey="Drawdown" 
-                          stroke="#ef4444" 
-                          fill="rgba(239, 68, 68, 0.15)" 
-                          name="Selected Drawdown" 
-                        />
-                      </AreaChart>
-                    </ResponsiveContainer>
+                    {mounted ? (
+                      <ResponsiveContainer width="100%" height="100%" minWidth={0}>
+                        <AreaChart data={monteCarloData} margin={{ top: 5, right: 10, left: -20, bottom: 5 }}>
+                          <CartesianGrid strokeDasharray="3 3" stroke={gridColor} />
+                          <XAxis dataKey="trade" stroke={axisColor} fontSize={9} />
+                          <YAxis stroke={axisColor} fontSize={9} unit="%" domain={[-100, 0]} />
+                          <Tooltip
+                            contentStyle={{ backgroundColor: tooltipBg, borderColor: tooltipBorder, borderRadius: '12px' }}
+                            labelStyle={{ color: tooltipTextColor, fontSize: '11px', fontWeight: 'bold' }}
+                            itemStyle={{ color: tooltipTextColor, fontSize: '10px' }}
+                            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                            formatter={(value: any) => [`${value ?? 0}%`]}
+                          />
+                          <Area 
+                            type="monotone" 
+                            dataKey="Drawdown" 
+                            stroke="#ef4444" 
+                            fill="rgba(239, 68, 68, 0.15)" 
+                            name="Selected Drawdown" 
+                          />
+                        </AreaChart>
+                      </ResponsiveContainer>
+                    ) : (
+                      <div className="h-full w-full bg-white/2 rounded-xl animate-pulse" />
+                    )}
                   </div>
                 </Card>
               </div>
@@ -789,8 +806,8 @@ export default function Lab() {
 
             {/* Bottom Row: Market Regime explanation cards */}
             <div className="flex flex-col gap-4">
-              <h3 className="text-xs font-bold text-white font-mono uppercase tracking-wider flex items-center gap-1.5 pb-2 border-b border-white/5">
-                <ShieldCheck className="h-4 w-4 text-emerald-450" /> NF-LRD Market Regimes Discovery
+              <h3 className="text-lg font-medium font-serif text-foreground tracking-tight flex items-center gap-2">
+                <ShieldCheck className="h-4 w-4 text-emerald-400" /> NF-LRD Market Regimes Discovery
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 
@@ -821,7 +838,7 @@ export default function Lab() {
                 {/* Regime 3 */}
                 <Card className="p-5 flex flex-col gap-2.5">
                   <div className="flex items-center justify-between">
-                    <Badge variant="outline" className="text-[8px] font-mono border-rose-500/20 text-rose-400 bg-rose-955/10 uppercase">State 2</Badge>
+                    <Badge variant="outline" className="text-[8px] font-mono border-rose-500/20 text-rose-400 bg-rose-905/10 uppercase">State 2</Badge>
                     <span className="text-[9px] font-mono text-muted">HMM Class</span>
                   </div>
                   <h4 className="text-xs font-bold text-foreground font-serif">Bearish High Volatility</h4>
@@ -833,7 +850,7 @@ export default function Lab() {
                 {/* Regime 4 */}
                 <Card className="p-5 flex flex-col gap-2.5">
                   <div className="flex items-center justify-between">
-                    <Badge variant="outline" className="text-[8px] font-mono border-amber-500/20 text-amber-400 bg-amber-955/10 uppercase">State 3</Badge>
+                    <Badge variant="outline" className="text-[8px] font-mono border-amber-500/20 text-amber-400 bg-amber-905/10 uppercase">State 3</Badge>
                     <span className="text-[9px] font-mono text-muted">HMM Class</span>
                   </div>
                   <h4 className="text-xs font-bold text-foreground font-serif">Bearish Low Volatility</h4>
@@ -862,7 +879,7 @@ export default function Lab() {
             <div className="border-t border-card-border pt-8 mt-4">
               <div className="flex flex-col gap-1 mb-6">
                 <h3 className="text-lg font-medium font-serif text-foreground tracking-tight flex items-center gap-2">
-                  <Activity className="h-4.5 w-4.5 text-secondary animate-pulse" /> Data Flow Pipeline Explorer
+                  <Activity className="h-[18px] w-[18px] text-secondary animate-pulse" /> Data Flow Pipeline Explorer
                 </h3>
                 <p className="text-xs text-secondary leading-relaxed max-w-2xl font-medium">
                   Select a workflow pipeline below to watch transaction payloads mutate through inputs validation, secure API routes, models compute, and databases logs.

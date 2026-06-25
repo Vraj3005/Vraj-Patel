@@ -1,16 +1,16 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { Card } from '@/components/ui/card';
 import { HeatmapCell } from '@/types/advanced';
-import { Github, RefreshCw, Flame, Calendar, GitCommit, Activity } from 'lucide-react';
+import { Github, RefreshCw, Calendar, GitCommit, Activity } from 'lucide-react';
 import { parseDateString, alignDataToWeeks } from '@/lib/github/heatmap-utils';
 
 interface GithubHeatmapProps {
   username?: string;
 }
 
-export default function GithubHeatmap({ username }: GithubHeatmapProps) {
+export default function GithubHeatmap({ username: _username }: GithubHeatmapProps) {
   const [account, setAccount] = useState<'combined' | 'personal' | 'academic'>('combined');
   const [data, setData] = useState<HeatmapCell[]>([]);
   const [loading, setLoading] = useState(true);
@@ -24,7 +24,7 @@ export default function GithubHeatmap({ username }: GithubHeatmapProps) {
     y: number;
   } | null>(null);
 
-  const fetchContributions = (selectedAcc: typeof account, isInitial: boolean) => {
+  const fetchContributions = useCallback((selectedAcc: typeof account, isInitial: boolean) => {
     if (isInitial) {
       setLoading(true);
     } else {
@@ -52,11 +52,11 @@ export default function GithubHeatmap({ username }: GithubHeatmapProps) {
         setLoading(false);
         setSyncing(false);
       });
-  };
+  }, []);
 
   useEffect(() => {
     fetchContributions(account, true);
-  }, [account]);
+  }, [account, fetchContributions]);
 
   const getColorClass = (level: HeatmapCell['level']) => {
     switch (level) {

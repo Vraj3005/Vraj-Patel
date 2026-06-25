@@ -3,8 +3,7 @@
 import React from 'react';
 import CLITerminal from '@/components/console/cli-terminal';
 import { Card } from '@/components/ui/card';
-import { Terminal, Command, HelpCircle, ArrowUpRight } from 'lucide-react';
-import { COMMANDS } from '@/lib/cli/registry';
+import { Terminal, Command } from 'lucide-react';
 
 export default function TerminalPage() {
   return (

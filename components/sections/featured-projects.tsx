@@ -28,7 +28,7 @@ export default function FeaturedProjects() {
 
         <Link href="/projects" className="shrink-0">
           <Button variant="secondary" size="md" className="flex items-center gap-1.5">
-            View All 10 Projects <ArrowRight className="h-4 w-4" />
+            View All {projects.length} Projects <ArrowRight className="h-4 w-4" />
           </Button>
         </Link>
       </div>

@@ -22,7 +22,7 @@ export const COMMANDS: CommandDefinition[] = [
   { name: 'skills', category: 'general', description: 'View complete full-stack, AI, and quantitative skillset matrices.', usage: 'skills' },
 
   // Project specific
-  { name: 'project list', category: 'project', description: 'List all 11 real portfolio projects with slugs.', usage: 'project list' },
+  { name: 'project list', category: 'project', description: `List all ${projects.length} real portfolio projects with slugs.`, usage: 'project list' },
   { name: 'project open', category: 'project', description: 'Navigate directly to a project\'s details page.', usage: 'project open <slug>', params: ['slug'] },
   { name: 'project tech', category: 'project', description: 'View the technical stack utilized in a project.', usage: 'project tech <slug>', params: ['slug'] },
   { name: 'project features', category: 'project', description: 'List the key functional features of a project.', usage: 'project features <slug>', params: ['slug'] },

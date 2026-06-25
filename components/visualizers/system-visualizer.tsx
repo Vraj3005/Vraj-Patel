@@ -9,6 +9,7 @@ import {
   User, Layout, Server, Cpu, Database, Network, ShieldCheck, 
   CheckCircle, Activity, Terminal, Globe, Info, Zap, AlertCircle, HelpCircle
 } from 'lucide-react';
+import { getErrorMessage } from '@/lib/utils';
 
 interface SystemVisualizerProps {
   projectSlug?: string;
@@ -72,9 +73,9 @@ export default function SystemVisualizer({
         }
         setNodes(data.nodes || []);
         setEdges(data.edges || []);
-      } catch (err: any) {
+      } catch (err: unknown) {
         console.error('Failed to load system architecture data map:', err);
-        setError(err.message || 'Failed to fetch coordinates matrices.');
+        setError(getErrorMessage(err));
       } finally {
         setLoading(false);
       }
@@ -87,14 +88,14 @@ export default function SystemVisualizer({
     switch (type) {
       case 'user': return <User className="h-3.5 w-3.5 text-sky-400" />;
       case 'frontend': return <Layout className="h-3.5 w-3.5 text-cyan-400" />;
-      case 'backend': return <Server className="h-3.5 w-3.5 text-emerald-450" />;
+      case 'backend': return <Server className="h-3.5 w-3.5 text-emerald-400" />;
       case 'api': return <Server className="h-3.5 w-3.5 text-teal-400" />;
-      case 'validation': return <CheckCircle className="h-3.5 w-3.5 text-amber-550" />;
+      case 'validation': return <CheckCircle className="h-3.5 w-3.5 text-amber-500" />;
       case 'auth': return <ShieldCheck className="h-3.5 w-3.5 text-violet-400" />;
       case 'database': return <Database className="h-3.5 w-3.5 text-blue-400" />;
       case 'ai': return <Cpu className="h-3.5 w-3.5 text-fuchsia-400" />;
-      case 'analytics': return <Activity className="h-3.5 w-3.5 text-orange-450" />;
-      case 'admin': return <Terminal className="h-3.5 w-3.5 text-rose-450" />;
+      case 'analytics': return <Activity className="h-3.5 w-3.5 text-orange-500" />;
+      case 'admin': return <Terminal className="h-3.5 w-3.5 text-rose-500" />;
       case 'external': return <Globe className="h-3.5 w-3.5 text-gray-400" />;
       default: return <Info className="h-3.5 w-3.5 text-slate-400" />;
     }
@@ -152,7 +153,7 @@ export default function SystemVisualizer({
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-card-border pb-4 gap-3 z-10">
         <div className="flex flex-col gap-1 select-none">
           <h3 className="text-sm font-bold text-foreground font-mono uppercase tracking-wider flex items-center gap-2">
-            <Network className="h-4.5 w-4.5 text-cyan-400 animate-pulse" /> Systems Architect Mapping
+            <Network className="h-[18px] w-[18px] text-cyan-400 animate-pulse" /> Systems Architect Mapping
           </h3>
           <span className="text-[10px] font-mono text-secondary">
             Visualize technical nodes and data flow pipelines
@@ -325,7 +326,7 @@ export default function SystemVisualizer({
                             {node.type === 'ai' ? 'ML/MATH' : node.type}
                           </span>
                           <div className="flex items-center gap-0.5">
-                            <span className={`h-1.5 w-1.5 rounded-full ${node.status === 'online' ? 'bg-emerald-450' : 'bg-amber-500 animate-pulse'}`} />
+                            <span className={`h-1.5 w-1.5 rounded-full ${node.status === 'online' ? 'bg-emerald-400' : 'bg-amber-500 animate-pulse'}`} />
                             <span className="text-[7px] font-mono text-secondary uppercase font-semibold leading-none">
                               {node.status}
                             </span>
@@ -425,7 +426,7 @@ export default function SystemVisualizer({
                             ))}
                             <div className="flex justify-between border-b border-white/2 pb-1">
                               <span className="text-muted">Node Status:</span>
-                              <span className="text-emerald-450 uppercase font-black">{selectedNode.status}</span>
+                              <span className="text-emerald-400 uppercase font-black">{selectedNode.status}</span>
                             </div>
                             <div className="flex justify-between pb-1">
                               <span className="text-muted">Connected Pipelines:</span>
@@ -437,7 +438,7 @@ export default function SystemVisualizer({
 
                       <div className="flex items-center gap-1.5 mt-2 text-[9px] text-sky-400 bg-sky-950/10 border border-sky-900/30 p-2.5 rounded-lg select-none">
                         <Zap className="h-3.5 w-3.5" />
-                        <span>Recruiter Tip: Ask the **Ask Vraj** assistant on this page: *"Explain Vraj's contributions on the {selectedNode.label} of {PROJECT_LIST.find(p => p.slug === activeProject)?.name}"* to learn more details.</span>
+                        <span>Recruiter Tip: Ask the **Ask Vraj** assistant on this page: *&quot;Explain Vraj&apos;s contributions on the {selectedNode.label} of {PROJECT_LIST.find(p => p.slug === activeProject)?.name}&quot;* to learn more details.</span>
                       </div>
                     </div>
                   )}

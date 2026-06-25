@@ -23,7 +23,6 @@ import {
   AlertTriangle,
   XCircle,
   Info,
-  Layers,
   Activity,
   Clock
 } from 'lucide-react';
@@ -374,7 +373,7 @@ export default function DeveloperConsole({ adminMode = false }: DeveloperConsole
               placeholder="Search logs metadata..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-7.5 pr-2 py-1 bg-white/5 border border-white/10 rounded-lg text-[10px] text-foreground font-bold font-mono focus:border-cyan-500/50 outline-none transition-colors placeholder:text-gray-600"
+              className="w-full pl-[30px] pr-2 py-1 bg-white/5 border border-white/10 rounded-lg text-[10px] text-foreground font-bold font-mono focus:border-cyan-500/50 outline-none transition-colors placeholder:text-gray-600"
             />
           </div>
 

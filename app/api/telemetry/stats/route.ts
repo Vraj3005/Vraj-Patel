@@ -3,7 +3,7 @@ import { supabaseAdmin, isSupabaseAdminConfigured } from '@/lib/supabase/admin';
 import fs from 'fs';
 import path from 'path';
 
-export async function GET(req: NextRequest) {
+export async function GET(_req: NextRequest) {
   try {
     const supabase = supabaseAdmin as any;
 
@@ -53,11 +53,11 @@ export async function GET(req: NextRequest) {
     }
 
     // 3. Count views & AI requests
-    dbViewsCount = allEvents.filter(e => e && e.event_type === 'portfolio').length;
+    dbViewsCount = allEvents.filter(e => e && e.event_type === 'portfolio' && e.severity === 'info').length;
     dbAiRequestsCount = allEvents.filter(e => e && e.event_type === 'ask-vraj').length;
 
     // 4. Inquiries
-    dbInquiriesCount = allEvents.filter(e => e && e.event_type === 'contact' && e.message && typeof e.message === 'string' && (e.message.toLowerCase().includes('submission') || e.message.toLowerCase().includes('cataloged') || e.message.toLowerCase().includes('inquiry'))).length;
+    dbInquiriesCount = allEvents.filter(e => e && e.event_type === 'contact' && e.severity === 'success').length;
     try {
       const messagesPath = path.join(process.cwd(), 'db', 'messages.json');
       if (fs.existsSync(messagesPath)) {
@@ -73,14 +73,14 @@ export async function GET(req: NextRequest) {
     try {
       const { count } = await supabase.from('contact_messages').select('*', { count: 'exact', head: true });
       if (count) dbInquiriesCount = Math.max(dbInquiriesCount, count);
-    } catch (e) {}
+    } catch (_e) {}
 
     // 5. Resume downloads
-    dbDownloadsCount = allEvents.filter(e => e && e.event_type === 'portfolio' && e.message && typeof e.message === 'string' && e.message.includes('Resume')).length;
+    dbDownloadsCount = allEvents.filter(e => e && e.event_type === 'portfolio' && e.severity === 'success').length;
     try {
       const { count } = await supabase.from('resume_downloads').select('*', { count: 'exact', head: true });
       if (count) dbDownloadsCount = Math.max(dbDownloadsCount, count);
-    } catch (e) {}
+    } catch (_e) {}
 
     // 6. Fetch metrics_snapshots from Supabase
     try {
@@ -89,7 +89,7 @@ export async function GET(req: NextRequest) {
         .select('*')
         .eq('metric_name', 'api_latency_ms');
       if (dbMetrics) allMetrics = dbMetrics;
-    } catch (e) {}
+    } catch (_e) {}
 
     // 7. Read metrics from local fallback JSON file
     try {
@@ -109,7 +109,7 @@ export async function GET(req: NextRequest) {
           allMetrics = Array.from(metricMap.values());
         }
       }
-    } catch (e) {}
+    } catch (_e) {}
 
     // 8. Calculate avg latency
     if (allMetrics.length > 0) {
@@ -145,7 +145,7 @@ export async function GET(req: NextRequest) {
         if (!e) return false;
         const eDate = e.created_at || e.timestamp;
         if (typeof eDate !== 'string') return false;
-        return eDate.startsWith(dateKey) && e.event_type === 'portfolio';
+        return eDate.startsWith(dateKey) && e.event_type === 'portfolio' && e.severity === 'info';
       }).length;
 
       const aiOnDay = allEvents.filter(e => {
@@ -159,7 +159,7 @@ export async function GET(req: NextRequest) {
         if (!e) return false;
         const eDate = e.created_at || e.timestamp;
         if (typeof eDate !== 'string') return false;
-        return eDate.startsWith(dateKey) && e.event_type === 'portfolio' && e.message && typeof e.message === 'string' && e.message.includes('Resume');
+        return eDate.startsWith(dateKey) && e.event_type === 'portfolio' && e.severity === 'success';
       }).length;
 
       timeline.push({

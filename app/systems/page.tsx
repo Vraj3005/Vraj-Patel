@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import dynamic from 'next/dynamic';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Network, Info, Server, Cpu, Layers, Activity, Shield, GitCommit } from 'lucide-react';
+import { Network, Server, Cpu, Layers, Activity, Shield, GitCommit } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 
 // Dynamically lazy-loaded heavy visualizers
@@ -169,7 +169,7 @@ export default function SystemsPlayground() {
 
         <Card className="p-5 flex flex-col gap-3 bg-card-bg/40 border-card-border backdrop-blur-sm">
           <div className="flex items-center gap-2 border-b border-card-border pb-2 text-foreground font-serif font-bold text-xs select-none">
-            <Server className="h-4 w-4 text-emerald-450" />
+            <Server className="h-4 w-4 text-emerald-400" />
             <span>Risk Management</span>
           </div>
           <p className="text-[10px] text-secondary leading-relaxed font-mono">

@@ -3,6 +3,7 @@
 import { Card } from '@/components/ui/card';
 import { GitBranch, CheckCircle } from 'lucide-react';
 import GithubHeatmap from '@/components/dashboard/github-heatmap';
+import { projects } from '@/lib/data/projects';
 
 export default function GitTelemetry() {
   return (
@@ -50,11 +51,13 @@ export default function GitTelemetry() {
           <div className="grid grid-cols-2 gap-2 text-center text-xs mt-2">
             <div className="bg-white/[0.02] border border-card-border rounded-xl py-3 flex flex-col gap-0.5">
               <span className="text-[10px] text-muted uppercase font-medium tracking-wider font-mono">Projects</span>
-              <span className="text-foreground font-bold text-sm">11 Real</span>
+              <span className="text-foreground font-bold text-sm">{projects.length} Real</span>
             </div>
             <div className="bg-white/[0.02] border border-card-border rounded-xl py-3 flex flex-col gap-0.5">
               <span className="text-[10px] text-muted uppercase font-medium tracking-wider font-mono">Clients</span>
-              <span className="text-foreground font-bold text-sm">5 Deployed</span>
+              <span className="text-foreground font-bold text-sm">
+                {projects.filter(p => p.client && p.client.includes('Pitbull') && !p.slug.includes('admin') && !p.slug.includes('dashboard')).length} Deployed
+              </span>
             </div>
           </div>
         </Card>

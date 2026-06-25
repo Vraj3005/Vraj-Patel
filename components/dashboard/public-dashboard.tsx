@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { Card } from '@/components/ui/card';
 import { supabase } from '@/lib/supabase/client';
-import { Activity, Shield, Clock, HardDrive, Cpu } from 'lucide-react';
+import { Activity, Shield, Clock, Cpu } from 'lucide-react';
 import GithubHeatmap from './github-heatmap';
 
 export default function PublicDashboard() {
@@ -13,7 +13,7 @@ export default function PublicDashboard() {
     threatsMitigated: 'Loading...',
     systemUptime: 'Loading...'
   });
-  const [isDemoMode, setIsDemoMode] = useState(false);
+  const [_isDemoMode, _setIsDemoMode] = useState(false);
 
   useEffect(() => {
     const supabaseClient = supabase as any;
@@ -58,7 +58,7 @@ export default function PublicDashboard() {
             threatsMitigated: String(totalThreats),
             systemUptime: '99.98%'
           });
-          setIsDemoMode(false);
+          _setIsDemoMode(false);
         } else {
           setVitals({
             avgLatency: 'Demo Mode (118 ms)',
@@ -66,16 +66,16 @@ export default function PublicDashboard() {
             threatsMitigated: 'Demo Mode (0)',
             systemUptime: 'Demo Mode'
           });
-          setIsDemoMode(true);
+          _setIsDemoMode(true);
         }
-      } catch (err) {
+      } catch (_err) {
         setVitals({
           avgLatency: 'Demo Mode (118 ms)',
           requestsToday: 'Demo Mode (0)',
           threatsMitigated: 'Demo Mode (0)',
           systemUptime: 'Demo Mode'
         });
-        setIsDemoMode(true);
+        _setIsDemoMode(true);
       }
     };
 

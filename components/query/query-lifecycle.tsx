@@ -3,10 +3,9 @@
 import React, { useEffect, useState } from 'react';
 import { Card } from '@/components/ui/card';
 import { supabase } from '@/lib/supabase/client';
-import { RequestTraceRecord, RequestTraceStep } from '@/types/advanced';
+import { RequestTraceRecord } from '@/types/advanced';
 import { 
-  Play, Clock, ArrowRight, Activity, Terminal, Code, Cpu, Database, 
-  RefreshCw, Send, CheckCircle2, AlertTriangle, XCircle, Search, Info 
+  Activity, RefreshCw, CheckCircle2, AlertTriangle, XCircle, Search, Info 
 } from 'lucide-react';
 
 interface StaticWorkflowStage {
@@ -620,8 +619,8 @@ export default function QueryLifecycle() {
 
                     <span className={`px-2.5 py-0.5 border text-[9px] font-mono font-bold rounded-full uppercase shrink-0 ${
                       activeTrace.statusCode === 200
-                        ? 'bg-emerald-500/10 text-emerald-450 border-emerald-500/25'
-                        : 'bg-red-500/10 text-red-550 border-red-500/25'
+                        ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/25'
+                        : 'bg-red-500/10 text-red-500 border-red-500/25'
                     }`}>
                       Status: {activeTrace.statusCode}
                     </span>

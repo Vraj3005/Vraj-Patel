@@ -584,7 +584,7 @@ export default function ProjectCaseStudy({ params }: ProjectPageProps) {
               <button
                 type="button"
                 onClick={() => handleSendMessage(`Summarize the ${project.title} project's value proposition for a recruiter, highlighting Vraj's role, quantitative impact metrics, and engineering mindset.`)}
-                className="text-[10px] font-bold text-amber-400 hover:text-white bg-amber-955/20 hover:bg-amber-900/40 border border-amber-900/30 px-3 py-1.5 rounded-full transition-all cursor-pointer flex items-center gap-1 font-mono"
+                className="text-[10px] font-bold text-amber-400 hover:text-white bg-amber-950/20 hover:bg-amber-900/40 border border-amber-900/30 px-3 py-1.5 rounded-full transition-all cursor-pointer flex items-center gap-1 font-mono"
               >
                 <Award className="h-3 w-3 text-amber-400" /> Explain for Recruiter
               </button>

@@ -637,5 +637,1082 @@
       "recordCount": 369
     },
     "is_public": true
+  },
+  {
+    "id": "9fd63d16-990b-4384-9ac9-8b6e0f0dc819",
+    "created_at": "2026-06-25T08:49:07.346Z",
+    "event_type": "ask-vraj",
+    "severity": "warning",
+    "message": "AI Assistant input validation failed.",
+    "metadata": {
+      "errors": {
+        "prompt": [
+          "Prompt is required."
+        ]
+      }
+    },
+    "is_public": true
+  },
+  {
+    "id": "3e611c0d-607c-45bc-84c6-e89071f4b3fd",
+    "created_at": "2026-06-25T08:49:07.357Z",
+    "event_type": "ask-vraj",
+    "severity": "success",
+    "message": "Processed Ask Vraj AI query: \"Who is Vraj?...\"",
+    "metadata": {
+      "promptLength": 12,
+      "sessionId": "1784cbfb-fdfe-484c-812a-3dfd2d767b22"
+    },
+    "is_public": true
+  },
+  {
+    "id": "3528b020-442f-4f9c-bcae-b1a3beb92229",
+    "created_at": "2026-06-25T08:49:07.439Z",
+    "event_type": "contact",
+    "severity": "warning",
+    "message": "Contact form input validation failed.",
+    "metadata": {
+      "errors": {
+        "message": [
+          "Message must be at least 10 characters."
+        ]
+      }
+    },
+    "is_public": true
+  },
+  {
+    "id": "1c7e1134-f73a-4002-bcd9-6a664e2fe74e",
+    "created_at": "2026-06-25T08:49:07.458Z",
+    "event_type": "contact",
+    "severity": "success",
+    "message": "Contact inquiry cataloged successfully: \"Full-stack Position...\"",
+    "metadata": {
+      "subjectPreview": "Full-stack Position"
+    },
+    "is_public": true
+  },
+  {
+    "id": "3113e218-ef70-4aa9-8042-fa108b84fb6e",
+    "created_at": "2026-06-25T08:50:30.753Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /",
+    "metadata": {
+      "path": "/",
+      "referrer": "",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "3dcea366-fc8a-4a85-ac95-deb33e693726",
+    "created_at": "2026-06-25T08:50:32.139Z",
+    "event_type": "github_sync",
+    "severity": "success",
+    "message": "GitHub contributions cache successfully synced for account context: Combined (Vraj3005 + 23bce377-debug)",
+    "metadata": {
+      "mode": "combined",
+      "recordCount": 369
+    },
+    "is_public": true
+  },
+  {
+    "id": "6cd78dcf-c43e-4a71-ae71-1e3a1d9eeda5",
+    "created_at": "2026-06-25T08:50:54.150Z",
+    "event_type": "github_sync",
+    "severity": "success",
+    "message": "GitHub contributions cache successfully synced for account context: Vraj3005 (Personal)",
+    "metadata": {
+      "mode": "personal",
+      "recordCount": 369
+    },
+    "is_public": true
+  },
+  {
+    "id": "9096b95d-d9a2-40c2-b431-f20757e47cf6",
+    "created_at": "2026-06-25T08:50:56.954Z",
+    "event_type": "github_sync",
+    "severity": "success",
+    "message": "GitHub contributions cache successfully synced for account context: 23bce377-debug (Academic)",
+    "metadata": {
+      "mode": "academic",
+      "recordCount": 369
+    },
+    "is_public": true
+  },
+  {
+    "id": "1e692a8c-f834-4685-87ae-f9f65c50257b",
+    "created_at": "2026-06-25T08:51:02.591Z",
+    "event_type": "github_sync",
+    "severity": "success",
+    "message": "GitHub contributions cache successfully synced for account context: Combined (Vraj3005 + 23bce377-debug)",
+    "metadata": {
+      "mode": "combined",
+      "recordCount": 369
+    },
+    "is_public": true
+  },
+  {
+    "id": "abe8fda1-f295-4eee-9c82-c06d3d2a042f",
+    "created_at": "2026-06-25T08:51:13.933Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /projects",
+    "metadata": {
+      "path": "/projects",
+      "referrer": "",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "1b5ccae0-a6a3-40c6-bea9-050a665d5e83",
+    "created_at": "2026-06-25T08:51:21.652Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /projects/outreachops-ai",
+    "metadata": {
+      "path": "/projects/outreachops-ai",
+      "referrer": "",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "c53cf57a-77fd-49c2-a4df-153686a95b70",
+    "created_at": "2026-06-25T08:52:08.473Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /dashboard",
+    "metadata": {
+      "path": "/dashboard",
+      "referrer": "",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "a4163b81-7a3b-435e-89e0-8dcb15a25cf5",
+    "created_at": "2026-06-25T08:52:10.397Z",
+    "event_type": "github_sync",
+    "severity": "success",
+    "message": "GitHub contributions cache successfully synced for account context: Combined (Vraj3005 + 23bce377-debug)",
+    "metadata": {
+      "mode": "combined",
+      "recordCount": 369
+    },
+    "is_public": true
+  },
+  {
+    "id": "c90848be-b92e-4893-be90-ba34044af386",
+    "created_at": "2026-06-25T08:52:12.209Z",
+    "event_type": "github_sync",
+    "severity": "success",
+    "message": "GitHub contributions cache successfully synced for account context: Combined (Vraj3005 + 23bce377-debug)",
+    "metadata": {
+      "mode": "combined",
+      "recordCount": 369
+    },
+    "is_public": true
+  },
+  {
+    "id": "119b9940-faaf-4885-8f46-df3b6f74458b",
+    "created_at": "2026-06-25T08:52:25.991Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /inbox",
+    "metadata": {
+      "path": "/inbox",
+      "referrer": "",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "857cd076-b4f1-45a0-803f-bd49ec388478",
+    "created_at": "2026-06-25T08:52:40.765Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /",
+    "metadata": {
+      "path": "/",
+      "referrer": "",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "6c378a04-13e8-4c21-8dfa-3cdb0196decd",
+    "created_at": "2026-06-25T08:52:42.344Z",
+    "event_type": "github_sync",
+    "severity": "success",
+    "message": "GitHub contributions cache successfully synced for account context: Combined (Vraj3005 + 23bce377-debug)",
+    "metadata": {
+      "mode": "combined",
+      "recordCount": 369
+    },
+    "is_public": true
+  },
+  {
+    "id": "226c9c45-3b8b-43d9-b684-bbec9ca1e5a2",
+    "created_at": "2026-06-25T08:52:44.010Z",
+    "event_type": "github_sync",
+    "severity": "success",
+    "message": "GitHub contributions cache successfully synced for account context: Combined (Vraj3005 + 23bce377-debug)",
+    "metadata": {
+      "mode": "combined",
+      "recordCount": 369
+    },
+    "is_public": true
+  },
+  {
+    "id": "225ec677-b93d-421d-bc52-17fa0f906537",
+    "created_at": "2026-06-25T08:52:45.399Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /terminal",
+    "metadata": {
+      "path": "/terminal",
+      "referrer": "",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "1b2eede6-c737-4007-b3a0-4a6752462abe",
+    "created_at": "2026-06-25T08:52:46.306Z",
+    "event_type": "github_sync",
+    "severity": "success",
+    "message": "GitHub contributions cache successfully synced for account context: Combined (Vraj3005 + 23bce377-debug)",
+    "metadata": {
+      "mode": "combined",
+      "recordCount": 369
+    },
+    "is_public": true
+  },
+  {
+    "id": "6e8d52b8-8f93-437a-ad8a-b4e270d59f3e",
+    "created_at": "2026-06-25T08:52:47.891Z",
+    "event_type": "github_sync",
+    "severity": "success",
+    "message": "GitHub contributions cache successfully synced for account context: Combined (Vraj3005 + 23bce377-debug)",
+    "metadata": {
+      "mode": "combined",
+      "recordCount": 369
+    },
+    "is_public": true
+  },
+  {
+    "id": "b8399995-a4b8-4108-a938-22423515c6d1",
+    "created_at": "2026-06-25T08:52:50.254Z",
+    "event_type": "cli",
+    "severity": "success",
+    "message": "CLI Command: 'help' (duration 3ms, success: true)",
+    "metadata": {
+      "success": true,
+      "duration": 3
+    },
+    "is_public": true
+  },
+  {
+    "id": "8e1ef0df-71f6-47c2-956c-17d5bb3917f8",
+    "created_at": "2026-06-25T08:53:13.276Z",
+    "event_type": "cli",
+    "severity": "success",
+    "message": "CLI Command: 'show trace outreachops-ai' (duration 1ms, success: true)",
+    "metadata": {
+      "success": true,
+      "duration": 1
+    },
+    "is_public": true
+  },
+  {
+    "id": "f3d6b11e-35d3-4172-bd9f-c7b0f41fe36a",
+    "created_at": "2026-06-25T08:53:21.025Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /",
+    "metadata": {
+      "path": "/",
+      "referrer": "",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "34a1e91b-173f-4841-9e03-240c54c8749f",
+    "created_at": "2026-06-25T08:53:22.826Z",
+    "event_type": "github_sync",
+    "severity": "success",
+    "message": "GitHub contributions cache successfully synced for account context: Combined (Vraj3005 + 23bce377-debug)",
+    "metadata": {
+      "mode": "combined",
+      "recordCount": 369
+    },
+    "is_public": true
+  },
+  {
+    "id": "e70a6b9d-a9c4-4eb1-b5c1-3a014d6f3c9b",
+    "created_at": "2026-06-25T08:53:24.383Z",
+    "event_type": "github_sync",
+    "severity": "success",
+    "message": "GitHub contributions cache successfully synced for account context: Combined (Vraj3005 + 23bce377-debug)",
+    "metadata": {
+      "mode": "combined",
+      "recordCount": 369
+    },
+    "is_public": true
+  },
+  {
+    "id": "74372cd7-5690-4848-b376-c489f33867af",
+    "created_at": "2026-06-25T08:53:43.716Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /ask-vraj",
+    "metadata": {
+      "path": "/ask-vraj",
+      "referrer": "",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "584f4737-f31f-4c9e-8625-4a364dbe79ff",
+    "created_at": "2026-06-25T08:56:55.851Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /terminal",
+    "metadata": {
+      "path": "/terminal",
+      "referrer": "",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "34481dbb-efcc-4f46-9237-5722993d4d3b",
+    "created_at": "2026-06-25T08:56:57.102Z",
+    "event_type": "github_sync",
+    "severity": "success",
+    "message": "GitHub contributions cache successfully synced for account context: Combined (Vraj3005 + 23bce377-debug)",
+    "metadata": {
+      "mode": "combined",
+      "recordCount": 369
+    },
+    "is_public": true
+  },
+  {
+    "id": "f0ec4bce-70d6-4868-ae27-33a0b2721ef8",
+    "created_at": "2026-06-25T08:56:58.743Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /",
+    "metadata": {
+      "path": "/",
+      "referrer": "",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "9775c91e-baa3-49b9-84e1-4d5a7cab4a91",
+    "created_at": "2026-06-25T08:56:58.909Z",
+    "event_type": "github_sync",
+    "severity": "success",
+    "message": "GitHub contributions cache successfully synced for account context: Combined (Vraj3005 + 23bce377-debug)",
+    "metadata": {
+      "mode": "combined",
+      "recordCount": 369
+    },
+    "is_public": true
+  },
+  {
+    "id": "bd884fec-7fa3-4b9b-a177-2e5e3bca5838",
+    "created_at": "2026-06-25T08:56:59.661Z",
+    "event_type": "github_sync",
+    "severity": "success",
+    "message": "GitHub contributions cache successfully synced for account context: Combined (Vraj3005 + 23bce377-debug)",
+    "metadata": {
+      "mode": "combined",
+      "recordCount": 369
+    },
+    "is_public": true
+  },
+  {
+    "id": "e5233147-86ff-4ed8-82e4-c68c5b828c3a",
+    "created_at": "2026-06-25T08:57:01.389Z",
+    "event_type": "github_sync",
+    "severity": "success",
+    "message": "GitHub contributions cache successfully synced for account context: Combined (Vraj3005 + 23bce377-debug)",
+    "metadata": {
+      "mode": "combined",
+      "recordCount": 369
+    },
+    "is_public": true
+  },
+  {
+    "id": "701dad92-8f4a-4c0e-a884-37d5ae6c649e",
+    "created_at": "2026-06-25T09:10:28.506Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /dashboard",
+    "metadata": {
+      "path": "/dashboard",
+      "referrer": "",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "f880e798-3b70-4696-9513-d54968885d30",
+    "created_at": "2026-06-25T09:10:31.385Z",
+    "event_type": "github_sync",
+    "severity": "success",
+    "message": "GitHub contributions cache successfully synced for account context: Combined (Vraj3005 + 23bce377-debug)",
+    "metadata": {
+      "mode": "combined",
+      "recordCount": 369
+    },
+    "is_public": true
+  },
+  {
+    "id": "089176b7-1515-409d-b3dd-8a822df7485d",
+    "created_at": "2026-06-25T09:10:33.739Z",
+    "event_type": "github_sync",
+    "severity": "success",
+    "message": "GitHub contributions cache successfully synced for account context: Combined (Vraj3005 + 23bce377-debug)",
+    "metadata": {
+      "mode": "combined",
+      "recordCount": 369
+    },
+    "is_public": true
+  },
+  {
+    "id": "4f4d088e-ab2f-4b25-80a5-5cd95ad24a31",
+    "created_at": "2026-06-25T09:11:48.024Z",
+    "event_type": "ask-vraj",
+    "severity": "warning",
+    "message": "AI Assistant input validation failed.",
+    "metadata": {
+      "errors": {
+        "prompt": [
+          "Prompt is required."
+        ]
+      }
+    },
+    "is_public": true
+  },
+  {
+    "id": "2e13f8f0-845b-4c5f-8118-893a509ff0ea",
+    "created_at": "2026-06-25T09:11:48.038Z",
+    "event_type": "ask-vraj",
+    "severity": "success",
+    "message": "Processed Ask Vraj AI query: \"Who is Vraj?...\"",
+    "metadata": {
+      "promptLength": 12,
+      "sessionId": "04e9b599-a4ea-4290-9cab-8b815d5d7c71"
+    },
+    "is_public": true
+  },
+  {
+    "id": "fbb727e1-860b-43f2-b8b0-a2d011ae3396",
+    "created_at": "2026-06-25T09:11:48.265Z",
+    "event_type": "contact",
+    "severity": "warning",
+    "message": "Contact form input validation failed.",
+    "metadata": {
+      "errors": {
+        "message": [
+          "Message must be at least 10 characters."
+        ]
+      }
+    },
+    "is_public": true
+  },
+  {
+    "id": "d1d5c469-5215-4b62-823a-ea900158e93c",
+    "created_at": "2026-06-25T09:11:48.284Z",
+    "event_type": "contact",
+    "severity": "success",
+    "message": "Contact inquiry cataloged successfully: \"Full-stack Position...\"",
+    "metadata": {
+      "subjectPreview": "Full-stack Position"
+    },
+    "is_public": true
+  },
+  {
+    "id": "79493f8f-35d5-4813-9dc7-c0994f19e699",
+    "created_at": "2026-06-25T09:13:46.632Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /",
+    "metadata": {
+      "path": "/",
+      "referrer": "",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "5a83ffe7-563b-49db-9a7f-97e68fb03f8f",
+    "created_at": "2026-06-25T09:13:48.343Z",
+    "event_type": "github_sync",
+    "severity": "success",
+    "message": "GitHub contributions cache successfully synced for account context: Combined (Vraj3005 + 23bce377-debug)",
+    "metadata": {
+      "mode": "combined",
+      "recordCount": 369
+    },
+    "is_public": true
+  },
+  {
+    "id": "be01f445-1e62-455d-bfd6-469aae95491b",
+    "created_at": "2026-06-25T09:13:50.424Z",
+    "event_type": "github_sync",
+    "severity": "success",
+    "message": "GitHub contributions cache successfully synced for account context: Combined (Vraj3005 + 23bce377-debug)",
+    "metadata": {
+      "mode": "combined",
+      "recordCount": 369
+    },
+    "is_public": true
+  },
+  {
+    "id": "1b07eeee-fed9-43e2-9766-00f27899e28c",
+    "created_at": "2026-06-25T09:14:08.287Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /projects",
+    "metadata": {
+      "path": "/projects",
+      "referrer": "",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "6f212bd1-c1ba-4da6-a566-9bf42ae04f94",
+    "created_at": "2026-06-25T09:14:08.519Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /",
+    "metadata": {
+      "path": "/",
+      "referrer": "",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "5fcfea55-b135-4d89-b6d6-9e541506e2e5",
+    "created_at": "2026-06-25T09:14:10.153Z",
+    "event_type": "github_sync",
+    "severity": "success",
+    "message": "GitHub contributions cache successfully synced for account context: Combined (Vraj3005 + 23bce377-debug)",
+    "metadata": {
+      "mode": "combined",
+      "recordCount": 369
+    },
+    "is_public": true
+  },
+  {
+    "id": "9c6ea4f4-8a11-4a12-af63-fd2a7905c3f7",
+    "created_at": "2026-06-25T09:14:12.008Z",
+    "event_type": "github_sync",
+    "severity": "success",
+    "message": "GitHub contributions cache successfully synced for account context: Combined (Vraj3005 + 23bce377-debug)",
+    "metadata": {
+      "mode": "combined",
+      "recordCount": 369
+    },
+    "is_public": true
+  },
+  {
+    "id": "e62b769c-d80c-4cf0-81ea-ff6969664bfe",
+    "created_at": "2026-06-25T09:15:26.833Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /",
+    "metadata": {
+      "path": "/",
+      "referrer": "",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "a5ee2c6e-f963-4486-aa4d-e848ca3eeb81",
+    "created_at": "2026-06-25T09:15:28.286Z",
+    "event_type": "github_sync",
+    "severity": "success",
+    "message": "GitHub contributions cache successfully synced for account context: Combined (Vraj3005 + 23bce377-debug)",
+    "metadata": {
+      "mode": "combined",
+      "recordCount": 369
+    },
+    "is_public": true
+  },
+  {
+    "id": "91e36d0a-5d01-43fe-b494-218c5d3c4590",
+    "created_at": "2026-06-25T09:15:35.301Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /projects",
+    "metadata": {
+      "path": "/projects",
+      "referrer": "",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "25db5894-aa24-4289-9ceb-126e68c1e05d",
+    "created_at": "2026-06-25T09:15:38.744Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /dashboard",
+    "metadata": {
+      "path": "/dashboard",
+      "referrer": "",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "661d850f-2501-4eac-8a8f-28308cf0b842",
+    "created_at": "2026-06-25T09:15:40.098Z",
+    "event_type": "github_sync",
+    "severity": "success",
+    "message": "GitHub contributions cache successfully synced for account context: Combined (Vraj3005 + 23bce377-debug)",
+    "metadata": {
+      "mode": "combined",
+      "recordCount": 369
+    },
+    "is_public": true
+  },
+  {
+    "id": "7ec090c3-ca64-4de6-abee-d1cc8ce7d05d",
+    "created_at": "2026-06-25T09:15:42.299Z",
+    "event_type": "github_sync",
+    "severity": "success",
+    "message": "GitHub contributions cache successfully synced for account context: Combined (Vraj3005 + 23bce377-debug)",
+    "metadata": {
+      "mode": "combined",
+      "recordCount": 369
+    },
+    "is_public": true
+  },
+  {
+    "id": "e5b3bd8e-238f-45a8-b547-88e99a66843e",
+    "created_at": "2026-06-25T09:19:43.593Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /systems",
+    "metadata": {
+      "path": "/systems",
+      "referrer": "http://localhost:3000/systems",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "d8403ce9-3bc6-40dc-b23d-a429b12a5902",
+    "created_at": "2026-06-25T09:23:32.041Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /systems",
+    "metadata": {
+      "path": "/systems",
+      "referrer": "http://localhost:3000/systems",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "cfc088cf-70cf-4694-ab04-245aa60728db",
+    "created_at": "2026-06-25T09:23:54.106Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /systems",
+    "metadata": {
+      "path": "/systems",
+      "referrer": "http://localhost:3000/systems",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "a767dd8a-e03d-4676-b1c5-5a262c3f00ee",
+    "created_at": "2026-06-25T09:23:55.466Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /systems",
+    "metadata": {
+      "path": "/systems",
+      "referrer": "http://localhost:3000/systems",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "4fa21c3a-2349-4473-9f73-e482da05f6dc",
+    "created_at": "2026-06-25T09:23:57.999Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /",
+    "metadata": {
+      "path": "/",
+      "referrer": "http://localhost:3000/systems",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "a18045e2-b407-4f68-96eb-caf80342d007",
+    "created_at": "2026-06-25T09:23:59.443Z",
+    "event_type": "github_sync",
+    "severity": "success",
+    "message": "GitHub contributions cache successfully synced for account context: Combined (Vraj3005 + 23bce377-debug)",
+    "metadata": {
+      "mode": "combined",
+      "recordCount": 369
+    },
+    "is_public": true
+  },
+  {
+    "id": "7e359c4f-c998-408f-b274-c7f4e1094570",
+    "created_at": "2026-06-25T09:24:01.544Z",
+    "event_type": "github_sync",
+    "severity": "success",
+    "message": "GitHub contributions cache successfully synced for account context: Combined (Vraj3005 + 23bce377-debug)",
+    "metadata": {
+      "mode": "combined",
+      "recordCount": 369
+    },
+    "is_public": true
+  },
+  {
+    "id": "e5066887-e738-4fd0-871c-ffec9844b58e",
+    "created_at": "2026-06-25T09:24:45.220Z",
+    "event_type": "ask-vraj",
+    "severity": "warning",
+    "message": "AI Assistant input validation failed.",
+    "metadata": {
+      "errors": {
+        "prompt": [
+          "Prompt is required."
+        ]
+      }
+    },
+    "is_public": true
+  },
+  {
+    "id": "c231f88b-f733-4d78-a343-61fa594a5fc8",
+    "created_at": "2026-06-25T09:24:45.232Z",
+    "event_type": "ask-vraj",
+    "severity": "success",
+    "message": "Processed Ask Vraj AI query: \"Who is Vraj?...\"",
+    "metadata": {
+      "promptLength": 12,
+      "sessionId": "335b8bb7-ff2a-4d1a-ad05-48fa20991596"
+    },
+    "is_public": true
+  },
+  {
+    "id": "a76dc9b6-fbc8-4b3a-9bb6-c41a616bdfb8",
+    "created_at": "2026-06-25T09:24:45.257Z",
+    "event_type": "contact",
+    "severity": "warning",
+    "message": "Contact form input validation failed.",
+    "metadata": {
+      "errors": {
+        "message": [
+          "Message must be at least 10 characters."
+        ]
+      }
+    },
+    "is_public": true
+  },
+  {
+    "id": "50bfd07a-62d9-4b33-9d43-a79e4c52f779",
+    "created_at": "2026-06-25T09:24:45.296Z",
+    "event_type": "contact",
+    "severity": "success",
+    "message": "Contact inquiry cataloged successfully: \"Full-stack Position...\"",
+    "metadata": {
+      "subjectPreview": "Full-stack Position"
+    },
+    "is_public": true
+  },
+  {
+    "id": "e6b8b441-c460-4c55-9abe-547009e07e19",
+    "created_at": "2026-06-25T09:25:55.600Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /dashboard",
+    "metadata": {
+      "path": "/dashboard",
+      "referrer": "http://localhost:3000/systems",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "20cec57e-e4cb-4d4f-8738-dc17e9c69c1e",
+    "created_at": "2026-06-25T09:25:57.427Z",
+    "event_type": "github_sync",
+    "severity": "success",
+    "message": "GitHub contributions cache successfully synced for account context: Combined (Vraj3005 + 23bce377-debug)",
+    "metadata": {
+      "mode": "combined",
+      "recordCount": 369
+    },
+    "is_public": true
+  },
+  {
+    "id": "994b2436-30fd-4119-8726-5e2cc4f8a741",
+    "created_at": "2026-06-25T09:25:59.443Z",
+    "event_type": "github_sync",
+    "severity": "success",
+    "message": "GitHub contributions cache successfully synced for account context: Combined (Vraj3005 + 23bce377-debug)",
+    "metadata": {
+      "mode": "combined",
+      "recordCount": 369
+    },
+    "is_public": true
+  },
+  {
+    "id": "f7f85552-98ab-41aa-adf7-57d49714a510",
+    "created_at": "2026-06-25T09:29:41.032Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /projects",
+    "metadata": {
+      "path": "/projects",
+      "referrer": "http://localhost:3000/systems",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "2337763e-32cf-4449-b9b5-550771590b4f",
+    "created_at": "2026-06-25T09:29:55.677Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /",
+    "metadata": {
+      "path": "/",
+      "referrer": "http://localhost:3000/systems",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "c6439cb5-9078-476f-846e-9b9cf252cc56",
+    "created_at": "2026-06-25T09:30:04.455Z",
+    "event_type": "github_sync",
+    "severity": "success",
+    "message": "GitHub contributions cache successfully synced for account context: Vraj3005 (Personal)",
+    "metadata": {
+      "mode": "personal",
+      "recordCount": 369
+    },
+    "is_public": true
+  },
+  {
+    "id": "53b477e2-b7e6-451a-85e1-550f67cf8668",
+    "created_at": "2026-06-25T09:30:08.881Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /dashboard",
+    "metadata": {
+      "path": "/dashboard",
+      "referrer": "http://localhost:3000/systems",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "3d252c67-c759-4fac-99ee-158c2b0f40ef",
+    "created_at": "2026-06-25T09:30:12.446Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /systems",
+    "metadata": {
+      "path": "/systems",
+      "referrer": "http://localhost:3000/systems",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "f549849c-c5b4-4a10-82d1-a711681e2a45",
+    "created_at": "2026-06-25T09:30:24.103Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /dashboard",
+    "metadata": {
+      "path": "/dashboard",
+      "referrer": "http://localhost:3000/systems",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "5752e1d8-6e57-41b6-a74b-e7c69d3900a1",
+    "created_at": "2026-06-25T09:30:52.768Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /dashboard",
+    "metadata": {
+      "path": "/dashboard",
+      "referrer": "http://localhost:3000/dashboard",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "51410ccb-36fd-4bde-91f6-65464abebfe9",
+    "created_at": "2026-06-25T09:31:09.641Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /lab",
+    "metadata": {
+      "path": "/lab",
+      "referrer": "http://localhost:3000/dashboard",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "e7c54978-567e-4e6e-8dba-0f39f1086bce",
+    "created_at": "2026-06-25T09:31:12.220Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /dashboard",
+    "metadata": {
+      "path": "/dashboard",
+      "referrer": "http://localhost:3000/dashboard",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "f85bf2f6-a0e0-4e28-90c4-a4d34fc89cb7",
+    "created_at": "2026-06-25T09:31:13.041Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /systems",
+    "metadata": {
+      "path": "/systems",
+      "referrer": "http://localhost:3000/dashboard",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "dd4ac12d-4b3c-49a1-8687-f56c3e6f13d7",
+    "created_at": "2026-06-25T09:32:20.755Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /projects",
+    "metadata": {
+      "path": "/projects",
+      "referrer": "http://localhost:3000/dashboard",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "1630fa02-7367-4fb6-ab28-93e4973db562",
+    "created_at": "2026-06-25T09:32:26.459Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /projects/ask-vraj",
+    "metadata": {
+      "path": "/projects/ask-vraj",
+      "referrer": "http://localhost:3000/dashboard",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "bb42eec0-ec8b-414b-9a55-3f4a33ad0df3",
+    "created_at": "2026-06-25T09:32:51.652Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /",
+    "metadata": {
+      "path": "/",
+      "referrer": "http://localhost:3000/dashboard",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "3a2085a9-e452-4a24-a4dc-c804563ec804",
+    "created_at": "2026-06-25T09:35:32.298Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /systems",
+    "metadata": {
+      "path": "/systems",
+      "referrer": "http://localhost:3000/dashboard",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "f3bfdeaf-8b57-4d91-afd2-a0ebfd72cd82",
+    "created_at": "2026-06-25T09:36:45.093Z",
+    "event_type": "ask-vraj",
+    "severity": "warning",
+    "message": "AI Assistant input validation failed.",
+    "metadata": {
+      "errors": {
+        "prompt": [
+          "Prompt is required."
+        ]
+      }
+    },
+    "is_public": true
+  },
+  {
+    "id": "dce765e3-4b07-4b79-8bba-97dc358ea6fc",
+    "created_at": "2026-06-25T09:36:45.105Z",
+    "event_type": "ask-vraj",
+    "severity": "success",
+    "message": "Processed Ask Vraj AI query: \"Who is Vraj?...\"",
+    "metadata": {
+      "promptLength": 12,
+      "sessionId": "66348749-647b-473e-aa6f-c95563aa5af5"
+    },
+    "is_public": true
+  },
+  {
+    "id": "ae4616e2-e46d-482b-84bd-6d129482a1ba",
+    "created_at": "2026-06-25T09:36:45.163Z",
+    "event_type": "contact",
+    "severity": "warning",
+    "message": "Contact form input validation failed.",
+    "metadata": {
+      "errors": {
+        "message": [
+          "Message must be at least 10 characters."
+        ]
+      }
+    },
+    "is_public": true
+  },
+  {
+    "id": "369d706a-1c9a-43eb-b4d2-81e612f9d83f",
+    "created_at": "2026-06-25T09:36:45.181Z",
+    "event_type": "contact",
+    "severity": "success",
+    "message": "Contact inquiry cataloged successfully: \"Full-stack Position...\"",
+    "metadata": {
+      "subjectPreview": "Full-stack Position"
+    },
+    "is_public": true
   }
 ]
