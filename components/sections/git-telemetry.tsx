@@ -19,7 +19,7 @@ export default function GitTelemetry() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
         {/* Real Dynamic Heatmap Column */}
         <div className="lg:col-span-2">
-          <GithubHeatmap username="vrajpatel" />
+          <GithubHeatmap username="Vraj3005" />
         </div>
 
         {/* Status */}

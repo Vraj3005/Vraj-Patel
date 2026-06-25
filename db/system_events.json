@@ -510,5 +510,132 @@
       "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
     },
     "is_public": true
+  },
+  {
+    "id": "c6b3276f-00bb-4ebe-8ace-a837ef4e063e",
+    "created_at": "2026-06-25T06:16:43.980Z",
+    "event_type": "ask-vraj",
+    "severity": "warning",
+    "message": "AI Assistant input validation failed.",
+    "metadata": {
+      "errors": {
+        "prompt": [
+          "Prompt is required."
+        ]
+      }
+    },
+    "is_public": true
+  },
+  {
+    "id": "36c5b1e2-19ec-43ab-9fc7-e7d8c6a1f1c9",
+    "created_at": "2026-06-25T06:16:44.000Z",
+    "event_type": "ask-vraj",
+    "severity": "success",
+    "message": "Processed Ask Vraj AI query: \"Who is Vraj?...\"",
+    "metadata": {
+      "promptLength": 12,
+      "sessionId": "219cc2ab-0b36-4ade-8fb5-90afb448d879"
+    },
+    "is_public": true
+  },
+  {
+    "id": "df50fdaf-6bd5-4502-9dc4-3f507818edee",
+    "created_at": "2026-06-25T06:16:44.089Z",
+    "event_type": "contact",
+    "severity": "warning",
+    "message": "Contact form input validation failed.",
+    "metadata": {
+      "errors": {
+        "message": [
+          "Message must be at least 10 characters."
+        ]
+      }
+    },
+    "is_public": true
+  },
+  {
+    "id": "dbd351ec-f70f-4058-bc38-2a9b5f9a66e5",
+    "created_at": "2026-06-25T06:16:44.106Z",
+    "event_type": "contact",
+    "severity": "success",
+    "message": "Contact inquiry cataloged successfully: \"Full-stack Position...\"",
+    "metadata": {
+      "subjectPreview": "Full-stack Position"
+    },
+    "is_public": true
+  },
+  {
+    "id": "9577d3c3-8873-4c32-b322-60b70f785540",
+    "created_at": "2026-06-25T06:18:16.627Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /",
+    "metadata": {
+      "path": "/",
+      "referrer": "",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "30e50883-4fa3-4ce2-9bff-809d215d1668",
+    "created_at": "2026-06-25T06:18:16.856Z",
+    "event_type": "github_sync",
+    "severity": "error",
+    "message": "Failed to sync GitHub contributions for account context \"combined\": GITHUB_TOKEN environment variable is not defined in the server environment",
+    "metadata": {
+      "mode": "combined",
+      "error": "GITHUB_TOKEN environment variable is not defined in the server environment"
+    },
+    "is_public": true
+  },
+  {
+    "id": "c44907a8-5a4b-47d1-a02e-0c36bb87a6dc",
+    "created_at": "2026-06-25T06:23:35.043Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /",
+    "metadata": {
+      "path": "/",
+      "referrer": "",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "9d023dae-f067-4110-ac9e-9e1409430c02",
+    "created_at": "2026-06-25T06:23:36.585Z",
+    "event_type": "github_sync",
+    "severity": "success",
+    "message": "GitHub contributions cache successfully synced for account context: Combined (Vraj3005 + 23bce377-debug)",
+    "metadata": {
+      "mode": "combined",
+      "recordCount": 369
+    },
+    "is_public": true
+  },
+  {
+    "id": "bfd08f8c-f3f6-4e56-8a03-5b333de9877f",
+    "created_at": "2026-06-25T06:23:41.350Z",
+    "event_type": "github_sync",
+    "severity": "success",
+    "message": "GitHub contributions cache successfully synced for account context: Vraj3005 (Personal)",
+    "metadata": {
+      "mode": "personal",
+      "recordCount": 369
+    },
+    "is_public": true
+  },
+  {
+    "id": "fa98d3b8-f55f-49c6-a677-3824d739c0cd",
+    "created_at": "2026-06-25T06:23:45.789Z",
+    "event_type": "github_sync",
+    "severity": "success",
+    "message": "GitHub contributions cache successfully synced for account context: Combined (Vraj3005 + 23bce377-debug)",
+    "metadata": {
+      "mode": "combined",
+      "recordCount": 369
+    },
+    "is_public": true
   }
 ]

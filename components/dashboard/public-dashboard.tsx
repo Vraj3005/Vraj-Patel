@@ -132,7 +132,7 @@ export default function PublicDashboard() {
       </div>
 
       {/* GitHub contributions calendar graph embedded */}
-      <GithubHeatmap username="vrajpatel" />
+      <GithubHeatmap username="Vraj3005" />
     </div>
   );
 }

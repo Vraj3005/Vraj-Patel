@@ -78,11 +78,16 @@ export interface MetricCardConfig {
   change24h?: number;
 }
 
-// Heatmap Contribution Cell
 export interface HeatmapCell {
   date: string;
   count: number;
   level: 0 | 1 | 2 | 3 | 4; // intensity
+  contributionCount?: number;
+  intensity?: 0 | 1 | 2 | 3 | 4;
+  color?: string;
+  account?: string;
+  weekday?: number;
+  weekIndex?: number;
 }
 
 // Security Configuration Layer

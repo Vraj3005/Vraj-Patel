@@ -1,78 +1,112 @@
 import { createSimpleSupabaseClient } from '../supabase/simple';
+import { supabaseAdmin, isSupabaseAdminConfigured } from '../supabase/admin';
 import { HeatmapCell } from '@/types/advanced';
+import { EventBus } from '../events/event-bus';
 
 /**
  * Service to fetch, compile, and cache GitHub contributions history blocks
  */
 export class GithubFetcher {
-  private static CACHE_TTL_MS = 24 * 60 * 60 * 1000; // 24 Hours cache duration
+  private static CACHE_TTL_MS = 6 * 60 * 60 * 1000; // 6 Hours cache duration (safe interval)
 
   /**
-   * Fetch user contributions list. Returns cached values if fresh, else scrapes GitHub stats.
+   * Fetch user contributions list. Returns cached values if fresh, else fetches from GitHub API.
    * Aggregates contributions from both Vraj3005 (personal) and 23bce377-debug (academic).
    */
   public static async getContributions(mode: string = 'combined'): Promise<{ data: HeatmapCell[]; isDemoMode: boolean }> {
     const cacheKey = `vraj_${mode}`;
-    const supabase = createSimpleSupabaseClient() as any;
+    const supabase = isSupabaseAdminConfigured ? supabaseAdmin : (createSimpleSupabaseClient() as any);
 
+    let cachedData: HeatmapCell[] | null = null;
+    let isCacheExpired = true;
+
+    // 1. Query Supabase cache table
     try {
-      let rawData: HeatmapCell[] = [];
-      let isDemoMode = false;
-
-      // 1. Query Supabase cache table
       const { data, error } = await supabase
         .from('github_contributions_cache')
-        .select('updated_at, contribution_data, is_demo_mode')
+        .select('updated_at, contribution_data')
         .eq('username', cacheKey)
         .maybeSingle();
 
       if (data && !error && data.contribution_data) {
+        cachedData = data.contribution_data as HeatmapCell[];
         const cacheAge = Date.now() - new Date(data.updated_at).getTime();
         if (cacheAge < this.CACHE_TTL_MS) {
-          rawData = data.contribution_data as HeatmapCell[];
-          isDemoMode = !!data.is_demo_mode;
+          isCacheExpired = false;
         }
       }
+    } catch (cacheErr) {
+      console.warn('Failed to query GitHub contributions cache:', cacheErr);
+    }
 
-      if (!rawData || !Array.isArray(rawData) || rawData.length === 0) {
-        if (mode === 'personal') {
-          const res = await this.fetchFromGitHub('Vraj3005');
-          rawData = res.data;
-          isDemoMode = res.isDemoMode;
-        } else if (mode === 'academic') {
-          const res = await this.fetchFromGitHub('23bce377-debug');
-          rawData = res.data;
-          isDemoMode = res.isDemoMode;
-        } else {
-          // Combined (default)
-          // 2. Fetch data for both profiles in parallel
-          const [res1, res2] = await Promise.all([
-            this.fetchFromGitHub('Vraj3005'),
-            this.fetchFromGitHub('23bce377-debug')
-          ]);
+    // 2. If cache is fresh, return it
+    if (cachedData && !isCacheExpired) {
+      return { data: cachedData, isDemoMode: false };
+    }
 
-          rawData = this.mergeContributions(res1.data, res2.data);
-          isDemoMode = res1.isDemoMode || res2.isDemoMode;
-        }
+    // 3. Cache expired or missing. Fetch live data.
+    try {
+      let rawData: HeatmapCell[] = [];
 
-        // 4. Persist combined/individual contribution array to cache table
+      if (mode === 'personal') {
+        rawData = await this.fetchFromGitHub('Vraj3005');
+      } else if (mode === 'academic') {
+        rawData = await this.fetchFromGitHub('23bce377-debug');
+      } else {
+        // Combined (default)
+        const [res1, res2] = await Promise.all([
+          this.fetchFromGitHub('Vraj3005'),
+          this.fetchFromGitHub('23bce377-debug')
+        ]);
+
+        rawData = this.mergeContributions(res1, res2);
+      }
+
+      // 4. Update the Supabase cache
+      try {
         await supabase.from('github_contributions_cache').upsert({
           username: cacheKey,
           updated_at: new Date().toISOString(),
-          contribution_data: rawData,
-          is_demo_mode: isDemoMode
+          contribution_data: rawData
         }, { onConflict: 'username' });
+      } catch (upsertErr) {
+        console.error('Failed to write to GitHub contributions cache database:', upsertErr);
       }
 
-      // 5. Post-process: Filter out future dates and slice to the last 371 days (53 weeks)
-      const offset = 5.5 * 60 * 60 * 1000;
-      const todayStr = new Date(Date.now() + offset).toISOString().split('T')[0];
-      const sortedData = Array.isArray(rawData) ? [...rawData].sort((a, b) => a.date.localeCompare(b.date)) : [];
-      const filteredData = sortedData.filter(d => d && typeof d.date === 'string' && d.date <= todayStr);
-      return { data: filteredData.slice(-371), isDemoMode };
-    } catch (err) {
-      console.error('GitHub contributions fetcher error, serving mock stats fallback:', err);
-      return { data: this.generateMockContributions(), isDemoMode: true };
+      // 5. Write a safe success event to system_events
+      await EventBus.publish(
+        'github_sync',
+        'success',
+        `GitHub contributions cache successfully synced for account context: ${
+          mode === 'combined'
+            ? 'Combined (Vraj3005 + 23bce377-debug)'
+            : mode === 'personal'
+            ? 'Vraj3005 (Personal)'
+            : '23bce377-debug (Academic)'
+        }`,
+        { mode, recordCount: rawData.length }
+      );
+
+      return { data: rawData, isDemoMode: false };
+    } catch (err: any) {
+      console.error(`GitHub contributions fetcher error for mode "${mode}":`, err);
+
+      // 6. Write a safe error event to system_events
+      await EventBus.publish(
+        'github_sync',
+        'error',
+        `Failed to sync GitHub contributions for account context "${mode}": ${err.message}`,
+        { mode, error: err.message }
+      );
+
+      // 7. If API fails, fall back to cached data (even if expired)
+      if (cachedData) {
+        console.warn(`Serving expired cache fallback for mode "${mode}" due to API sync failure.`);
+        return { data: cachedData, isDemoMode: false };
+      }
+
+      // 8. If no cache exists, throw an error to signal to frontend
+      throw new Error('GitHub data unavailable');
     }
   }
 
@@ -80,92 +114,162 @@ export class GithubFetcher {
    * Helper to merge two contribution lists chronologically
    */
   private static mergeContributions(data1: HeatmapCell[], data2: HeatmapCell[]): HeatmapCell[] {
-    const dateMap: Record<string, { count: number; level: 0 | 1 | 2 | 3 | 4 }> = {};
+    const dateMap: Record<string, HeatmapCell> = {};
 
     data1.forEach((cell) => {
-      dateMap[cell.date] = { count: cell.count, level: cell.level };
+      dateMap[cell.date] = { ...cell };
     });
 
     data2.forEach((cell) => {
-      if (dateMap[cell.date]) {
-        const newCount = dateMap[cell.date].count + cell.count;
-        let newLevel: 0 | 1 | 2 | 3 | 4 = 0;
-        if (newCount > 0 && newCount <= 2) newLevel = 1;
-        else if (newCount > 2 && newCount <= 4) newLevel = 2;
-        else if (newCount > 4 && newCount <= 6) newLevel = 3;
-        else if (newCount > 6) newLevel = 4;
+      const existing = dateMap[cell.date];
+      if (existing) {
+        const mergedCount = existing.count + cell.count;
+        let mergedLevel: 0 | 1 | 2 | 3 | 4 = 0;
+        if (mergedCount > 0 && mergedCount <= 2) mergedLevel = 1;
+        else if (mergedCount > 2 && mergedCount <= 4) mergedLevel = 2;
+        else if (mergedCount > 4 && mergedCount <= 6) mergedLevel = 3;
+        else if (mergedCount > 6) mergedLevel = 4;
 
-        dateMap[cell.date] = { count: newCount, level: newLevel };
+        dateMap[cell.date] = {
+          date: cell.date,
+          count: mergedCount,
+          level: mergedLevel,
+          contributionCount: mergedCount,
+          intensity: mergedLevel,
+          color: cell.color || existing.color || '#ebedf0',
+          account: 'combined',
+          weekday: cell.weekday !== undefined ? cell.weekday : existing.weekday,
+          weekIndex: cell.weekIndex !== undefined ? cell.weekIndex : existing.weekIndex
+        };
       } else {
-        dateMap[cell.date] = { count: cell.count, level: cell.level };
+        dateMap[cell.date] = {
+          ...cell,
+          account: 'combined'
+        };
       }
     });
 
-    return Object.entries(dateMap)
-      .map(([date, val]) => ({
-        date,
-        count: val.count,
-        level: val.level
-      }))
-      .sort((a, b) => a.date.localeCompare(b.date));
-  }
+    const mergedList = Object.values(dateMap);
+    mergedList.sort((a, b) => a.date.localeCompare(b.date));
 
-  /**
-   * Performs HTTP request to fetch active contributions counts list
-   */
-  private static async fetchFromGitHub(username: string): Promise<{ data: HeatmapCell[]; isDemoMode: boolean }> {
-    try {
-      const response = await fetch(`https://github-contributions-api.jogruber.de/v4/${username}`, {
-        next: { revalidate: 3600 }
-      });
-      
-      if (!response.ok) throw new Error('GitHub metrics endpoint returned error status');
-      
-      const json = await response.json();
-      if (!json.contributions || !Array.isArray(json.contributions)) {
-        throw new Error('Invalid JSON structure returned by contributions compiler');
+    // Re-assign weekIndex chronologically starting from 0, incrementing on each Sunday (weekday === 0)
+    let currentWeekIndex = 0;
+    for (let i = 0; i < mergedList.length; i++) {
+      const cell = mergedList[i];
+      const dateParts = cell.date.split('-').map(Number);
+      const d = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
+      const wd = d.getDay();
+
+      if (i > 0 && wd === 0) {
+        currentWeekIndex++;
       }
 
-      const data = json.contributions.map((c: any) => ({
-        date: c.date,
-        count: c.count,
-        level: c.level as HeatmapCell['level']
-      }));
-      return { data, isDemoMode: false };
-    } catch (err) {
-      console.warn(`Could not fetch real GitHub data for ${username}, utilizing realistic seed data.`, err);
-      return { data: this.generateMockContributions(), isDemoMode: true };
+      cell.weekday = wd;
+      cell.weekIndex = currentWeekIndex;
     }
+
+    return mergedList;
   }
 
   /**
-   * Fallback generation when GitHub APIs are blocked/offline
+   * Performs HTTP request to fetch active contributions counts list using GitHub GraphQL API
    */
-  private static generateMockContributions(): HeatmapCell[] {
+  private static async fetchFromGitHub(username: string): Promise<HeatmapCell[]> {
+    const token = process.env.GITHUB_TOKEN;
+    if (!token) {
+      throw new Error('GITHUB_TOKEN environment variable is not defined in the server environment');
+    }
+
+    const query = `
+      query($login: String!) {
+        user(login: $login) {
+          contributionsCollection {
+            contributionCalendar {
+              totalContributions
+              weeks {
+                contributionDays {
+                  contributionCount
+                  date
+                  color
+                  weekday
+                }
+              }
+            }
+          }
+        }
+      }
+    `;
+
+    const response = await fetch('https://api.github.com/graphql', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+        'User-Agent': 'Vraj-Portfolio-App'
+      },
+      body: JSON.stringify({
+        query,
+        variables: { login: username }
+      })
+    });
+
+    if (!response.ok) {
+      throw new Error(`GitHub GraphQL API returned status ${response.status}: ${response.statusText}`);
+    }
+
+    const json = await response.json();
+    if (json.errors && json.errors.length > 0) {
+      throw new Error(`GitHub GraphQL query failed: ${json.errors[0].message}`);
+    }
+
+    const calendar = json.data?.user?.contributionsCollection?.contributionCalendar;
+    if (!calendar) {
+      throw new Error(`Invalid response structure or user not found: ${username}`);
+    }
+
     const cells: HeatmapCell[] = [];
-    const now = new Date();
-    const oneYearAgo = new Date();
-    oneYearAgo.setFullYear(now.getFullYear() - 1);
+    const weeks = calendar.weeks || [];
 
-    for (let d = new Date(oneYearAgo); d <= now; d.setDate(d.getDate() + 1)) {
-      const dayOfWeek = d.getDay();
-      // Generate some realistic developer patterns (low on weekends, active on weekdays)
-      const isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
-      const count = isWeekend 
-        ? (Math.random() > 0.85 ? Math.floor(Math.random() * 3) : 0)
-        : Math.floor(Math.pow(Math.random(), 2) * 8);
+    weeks.forEach((week: any, weekIndex: number) => {
+      if (week && Array.isArray(week.contributionDays)) {
+        week.contributionDays.forEach((day: any) => {
+          const count = day.contributionCount || 0;
+          let level: 0 | 1 | 2 | 3 | 4 = 0;
+          if (count > 0 && count <= 2) level = 1;
+          else if (count > 2 && count <= 4) level = 2;
+          else if (count > 4 && count <= 6) level = 3;
+          else if (count > 6) level = 4;
 
-      let level: HeatmapCell['level'] = 0;
-      if (count > 0 && count <= 2) level = 1;
-      else if (count > 2 && count <= 4) level = 2;
-      else if (count > 4 && count <= 6) level = 3;
-      else if (count > 6) level = 4;
+          cells.push({
+            date: day.date,
+            count: count,
+            level: level,
+            contributionCount: count,
+            intensity: level,
+            color: day.color || '#ebedf0',
+            account: username,
+            weekday: typeof day.weekday === 'number' ? day.weekday : new Date(day.date).getDay(),
+            weekIndex: weekIndex
+          });
+        });
+      }
+    });
 
-      cells.push({
-        date: d.toISOString().split('T')[0],
-        count,
-        level
-      });
+    // Sort chronologically and assign normalized weekIndex to be perfectly aligned
+    cells.sort((a, b) => a.date.localeCompare(b.date));
+    let currentWeekIndex = 0;
+    for (let i = 0; i < cells.length; i++) {
+      const cell = cells[i];
+      const dateParts = cell.date.split('-').map(Number);
+      const d = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
+      const wd = d.getDay();
+
+      if (i > 0 && wd === 0) {
+        currentWeekIndex++;
+      }
+
+      cell.weekday = wd;
+      cell.weekIndex = currentWeekIndex;
     }
 
     return cells;

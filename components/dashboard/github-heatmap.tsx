@@ -3,13 +3,12 @@
 import React, { useEffect, useState } from 'react';
 import { Card } from '@/components/ui/card';
 import { HeatmapCell } from '@/types/advanced';
-import { Github, RefreshCw, Flame, Calendar, GitCommit } from 'lucide-react';
+import { Github, RefreshCw, Flame, Calendar, GitCommit, Activity } from 'lucide-react';
+import { parseDateString, alignDataToWeeks } from '@/lib/github/heatmap-utils';
 
 interface GithubHeatmapProps {
   username?: string;
 }
-
-import { parseDateString, alignDataToWeeks } from '@/lib/github/heatmap-utils';
 
 export default function GithubHeatmap({ username }: GithubHeatmapProps) {
   const [account, setAccount] = useState<'combined' | 'personal' | 'academic'>('combined');
@@ -17,6 +16,7 @@ export default function GithubHeatmap({ username }: GithubHeatmapProps) {
   const [loading, setLoading] = useState(true);
   const [syncing, setSyncing] = useState(false);
   const [isDemoMode, setIsDemoMode] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const [hoveredCell, setHoveredCell] = useState<{
     date: string;
     count: number;
@@ -37,11 +37,16 @@ export default function GithubHeatmap({ username }: GithubHeatmapProps) {
         return res.json();
       })
       .then((payload) => {
+        if (payload.error) {
+          throw new Error(payload.error);
+        }
         setData(payload.data || []);
         setIsDemoMode(!!payload.isDemoMode);
+        setError(null);
       })
       .catch((err) => {
         console.error('Error fetching contributions:', err);
+        setError(err.message || 'GitHub data unavailable');
       })
       .finally(() => {
         setLoading(false);
@@ -63,72 +68,34 @@ export default function GithubHeatmap({ username }: GithubHeatmapProps) {
     }
   };
 
-  // 1. Calculate standard metrics directly from the raw chronological API data
-  const totalCount = data.reduce((acc, c) => acc + c.count, 0);
+  // 1. Calculate requested metrics directly from the normalized API data
+  const totalCount = data.reduce((acc, c) => acc + (c.contributionCount ?? c.count), 0);
+  const activeDays = data.filter((c) => (c.contributionCount ?? c.count) > 0).length;
 
-  let currentStreak = 0;
-  let maxStreak = 0;
-  let busiestMonthStr = 'N/A';
-
-  if (data.length > 0) {
-    // Current streak calculation (active if contributed today or yesterday)
-    const today = new Date();
-    const todayStr = today.toISOString().split('T')[0];
-    const yesterday = new Date();
-    yesterday.setDate(yesterday.getDate() - 1);
-    const yesterdayStr = yesterday.toISOString().split('T')[0];
-
-    const hasRecent = data.some((d) => (d.date === todayStr || d.date === yesterdayStr) && d.count > 0);
-
-    if (hasRecent) {
-      for (let i = data.length - 1; i >= 0; i--) {
-        const cell = data[i];
-        if (cell.count > 0) {
-          currentStreak++;
-        } else {
-          if (cell.date === todayStr) {
-            continue;
-          }
-          break;
-        }
-      }
+  let busiestDay: HeatmapCell | null = null;
+  for (const c of data) {
+    if (!busiestDay || (c.contributionCount ?? c.count) > (busiestDay.contributionCount ?? busiestDay.count)) {
+      busiestDay = c;
     }
-
-    // Max streak calculation
-    let tempStreak = 0;
-    for (const cell of data) {
-      if (cell.count > 0) {
-        tempStreak++;
-        if (tempStreak > maxStreak) {
-          maxStreak = tempStreak;
-        }
-      } else {
-        tempStreak = 0;
-      }
-    }
-
-    // Busiest month calculation
-    const monthSums: Record<string, number> = {};
-    data.forEach((cell) => {
-      if (!cell.date) return;
-      const [y, m] = cell.date.split('-');
-      const date = new Date(Number(y), Number(m) - 1, 1);
-      const monthName = date.toLocaleString('default', { month: 'short' });
-      const key = `${monthName} ${y}`;
-      monthSums[key] = (monthSums[key] || 0) + cell.count;
-    });
-
-    let maxMonthContributions = 0;
-    Object.entries(monthSums).forEach(([month, sum]) => {
-      if (sum > maxMonthContributions) {
-        maxMonthContributions = sum;
-        busiestMonthStr = `${month} (${sum})`;
-      }
-    });
   }
 
-  // 2. Align data to starting Sunday and ending Saturday for consistent columns
+  let busiestDayStr = 'N/A';
+  if (busiestDay && (busiestDay.contributionCount ?? busiestDay.count) > 0) {
+    const [y, m, d] = busiestDay.date.split('-').map(Number);
+    const dateObj = new Date(y, m - 1, d);
+    const formattedDate = dateObj.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+    busiestDayStr = `${busiestDay.contributionCount ?? busiestDay.count} commits (${formattedDate})`;
+  }
 
+  const getAccountLabel = () => {
+    switch (account) {
+      case 'personal': return 'Vraj3005';
+      case 'academic': return '23bce377-debug';
+      default: return 'Combined (Vraj3005 + 23bce377-debug)';
+    }
+  };
+
+  // 2. Align data to starting Sunday and ending Saturday for consistent columns
   const weeks = alignDataToWeeks(data);
 
   // Determine months to label above weeks
@@ -156,6 +123,26 @@ export default function GithubHeatmap({ username }: GithubHeatmapProps) {
     );
   }
 
+  if (error || data.length === 0) {
+    return (
+      <Card className="p-6 relative overflow-hidden bg-card-bg/40 border-card-border backdrop-blur-md h-[260px] flex items-center justify-center">
+        <div className="absolute inset-0 bg-gradient-to-br from-red-500/5 to-transparent pointer-events-none" />
+        <div className="flex flex-col items-center gap-3 relative z-10 select-none text-center max-w-sm">
+          <div className="p-2 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400">
+            <Github className="h-5 w-5" />
+          </div>
+          <h4 className="text-sm font-bold text-foreground font-mono uppercase tracking-wider">GitHub Connection Offline</h4>
+          <p className="text-xs text-secondary leading-normal">
+            The GitHub data aggregation pipeline is currently offline and no local cached snapshots are available.
+          </p>
+          <span className="text-[10px] font-mono bg-red-500/10 text-red-400 border border-red-500/20 px-2.5 py-0.5 rounded mt-1">
+            Status: GitHub data unavailable
+          </span>
+        </div>
+      </Card>
+    );
+  }
+
   return (
     <Card className="p-6 relative overflow-hidden bg-card-bg/40 border-card-border backdrop-blur-md flex flex-col gap-5">
       <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-transparent pointer-events-none" />
@@ -178,7 +165,7 @@ export default function GithubHeatmap({ username }: GithubHeatmapProps) {
           {[
             { id: 'combined', label: 'Combined' },
             { id: 'personal', label: 'Vraj3005 (Personal)' },
-            { id: 'academic', label: '23bce377 (Academic)' }
+            { id: 'academic', label: '23bce377-debug (Academic)' }
           ].map((acc) => (
             <button
               key={acc.id}
@@ -251,7 +238,7 @@ export default function GithubHeatmap({ username }: GithubHeatmapProps) {
                         if (container) {
                           setHoveredCell({
                             date: day.date,
-                            count: day.count,
+                            count: day.contributionCount ?? day.count,
                             x: rect.left - container.left + rect.width / 2,
                             y: rect.top - container.top - 42
                           });
@@ -302,29 +289,19 @@ export default function GithubHeatmap({ username }: GithubHeatmapProps) {
           <div className="p-2 rounded-lg bg-cyan-500/5 border border-cyan-500/10 text-cyan-400">
             <GitCommit className="h-4 w-4" />
           </div>
-          <div className="flex flex-col">
-            <span className="text-[9px] text-secondary uppercase font-medium tracking-wider font-mono">Total Activity</span>
-            <span className="text-sm font-bold text-foreground font-mono leading-none mt-1">{totalCount} commits</span>
-          </div>
-        </div>
-
-        <div className="bg-white/[0.01] border border-white/5 rounded-xl p-3 flex items-center gap-3 hover:border-cyan-500/10 transition-all duration-300">
-          <div className="p-2 rounded-lg bg-amber-500/5 border border-amber-500/10 text-amber-500">
-            <Flame className="h-4 w-4" />
-          </div>
-          <div className="flex flex-col">
-            <span className="text-[9px] text-secondary uppercase font-medium tracking-wider font-mono">Current Streak</span>
-            <span className="text-sm font-bold text-foreground font-mono leading-none mt-1">{currentStreak} days</span>
+          <div className="flex flex-col min-w-0">
+            <span className="text-[9px] text-secondary uppercase font-medium tracking-wider font-mono">Total Contributions</span>
+            <span className="text-sm font-bold text-foreground font-mono leading-none mt-1 truncate">{totalCount} commits</span>
           </div>
         </div>
 
         <div className="bg-white/[0.01] border border-white/5 rounded-xl p-3 flex items-center gap-3 hover:border-cyan-500/10 transition-all duration-300">
           <div className="p-2 rounded-lg bg-emerald-500/5 border border-emerald-500/10 text-emerald-500">
-            <Flame className="h-4 w-4" />
+            <Activity className="h-4 w-4" />
           </div>
-          <div className="flex flex-col">
-            <span className="text-[9px] text-secondary uppercase font-medium tracking-wider font-mono">Maximum Streak</span>
-            <span className="text-sm font-bold text-foreground font-mono leading-none mt-1">{maxStreak} days</span>
+          <div className="flex flex-col min-w-0">
+            <span className="text-[9px] text-secondary uppercase font-medium tracking-wider font-mono">Active Days</span>
+            <span className="text-sm font-bold text-foreground font-mono leading-none mt-1 truncate">{activeDays} days</span>
           </div>
         </div>
 
@@ -332,13 +309,22 @@ export default function GithubHeatmap({ username }: GithubHeatmapProps) {
           <div className="p-2 rounded-lg bg-purple-500/5 border border-purple-500/10 text-purple-400">
             <Calendar className="h-4 w-4" />
           </div>
-          <div className="flex flex-col">
-            <span className="text-[9px] text-secondary uppercase font-medium tracking-wider font-mono">Busiest Month</span>
-            <span className="text-xs font-bold text-foreground font-mono leading-none mt-1 truncate max-w-[120px]" title={busiestMonthStr}>{busiestMonthStr}</span>
+          <div className="flex flex-col min-w-0">
+            <span className="text-[9px] text-secondary uppercase font-medium tracking-wider font-mono">Busiest Day</span>
+            <span className="text-[11px] font-bold text-foreground font-mono leading-none mt-1 truncate" title={busiestDayStr}>{busiestDayStr}</span>
+          </div>
+        </div>
+
+        <div className="bg-white/[0.01] border border-white/5 rounded-xl p-3 flex items-center gap-3 hover:border-cyan-500/10 transition-all duration-300">
+          <div className="p-2 rounded-lg bg-cyan-500/5 border border-cyan-500/10 text-cyan-400">
+            <Github className="h-4 w-4" />
+          </div>
+          <div className="flex flex-col min-w-0">
+            <span className="text-[9px] text-secondary uppercase font-medium tracking-wider font-mono">Account Displayed</span>
+            <span className="text-xs font-bold text-foreground font-mono leading-none mt-1 truncate" title={getAccountLabel()}>{getAccountLabel()}</span>
           </div>
         </div>
       </div>
     </Card>
   );
 }
-
