@@ -24,14 +24,15 @@ export default function GithubHeatmap({ username: _username }: GithubHeatmapProp
     y: number;
   } | null>(null);
 
-  const fetchContributions = useCallback((selectedAcc: typeof account, isInitial: boolean) => {
+  const fetchContributions = useCallback((selectedAcc: typeof account, isInitial: boolean, forceRefresh = false) => {
     if (isInitial) {
       setLoading(true);
     } else {
       setSyncing(true);
     }
 
-    fetch(`/api/github/contributions?account=${selectedAcc}`)
+    const url = `/api/github/contributions?account=${selectedAcc}${forceRefresh ? '&refresh=true' : ''}`;
+    fetch(url)
       .then((res) => {
         if (!res.ok) throw new Error('Failed to fetch contributions');
         return res.json();
@@ -157,7 +158,14 @@ export default function GithubHeatmap({ username: _username }: GithubHeatmapProp
               Demo Mode
             </span>
           )}
-          {syncing && <RefreshCw className="h-3.5 w-3.5 animate-spin text-cyan-400/80 ml-1" />}
+          <button
+            onClick={() => fetchContributions(account, false, true)}
+            disabled={syncing || loading}
+            className="p-1 hover:text-cyan-400 text-secondary disabled:opacity-50 transition-colors cursor-pointer flex items-center justify-center rounded-lg border border-transparent hover:border-white/5 bg-transparent ml-1"
+            title="Force refresh contributions cache"
+          >
+            <RefreshCw className={`h-3.5 w-3.5 ${syncing ? 'animate-spin text-cyan-400' : ''}`} />
+          </button>
         </div>
         
         {/* Switcher pills */}

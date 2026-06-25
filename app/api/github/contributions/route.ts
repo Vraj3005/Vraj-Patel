@@ -7,7 +7,8 @@ export async function GET(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url);
     const mode = searchParams.get('account') || 'combined'; // 'combined' | 'personal' | 'academic'
-    const result = await GithubFetcher.getContributions(mode);
+    const forceRefresh = searchParams.get('refresh') === 'true';
+    const result = await GithubFetcher.getContributions(mode, forceRefresh);
     await MetricsCollector.recordApiLatency('/api/github/contributions', Date.now() - startTime);
     return NextResponse.json(result);
   } catch (err: unknown) {

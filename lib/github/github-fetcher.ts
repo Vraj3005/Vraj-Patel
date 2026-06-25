@@ -14,7 +14,7 @@ export class GithubFetcher {
    * Fetch user contributions list. Returns cached values if fresh, else fetches from GitHub API.
    * Aggregates contributions from both Vraj3005 (personal) and 23bce377-debug (academic).
    */
-  public static async getContributions(mode: string = 'combined'): Promise<{ data: HeatmapCell[]; isDemoMode: boolean }> {
+  public static async getContributions(mode: string = 'combined', forceRefresh: boolean = false): Promise<{ data: HeatmapCell[]; isDemoMode: boolean }> {
     const cacheKey = `vraj_${mode}`;
     const supabase = isSupabaseAdminConfigured ? supabaseAdmin : (createSimpleSupabaseClient() as any);
 
@@ -32,7 +32,7 @@ export class GithubFetcher {
       if (data && !error && data.contribution_data) {
         cachedData = data.contribution_data as HeatmapCell[];
         const cacheAge = Date.now() - new Date(data.updated_at).getTime();
-        if (cacheAge < this.CACHE_TTL_MS) {
+        if (cacheAge < this.CACHE_TTL_MS && !forceRefresh) {
           isCacheExpired = false;
         }
       }
@@ -212,7 +212,8 @@ export class GithubFetcher {
       body: JSON.stringify({
         query,
         variables: { login: username }
-      })
+      }),
+      cache: 'no-store'
     });
 
     if (!response.ok) {
