@@ -123,14 +123,14 @@ const architectureData: Record<string, ProjectArchitecture> = {
     backend: {
       title: 'Backend Services',
       icon: <Server className="h-4 w-4" />,
-      tech: ['Next.js Server Actions', 'Prisma ORM'],
+      tech: ['Next.js Server Actions', 'Drizzle ORM'],
       description: 'Processes database queries, material catalog rate edits, designer task updates, and automated GST billing reports.',
-      keyMetric: 'Prisma ORM'
+      keyMetric: 'Drizzle ORM'
     },
     database: {
       title: 'Database Schema',
       icon: <Database className="h-4 w-4" />,
-      tech: ['PostgreSQL (Supabase)', 'Prisma Schema'],
+      tech: ['PostgreSQL (Supabase)', 'Drizzle Schema'],
       description: 'PostgreSQL database. Stores structured schemas for sites progress, transport details, and item catalogues.',
       keyMetric: 'Supabase PostgreSQL'
     },

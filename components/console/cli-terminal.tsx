@@ -1110,7 +1110,7 @@ export default function CLITerminal() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 10 }}
-            className="absolute bottom-[48px] left-5 right-5 z-25 bg-black/95 border border-white/10 rounded-xl p-2 shadow-2xl flex flex-wrap gap-2 select-none"
+            className="absolute bottom-[48px] left-5 right-5 z-30 bg-black/95 border border-white/10 rounded-xl p-2 shadow-2xl flex flex-wrap gap-2 select-none"
           >
             <span className="text-[9px] text-gray-500 font-bold font-mono uppercase tracking-wider block w-full px-1 mb-1">Autocomplete Suggestions (Tab to cycle)</span>
             {suggestions.map((sug, idx) => {

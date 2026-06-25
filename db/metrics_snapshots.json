@@ -1195,5 +1195,32 @@
     "tags": {
       "path": "/api/contact"
     }
+  },
+  {
+    "id": "486e0be5-f7e9-446a-a86d-c4b50b545958",
+    "created_at": "2026-06-25T10:28:48.449Z",
+    "metric_name": "api_latency_ms",
+    "metric_value": 6,
+    "tags": {
+      "path": "/api/contact"
+    }
+  },
+  {
+    "id": "8879bb8a-36c1-4b95-8a96-02a2e5bef515",
+    "created_at": "2026-06-25T10:46:00.072Z",
+    "metric_name": "api_latency_ms",
+    "metric_value": 4,
+    "tags": {
+      "path": "/api/contact"
+    }
+  },
+  {
+    "id": "b331d949-6993-4dce-8375-4104a0b66b9e",
+    "created_at": "2026-06-25T10:57:10.916Z",
+    "metric_name": "api_latency_ms",
+    "metric_value": 11,
+    "tags": {
+      "path": "/api/contact"
+    }
   }
 ]

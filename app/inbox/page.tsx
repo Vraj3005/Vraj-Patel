@@ -30,14 +30,48 @@ export default function InboxPage() {
   const [error, setError] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
 
-  const attemptUnlock = async (codeToTry: string) => {
+  const checkSession = async () => {
     setLoading(true);
     setError(null);
     try {
       const response = await fetch('/api/contact/inbox', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ passcode: codeToTry }),
+        body: JSON.stringify({}),
+      });
+
+      if (response.ok) {
+        const payload = await response.json();
+        setMessages(payload.messages || []);
+        setIsUnlocked(true);
+      } else {
+        setIsUnlocked(false);
+      }
+    } catch (_) {
+      setIsUnlocked(false);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Check if session cookie is valid on mount
+  useEffect(() => {
+    checkSession();
+  }, []);
+
+  const handleUnlockSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!passcode.trim()) {
+      setError('Passcode cannot be empty.');
+      return;
+    }
+    setLoading(true);
+    setError(null);
+    try {
+      const response = await fetch('/api/contact/inbox', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ passcode }),
       });
 
       if (!response.ok) {
@@ -48,46 +82,33 @@ export default function InboxPage() {
       const payload = await response.json();
       setMessages(payload.messages || []);
       setIsUnlocked(true);
-      sessionStorage.setItem('vraj_inbox_passcode', codeToTry);
     } catch (err: unknown) {
       setError(getErrorMessage(err));
-      sessionStorage.removeItem('vraj_inbox_passcode');
       setIsUnlocked(false);
     } finally {
       setLoading(false);
     }
   };
 
-  // Check if session has passcode stored on mount
-  useEffect(() => {
-    const saved = sessionStorage.getItem('vraj_inbox_passcode');
-    if (saved) {
-      setPasscode(saved);
-      attemptUnlock(saved);
+  const handleLock = async () => {
+    setLoading(true);
+    try {
+      await fetch('/api/contact/inbox', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ lock: true }),
+      });
+    } catch (_) {
+      // Ignore lock notification failure
     }
-  }, []);
-
-  const handleUnlockSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!passcode.trim()) {
-      setError('Passcode cannot be empty.');
-      return;
-    }
-    attemptUnlock(passcode);
-  };
-
-  const handleLock = () => {
     setPasscode('');
     setIsUnlocked(false);
     setMessages([]);
-    sessionStorage.removeItem('vraj_inbox_passcode');
+    setLoading(false);
   };
 
   const handleRefresh = () => {
-    const saved = sessionStorage.getItem('vraj_inbox_passcode');
-    if (saved) {
-      attemptUnlock(saved);
-    }
+    checkSession();
   };
 
   const formatMessageTime = (timestamp: string) => {

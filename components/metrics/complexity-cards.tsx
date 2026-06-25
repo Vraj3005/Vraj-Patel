@@ -16,8 +16,8 @@ export default function ComplexityCards() {
     {
       title: 'Redis Cache & QStash Worker pipeline',
       project: 'Bhagwati Interior ERP',
-      tech: 'Upstash Redis / QStash Queue / Prisma',
-      desc: 'Implements asynchronous queues to coordinate catalog price revisions and prevent concurrent SQLite write transactions locks, syncing client ledgers and invoice status notifications.',
+      tech: 'Upstash Redis / QStash Queue / Drizzle',
+      desc: 'Implements asynchronous queues to coordinate catalog price revisions and prevent concurrent PostgreSQL write transactions locks, syncing client ledgers and invoice status notifications.',
       icon: <QueueIcon />,
       tier: 'Tier 2 Systems'
     },

@@ -1,6 +1,10 @@
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
 import { Database } from '../../types/supabase';
 
+if (typeof window !== 'undefined' && process.env.NODE_ENV !== 'test') {
+  throw new Error('Supabase admin service role client can only be used on the server.');
+}
+
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
 const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
 

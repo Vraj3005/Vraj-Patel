@@ -1,22 +1,56 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { supabaseAdmin, isSupabaseAdminConfigured } from '@/lib/supabase/admin';
+import { cookies } from 'next/headers';
 import fs from 'fs';
 import path from 'path';
 
 export async function POST(req: NextRequest) {
   try {
-    const body = await req.json();
-    const { passcode } = body;
-
-    // Verify passcode against environment variable exclusively (fail-closed if missing)
     const correctPasscode = process.env.INBOX_PASSCODE;
     if (!correctPasscode) {
       console.error('Inbox Secure Gate Error: INBOX_PASSCODE is not configured in server environment.');
       return NextResponse.json({ error: 'System configuration error. Access denied.' }, { status: 500 });
     }
 
-    if (!passcode || passcode !== correctPasscode) {
-      return NextResponse.json({ error: 'Unauthorized: Invalid passcode.' }, { status: 401 });
+    let passcode: string | undefined;
+    let lock = false;
+    try {
+      const body = await req.json();
+      if (body) {
+        passcode = body.passcode;
+        lock = !!body.lock;
+      }
+    } catch (_) {
+      // Body may be empty or missing
+    }
+
+    const cookieStore = await cookies();
+
+    // 1. Handle lock/clear request
+    if (lock || passcode === '') {
+      cookieStore.delete('inbox_session');
+      return NextResponse.json({ success: true, messages: [] });
+    }
+
+    // 2. If passcode is provided in payload (login attempt)
+    if (passcode !== undefined) {
+      if (passcode !== correctPasscode) {
+        return NextResponse.json({ error: 'Unauthorized: Invalid passcode.' }, { status: 401 });
+      }
+      // Set HttpOnly secure session cookie
+      cookieStore.set('inbox_session', passcode, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'strict',
+        path: '/',
+        maxAge: 60 * 60 * 2, // 2 hours
+      });
+    } else {
+      // 3. Mount validation (no passcode in body, read from cookie)
+      const sessionValue = cookieStore.get('inbox_session')?.value;
+      if (!sessionValue || sessionValue !== correctPasscode) {
+        return NextResponse.json({ error: 'Unauthorized: Invalid passcode.' }, { status: 401 });
+      }
     }
 
     let messages: any[] = [];
