@@ -1,9 +1,11 @@
 'use client';
 
+import React from 'react';
 import { motion, Variants } from 'framer-motion';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { BookOpen, Calendar, Briefcase, GraduationCap, ChevronRight, Award, Server, Database, Layout } from 'lucide-react';
+import skillsData from '@/db/skills.json';
 
 interface ExperienceItem {
   period: string;
@@ -37,28 +39,23 @@ const timeline: ExperienceItem[] = [
   },
 ];
 
-const skills = [
-  {
-    category: 'Languages',
-    icon: <Server className="h-4 w-4 text-foreground" />,
-    items: ['TypeScript', 'JavaScript', 'Python', 'SQL'],
-  },
-  {
-    category: 'Frontend Development',
-    icon: <Layout className="h-4 w-4 text-foreground" />,
-    items: ['Next.js', 'React', 'Tailwind CSS', 'Framer Motion', 'Three.js', 'Recharts', 'Redux Toolkit'],
-  },
-  {
-    category: 'Backend & APIs',
-    icon: <Database className="h-4 w-4 text-foreground" />,
-    items: ['Node.js', 'Express', 'FastAPI', 'RESTful APIs', 'Zod validation'],
-  },
-  {
-    category: 'Databases & Systems',
-    icon: <Server className="h-4 w-4 text-foreground" />,
-    items: ['PostgreSQL', 'Supabase', 'MongoDB Atlas', 'AWS S3', 'Docker'],
-  },
-];
+interface SkillGroup {
+  category: string;
+  items: string[];
+}
+
+const categoryIcons: Record<string, React.ReactNode> = {
+  'Languages': <Server className="h-4 w-4 text-foreground" />,
+  'Frontend Development': <Layout className="h-4 w-4 text-foreground" />,
+  'Backend & APIs': <Database className="h-4 w-4 text-foreground" />,
+  'Databases & Systems': <Server className="h-4 w-4 text-foreground" />,
+};
+
+const skills = (skillsData as SkillGroup[]).map((s) => ({
+  category: s.category,
+  icon: categoryIcons[s.category] || <Server className="h-4 w-4 text-foreground" />,
+  items: s.items,
+}));
 
 export default function About() {
   const containerVariants: Variants = {

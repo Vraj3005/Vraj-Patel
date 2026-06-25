@@ -6,8 +6,8 @@ import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { DataFlow } from '@/types/advanced';
 import { DATA_FLOWS } from '@/lib/visualizer/flow-data';
-import { 
-  Play, Pause, RotateCcw, ArrowRight, ArrowLeft, ShieldAlert, 
+import {
+  Play, Pause, RotateCcw, ArrowRight, ArrowLeft, ShieldAlert,
   Cpu, Activity, Database, CheckCircle2, ChevronRight, X, Terminal, Code
 } from 'lucide-react';
 
@@ -16,9 +16,9 @@ interface DataFlowExplorerProps {
   allowFlowSwitching?: boolean;
 }
 
-export default function DataFlowExplorer({ 
-  projectSlug, 
-  allowFlowSwitching = true 
+export default function DataFlowExplorer({
+  projectSlug,
+  allowFlowSwitching = true
 }: DataFlowExplorerProps) {
   // Find initial flow
   const initialFlow = DATA_FLOWS.find(f => f.projectSlug === projectSlug) || DATA_FLOWS[0];
@@ -196,7 +196,7 @@ export default function DataFlowExplorer({
           return {
             event: "GEMINI_MODEL_GENERATE",
             timestamp: new Date().toISOString(),
-            sdk: "@google/generative-ai",
+            sdk: "@google/genai",
             model: "gemini-1.5-flash",
             temperature: 0.2,
             prompt_tokens_estimate: 840,
@@ -617,7 +617,8 @@ export default function DataFlowExplorer({
   return (
     <Card className="p-6 relative overflow-hidden bg-card-bg/40 border-card-border backdrop-blur-md flex flex-col gap-6 w-full">
       {/* Inline animations styling */}
-      <style dangerouslySetInnerHTML={{ __html: `
+      <style dangerouslySetInnerHTML={{
+        __html: `
         @keyframes pulseTrack {
           0%, 100% { opacity: 0.15; }
           50% { opacity: 0.45; }
@@ -645,11 +646,10 @@ export default function DataFlowExplorer({
               <button
                 key={mode}
                 onClick={() => setViewMode(mode)}
-                className={`px-2.5 py-1.5 rounded-md uppercase transition-all cursor-pointer ${
-                  viewMode === mode 
-                    ? 'bg-white/5 text-white shadow-sm' 
-                    : 'text-secondary hover:text-foreground'
-                }`}
+                className={`px-2.5 py-1.5 rounded-md uppercase transition-all cursor-pointer ${viewMode === mode
+                  ? 'bg-white/5 text-white shadow-sm'
+                  : 'text-secondary hover:text-foreground'
+                  }`}
               >
                 {mode === 'overview' ? 'Overview' : mode === 'technical' ? 'Tech' : 'Recruiter'}
               </button>
@@ -685,15 +685,15 @@ export default function DataFlowExplorer({
         {/* Desktop Horizontal Swimlane (md and above) */}
         <div className="hidden md:flex flex-col gap-3 relative py-4 px-2 w-full border border-card-border bg-black/45 rounded-xl overflow-hidden select-none">
           <div className="absolute inset-0 cyber-grid opacity-[0.02] pointer-events-none" />
-          
+
           <span className="text-[8px] font-mono font-bold tracking-widest text-muted px-2 uppercase">FLOW PROGRESSION SWIMLANES</span>
-          
+
           <div className="relative flex items-center justify-between px-10 h-16 w-full">
             {/* Timeline Track Connectors */}
             <div className="absolute left-10 right-10 h-1 bg-white/5 rounded-full pointer-events-none">
-              <div 
-                className="h-full rounded-full transition-all duration-500 ease-out" 
-                style={{ 
+              <div
+                className="h-full rounded-full transition-all duration-500 ease-out"
+                style={{
                   width: `${(activeStepIdx / (stepsCount - 1)) * 100}%`,
                   backgroundColor: currentFlowAccentColor,
                   boxShadow: `0 0 10px ${currentFlowAccentColor}`
@@ -705,13 +705,13 @@ export default function DataFlowExplorer({
             <div className="absolute left-10 right-10 h-0 w-auto pointer-events-none z-10">
               <motion.div
                 className="h-3 w-3 -mt-1.5 rounded-full absolute"
-                style={{ 
+                style={{
                   backgroundColor: currentFlowAccentColor,
                   boxShadow: `0 0 12px ${currentFlowAccentColor}`,
                   x: "-50%"
                 }}
-                animate={{ 
-                  left: `${(activeStepIdx / (stepsCount - 1)) * 100}%` 
+                animate={{
+                  left: `${(activeStepIdx / (stepsCount - 1)) * 100}%`
                 }}
                 transition={{ type: "spring", stiffness: 90, damping: 15 }}
               />
@@ -721,9 +721,9 @@ export default function DataFlowExplorer({
             {activeFlow.steps.map((step, idx) => {
               const isActive = idx === activeStepIdx;
               const isPast = idx < activeStepIdx;
-              
+
               return (
-                <div 
+                <div
                   key={step.sequence}
                   onClick={() => {
                     setIsRunning(false);
@@ -731,23 +731,23 @@ export default function DataFlowExplorer({
                   }}
                   className="flex flex-col items-center relative z-20 cursor-pointer group"
                 >
-                  <div 
+                  <div
                     className="h-7 w-7 rounded-full border flex items-center justify-center font-mono text-[9px] font-bold transition-all duration-300 bg-black"
-                    style={{ 
-                      borderColor: isActive 
-                        ? currentFlowAccentColor 
-                        : isPast 
-                        ? `${currentFlowAccentColor}66` 
-                        : 'rgba(255, 255, 255, 0.08)',
+                    style={{
+                      borderColor: isActive
+                        ? currentFlowAccentColor
+                        : isPast
+                          ? `${currentFlowAccentColor}66`
+                          : 'rgba(255, 255, 255, 0.08)',
                       boxShadow: isActive ? `0 0 12px ${currentFlowAccentColor}44` : 'none',
                       color: isActive ? '#ffffff' : isPast ? '#a3a3a3' : '#737373'
                     }}
                   >
                     {step.sequence}
                   </div>
-                  <span 
+                  <span
                     className="absolute -bottom-6 text-[8px] font-mono text-center tracking-tight truncate max-w-[80px] select-none pointer-events-none group-hover:text-foreground transition-colors"
-                    style={{ 
+                    style={{
                       color: isActive ? '#ffffff' : '#737373',
                       fontWeight: isActive ? 'bold' : 'normal'
                     }}
@@ -774,7 +774,7 @@ export default function DataFlowExplorer({
                 className="w-full p-6 border border-card-border bg-foreground/[0.015] rounded-xl flex flex-col gap-5 relative overflow-hidden"
               >
                 {/* Visual side accent border */}
-                <div 
+                <div
                   className="absolute left-0 top-0 bottom-0 w-1.5"
                   style={{ backgroundColor: currentFlowAccentColor }}
                 />
@@ -788,8 +788,8 @@ export default function DataFlowExplorer({
                       {viewMode === 'technical' && activeStep.technicalView?.title
                         ? activeStep.technicalView.title
                         : viewMode === 'recruiter' && activeStep.recruiterView?.title
-                        ? activeStep.recruiterView.title
-                        : activeStep.title}
+                          ? activeStep.recruiterView.title
+                          : activeStep.title}
                     </h4>
                   </div>
 
@@ -804,8 +804,8 @@ export default function DataFlowExplorer({
                   {viewMode === 'technical' && activeStep.technicalView?.description
                     ? activeStep.technicalView.description
                     : viewMode === 'recruiter' && activeStep.recruiterView?.description
-                    ? activeStep.recruiterView.description
-                    : activeStep.description}
+                      ? activeStep.recruiterView.description
+                      : activeStep.description}
                 </p>
 
                 {/* Data Transforms Grid */}
@@ -921,7 +921,7 @@ export default function DataFlowExplorer({
           {/* Right Sidebar: Mobile Vertical List Timeline / Interactive log log (Desktop only) */}
           <div className="lg:col-span-4 flex flex-col gap-3 font-mono text-[9px] select-none text-left w-full h-full">
             <span className="text-secondary font-bold uppercase tracking-wider px-1">Pipeline Steps Checklist</span>
-            
+
             <div className="flex flex-col gap-2 bg-black/25 border border-card-border rounded-xl p-3 max-h-[360px] overflow-y-auto w-full scrollbar-thin">
               {activeFlow.steps.map((step, idx) => {
                 const isActive = idx === activeStepIdx;
@@ -934,14 +934,13 @@ export default function DataFlowExplorer({
                       setIsRunning(false);
                       setActiveStepIdx(idx);
                     }}
-                    className={`p-3 rounded-lg border flex items-center justify-between cursor-pointer transition-all ${
-                      isActive 
-                        ? 'bg-white/5 border-white/20 shadow-sm' 
-                        : 'border-card-border/40 hover:border-white/10'
-                    }`}
+                    className={`p-3 rounded-lg border flex items-center justify-between cursor-pointer transition-all ${isActive
+                      ? 'bg-white/5 border-white/20 shadow-sm'
+                      : 'border-card-border/40 hover:border-white/10'
+                      }`}
                   >
                     <div className="flex items-center gap-2">
-                      <div 
+                      <div
                         className={`h-4 w-4 rounded-full border flex items-center justify-center font-bold text-[8px]`}
                         style={{
                           borderColor: isActive ? currentFlowAccentColor : isPast ? `${currentFlowAccentColor}66` : 'rgba(255,255,255,0.08)',
@@ -984,7 +983,7 @@ export default function DataFlowExplorer({
                   <Terminal className="h-[18px] w-[18px] text-cyan-400" />
                   <span className="font-mono text-xs font-bold text-foreground uppercase tracking-wider">Transaction Data Ledger</span>
                 </div>
-                <button 
+                <button
                   onClick={() => setIsDrawerOpen(false)}
                   className="p-1 border border-card-border rounded-lg text-secondary hover:text-white cursor-pointer"
                 >
@@ -1019,7 +1018,7 @@ export default function DataFlowExplorer({
                     <span className="text-[8px] font-bold text-secondary uppercase tracking-widest">Simulated JSON payload</span>
                     <span className="text-[7.5px] text-cyan-400 font-black tracking-widest bg-cyan-950/20 px-2 py-0.5 rounded">REST_RPC</span>
                   </div>
-                  
+
                   <pre className="text-foreground leading-relaxed overflow-x-auto text-[9.5px] p-2 bg-black/25 rounded border border-white/2 font-mono scrollbar-thin select-text">
                     {JSON.stringify(getMockJSONLog(activeFlow.id, activeStep.sequence), null, 2)}
                   </pre>

@@ -6,6 +6,33 @@ import { supabaseAdmin, isSupabaseAdminConfigured } from '@/lib/supabase/admin';
 import { ServerLogger } from '@/lib/telemetry/server-logger';
 import { MetricsCollector } from '@/lib/metrics/metrics-collector';
 
+if (typeof window !== 'undefined' && process.env.NODE_ENV !== 'test') {
+  throw new Error('This API endpoint can only be run on the server.');
+}
+
+function sanitizeOutput(text: string): string {
+  if (!text) return text;
+  let sanitized = text;
+  
+  const sensitiveKeys = [
+    process.env.ADMIN_PASSCODE,
+    process.env.INBOX_PASSCODE,
+    process.env.GEMINI_API_KEY,
+    process.env.NEXT_PUBLIC_SUPABASE_KEY,
+    process.env.SUPABASE_SERVICE_ROLE_KEY,
+  ].filter(Boolean) as string[];
+
+  for (const key of sensitiveKeys) {
+    if (key.length >= 4) {
+      const escapedKey = key.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+      const regex = new RegExp(escapedKey, 'gi');
+      sanitized = sanitized.replace(regex, '[REDACTED]');
+    }
+  }
+  
+  return sanitized;
+}
+
 export async function POST(req: NextRequest) {
   const startTime = Date.now();
   const ip = req.headers.get('x-forwarded-for') || '127.0.0.1';
@@ -88,6 +115,7 @@ export async function POST(req: NextRequest) {
       const streamResult = await askVrajAIStream(prompt, history || []);
 
       let responseStream: ReadableStream;
+      const encoder = new TextEncoder();
 
       if (streamResult instanceof ReadableStream) {
         // Simulated stream fallback
@@ -100,8 +128,10 @@ export async function POST(req: NextRequest) {
               while (true) {
                 const { done, value } = await reader.read();
                 if (done) break;
-                fullText += decoder.decode(value, { stream: true });
-                controller.enqueue(value);
+                const text = decoder.decode(value, { stream: true });
+                const sanitizedText = sanitizeOutput(text);
+                fullText += sanitizedText;
+                controller.enqueue(encoder.encode(sanitizedText));
               }
               controller.close();
 
@@ -123,15 +153,15 @@ export async function POST(req: NextRequest) {
         });
       } else {
         // Real Gemini stream response
-        const encoder = new TextEncoder();
         responseStream = new ReadableStream({
           async start(controller) {
             try {
               let fullText = '';
-              for await (const chunk of streamResult.stream) {
-                const text = chunk.text();
-                fullText += text;
-                controller.enqueue(encoder.encode(text));
+              for await (const chunk of streamResult) {
+                const text = chunk.text || '';
+                const sanitizedText = sanitizeOutput(text);
+                fullText += sanitizedText;
+                controller.enqueue(encoder.encode(sanitizedText));
               }
               controller.close();
 
@@ -166,12 +196,13 @@ export async function POST(req: NextRequest) {
 
     // 3. Fallback standard JSON response (non-streaming, e.g. for homepage preview)
     const aiResponse = await askVrajAI(prompt, history || []);
+    const sanitizedResponse = sanitizeOutput(aiResponse);
 
     if (isSupabaseAdminConfigured && activeSessionId) {
       try {
         await (supabaseAdmin as any).from('ai_chat_messages').insert([
           { session_id: activeSessionId, role: 'user', content: prompt },
-          { session_id: activeSessionId, role: 'assistant', content: aiResponse }
+          { session_id: activeSessionId, role: 'assistant', content: sanitizedResponse }
         ]);
       } catch (dbErr) {
         console.error('Supabase message log failed in standard JSON ask:', dbErr);
@@ -186,7 +217,7 @@ export async function POST(req: NextRequest) {
     }
 
     await MetricsCollector.recordApiLatency('/api/ask', Date.now() - startTime);
-    return new Response(JSON.stringify({ response: aiResponse, sessionId: activeSessionId }), {
+    return new Response(JSON.stringify({ response: sanitizedResponse, sessionId: activeSessionId }), {
       status: 200,
       headers,
     });

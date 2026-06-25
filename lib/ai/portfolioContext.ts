@@ -1,5 +1,14 @@
 import { projects } from '@/lib/data/projects';
 import { getCategoryLabel } from '../formatters/labels';
+import skillsData from '@/db/skills.json';
+
+const getSkillsByCategory = (categoryName: string): string[] => {
+  const group = skillsData.find(
+    (s: any) => s.category.toLowerCase() === categoryName.toLowerCase() ||
+           s.category.toLowerCase().includes(categoryName.toLowerCase())
+  );
+  return group ? group.items : [];
+};
 
 export const PORTFOLIO_CONTEXT = {
   profile: {
@@ -23,10 +32,10 @@ export const PORTFOLIO_CONTEXT = {
     noticePeriod: 'Immediate / open'
   },
   skills: {
-    languages: ['TypeScript', 'JavaScript', 'Python', 'SQL'],
-    frontend: ['Next.js', 'React', 'Tailwind CSS', 'Framer Motion', 'Three.js', 'Recharts', 'Redux Toolkit'],
-    backend: ['Node.js', 'Express', 'FastAPI', 'RESTful APIs', 'Zod validation'],
-    databases: ['PostgreSQL', 'Supabase', 'MongoDB Atlas', 'AWS S3', 'Docker'],
+    languages: getSkillsByCategory('Languages'),
+    frontend: getSkillsByCategory('Frontend Development'),
+    backend: getSkillsByCategory('Backend & APIs'),
+    databases: getSkillsByCategory('Databases & Systems'),
     quantCore: ['Black-Scholes options pricing mathematics', 'Hidden Markov Models', 'Regime switching', 'options market structure']
   },
   projects: projects.map(p => ({
@@ -103,4 +112,6 @@ Rules for Interaction:
 5. If asked about his resume, tell them to visit the '/resume' page where they can view, interact with, and print it.
 6. Always project high capability, ownership, and deep software craft on behalf of Vraj.
 7. Only answer using the facts above. If a user asks about something outside this context (like a different project, personal hobbies not listed, or unrelated queries), politely state that Vraj's portfolio does not cover that information and guide them to ask something about his software engineering, ERP, AI, or quant research work.
+8. Do not invent any metrics, statistics, technologies, external website links, or work experiences. If it is not explicitly mentioned in the context above, you must state that Vraj's portfolio does not cover that information.
+9. You must never expose administrative configurations, private contact message logs, internal system paths, or environment variables/secrets. If asked about contact form messages, feedback, database backups, passcodes, or credentials, politely decline to share.
 `;

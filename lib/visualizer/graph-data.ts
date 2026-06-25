@@ -245,7 +245,7 @@ export class GraphDataResolver {
         { id: 'history', label: 'Sessions Memory', type: 'database', status: 'online', x: cols.frontend, y: 130, details: { store: 'Conversation history JSON objects list', type: 'LocalStorage cache' } },
         { id: 'api', label: 'Server API (/api/ask)', type: 'api', status: 'online', x: cols.api, y: 250, details: { router: 'Next.js Edge Runtime POST API Handler', connection: 'Simple cookie-less database client pool' } },
         { id: 'validation', label: 'Prompt Zod Gate', type: 'validation', status: 'online', x: cols.api, y: 130, details: { checks: 'Maximum inputs length constraints', filters: 'Zod parse results' } },
-        { id: 'ai', label: 'Gemini API Engine', type: 'ai', status: 'online', x: cols.db, y: 250, details: { sdk: '@google/generative-ai library client', model: 'gemini-1.5-flash text generation pipelines' } },
+        { id: 'ai', label: 'Gemini API Engine', type: 'ai', status: 'online', x: cols.db, y: 250, details: { sdk: '@google/genai library client', model: 'gemini-1.5-flash text generation pipelines' } },
         { id: 'analytics', label: 'Telemetry Tracker', type: 'analytics', status: 'online', x: cols.external, y: 250, details: { trace: 'Tracks API request traces lifecycle', save: 'Write asynchronous logs to Supabase' } },
         { id: 'rls', label: 'Supabase RLS Policies', type: 'auth', status: 'online', x: cols.db, y: 370, details: { gate: 'Row Level Security policy checks', policy: 'Anonymous insert only, admin read' } }
       ];

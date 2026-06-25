@@ -14,7 +14,7 @@ export type ContactMessageInput = z.infer<typeof contactMessageSchema>;
 
 // AI Assistant input validation
 export const aiChatInputSchema = z.object({
-  prompt: z.string().min(1, 'Prompt is required.'),
+  prompt: z.string().min(1, 'Prompt is required.').max(500, 'Prompt is too long. Max 500 characters.'),
   sessionId: z.string().optional(),
   stream: z.boolean().optional(),
   history: z
