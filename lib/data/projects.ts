@@ -566,7 +566,7 @@ export const projects: Project[] = [
     client: 'Personal Project',
     metrics: [
       { label: 'LLM Latency', value: 'Streaming' },
-      { label: 'Model', value: 'Gemini 1.5 Flash' },
+      { label: 'Model', value: 'Gemini 3.1 Flash Lite' },
       { label: 'Logging', value: 'Supabase DB' }
     ],
     problem: 'Recruiters and visitors have to manually read through multiple project listings and resumes to evaluate candidate fit, which is slow and tedious.',

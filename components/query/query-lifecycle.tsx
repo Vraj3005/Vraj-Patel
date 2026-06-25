@@ -326,7 +326,7 @@ export default function QueryLifecycle() {
                 { name: 'validate_inputs_zod', durationMs: 5, status: 'success', timestamp: new Date(Date.now() - 1000).toISOString() },
                 { name: 'query_ip_rate_limit_memory', durationMs: 30, status: 'success', timestamp: new Date(Date.now() - 970).toISOString() },
                 { name: 'load_context_data', durationMs: 120, status: 'success', timestamp: new Date(Date.now() - 850).toISOString(), metadata: { file: 'portfolioContext.ts' } },
-                { name: 'call_google_genai_api', durationMs: 850, status: 'success', timestamp: new Date(Date.now() - 0).toISOString(), metadata: { model: 'gemini-1.5-flash' } }
+                { name: 'call_google_genai_api', durationMs: 850, status: 'success', timestamp: new Date(Date.now() - 0).toISOString(), metadata: { model: 'gemini-3.1-flash-lite' } }
               ]
             },
             {

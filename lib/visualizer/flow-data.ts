@@ -484,19 +484,19 @@ export const DATA_FLOWS: DataFlow[] = [
         sequence: 6,
         nodeId: 'ai',
         title: 'Gemini LLM Generation Call',
-        description: 'Calls Google GenAI SDK to request text generation from Gemini 1.5 Flash.',
+        description: 'Calls Google GenAI SDK to request text generation from Gemini 3.1 Flash Lite.',
         input: 'Wrapped prompt context instruction.',
         action: 'Invokes Google GenAI client to initialize stream response calls.',
         output: 'Token stream generator buffer.',
         securityNote: 'Gemini API key is read securely from environment variables.',
         businessView: {
           title: 'Gemini LLM Invocation',
-          description: 'Passes prompt to Gemini 1.5 Flash to generate responses.',
-          metric: 'Gemini 1.5 Flash API'
+          description: 'Passes prompt to Gemini 3.1 Flash Lite to generate responses.',
+          metric: 'Gemini 3.1 Flash Lite API'
         },
         technicalView: {
           title: 'GenAI SDK Call execution',
-          description: 'Invokes googleGenAI.models.generateContentStream() using gemini-1.5-flash.',
+          description: 'Invokes googleGenAI.models.generateContentStream() using gemini-3.1-flash-lite.',
           metric: 'generateContentStream()'
         },
         recruiterView: {
@@ -1070,7 +1070,7 @@ export const DATA_FLOWS: DataFlow[] = [
         sequence: 5,
         nodeId: 'ai',
         title: 'Gemini LLM Text Generation',
-        description: 'Invokes Google GenAI Gemini 1.5 Flash API to draft personalized cold outreach emails.',
+        description: 'Invokes Google GenAI Gemini 3.1 Flash Lite API to draft personalized cold outreach emails.',
         input: 'Contextualized prompt containing variables, values, and campaign instructions.',
         action: 'Google Gemini processes prompts and returns personalized text drafts.',
         output: 'Draft cold email drafts JSON object.',
@@ -1078,11 +1078,11 @@ export const DATA_FLOWS: DataFlow[] = [
         businessView: {
           title: 'Personalized Email Generation',
           description: 'Generates custom cold emails tailored to lead details, improving replies rates.',
-          metric: 'Gemini 1.5 Flash'
+          metric: 'Gemini 3.1 Flash Lite'
         },
         technicalView: {
           title: 'GenAI SDK Call',
-          description: 'Executes generate_content() on model gemini-1.5-flash with temperature 0.2.',
+          description: 'Executes generate_content() on model gemini-3.1-flash-lite with temperature 0.2.',
           metric: 'generate_content()'
         },
         recruiterView: {

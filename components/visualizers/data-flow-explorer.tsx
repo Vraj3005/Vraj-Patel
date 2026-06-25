@@ -197,7 +197,7 @@ export default function DataFlowExplorer({
             event: "GEMINI_MODEL_GENERATE",
             timestamp: new Date().toISOString(),
             sdk: "@google/genai",
-            model: "gemini-1.5-flash",
+            model: "gemini-3.1-flash-lite",
             temperature: 0.2,
             prompt_tokens_estimate: 840,
             generation_time_ms: 810,
@@ -341,7 +341,7 @@ export default function DataFlowExplorer({
           return {
             event: "GEMINI_CONTENT_STREAM_OPENED",
             timestamp: new Date().toISOString(),
-            model: "gemini-1.5-flash",
+            model: "gemini-3.1-flash-lite",
             stream: true,
             status: "STREAM_CONNECTED"
           };
