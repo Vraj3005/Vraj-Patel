@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Login | Vraj Patel Portfolio Admin',
+  title: 'Console Unlock | Vraj Patel Portfolio Admin',
   robots: {
     index: false,
     follow: false,

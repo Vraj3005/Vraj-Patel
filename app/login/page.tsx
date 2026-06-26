@@ -108,13 +108,13 @@ function LoginContent() {
 
           <div className="flex flex-col gap-2 relative z-10 select-none">
             <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-secondary">
-              Admin Login Gate
+              Console Unlock Gate
             </span>
             <h1 className="text-2xl font-medium font-serif text-foreground tracking-tight">
-              Sign In to Console
+              Authenticate Operator
             </h1>
             <p className="text-xs text-secondary leading-relaxed font-semibold max-w-xs mx-auto">
-              Please enter your administrator email and credentials below to unlock the secure dashboard ledger.
+              Provide authorization key matching the operator identity parameters to establish a secure session.
             </p>
           </div>
 
@@ -122,16 +122,16 @@ function LoginContent() {
           <form onSubmit={handleLogin} className="w-full flex flex-col gap-4 relative z-10 text-left">
             {/* Email Field */}
             <div className="flex flex-col gap-1.5">
-              <label className="text-[10px] font-mono font-bold text-secondary uppercase">Email Address</label>
+              <label className="text-[10px] font-mono font-bold text-secondary uppercase">Operator ID</label>
               <div className="relative flex items-center">
                 <div className="absolute left-3.5 text-secondary">
                   <Mail className="h-4 w-4" />
                 </div>
                 <input
-                  type="email"
+                  type="text"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="admin@example.com"
+                  placeholder="operator@its-vraj.vercel.app"
                   className="w-full pl-10 pr-4 py-2.5 bg-[#0e0e11] border border-card-border hover:border-white/10 focus:border-cyan-500/50 rounded-xl text-white placeholder-muted font-sans text-xs focus:ring-0 focus:outline-none transition-all"
                   disabled={loading}
                   required
@@ -141,16 +141,17 @@ function LoginContent() {
 
             {/* Password Field */}
             <div className="flex flex-col gap-1.5">
-              <label className="text-[10px] font-mono font-bold text-secondary uppercase">Password</label>
+              <label className="text-[10px] font-mono font-bold text-secondary uppercase">Access Token</label>
               <div className="relative flex items-center">
                 <div className="absolute left-3.5 text-secondary">
                   <KeyRound className="h-4 w-4" />
                 </div>
                 <input
-                  type={showPassword ? 'text' : 'password'}
+                  type="text"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  placeholder="••••••••••••"
+                  placeholder="Enter access token..."
+                  style={{ WebkitTextSecurity: showPassword ? 'none' : 'disc' } as React.CSSProperties}
                   className="w-full pl-10 pr-10 py-2.5 bg-[#0e0e11] border border-card-border hover:border-white/10 focus:border-cyan-500/50 rounded-xl text-white placeholder-muted font-mono text-xs focus:ring-0 focus:outline-none transition-all"
                   disabled={loading}
                   required
@@ -159,7 +160,7 @@ function LoginContent() {
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
                   className="absolute right-3 text-secondary hover:text-foreground cursor-pointer focus:outline-none"
-                  title={showPassword ? 'Hide password' : 'Show password'}
+                  title={showPassword ? 'Hide token' : 'Show token'}
                 >
                   {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                 </button>
@@ -183,10 +184,10 @@ function LoginContent() {
               {loading ? (
                 <>
                   <RefreshCw className="h-4 w-4 animate-spin text-cyan-400" />
-                  <span>Verifying Credentials...</span>
+                  <span>Verifying Session...</span>
                 </>
               ) : (
-                <span>Authenticate Credentials</span>
+                <span>Unlock Terminal Session</span>
               )}
             </Button>
           </form>
