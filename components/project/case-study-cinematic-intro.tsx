@@ -211,6 +211,7 @@ export default function CaseStudyCinematicIntro({ project }: CaseStudyCinematicI
                 alt={project.title}
                 fill
                 priority
+                unoptimized
                 sizes="(max-width: 1024px) 100vw, 40vw"
                 className={cn(
                   "object-cover transition-opacity duration-300",
