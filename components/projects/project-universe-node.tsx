@@ -100,8 +100,8 @@ export default function ProjectUniverseNode({
       {/* 1. External Active Glow Aura (grows on hover/select) */}
       {(isHovered || isSelected || isHighlighted) && (
         <circle
-          cx={`${x}%`}
-          cy={`${y}%`}
+          cx={x}
+          cy={y}
           r={radius * 2.8}
           fill={colors.glow}
           className={cn(!shouldReduce && "animate-pulse")}
@@ -113,8 +113,8 @@ export default function ProjectUniverseNode({
 
       {/* 2. Concentric Orbit Outer Ring */}
       <circle
-        cx={`${x}%`}
-        cy={`${y}%`}
+        cx={x}
+        cy={y}
         r={radius * 1.8}
         fill="none"
         stroke={colors.stroke}
@@ -127,8 +127,8 @@ export default function ProjectUniverseNode({
 
       {/* 3. Glowing Core Node Dot */}
       <circle
-        cx={`${x}%`}
-        cy={`${y}%`}
+        cx={x}
+        cy={y}
         r={radius}
         fill={colors.fill}
         stroke="#ffffff"
@@ -139,8 +139,8 @@ export default function ProjectUniverseNode({
       {/* 4. Secondary small core highlight for selected node */}
       {isSelected && (
         <circle
-          cx={`${x}%`}
-          cy={`${y}%`}
+          cx={x}
+          cy={y}
           r="0.8"
           fill="#ffffff"
           className="pointer-events-none"
@@ -150,8 +150,8 @@ export default function ProjectUniverseNode({
       {/* 5. HUD Text Label */}
       {(!isMobile || isHovered || isSelected || isHighlighted) && (
         <text
-          x={`${x}%`}
-          y={`${y}%`}
+          x={x}
+          y={y}
           dy={radius + 4.0}
           textAnchor="middle"
           className={cn(

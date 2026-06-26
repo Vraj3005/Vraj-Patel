@@ -69,12 +69,12 @@ export default function ProjectUniverse({
   };
 
   return (
-    <div className="w-full relative flex flex-col gap-6 p-6 border border-white/5 rounded-3xl bg-black/25 backdrop-blur-md overflow-hidden select-none">
+    <div className="w-full relative flex flex-col gap-4 p-4 border border-white/5 rounded-2xl bg-black/25 backdrop-blur-md overflow-hidden select-none">
       {/* Blueprint background grid lines */}
       <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.008)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.008)_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_60%_at_50%_50%,#000_70%,transparent_100%)] opacity-40 pointer-events-none z-0" />
 
       {/* HeaderHUD Bar */}
-      <div className="flex items-center justify-between border-b border-white/5 pb-4 z-10">
+      <div className="flex items-center justify-between border-b border-white/5 pb-3 z-10">
         <div className="flex items-center gap-2">
           <Layers className="h-4 w-4 text-cyan-400 animate-pulse" />
           <span className="font-mono text-xs text-secondary font-semibold uppercase tracking-widest">
@@ -87,17 +87,17 @@ export default function ProjectUniverse({
       </div>
 
       {/* Main visualization grid container */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch relative min-h-[380px] lg:min-h-[480px] z-10 w-full">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-stretch relative z-10 w-full">
         
         {/* Left Side: SVG Constellation Map (Spans 8 cols on desktop) */}
-        <div className="lg:col-span-8 bg-black/10 rounded-2xl border border-white/5 relative flex items-center justify-center min-h-[320px] lg:min-h-[450px]">
+        <div className="lg:col-span-8 bg-black/10 rounded-2xl border border-white/5 relative flex items-center justify-center h-[260px] lg:h-[350px] w-full overflow-hidden">
           
           <svg
             width="100%"
             height="100%"
-            viewBox="0 0 100 100"
+            viewBox="0 0 200 100"
             preserveAspectRatio="xMidYMid meet"
-            className="w-full h-full p-6 text-foreground/5 z-10 relative select-none"
+            className="w-full h-full p-3 text-foreground/5 z-10 relative select-none"
           >
             {/* 1. Draw static and highlighted relationship lines */}
             <g>
@@ -121,10 +121,10 @@ export default function ProjectUniverse({
                   <g key={`link-${idx}`}>
                     {/* Background thicker hover detection bridge */}
                     <line
-                      x1={`${sourceNode.x}%`}
-                      y1={`${sourceNode.y}%`}
-                      x2={`${targetNode.x}%`}
-                      y2={`${targetNode.y}%`}
+                      x1={sourceNode.x * 2}
+                      y1={sourceNode.y}
+                      x2={targetNode.x * 2}
+                      y2={targetNode.y}
                       stroke="transparent"
                       strokeWidth="6"
                       className="pointer-events-none"
@@ -132,10 +132,10 @@ export default function ProjectUniverse({
                     
                     {/* Glowing / Pulse vector line */}
                     <line
-                      x1={`${sourceNode.x}%`}
-                      y1={`${sourceNode.y}%`}
-                      x2={`${targetNode.x}%`}
-                      y2={`${targetNode.y}%`}
+                      x1={sourceNode.x * 2}
+                      y1={sourceNode.y}
+                      x2={targetNode.x * 2}
+                      y2={targetNode.y}
                       stroke={isLineActive ? "#22d3ee" : "rgba(255, 255, 255, 0.08)"}
                       strokeWidth={isLineActive ? 1.5 : 0.75}
                       strokeDasharray={isLineActive && !shouldReduce ? "3 3" : undefined}
@@ -172,7 +172,7 @@ export default function ProjectUniverse({
                     slug={node.slug}
                     title={node.title}
                     category={node.category}
-                    x={node.x}
+                    x={node.x * 2}
                     y={node.y}
                     isHovered={isHovered}
                     isDimmed={isDimmed}
@@ -190,7 +190,7 @@ export default function ProjectUniverse({
         </div>
 
         {/* Right Side: Glassmorphic Project Preview Panel (Spans 4 cols on desktop) */}
-        <div className="lg:col-span-4 flex flex-col justify-stretch">
+        <div className="lg:col-span-4 flex flex-col h-[260px] lg:h-[350px] overflow-hidden">
           <AnimatePresence mode="wait">
             {selectedNode ? (
               <motion.div
@@ -199,14 +199,14 @@ export default function ProjectUniverse({
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: 10 }}
                 transition={{ duration: 0.25 }}
-                className="w-full h-full flex flex-col justify-between p-6 border border-white/10 rounded-2xl bg-white/[0.02] backdrop-blur-xl shadow-xl shadow-black/40 z-10"
+                className="w-full h-full flex flex-col justify-between p-4 border border-white/10 rounded-2xl bg-white/[0.02] backdrop-blur-xl shadow-xl shadow-black/40 z-10 overflow-hidden"
               >
                 {/* Panel Header */}
-                <div className="flex flex-col gap-3">
+                <div className="flex flex-col gap-2 shrink-0">
                   <div className="flex items-center justify-between">
                     <Badge 
                       variant="secondary" 
-                      className="text-[10px] font-mono border-white/5 uppercase bg-white/5 cursor-pointer hover:bg-white/10 hover:text-white transition-colors"
+                      className="text-[9px] font-mono border-white/5 uppercase bg-white/5 cursor-pointer hover:bg-white/10 hover:text-white transition-colors"
                       onClick={() => {
                         const filterVal = selectedNode.category === "ecommerce" ? "client_software" : selectedNode.category;
                         onCategoryChange(filterVal);
@@ -221,7 +221,7 @@ export default function ProjectUniverse({
                       <X className="h-4 w-4" />
                     </button>
                   </div>
-                  <h3 className="text-lg font-semibold text-foreground tracking-tight leading-tight">
+                  <h3 className="text-base font-semibold text-foreground tracking-tight leading-tight">
                     {selectedNode.title}
                   </h3>
                   <p className="text-xs text-secondary leading-relaxed">
@@ -229,65 +229,68 @@ export default function ProjectUniverse({
                   </p>
                 </div>
 
-                {/* Relational Metrics */}
-                {selectedNode.metrics && selectedNode.metrics.length > 0 && (
-                  <div className="flex flex-col gap-2 my-4 border-y border-white/5 py-4">
-                    <span className="text-[9px] font-bold uppercase tracking-widest text-secondary font-mono">
-                      System Metrics
-                    </span>
-                    <div className="grid grid-cols-2 gap-3 mt-1">
-                      {selectedNode.metrics.slice(0, 2).map((m, mIdx) => (
-                        <div key={mIdx} className="flex flex-col p-2 bg-black/20 border border-white/5 rounded-lg">
-                          <span className="text-[9px] text-muted font-mono">{m.label}</span>
-                          <span className="text-xs font-semibold text-foreground mt-0.5">{m.value}</span>
-                        </div>
-                      ))}
+                {/* Scrollable Content Area */}
+                <div className="flex-1 overflow-y-auto my-2 pr-1.5 space-y-3.5 scrollbar-thin">
+                  {/* Relational Metrics */}
+                  {selectedNode.metrics && selectedNode.metrics.length > 0 && (
+                    <div className="flex flex-col gap-1.5 border-t border-b border-white/5 py-2">
+                      <span className="text-[9px] font-bold uppercase tracking-widest text-secondary font-mono">
+                        System Metrics
+                      </span>
+                      <div className="grid grid-cols-2 gap-2 mt-1">
+                        {selectedNode.metrics.slice(0, 2).map((m, mIdx) => (
+                          <div key={mIdx} className="flex flex-col p-1.5 bg-black/20 border border-white/5 rounded-lg">
+                            <span className="text-[9px] text-muted font-mono">{m.label}</span>
+                            <span className="text-xs font-semibold text-foreground mt-0.5">{m.value}</span>
+                          </div>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                )}
+                  )}
 
-                {/* Problem / Solution HUD segment */}
-                {(selectedNode.problem || selectedNode.solution) && (
-                  <div className="flex flex-col gap-2.5 mb-4">
-                    {selectedNode.problem && (
-                      <div className="text-[10px] text-secondary leading-relaxed">
-                        <span className="text-red-400 font-bold font-mono text-[9px] mr-1 uppercase">Challenge:</span>
-                        {selectedNode.problem}
-                      </div>
-                    )}
-                    {selectedNode.solution && (
-                      <div className="text-[10px] text-secondary leading-relaxed">
-                        <span className="text-emerald-400 font-bold font-mono text-[9px] mr-1 uppercase">Solution:</span>
-                        {selectedNode.solution}
-                      </div>
-                    )}
-                  </div>
-                )}
+                  {/* Problem / Solution HUD segment */}
+                  {(selectedNode.problem || selectedNode.solution) && (
+                    <div className="flex flex-col gap-1.5 pb-1">
+                      {selectedNode.problem && (
+                        <div className="text-[10px] text-secondary leading-relaxed">
+                          <span className="text-red-400 font-bold font-mono text-[9px] mr-1 uppercase">Challenge:</span>
+                          {selectedNode.problem}
+                        </div>
+                      )}
+                      {selectedNode.solution && (
+                        <div className="text-[10px] text-secondary leading-relaxed">
+                          <span className="text-emerald-400 font-bold font-mono text-[9px] mr-1 uppercase">Solution:</span>
+                          {selectedNode.solution}
+                        </div>
+                      )}
+                    </div>
+                  )}
 
-                {/* Technologies List */}
-                <div className="flex flex-col gap-2 mb-4">
-                  <span className="text-[9px] font-bold uppercase tracking-widest text-secondary font-mono">
-                    Technology Stack
-                  </span>
-                  <div className="flex flex-wrap gap-1 mt-1">
-                    {selectedNode.technologies.slice(0, 5).map((tech) => (
-                      <span
-                        key={tech}
-                        className="text-[9px] font-mono border border-white/5 px-2 py-0.5 rounded bg-white/[0.01] text-secondary hover:text-white hover:border-white/10 transition-colors"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                    {selectedNode.technologies.length > 5 && (
-                      <span className="text-[9px] text-muted font-mono self-center px-1">
-                        +{selectedNode.technologies.length - 5}
-                      </span>
-                    )}
+                  {/* Technologies List */}
+                  <div className="flex flex-col gap-1.5 border-t border-white/5 pt-2">
+                    <span className="text-[9px] font-bold uppercase tracking-widest text-secondary font-mono">
+                      Technology Stack
+                    </span>
+                    <div className="flex flex-wrap gap-1 mt-1">
+                      {selectedNode.technologies.slice(0, 5).map((tech) => (
+                        <span
+                          key={tech}
+                          className="text-[9px] font-mono border border-white/5 px-2 py-0.5 rounded bg-white/[0.01] text-secondary hover:text-white hover:border-white/10 transition-colors"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                      {selectedNode.technologies.length > 5 && (
+                        <span className="text-[9px] text-muted font-mono self-center px-1">
+                          +{selectedNode.technologies.length - 5}
+                        </span>
+                      )}
+                    </div>
                   </div>
                 </div>
 
                 {/* Case Study / Links */}
-                <div className="flex flex-col gap-2 pt-4 border-t border-white/5 mt-auto">
+                <div className="flex flex-col gap-1.5 pt-2 border-t border-white/5 mt-auto shrink-0">
                   {selectedNode.slug !== "constructionos" ? (
                     <Link href={`/projects/${selectedNode.slug}`} className="w-full">
                       <Button variant="primary" size="md" className="w-full flex items-center justify-center gap-1.5 text-xs font-semibold">
@@ -306,7 +309,7 @@ export default function ProjectUniverse({
                       href={selectedNode.liveUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-full flex items-center justify-center gap-1.5 px-4 py-2 bg-white/5 hover:bg-white/10 border border-white/5 text-foreground text-xs font-semibold rounded-xl transition-all cursor-pointer mt-1"
+                      className="w-full flex items-center justify-center gap-1.5 px-3 py-1.5 bg-white/5 hover:bg-white/10 border border-white/5 text-foreground text-xs font-semibold rounded-xl transition-all cursor-pointer mt-1"
                     >
                       Launch Live App <ExternalLink className="h-3.5 w-3.5" />
                     </a>
@@ -314,8 +317,8 @@ export default function ProjectUniverse({
                 </div>
               </motion.div>
             ) : (
-              <div className="w-full h-full min-h-[220px] border border-white/5 border-dashed rounded-2xl flex flex-col items-center justify-center text-center p-6 bg-white/[0.01]">
-                <Layers className="h-8 w-8 text-secondary mb-3 animate-pulse" />
+              <div className="w-full h-full border border-white/5 border-dashed rounded-2xl flex flex-col items-center justify-center text-center p-4 bg-white/[0.01]">
+                <Layers className="h-6 w-8 text-secondary mb-2 animate-pulse" />
                 <h4 className="text-xs font-bold text-foreground uppercase tracking-wider mb-1">
                   Select a Project Node
                 </h4>
