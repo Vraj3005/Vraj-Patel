@@ -4,7 +4,7 @@ import { requireAdmin } from '@/lib/auth/require-admin';
 import fs from 'fs';
 import path from 'path';
 
-export async function POST(req: NextRequest) {
+export async function POST(_req: NextRequest) {
   try {
     // Enforce administrative authentication check
     const { admin, error, status } = await requireAdmin();

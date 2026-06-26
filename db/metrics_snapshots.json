@@ -1285,5 +1285,14 @@
     "tags": {
       "path": "/api/contact"
     }
+  },
+  {
+    "id": "0fc51112-8b53-40b6-bafd-c21b21464ace",
+    "created_at": "2026-06-26T08:59:33.815Z",
+    "metric_name": "api_latency_ms",
+    "metric_value": 5,
+    "tags": {
+      "path": "/api/contact"
+    }
   }
 ]

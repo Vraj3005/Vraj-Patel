@@ -1,16 +1,21 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'About Vraj Patel | CSE Undergrad & Systems Architect',
-  description: 'Learn about Vraj Patel\'s academic background at Nirma University, key client software projects, custom ERP calculations, and technical skill competencies.',
+  title: 'About Vraj Patel | CSE Student & Software Developer',
+  description: 'Learn about Vraj Patel, a Computer Science Engineering student focused on full-stack development, AI automation, ERP systems, dashboards, and quantitative research platforms.',
   alternates: {
-    canonical: 'https://vrajpatel.dev/about',
+    canonical: 'https://its-vraj.vercel.app/about',
   },
   openGraph: {
-    title: 'About Vraj Patel | Systems Architect',
-    description: 'Learn about Vraj Patel\'s academic background at Nirma University, key client software projects, custom ERP calculations, and technical skill competencies.',
-    url: 'https://vrajpatel.dev/about',
+    title: 'About Vraj Patel | CSE Student & Software Developer',
+    description: 'Learn about Vraj Patel, a Computer Science Engineering student focused on full-stack development, AI automation, ERP systems, dashboards, and quantitative research platforms.',
+    url: 'https://its-vraj.vercel.app/about',
     type: 'profile',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'About Vraj Patel | CSE Student & Software Developer',
+    description: 'Learn about Vraj Patel, a Computer Science Engineering student focused on full-stack development, AI automation, ERP systems, dashboards, and quantitative research platforms.',
   },
 };
 

@@ -1,16 +1,21 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Contact Vraj Patel | Project Inquiries',
-  description: 'Get in touch with Vraj Patel for full-stack software architecture, ERP systems optimization, quantitative research collaborations, or autonomous AI workflows.',
+  title: 'Contact Vraj Patel | Full-Stack Developer',
+  description: 'Contact Vraj Patel for software development, AI automation, ERP systems, dashboards, quant research, and collaboration opportunities.',
   alternates: {
-    canonical: 'https://vrajpatel.dev/contact',
+    canonical: 'https://its-vraj.vercel.app/contact',
   },
   openGraph: {
-    title: 'Contact Vraj Patel | Project Inquiries',
-    description: 'Get in touch with Vraj Patel for full-stack software architecture, ERP systems optimization, quantitative research collaborations, or autonomous AI workflows.',
-    url: 'https://vrajpatel.dev/contact',
+    title: 'Contact Vraj Patel | Full-Stack Developer',
+    description: 'Contact Vraj Patel for software development, AI automation, ERP systems, dashboards, quant research, and collaboration opportunities.',
+    url: 'https://its-vraj.vercel.app/contact',
     type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Contact Vraj Patel | Full-Stack Developer',
+    description: 'Contact Vraj Patel for software development, AI automation, ERP systems, dashboards, quant research, and collaboration opportunities.',
   },
 };
 

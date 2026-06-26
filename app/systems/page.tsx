@@ -4,7 +4,6 @@ import React, { useState } from 'react';
 import dynamic from 'next/dynamic';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Network, Server, Cpu, Layers, Activity, Shield, GitCommit } from 'lucide-react';
-import Link from 'next/link';
 import { Card } from '@/components/ui/card';
 
 // Dynamically lazy-loaded heavy visualizers

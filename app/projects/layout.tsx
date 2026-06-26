@@ -1,16 +1,21 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Projects | Vraj Patel Portfolio Case Studies',
-  description: 'Explore Vraj Patel\'s portfolio projects including custom solar calculators, wooden materials ERP platforms, high-speed C++ WebAssembly options engines, and Hidden Markov Models (HMM) volatility segmenters.',
+  title: 'Projects | Vraj Patel Portfolio',
+  description: 'Explore Vraj Patel’s projects across client software, ERP systems, e-commerce dashboards, AI automation, websites, and quantitative research platforms.',
   alternates: {
-    canonical: 'https://vrajpatel.dev/projects',
+    canonical: 'https://its-vraj.vercel.app/projects',
   },
   openGraph: {
-    title: 'Vraj Patel Project Case Studies',
-    description: 'Explore Vraj Patel\'s portfolio projects including custom solar calculators, wooden materials ERP platforms, high-speed C++ WebAssembly options engines, and Hidden Markov Models (HMM) volatility segmenters.',
-    url: 'https://vrajpatel.dev/projects',
+    title: 'Projects | Vraj Patel Portfolio',
+    description: 'Explore Vraj Patel’s projects across client software, ERP systems, e-commerce dashboards, AI automation, websites, and quantitative research platforms.',
+    url: 'https://its-vraj.vercel.app/projects',
     type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Projects | Vraj Patel Portfolio',
+    description: 'Explore Vraj Patel’s projects across client software, ERP systems, e-commerce dashboards, AI automation, websites, and quantitative research platforms.',
   },
 };
 

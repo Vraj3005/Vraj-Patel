@@ -1,16 +1,21 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Ask Vraj AI | Interactive Gemini Assistant',
-  description: 'Ask Vraj Patel\'s secure, Gemini-powered assistant questions regarding his projects, technical capabilities, education timeline, and resume coordinates.',
+  title: 'Ask Vraj AI | Vraj Patel Portfolio Assistant',
+  description: 'Ask an AI assistant about Vraj Patel’s projects, skills, ERP systems, AI automation work, and quantitative research portfolio.',
   alternates: {
-    canonical: 'https://vrajpatel.dev/ask-vraj',
+    canonical: 'https://its-vraj.vercel.app/ask-vraj',
   },
   openGraph: {
-    title: 'Ask Vraj AI | Interactive Gemini Assistant',
-    description: 'Ask Vraj Patel\'s secure, Gemini-powered assistant questions regarding his projects, technical capabilities, education timeline, and resume coordinates.',
-    url: 'https://vrajpatel.dev/ask-vraj',
+    title: 'Ask Vraj AI | Vraj Patel Portfolio Assistant',
+    description: 'Ask an AI assistant about Vraj Patel’s projects, skills, ERP systems, AI automation work, and quantitative research portfolio.',
+    url: 'https://its-vraj.vercel.app/ask-vraj',
     type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Ask Vraj AI | Vraj Patel Portfolio Assistant',
+    description: 'Ask an AI assistant about Vraj Patel’s projects, skills, ERP systems, AI automation work, and quantitative research portfolio.',
   },
 };
 

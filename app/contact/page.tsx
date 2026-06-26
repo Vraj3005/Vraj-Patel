@@ -73,7 +73,7 @@ export default function Contact() {
           <Mail className="h-4 w-4 text-foreground" /> Secure Communications
         </span>
         <h1 className="text-3xl md:text-4xl font-medium font-serif text-foreground tracking-tight">
-          Initiate Connection
+          Contact Vraj Patel
         </h1>
         <p className="text-xs md:text-sm text-secondary leading-relaxed max-w-2xl font-medium">
           Recruiters, clients, and technical teams can use this secure portal to dispatch business opportunities, questions, or project inquiries directly to Vraj.

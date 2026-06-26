@@ -225,3 +225,12 @@ The project is structured to deploy on **Vercel** with minimal configuration.
 2. **Advanced Volatility Analytics**: Update options pricing metrics models to support SABR Volatility models and compute implied probability distribution curves dynamically.
 3. **Smart CRM Dispatching**: Connect recruiter form submissions directly to automated email workflows that respond with customizable, profile-matched resume files.
 4. **Outbox Semantic scoring (AI outreach)**: Utilize vector embeddings to analyze leads lists, sorting outreach prioritizations based on relevance matches.
+
+---
+
+## 🔍 Google Search Console
+
+> [!IMPORTANT]
+> Google Search Console verification file must remain in `/public`.
+> - **Filename**: `googlecea8e0436f5c0bcf.html`
+

@@ -52,7 +52,7 @@ export default function Resume() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-card-border pb-6 no-print shrink-0">
         <div className="flex flex-col gap-1">
           <span className="text-xs font-bold uppercase tracking-widest text-secondary font-mono">Academic & Career Record</span>
-          <h1 className="text-xl md:text-2xl font-medium font-serif text-foreground tracking-tight">Interactive Curriculum Vitae</h1>
+          <h1 className="text-xl md:text-2xl font-medium font-serif text-foreground tracking-tight">Vraj Patel Resume</h1>
         </div>
         <Button
           onClick={handlePrint}

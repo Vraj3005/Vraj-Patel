@@ -21,9 +21,49 @@ const fontMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Vraj Patel — Software Engineer',
-  description: 'Vraj Patel is a Computer Science student at Nirma University who builds full-stack applications, ERP systems, and quantitative research platforms.',
-  keywords: ['Vraj Patel', 'Software Engineer', 'Nirma University', 'Full-Stack Developer', 'Portfolio'],
+  metadataBase: new URL('https://its-vraj.vercel.app'),
+  title: {
+    default: 'Vraj Patel | Full-Stack Developer, AI/ERP Systems Builder & Quant Research Enthusiast',
+    template: '%s | Vraj Patel Portfolio',
+  },
+  description: 'Vraj Patel is a Computer Science Engineering student at Nirma University building full-stack applications, ERP systems, dashboards, AI automation workflows, and quantitative research platforms using Next.js, TypeScript, Python, Supabase, PostgreSQL, Gemini API, and FastAPI.',
+  keywords: [
+    'Vraj Patel', 'Vraj Patel portfolio', 'Vraj Patel developer', 'Vraj Patel Nirma University',
+    'Vraj Patel CSE', 'full stack developer India', 'AI ERP developer', 'Next.js developer',
+    'Supabase developer', 'quant research portfolio', 'Python trading dashboard', 'Gemini API developer'
+  ],
+  alternates: {
+    canonical: '/',
+  },
+  authors: [{ name: 'Vraj Patel', url: 'https://its-vraj.vercel.app' }],
+  creator: 'Vraj Patel',
+  publisher: 'Vraj Patel',
+  robots: {
+    index: true,
+    follow: true,
+  },
+  openGraph: {
+    title: 'Vraj Patel | Full-Stack Developer & AI/ERP Systems Builder',
+    description: 'Portfolio of Vraj Patel, a CSE student at Nirma University building real-world ERP systems, dashboards, AI automation tools, and quant research platforms.',
+    url: 'https://its-vraj.vercel.app',
+    siteName: 'Vraj Patel Portfolio',
+    type: 'website',
+    locale: 'en_IN',
+    images: [
+      {
+        url: '/og/vraj-patel-portfolio.png',
+        width: 1200,
+        height: 630,
+        alt: 'Vraj Patel Portfolio',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Vraj Patel | Full-Stack Developer & AI/ERP Systems Builder',
+    description: 'Portfolio of Vraj Patel, a CSE student at Nirma University building real-world ERP systems, dashboards, AI automation tools, and quant research platforms.',
+    images: ['/og/vraj-patel-portfolio.png'],
+  },
 };
 
 export default function RootLayout({

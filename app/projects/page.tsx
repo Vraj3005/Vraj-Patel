@@ -63,10 +63,10 @@ export default function Projects() {
           <FolderGit2 className="h-4 w-4 text-foreground" /> Systems Directory
         </span>
         <h1 className="text-3xl md:text-4xl font-serif text-foreground tracking-tight font-medium">
-          Case Studies & Software Architecture
+          Projects by Vraj Patel
         </h1>
         <p className="text-xs md:text-sm text-secondary leading-relaxed max-w-2xl font-medium">
-          Search and inspect detailed technical implementation details for the core projects built, deployed, and designed by Vraj Patel.
+          Explore Vraj Patel&apos;s software engineering portfolio projects across client software, ERP systems, e-commerce dashboards, AI automation, websites, and quantitative research platforms. Search and inspect detailed architectural schemas and transaction flows for each system below.
         </p>
       </div>
 

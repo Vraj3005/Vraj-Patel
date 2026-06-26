@@ -1,16 +1,21 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Resume | Vraj Patel Curriculum Vitae',
-  description: 'View and export Vraj Patel\'s single-page A4 engineering resume. Covers core systems competencies, CSE studies at Nirma University, and key projects.',
+  title: 'Resume | Vraj Patel',
+  description: 'View the resume of Vraj Patel, a Computer Science Engineering student skilled in Next.js, TypeScript, Python, Supabase, PostgreSQL, AI automation, ERP systems, and quant research.',
   alternates: {
-    canonical: 'https://vrajpatel.dev/resume',
+    canonical: 'https://its-vraj.vercel.app/resume',
   },
   openGraph: {
-    title: 'Vraj Patel Curriculum Vitae',
-    description: 'View and export Vraj Patel\'s single-page A4 engineering resume. Covers core systems competencies, CSE studies at Nirma University, and key projects.',
-    url: 'https://vrajpatel.dev/resume',
+    title: 'Resume | Vraj Patel',
+    description: 'View the resume of Vraj Patel, a Computer Science Engineering student skilled in Next.js, TypeScript, Python, Supabase, PostgreSQL, AI automation, ERP systems, and quant research.',
+    url: 'https://its-vraj.vercel.app/resume',
     type: 'profile',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Resume | Vraj Patel',
+    description: 'View the resume of Vraj Patel, a Computer Science Engineering student skilled in Next.js, TypeScript, Python, Supabase, PostgreSQL, AI automation, ERP systems, and quant research.',
   },
 };
 

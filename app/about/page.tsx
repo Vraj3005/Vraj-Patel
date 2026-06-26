@@ -82,10 +82,10 @@ export default function About() {
       <motion.div variants={itemVariants} className="flex flex-col gap-3">
         <span className="text-xs font-bold uppercase tracking-widest text-secondary font-mono">Identity & Background</span>
         <h1 className="text-3xl md:text-4xl font-serif text-foreground tracking-tight font-medium">
-          Engineering Scalable Business Systems
+          About Vraj Patel
         </h1>
         <p className="text-sm md:text-base text-secondary leading-relaxed max-w-3xl mt-1 font-medium">
-          I am Vraj Patel, a third-year Computer Science and Engineering student at Nirma University. 
+          I am Vraj Patel, a 4th year Computer Science and Engineering student at Nirma University. 
           I focus on building functional business products—like custom ERP pipelines and quantitative visualizers—rather than toy projects. I enjoy bridging the gap between database designs and slick, interactive client interfaces.
         </p>
       </motion.div>

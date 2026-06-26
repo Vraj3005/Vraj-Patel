@@ -5,7 +5,8 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: '*',
       allow: '/',
+      disallow: ['/admin', '/inbox', '/api', '/auth'],
     },
-    sitemap: 'https://vrajpatel.dev/sitemap.xml',
+    sitemap: 'https://its-vraj.vercel.app/sitemap.xml',
   };
 }

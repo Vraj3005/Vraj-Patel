@@ -631,11 +631,19 @@ export default function ProjectCaseStudy({ params }: ProjectPageProps) {
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             '@context': 'https://schema.org',
-            '@type': 'SoftwareApplication',
+            '@type': 'SoftwareSourceCode',
             'name': project.title,
-            'operatingSystem': 'All',
-            'applicationCategory': project.category === 'quant_research' ? 'FinanceApplication' : 'BusinessApplication',
-            'description': project.shortDescription || project.description.substring(0, 160)
+            'description': project.shortDescription || project.description.substring(0, 160),
+            'codeRepository': project.githubUrl || undefined,
+            'programmingLanguage': project.technologies.filter(tech =>
+              ['typescript', 'javascript', 'python', 'sql', 'c++', 'html', 'css'].includes(tech.toLowerCase())
+            ).join(', ') || 'TypeScript',
+            'runtimePlatform': project.category === 'quant_research' ? 'Python / Streamlit' : 'Node.js / Vercel',
+            'url': `https://its-vraj.vercel.app/projects/${project.slug}`,
+            'author': {
+              '@type': 'Person',
+              'name': 'Vraj Patel'
+            }
           })
         }}
       />

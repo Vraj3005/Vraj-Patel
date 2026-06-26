@@ -12,7 +12,6 @@ import { Card } from '@/components/ui/card';
 import {
   LayoutDashboard,
   BarChart3,
-  Network,
   Terminal,
   Bot,
   ChevronRight,
