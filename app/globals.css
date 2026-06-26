@@ -201,3 +201,9 @@ body {
     page-break-before: always;
   }
 }
+
+@media (min-width: 1024px) {
+  html {
+    font-size: clamp(13px, 1.111vw, 22px);
+  }
+}

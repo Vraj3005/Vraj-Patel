@@ -8,7 +8,7 @@ import { PageTitleReveal } from '@/components/motion/page-transition';
 
 export default function TerminalPage() {
   return (
-    <div className="flex flex-col gap-8 py-6 md:py-10 max-w-5xl mx-auto w-full px-4 sm:px-6 font-sans">
+    <div className="flex flex-col gap-8 py-6 md:py-10 w-full mx-auto font-sans">
       {/* Page Header */}
       <div className="flex flex-col gap-3 border-b border-card-border pb-6 shrink-0 select-none">
         <span className="text-xs font-bold uppercase tracking-widest text-secondary flex items-center gap-1.5 font-mono">

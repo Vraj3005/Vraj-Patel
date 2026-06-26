@@ -39,7 +39,7 @@ export default function SystemsPlayground() {
   const [activeTab, setActiveTab] = useState<'architecture' | 'security' | 'lifecycle' | 'telemetry'>('architecture');
 
   return (
-    <div className="flex flex-col gap-8 py-6 md:py-10 max-w-5xl mx-auto w-full px-4 sm:px-6 font-sans">
+    <div className="flex flex-col gap-8 py-6 md:py-10 w-full mx-auto font-sans">
       
       {/* Header */}
       <div className="flex flex-col gap-3 border-b border-card-border pb-6 shrink-0 select-none relative overflow-hidden rounded-xl bg-foreground/[0.01] p-4">

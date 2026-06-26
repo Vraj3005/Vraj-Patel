@@ -67,7 +67,7 @@ const timeline: ExperienceItem[] = [
 
 export default function About() {
   return (
-    <SectionStagger className="flex flex-col gap-12 max-w-5xl mx-auto py-6 md:py-10">
+    <SectionStagger className="flex flex-col gap-12 w-full py-6 md:py-10">
       {/* Intro Header */}
       <SectionItem className="flex flex-col gap-3">
         <span className="text-xs font-bold uppercase tracking-widest text-secondary font-mono">Identity & Background</span>
@@ -138,7 +138,7 @@ export default function About() {
         <h2 className="text-xl font-serif font-medium text-foreground tracking-tight flex items-center gap-2">
           <Server className="h-5 w-5 text-foreground" /> The Technical Skill Matrix
         </h2>
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch w-full max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch w-full mx-auto">
           {/* Left Column: Interactive network graph */}
           <div className="lg:col-span-6 flex flex-col justify-center">
             <TechStackGraph />

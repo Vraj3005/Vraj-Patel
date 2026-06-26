@@ -44,7 +44,7 @@ export default function Projects() {
   });
 
   return (
-    <div className="flex flex-col gap-10 py-6 md:py-10 max-w-5xl mx-auto w-full">
+    <div className="flex flex-col gap-10 py-6 md:py-10 w-full mx-auto">
       {/* Intro section */}
       <div className="flex flex-col gap-3">
         <span className="text-xs font-bold uppercase tracking-widest text-secondary font-mono flex items-center gap-1.5">

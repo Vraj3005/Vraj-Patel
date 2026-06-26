@@ -162,7 +162,7 @@ export default function ProjectCaseStudy({ params }: ProjectPageProps) {
   };
 
   return (
-    <div className="py-6 md:py-10 max-w-5xl mx-auto flex flex-col gap-10 md:gap-14 w-full">
+    <div className="py-6 md:py-10 flex flex-col gap-10 md:gap-14 w-full mx-auto">
       {/* 13. Back Button Navigation Link */}
       <div>
         <Link

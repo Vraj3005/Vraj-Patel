@@ -101,7 +101,7 @@ export default function InboxPage() {
   });
 
   return (
-    <div className="flex flex-col gap-8 py-6 md:py-10 max-w-5xl mx-auto w-full px-4 sm:px-6 font-sans">
+    <div className="flex flex-col gap-8 py-6 md:py-10 w-full mx-auto font-sans">
       
       {/* ═══════════════════════════════════════════
           STATE 1: UNAUTHORIZED / ERROR VIEW

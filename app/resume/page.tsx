@@ -48,7 +48,7 @@ export default function Resume() {
   const quantSummaryText = `Quantitative developer and mathematical modeler. Built Hidden Markov Model (HMM) volatility trackers for NIFTY 50 (hmmlearn, statsmodels) and Option implied volatility calculators using Python math solver pipelines (FastAPI, NumPy, Pandas).`;
 
   return (
-    <div className="py-6 md:py-10 max-w-4xl mx-auto w-full flex flex-col gap-8 px-4 sm:px-6">
+    <div className="py-6 md:py-10 w-full flex flex-col gap-8 px-4 sm:px-6 mx-auto">
       {/* Interactive PDF Control Banner */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-card-border pb-6 no-print shrink-0">
         <div className="flex flex-col gap-1">

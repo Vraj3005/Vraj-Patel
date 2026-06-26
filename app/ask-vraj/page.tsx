@@ -199,7 +199,7 @@ export default function AskVraj() {
   };
 
   return (
-    <div className="flex flex-col gap-6 py-6 max-w-5xl mx-auto w-full h-[calc(100vh-100px)] min-h-[600px]">
+    <div className="flex flex-col gap-6 py-6 w-full mx-auto h-[calc(100vh-100px)] min-h-[600px]">
       {/* Page header banner */}
       <div className="flex items-center justify-between border-b border-card-border pb-4 shrink-0">
         <div className="flex flex-col gap-1.5">

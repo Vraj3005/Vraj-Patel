@@ -67,7 +67,7 @@ export default function Contact() {
   };
 
   return (
-    <div className="py-6 md:py-10 max-w-4xl mx-auto w-full flex flex-col gap-8">
+    <div className="py-6 md:py-10 w-full flex flex-col gap-8 mx-auto">
       {/* Header Banner */}
       <div className="flex flex-col gap-3 border-b border-card-border pb-6 shrink-0">
         <span className="text-xs font-bold uppercase tracking-widest text-secondary flex items-center gap-1.5 font-mono">

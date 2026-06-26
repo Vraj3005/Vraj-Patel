@@ -70,7 +70,7 @@ export default function HomeClient() {
       variants={containerVariants}
       initial="hidden"
       animate="visible"
-      className="flex flex-col gap-20 md:gap-28 w-full max-w-6xl mx-auto py-8"
+      className="flex flex-col gap-20 md:gap-28 w-full mx-auto py-8"
     >
       {/* ═══════════════════════════════════════════
           HERO — Full-Width Intro + Side Terminal
@@ -252,7 +252,7 @@ export default function HomeClient() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch w-full max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch w-full mx-auto">
           {/* Left Column: Interactive network graph */}
           <div className="lg:col-span-6 flex flex-col justify-center">
             <TechStackGraph />
