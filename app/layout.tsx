@@ -72,8 +72,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${fontSans.variable} ${fontMono.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col relative select-none">
+    <html lang="en" className={`${fontSans.variable} ${fontMono.variable} h-full antialiased`} suppressHydrationWarning>
+      <body className="min-h-full flex flex-col relative select-none" suppressHydrationWarning>
         <Providers>
           <GridBackground />
           <Particles />

@@ -2,9 +2,10 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Bot, X, Send, User, ArrowRight, RefreshCw } from 'lucide-react';
+import { X, Send, User, ArrowRight, RefreshCw } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import AICoreAvatar, { AIStatus } from '@/components/ai/ai-core-avatar';
 
 interface ChatMessage {
   id: string;
@@ -36,6 +37,7 @@ export default function AIWidget() {
   ]);
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [aiStatus, setAiStatus] = useState<AIStatus>('ready');
   const [activeSessionId, setActiveSessionId] = useState<string | null>(() => {
     if (typeof window !== 'undefined') {
       return sessionStorage.getItem('ai_session_id') || null;
@@ -68,6 +70,7 @@ export default function AIWidget() {
     setMessages((prev) => [...prev, userMsg]);
     setInputValue('');
     setIsLoading(true);
+    setAiStatus('thinking');
 
     try {
       const chatHistory = messages
@@ -112,6 +115,7 @@ export default function AIWidget() {
           content: '',
         },
       ]);
+      setAiStatus('responding');
 
       const reader = response.body?.getReader();
       const decoder = new TextDecoder();
@@ -120,7 +124,10 @@ export default function AIWidget() {
       let chunksList: string[] = [];
       while (true) {
         const { done, value } = await reader.read();
-        if (done) break;
+        if (done) {
+          setAiStatus('ready');
+          break;
+        }
 
         const textChunk = decoder.decode(value, { stream: true });
         chunksList = [...chunksList, textChunk];
@@ -134,6 +141,8 @@ export default function AIWidget() {
       }
     } catch (err) {
       console.error('Widget chat stream error:', err);
+      setAiStatus('error');
+      setTimeout(() => setAiStatus('ready'), 4000);
       setMessages((prev) => [
         ...prev,
         {
@@ -153,6 +162,7 @@ export default function AIWidget() {
       sessionStorage.removeItem('ai_session_id');
     }
     setActiveSessionId(null);
+    setAiStatus('ready');
     setMessages([
       {
         id: 'welcome',
@@ -160,6 +170,18 @@ export default function AIWidget() {
         content: 'Session reset. Ask me anything about Vraj Patel!',
       },
     ]);
+  };
+
+  const handleInputFocus = () => {
+    if (!isLoading) {
+      setAiStatus('listening');
+    }
+  };
+
+  const handleInputBlur = () => {
+    if (aiStatus === 'listening') {
+      setAiStatus('ready');
+    }
   };
 
   return (
@@ -177,8 +199,8 @@ export default function AIWidget() {
             {/* Header */}
             <div className="p-4 border-b border-card-border flex items-center justify-between bg-foreground/[0.02] shrink-0">
               <div className="flex items-center gap-2">
-                <div className="h-7 w-7 rounded-lg bg-foreground/5 border border-card-border flex items-center justify-center text-foreground">
-                  <Bot className="h-4 w-4" />
+                <div className="h-7 w-7 rounded-lg bg-foreground/5 border border-card-border flex items-center justify-center overflow-hidden shrink-0">
+                  <AICoreAvatar status={aiStatus} size="sm" />
                 </div>
                 <div className="flex flex-col">
                   <span className="text-xs font-bold text-foreground font-mono">Vraj Patel AI Agent</span>
@@ -207,21 +229,30 @@ export default function AIWidget() {
 
             {/* Message Feed */}
             <div ref={feedRef} className="flex-1 overflow-y-auto p-4 flex flex-col gap-4 scrollbar-thin">
-              {messages.map((message) => {
+              {messages.map((message, idx) => {
                 const isUser = message.role === 'user';
+                const isLatestBotMsg = !isUser && idx === messages.length - 1 && isLoading;
+                
                 return (
                   <div
                     key={message.id}
                     className={`flex gap-2 max-w-[85%] ${isUser ? 'self-end flex-row-reverse' : 'self-start'}`}
                   >
                     <div
-                      className={`h-6 w-6 rounded-md flex items-center justify-center border shrink-0 text-[10px] ${
+                      className={`h-6 w-6 rounded-md flex items-center justify-center border shrink-0 text-[10px] overflow-hidden ${
                         isUser
                           ? 'bg-foreground border-foreground text-background'
                           : 'bg-foreground/5 border-card-border text-foreground'
                       }`}
                     >
-                      {isUser ? <User className="h-3 w-3" /> : <Bot className="h-3 w-3" />}
+                      {isUser ? (
+                        <User className="h-3 w-3" />
+                      ) : (
+                        <AICoreAvatar 
+                          status={isLatestBotMsg ? 'responding' : 'ready'} 
+                          size="sm" 
+                        />
+                      )}
                     </div>
 
                     <div
@@ -277,6 +308,8 @@ export default function AIWidget() {
                   placeholder="Ask Vraj AI..."
                   value={inputValue}
                   onChange={(e) => setInputValue(e.target.value)}
+                  onFocus={handleInputFocus}
+                  onBlur={handleInputBlur}
                   disabled={isLoading}
                   className="flex-1 py-1.5 px-3 rounded-lg text-xs"
                 />
@@ -300,7 +333,7 @@ export default function AIWidget() {
         onClick={() => setIsOpen(!isOpen)}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
-        className="h-12 w-12 rounded-full bg-foreground border border-foreground text-background flex items-center justify-center shadow-xl cursor-pointer hover:shadow-2xl transition-shadow relative"
+        className="h-12 w-12 rounded-full bg-foreground border border-foreground text-background flex items-center justify-center shadow-xl cursor-pointer hover:shadow-2xl transition-shadow relative overflow-hidden"
         title="Ask Vraj AI"
       >
         <AnimatePresence mode="wait">
@@ -321,13 +354,9 @@ export default function AIWidget() {
               animate={{ rotate: 0, opacity: 1 }}
               exit={{ rotate: -45, opacity: 0 }}
               transition={{ duration: 0.15 }}
-              className="relative"
+              className="w-full h-full flex items-center justify-center"
             >
-              <Bot className="h-5 w-5 text-background" />
-              <span className="absolute -top-1 -right-1 flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
-              </span>
+              <AICoreAvatar status={aiStatus} size="sm" className="opacity-95" />
             </motion.div>
           )}
         </AnimatePresence>

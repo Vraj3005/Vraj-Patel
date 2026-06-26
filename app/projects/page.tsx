@@ -1,13 +1,14 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { motion, Variants } from 'framer-motion';
 import { projects, categories } from '@/lib/data/projects';
 import ProjectCard from '@/components/project/project-card';
+import { PageTitleReveal, SectionStagger, SectionItem } from '@/components/motion/page-transition';
 import { Search, FolderGit2, X } from 'lucide-react';
 import { getCategoryLabel } from '@/lib/formatters/labels';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
+import ProjectUniverse from '@/components/projects/project-universe';
 
 export default function Projects() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -42,19 +43,6 @@ export default function Projects() {
     return matchesSearch && matchesCategory;
   });
 
-  const containerVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.05, delayChildren: 0.1 }
-    }
-  };
-
-  const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 15 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.3 } }
-  };
-
   return (
     <div className="flex flex-col gap-10 py-6 md:py-10 max-w-5xl mx-auto w-full">
       {/* Intro section */}
@@ -62,13 +50,16 @@ export default function Projects() {
         <span className="text-xs font-bold uppercase tracking-widest text-secondary font-mono flex items-center gap-1.5">
           <FolderGit2 className="h-4 w-4 text-foreground" /> Systems Directory
         </span>
-        <h1 className="text-3xl md:text-4xl font-serif text-foreground tracking-tight font-medium">
+        <PageTitleReveal className="text-3xl md:text-4xl font-serif text-foreground tracking-tight font-medium">
           Projects by Vraj Patel
-        </h1>
+        </PageTitleReveal>
         <p className="text-xs md:text-sm text-secondary leading-relaxed max-w-2xl font-medium">
           Explore Vraj Patel&apos;s software engineering portfolio projects across client software, ERP systems, e-commerce dashboards, AI automation, websites, and quantitative research platforms. Search and inspect detailed architectural schemas and transaction flows for each system below.
         </p>
       </div>
+
+      {/* Interactive Project Universe Constellation */}
+      <ProjectUniverse selectedCategory={selectedCategory} onCategoryChange={setSelectedCategory} />
 
       {/* Filter and Search Bar Section */}
       <Card className="p-4 flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-sm">
@@ -120,18 +111,13 @@ export default function Projects() {
 
       {/* Projects List Grid */}
       {filteredProjects.length > 0 ? (
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className="grid grid-cols-1 md:grid-cols-2 gap-6"
-        >
+        <SectionStagger className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {filteredProjects.map((project) => (
-            <motion.div key={project.slug} variants={itemVariants}>
+            <SectionItem key={project.slug}>
               <ProjectCard project={project} />
-            </motion.div>
+            </SectionItem>
           ))}
-        </motion.div>
+        </SectionStagger>
       ) : (
         <Card className="py-20 text-center flex flex-col items-center justify-center border-dashed border-card-border bg-card-bg">
           <FolderGit2 className="h-12 w-12 text-secondary mb-4 animate-pulse" />

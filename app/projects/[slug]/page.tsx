@@ -2,11 +2,10 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
-  ArrowLeft, ExternalLink, Github, Cpu, ShieldCheck, Zap, Database, 
+  ArrowLeft, Cpu, ShieldCheck, Zap, Database, 
   Sparkles, Terminal, User, Bot, Server, Award, CheckCircle, Lightbulb, Send
 } from 'lucide-react';
 import { projects } from '@/lib/data/projects';
@@ -14,9 +13,10 @@ import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { getCategoryLabel } from '@/lib/formatters/labels';
 import dynamic from 'next/dynamic';
 import ArchitectureViewer from '@/components/ui/architecture-viewer';
+import CaseStudyCinematicIntro from '@/components/project/case-study-cinematic-intro';
+import ProjectExplodedView from '@/components/project/project-exploded-view';
 
 // Dynamically lazy-load large visualizers inside case studies
 const SystemVisualizer = dynamic(() => import('@/components/visualizers/system-visualizer'), {
@@ -53,7 +53,6 @@ export default function ProjectCaseStudy({ params }: ProjectPageProps) {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [imgErrorSlug, setImgErrorSlug] = useState<string | null>(null);
   const feedRef = useRef<HTMLDivElement>(null);
 
   // Unwrap params safely and initialize welcome message
@@ -74,10 +73,6 @@ export default function ProjectCaseStudy({ params }: ProjectPageProps) {
   }, [params]);
 
   const project = projects.find((p) => p.slug === slug);
-  const isImgError = imgErrorSlug === slug;
-  const imgSrc = (isImgError && project?.image)
-    ? 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="50" viewBox="0 0 100 50" style="background:%23000;"><text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" fill="%23333" font-family="sans-serif" font-size="10">Vraj Patel Portfolio</text></svg>'
-    : project?.image || '';
 
   // Auto-scroll chat thread to bottom
   const scrollToBottom = () => {
@@ -178,124 +173,25 @@ export default function ProjectCaseStudy({ params }: ProjectPageProps) {
         </Link>
       </div>
 
-      {/* 1. Hero Section */}
-      <div className="flex flex-col gap-6 md:gap-8 border-b border-card-border pb-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-          
-          {/* Left Column: Heading and info */}
-          <div className="lg:col-span-7 flex flex-col gap-4">
-            <div className="flex flex-wrap items-center gap-2">
-              <span className="text-xs font-bold uppercase tracking-wider text-secondary font-mono">
-                {getCategoryLabel(project.category)}
-              </span>
-              <span className="text-secondary font-mono text-xs">•</span>
-              <span className="text-secondary font-mono text-xs font-semibold">{project.period}</span>
-            </div>
-            
-            <h1 className="text-3xl md:text-5xl font-medium font-serif text-foreground tracking-tight">
-              {project.title}
-            </h1>
-            
-            <p className="text-xs md:text-sm text-secondary leading-relaxed max-w-2xl font-medium mt-1">
-              {project.description}
-            </p>
+      {/* 1. Cinematic Hero Intro Section */}
+      <CaseStudyCinematicIntro project={project} />
 
-            {/* Quick Actions / 13. Links */}
-            <div className="flex flex-wrap gap-3 mt-3">
-              {project.liveUrl && (
-                <a
-                  href={project.liveUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-block"
-                >
-                  <Button variant="primary" size="md" className="gap-2 text-xs font-bold">
-                    <ExternalLink className="h-3.5 w-3.5" /> Launch Live Module
-                  </Button>
-                </a>
-              )}
-              {project.githubUrl && (
-                <a
-                  href={project.githubUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-block"
-                >
-                  <Button variant="secondary" size="md" className="gap-2 text-xs font-bold">
-                    <Github className="h-3.5 w-3.5" /> View Source Code
-                  </Button>
-                </a>
-              )}
-            </div>
-          </div>
+      {/* Scroll-Based Project Exploded View */}
+      <ProjectExplodedView projectSlug={project.slug} />
 
-          {/* Right Column: Featured Image */}
-          <div className="lg:col-span-5 w-full">
-            {project.image && (
-              <div className="relative aspect-video w-full overflow-hidden rounded-2xl border border-card-border shadow-md bg-foreground/5">
-                <Image 
-                  src={imgSrc} 
-                  alt={project.title}
-                  fill
-                  priority
-                  sizes="(max-width: 1024px) 100vw, 40vw"
-                  className="object-cover"
-                  onError={() => {
-                    if (slug) {
-                      setImgErrorSlug(slug);
-                    }
-                  }}
-                />
-              </div>
-            )}
-          </div>
-
-        </div>
-      </div>
-
-      {/* Project Metadata Parameters & Metrics Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {/* Core parameters */}
-        <Card className="p-6 flex flex-col gap-4">
-          <h3 className="text-xs font-bold uppercase tracking-wider text-foreground border-b border-card-border pb-2 font-mono">
-            System Parameters
-          </h3>
-          <div className="flex flex-col gap-3.5 text-xs font-medium">
-            <div className="flex justify-between">
-              <span className="text-secondary font-mono">My Role:</span>
-              <span className="text-foreground font-bold">{project.role}</span>
-            </div>
-            {project.client && (
-              <div className="flex justify-between">
-                <span className="text-secondary font-mono">Client/Organization:</span>
-                <span className="text-foreground font-bold">{project.client}</span>
-              </div>
-            )}
-            <div className="flex justify-between">
-              <span className="text-secondary font-mono">Status:</span>
-              <span className="text-foreground font-bold">{project.status}</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-secondary font-mono">Year:</span>
-              <span className="text-foreground font-bold font-mono">{project.year}</span>
-            </div>
-          </div>
-        </Card>
-
-        {/* Realized Metrics Grid */}
-        <div className="md:col-span-2 grid grid-cols-1 sm:grid-cols-3 gap-4">
-          {project.metrics.map((metric, idx) => (
-            <Card
-              key={idx}
-              className="p-5 flex flex-col items-center justify-center text-center gap-1.5"
-            >
-              <span className="text-2xl md:text-3xl font-black text-foreground font-serif">{metric.value}</span>
-              <span className="text-[10px] text-secondary uppercase font-bold tracking-wider font-mono">
-                {metric.label}
-              </span>
-            </Card>
-          ))}
-        </div>
+      {/* Realized Metrics Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        {project.metrics.map((metric, idx) => (
+          <Card
+            key={idx}
+            className="p-5 flex flex-col items-center justify-center text-center gap-1.5"
+          >
+            <span className="text-2xl md:text-3xl font-black text-foreground font-serif">{metric.value}</span>
+            <span className="text-[10px] text-secondary uppercase font-bold tracking-wider font-mono">
+              {metric.label}
+            </span>
+          </Card>
+        ))}
       </div>
 
       {/* 2. Problem & 3. Why I Built It */}

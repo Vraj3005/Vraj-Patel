@@ -8,6 +8,7 @@ import TechDistribution from '@/components/dashboard/tech-distribution';
 import MetricsCharts from '@/components/metrics/metrics-charts';
 import ComplexityCards from '@/components/metrics/complexity-cards';
 import GithubHeatmap from '@/components/dashboard/github-heatmap';
+import SystemHealthHud from '@/components/dashboard/system-health-hud';
 import { Card } from '@/components/ui/card';
 import {
   LayoutDashboard,
@@ -19,6 +20,8 @@ import {
   FolderKanban
 } from 'lucide-react';
 import Link from 'next/link';
+import { PageTitleReveal } from '@/components/motion/page-transition';
+import { SystemBlueprintBackground } from '@/components/visual/system-blueprint-background';
 
 export default function DashboardPage() {
   const [activeTab, setActiveTab] = useState<'overview' | 'metrics'>('overview');
@@ -84,21 +87,22 @@ export default function DashboardPage() {
   return (
     <div className="flex flex-col gap-8 py-6 md:py-10 max-w-7xl mx-auto w-full px-4 sm:px-6 md:px-8">
       {/* Dashboard Top Header */}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-card-border pb-6 gap-4">
-        <div className="flex flex-col gap-2">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-card-border pb-6 gap-4 relative overflow-hidden rounded-xl bg-foreground/[0.01] p-4">
+        <SystemBlueprintBackground variant="dashboard" density="medium" className="opacity-[0.04] z-0" />
+        <div className="flex flex-col gap-2 relative z-10">
           <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-secondary flex items-center gap-1.5">
             <LayoutDashboard className="h-4 w-4 text-cyan-400" /> Platform Observability Console
           </span>
-          <h1 className="text-3xl md:text-4xl font-medium font-serif text-foreground tracking-tight">
+          <PageTitleReveal className="text-3xl md:text-4xl font-medium font-serif text-foreground tracking-tight">
             Engineering Intelligence
-          </h1>
+          </PageTitleReveal>
           <p className="text-xs md:text-sm text-secondary max-w-xl font-medium">
             Aggregated diagnostics showing real-time visit flows, options mathematics parameters, and developer commits telemetry.
           </p>
         </div>
 
         {/* Tab Controls */}
-        <div className="flex items-center gap-2.5 bg-white/2 border border-card-border p-1 rounded-xl">
+        <div className="flex items-center gap-2.5 bg-white/2 border border-card-border p-1 rounded-xl relative z-10">
           <button
             onClick={() => setActiveTab('overview')}
             className={`px-4 py-2 rounded-lg text-xs font-bold tracking-wide flex items-center gap-1.5 transition-all cursor-pointer ${
@@ -146,6 +150,9 @@ export default function DashboardPage() {
               transition={{ duration: 0.2 }}
               className="flex flex-col gap-6 w-full"
             >
+              {/* Public System Health HUD */}
+              <SystemHealthHud />
+
               {/* Mid section: Showcase summary & distribution */}
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
                 <div className="lg:col-span-1">

@@ -544,40 +544,46 @@ export default function DeveloperConsole({ adminMode = false }: DeveloperConsole
                 {/* Log Row Header */}
                 <div
                   onClick={() => handleToggleExpand(log.id)}
-                  className="flex items-center gap-3 px-4 py-3 cursor-pointer select-none"
+                  className="flex flex-col md:flex-row md:items-center gap-2 md:gap-3 px-4 py-3 cursor-pointer select-none"
                 >
-                  {/* Expand Chevron */}
-                  <div className="text-secondary shrink-0">
-                    {isExpanded ? <ChevronDown className="h-3.5 w-3.5" /> : <ChevronRight className="h-3.5 w-3.5" />}
+                  {/* Metadata block (Chevron + Time + Source + Severity) */}
+                  <div className="flex items-center flex-wrap gap-2 shrink-0 select-none">
+                    {/* Expand Chevron */}
+                    <div className="text-secondary shrink-0">
+                      {isExpanded ? <ChevronDown className="h-3.5 w-3.5" /> : <ChevronRight className="h-3.5 w-3.5" />}
+                    </div>
+
+                    {/* Timestamp */}
+                    <span className="text-[10px] text-gray-500 tracking-wider shrink-0 select-none">
+                      [{formattedDate} {formattedTime}]
+                    </span>
+
+                    {/* Source Badge */}
+                    <Badge variant="outline" className={`text-[8.5px] uppercase font-bold tracking-wider py-0 px-2 rounded-md shrink-0 border border-white/5 ${getSourceStyle(log.type)}`}>
+                      {log.type}
+                    </Badge>
+
+                    {/* Severity Badge */}
+                    <Badge variant="outline" className={`text-[8.5px] font-black uppercase tracking-wider py-0.5 px-2 rounded-md shrink-0 border flex items-center gap-1.5 ${getSeverityBadge(log.severity)}`}>
+                      {getSeverityIcon(log.severity)}
+                      {log.severity}
+                    </Badge>
                   </div>
 
-                  {/* Timestamp */}
-                  <span className="text-[10px] text-gray-500 tracking-wider shrink-0 select-none">
-                    [{formattedDate} {formattedTime}]
-                  </span>
+                  {/* Message & Meta Badge block */}
+                  <div className="flex items-start gap-2 flex-1 min-w-0 md:ml-1">
+                    {/* Message text with wrap/overflow handling */}
+                    <span className="text-foreground font-semibold text-[11px] break-words whitespace-pre-wrap flex-1 min-w-0">
+                      {log.message}
+                    </span>
 
-                  {/* Source Badge */}
-                  <Badge variant="outline" className={`text-[8.5px] uppercase font-bold tracking-wider py-0 px-2 rounded-md shrink-0 border border-white/5 ${getSourceStyle(log.type)}`}>
-                    {log.type}
-                  </Badge>
-
-                  {/* Severity Badge */}
-                  <Badge variant="outline" className={`text-[8.5px] font-black uppercase tracking-wider py-0.5 px-2 rounded-md shrink-0 border flex items-center gap-1.5 ${getSeverityBadge(log.severity)}`}>
-                    {getSeverityIcon(log.severity)}
-                    {log.severity}
-                  </Badge>
-
-                  {/* Message */}
-                  <span className="text-foreground break-all line-clamp-1 font-semibold text-[11px] flex-1">
-                    {log.message}
-                  </span>
-
-                  {/* Indicators for metadata */}
-                  {log.metadata && Object.keys(log.metadata).length > 0 && (
-                    <Badge variant="outline" className="text-[7.5px] border-white/5 text-gray-500 py-0 tracking-widest uppercase shrink-0 font-bold bg-white/2">
-                      META
-                    </Badge>
-                  )}
+                    {/* Indicators for metadata */}
+                    {log.metadata && Object.keys(log.metadata).length > 0 && (
+                      <Badge variant="outline" className="text-[7.5px] border-white/5 text-gray-500 py-0 tracking-widest uppercase shrink-0 font-bold bg-white/2 select-none self-center">
+                        META
+                      </Badge>
+                    )}
+                  </div>
                 </div>
 
                 {/* Log Row Details (Expanded) */}

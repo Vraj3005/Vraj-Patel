@@ -23,6 +23,10 @@ const TechStackGraph = dynamic(() => import('@/components/ui/tech-stack-graph'),
 });
 
 const RecruiterModal = dynamic(() => import('@/components/ui/recruiter-modal'), { ssr: false });
+const OSWindowGrid = dynamic(() => import('@/components/os/os-window-grid'), {
+  ssr: false,
+  loading: () => <div className="w-full min-h-[300px] bg-black/45 border border-white/5 rounded-2xl animate-pulse animate-pulse-slow" />
+});
 import { motion, Variants } from 'framer-motion';
 import {
   Code, Database, Server, Cpu, Globe,
@@ -37,6 +41,8 @@ const techStack = [
   { category: 'Data & Infra', icon: <Database className="h-3.5 w-3.5" />, items: ['PostgreSQL', 'Supabase', 'MongoDB', 'Docker', 'AWS'] },
   { category: 'AI / ML', icon: <Cpu className="h-3.5 w-3.5" />, items: ['Gemini API', 'OpenAI API'] },
 ];
+
+
 
 export default function HomeClient() {
   const [isRecruiterOpen, setIsRecruiterOpen] = useState(false);
@@ -220,6 +226,13 @@ export default function HomeClient() {
             </div>
           </motion.div>
         </div>
+      </motion.section>
+
+      {/* ═══════════════════════════════════════════
+          PORTFOLIO OS
+          ═══════════════════════════════════════════ */}
+      <motion.section variants={itemVariants}>
+        <OSWindowGrid />
       </motion.section>
 
       {/* ═══════════════════════════════════════════

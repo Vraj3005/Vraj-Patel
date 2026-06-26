@@ -1,347 +1,5 @@
 [
   {
-    "id": "02dfbbb4-0d38-4827-84c4-57568280e623",
-    "created_at": "2026-06-24T19:19:44.032Z",
-    "event_type": "portfolio",
-    "severity": "info",
-    "message": "Page visit recorded: /",
-    "metadata": {
-      "path": "/",
-      "referrer": "",
-      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
-    },
-    "is_public": true
-  },
-  {
-    "id": "89b01c46-7fec-4e89-9a57-91ddc4870740",
-    "created_at": "2026-06-24T19:20:03.462Z",
-    "event_type": "portfolio",
-    "severity": "info",
-    "message": "Page visit recorded: /inbox",
-    "metadata": {
-      "path": "/inbox",
-      "referrer": "",
-      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
-    },
-    "is_public": true
-  },
-  {
-    "id": "da442119-3bd6-40b7-8380-f08fd41cdfa2",
-    "created_at": "2026-06-24T19:39:39.054Z",
-    "event_type": "portfolio",
-    "severity": "info",
-    "message": "Page visit recorded: /",
-    "metadata": {
-      "path": "/",
-      "referrer": "",
-      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
-    },
-    "is_public": true
-  },
-  {
-    "id": "c67bc671-f4b0-4f3f-8043-74adc37549fc",
-    "created_at": "2026-06-24T19:40:06.755Z",
-    "event_type": "portfolio",
-    "severity": "info",
-    "message": "Page visit recorded: /projects",
-    "metadata": {
-      "path": "/projects",
-      "referrer": "",
-      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
-    },
-    "is_public": true
-  },
-  {
-    "id": "8476c261-51ec-44c4-a9df-8ca13a87ae04",
-    "created_at": "2026-06-24T19:40:48.805Z",
-    "event_type": "portfolio",
-    "severity": "info",
-    "message": "Page visit recorded: /projects/marea-admin-dashboard",
-    "metadata": {
-      "path": "/projects/marea-admin-dashboard",
-      "referrer": "",
-      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
-    },
-    "is_public": true
-  },
-  {
-    "id": "35a82cad-3194-4afb-b3a0-6d4e5cee567a",
-    "created_at": "2026-06-24T19:41:47.113Z",
-    "event_type": "portfolio",
-    "severity": "info",
-    "message": "Page visit recorded: /",
-    "metadata": {
-      "path": "/",
-      "referrer": "",
-      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
-    },
-    "is_public": true
-  },
-  {
-    "id": "8f5e3137-a56f-4fdc-8a34-be0feffa30f9",
-    "created_at": "2026-06-24T19:41:55.802Z",
-    "event_type": "portfolio",
-    "severity": "info",
-    "message": "Page visit recorded: /lab",
-    "metadata": {
-      "path": "/lab",
-      "referrer": "",
-      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
-    },
-    "is_public": true
-  },
-  {
-    "id": "c902fd19-da80-4155-83fd-71a55ddebc30",
-    "created_at": "2026-06-24T19:42:04.944Z",
-    "event_type": "portfolio",
-    "severity": "info",
-    "message": "Page visit recorded: /dashboard",
-    "metadata": {
-      "path": "/dashboard",
-      "referrer": "",
-      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
-    },
-    "is_public": true
-  },
-  {
-    "id": "6d03446f-9a9b-4052-a880-9485c0af39fa",
-    "created_at": "2026-06-24T19:43:00.670Z",
-    "event_type": "portfolio",
-    "severity": "info",
-    "message": "Page visit recorded: /dashboard",
-    "metadata": {
-      "path": "/dashboard",
-      "referrer": "",
-      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
-    },
-    "is_public": true
-  },
-  {
-    "id": "ca9bde5b-a342-4eba-ab0b-fdf28fa63cdf",
-    "created_at": "2026-06-24T19:43:18.161Z",
-    "event_type": "portfolio",
-    "severity": "info",
-    "message": "Page visit recorded: /inbox",
-    "metadata": {
-      "path": "/inbox",
-      "referrer": "",
-      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
-    },
-    "is_public": true
-  },
-  {
-    "id": "a26ca096-1467-4e11-9f46-9bb9d1cf5001",
-    "created_at": "2026-06-24T19:43:47.179Z",
-    "event_type": "portfolio",
-    "severity": "info",
-    "message": "Page visit recorded: /",
-    "metadata": {
-      "path": "/",
-      "referrer": "",
-      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
-    },
-    "is_public": true
-  },
-  {
-    "id": "54c27668-d640-47b7-a6a3-7301009620b5",
-    "created_at": "2026-06-24T19:43:55.736Z",
-    "event_type": "ask-vraj",
-    "severity": "warning",
-    "message": "AI Assistant input validation failed.",
-    "metadata": {
-      "errors": {
-        "prompt": [
-          "Prompt is required."
-        ]
-      }
-    },
-    "is_public": true
-  },
-  {
-    "id": "cef84032-1cae-46f5-8782-fe1f52807d4e",
-    "created_at": "2026-06-24T19:43:55.783Z",
-    "event_type": "ask-vraj",
-    "severity": "success",
-    "message": "Processed Ask Vraj AI query: \"Who is Vraj?...\"",
-    "metadata": {
-      "promptLength": 12,
-      "sessionId": "d078badb-2bcc-498e-b362-30b2dea89813"
-    },
-    "is_public": true
-  },
-  {
-    "id": "d7b6d17e-3e2d-4385-b378-80e49c86d36b",
-    "created_at": "2026-06-24T19:43:55.792Z",
-    "event_type": "contact",
-    "severity": "success",
-    "message": "Contact inquiry cataloged successfully: \"Full-stack Position...\"",
-    "metadata": {
-      "subjectPreview": "Full-stack Position"
-    },
-    "is_public": true
-  },
-  {
-    "id": "e4bd33c4-d209-4cdd-b3ad-c320c04f93db",
-    "created_at": "2026-06-24T19:43:59.734Z",
-    "event_type": "portfolio",
-    "severity": "info",
-    "message": "Page visit recorded: /terminal",
-    "metadata": {
-      "path": "/terminal",
-      "referrer": "",
-      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
-    },
-    "is_public": true
-  },
-  {
-    "id": "e8c89c40-8cbf-4b53-bdb2-927a6eac96a9",
-    "created_at": "2026-06-24T20:19:21.664Z",
-    "event_type": "ask-vraj",
-    "severity": "warning",
-    "message": "AI Assistant input validation failed.",
-    "metadata": {
-      "errors": {
-        "prompt": [
-          "Prompt is required."
-        ]
-      }
-    },
-    "is_public": true
-  },
-  {
-    "id": "7b50f351-1773-4a3b-a1a4-e83c0eec98d7",
-    "created_at": "2026-06-24T20:29:43.141Z",
-    "event_type": "ask-vraj",
-    "severity": "warning",
-    "message": "AI Assistant input validation failed.",
-    "metadata": {
-      "errors": {
-        "prompt": [
-          "Prompt is required."
-        ]
-      }
-    },
-    "is_public": true
-  },
-  {
-    "id": "5224b4d3-d0e3-4b79-aa5e-b18f5cedc93a",
-    "created_at": "2026-06-24T20:29:43.146Z",
-    "event_type": "ask-vraj",
-    "severity": "success",
-    "message": "Processed Ask Vraj AI query: \"Who is Vraj?...\"",
-    "metadata": {
-      "promptLength": 12,
-      "sessionId": "5561f791-b596-41f8-8168-68ecbb3f1750"
-    },
-    "is_public": true
-  },
-  {
-    "id": "4c445202-2f60-44be-a8b2-87293cec272e",
-    "created_at": "2026-06-24T20:29:43.188Z",
-    "event_type": "contact",
-    "severity": "warning",
-    "message": "Contact form input validation failed.",
-    "metadata": {
-      "errors": {
-        "message": [
-          "Message must be at least 10 characters."
-        ]
-      }
-    },
-    "is_public": true
-  },
-  {
-    "id": "ee8091d2-96e0-4bc0-8f9d-920de0e3e697",
-    "created_at": "2026-06-24T20:29:43.194Z",
-    "event_type": "contact",
-    "severity": "success",
-    "message": "Contact inquiry cataloged successfully: \"Full-stack Position...\"",
-    "metadata": {
-      "subjectPreview": "Full-stack Position"
-    },
-    "is_public": true
-  },
-  {
-    "id": "37ed4b84-d6b0-48f6-97ba-ac93efa541ea",
-    "created_at": "2026-06-24T20:44:26.761Z",
-    "event_type": "ask-vraj",
-    "severity": "warning",
-    "message": "AI Assistant input validation failed.",
-    "metadata": {
-      "errors": {
-        "prompt": [
-          "Prompt is required."
-        ]
-      }
-    },
-    "is_public": true
-  },
-  {
-    "id": "9d8abebc-1ace-4e95-89de-805711beff0c",
-    "created_at": "2026-06-24T20:44:26.769Z",
-    "event_type": "ask-vraj",
-    "severity": "success",
-    "message": "Processed Ask Vraj AI query: \"Who is Vraj?...\"",
-    "metadata": {
-      "promptLength": 12,
-      "sessionId": "ea3f83ff-411c-4022-bae4-8207a37b2ee0"
-    },
-    "is_public": true
-  },
-  {
-    "id": "18d718b7-6244-407c-ba82-6bc0946852d5",
-    "created_at": "2026-06-24T20:44:26.840Z",
-    "event_type": "contact",
-    "severity": "warning",
-    "message": "Contact form input validation failed.",
-    "metadata": {
-      "errors": {
-        "message": [
-          "Message must be at least 10 characters."
-        ]
-      }
-    },
-    "is_public": true
-  },
-  {
-    "id": "66dd1b2a-5ffb-4141-b413-115c197edc46",
-    "created_at": "2026-06-24T20:44:26.848Z",
-    "event_type": "contact",
-    "severity": "success",
-    "message": "Contact inquiry cataloged successfully: \"Full-stack Position...\"",
-    "metadata": {
-      "subjectPreview": "Full-stack Position"
-    },
-    "is_public": true
-  },
-  {
-    "id": "5de89320-9614-42c3-9fe0-e59af909e4a2",
-    "created_at": "2026-06-24T20:45:48.798Z",
-    "event_type": "ask-vraj",
-    "severity": "warning",
-    "message": "AI Assistant input validation failed.",
-    "metadata": {
-      "errors": {
-        "prompt": [
-          "Prompt is required."
-        ]
-      }
-    },
-    "is_public": true
-  },
-  {
-    "id": "481f5a6a-63a3-4a8a-9b3e-7a67802c8911",
-    "created_at": "2026-06-24T20:45:48.804Z",
-    "event_type": "ask-vraj",
-    "severity": "success",
-    "message": "Processed Ask Vraj AI query: \"Who is Vraj?...\"",
-    "metadata": {
-      "promptLength": 12,
-      "sessionId": "c5441953-dfe6-4884-a937-5cbdddfecbdf"
-    },
-    "is_public": true
-  },
-  {
     "id": "c9145ba6-c52b-4976-91b8-32590385c23d",
     "created_at": "2026-06-24T20:45:48.837Z",
     "event_type": "contact",
@@ -2629,6 +2287,368 @@
   {
     "id": "f84b9946-485d-4f56-b9c2-d553808babf6",
     "created_at": "2026-06-26T09:07:46.808Z",
+    "event_type": "ask-vraj",
+    "severity": "warning",
+    "message": "AI Assistant input validation failed.",
+    "metadata": {
+      "errors": {
+        "prompt": [
+          "Prompt is too long. Max 500 characters."
+        ]
+      }
+    },
+    "is_public": true
+  },
+  {
+    "id": "d4ec058d-cfff-4ba8-8d5e-3387e3ae2029",
+    "created_at": "2026-06-26T09:49:58.453Z",
+    "event_type": "contact",
+    "severity": "warning",
+    "message": "Contact form input validation failed.",
+    "metadata": {
+      "errors": {
+        "message": [
+          "Message must be at least 10 characters."
+        ]
+      }
+    },
+    "is_public": true
+  },
+  {
+    "id": "2cc55d2e-f276-4041-8699-1f177bdcb23e",
+    "created_at": "2026-06-26T09:49:58.468Z",
+    "event_type": "contact",
+    "severity": "success",
+    "message": "Contact inquiry cataloged successfully: \"Full-stack Position...\"",
+    "metadata": {
+      "subjectPreview": "Full-stack Position"
+    },
+    "is_public": true
+  },
+  {
+    "id": "52c94a29-0d1b-4a4d-92de-e22b1480ba52",
+    "created_at": "2026-06-26T09:49:58.711Z",
+    "event_type": "ask-vraj",
+    "severity": "warning",
+    "message": "AI Assistant input validation failed.",
+    "metadata": {
+      "errors": {
+        "prompt": [
+          "Prompt is required."
+        ]
+      }
+    },
+    "is_public": true
+  },
+  {
+    "id": "784ea278-e1d4-49ff-a453-474bfe573fb7",
+    "created_at": "2026-06-26T09:49:58.723Z",
+    "event_type": "ask-vraj",
+    "severity": "warning",
+    "message": "AI Assistant input validation failed.",
+    "metadata": {
+      "errors": {
+        "prompt": [
+          "Prompt is too long. Max 500 characters."
+        ]
+      }
+    },
+    "is_public": true
+  },
+  {
+    "id": "3be3e237-f79a-4037-9d3f-970a1e3e904f",
+    "created_at": "2026-06-26T09:59:23.852Z",
+    "event_type": "contact",
+    "severity": "warning",
+    "message": "Contact form input validation failed.",
+    "metadata": {
+      "errors": {
+        "message": [
+          "Message must be at least 10 characters."
+        ]
+      }
+    },
+    "is_public": true
+  },
+  {
+    "id": "c420d872-8503-4b18-9268-4d35e6f4ebae",
+    "created_at": "2026-06-26T09:59:23.863Z",
+    "event_type": "contact",
+    "severity": "success",
+    "message": "Contact inquiry cataloged successfully: \"Full-stack Position...\"",
+    "metadata": {
+      "subjectPreview": "Full-stack Position"
+    },
+    "is_public": true
+  },
+  {
+    "id": "1bd3679e-dc82-46ba-aeac-ffd7af9fe647",
+    "created_at": "2026-06-26T09:59:24.032Z",
+    "event_type": "ask-vraj",
+    "severity": "warning",
+    "message": "AI Assistant input validation failed.",
+    "metadata": {
+      "errors": {
+        "prompt": [
+          "Prompt is required."
+        ]
+      }
+    },
+    "is_public": true
+  },
+  {
+    "id": "f9f83022-e415-4e77-8817-ca0fee5c9574",
+    "created_at": "2026-06-26T09:59:24.044Z",
+    "event_type": "ask-vraj",
+    "severity": "warning",
+    "message": "AI Assistant input validation failed.",
+    "metadata": {
+      "errors": {
+        "prompt": [
+          "Prompt is too long. Max 500 characters."
+        ]
+      }
+    },
+    "is_public": true
+  },
+  {
+    "id": "b025f967-bd23-47de-927a-5a59445d2257",
+    "created_at": "2026-06-26T10:03:39.736Z",
+    "event_type": "contact",
+    "severity": "warning",
+    "message": "Contact form input validation failed.",
+    "metadata": {
+      "errors": {
+        "message": [
+          "Message must be at least 10 characters."
+        ]
+      }
+    },
+    "is_public": true
+  },
+  {
+    "id": "e7cb89e1-7ccc-4646-a5fa-082a7b401800",
+    "created_at": "2026-06-26T10:03:39.800Z",
+    "event_type": "contact",
+    "severity": "success",
+    "message": "Contact inquiry cataloged successfully: \"Full-stack Position...\"",
+    "metadata": {
+      "subjectPreview": "Full-stack Position"
+    },
+    "is_public": true
+  },
+  {
+    "id": "df20da75-14ad-4e95-862d-4bf946fcd0d0",
+    "created_at": "2026-06-26T10:03:40.191Z",
+    "event_type": "ask-vraj",
+    "severity": "warning",
+    "message": "AI Assistant input validation failed.",
+    "metadata": {
+      "errors": {
+        "prompt": [
+          "Prompt is required."
+        ]
+      }
+    },
+    "is_public": true
+  },
+  {
+    "id": "be239b9b-5b6a-411d-8961-695b3230ffe9",
+    "created_at": "2026-06-26T10:03:40.227Z",
+    "event_type": "ask-vraj",
+    "severity": "warning",
+    "message": "AI Assistant input validation failed.",
+    "metadata": {
+      "errors": {
+        "prompt": [
+          "Prompt is too long. Max 500 characters."
+        ]
+      }
+    },
+    "is_public": true
+  },
+  {
+    "id": "816eea3b-bcd6-449f-9145-d26634d7a97e",
+    "created_at": "2026-06-26T10:06:47.429Z",
+    "event_type": "contact",
+    "severity": "warning",
+    "message": "Contact form input validation failed.",
+    "metadata": {
+      "errors": {
+        "message": [
+          "Message must be at least 10 characters."
+        ]
+      }
+    },
+    "is_public": true
+  },
+  {
+    "id": "e456b7f6-2612-4077-9769-77d97feed928",
+    "created_at": "2026-06-26T10:06:47.473Z",
+    "event_type": "contact",
+    "severity": "success",
+    "message": "Contact inquiry cataloged successfully: \"Full-stack Position...\"",
+    "metadata": {
+      "subjectPreview": "Full-stack Position"
+    },
+    "is_public": true
+  },
+  {
+    "id": "ead3a93f-3e6c-4068-90bd-bad9e1a02910",
+    "created_at": "2026-06-26T10:06:47.719Z",
+    "event_type": "ask-vraj",
+    "severity": "warning",
+    "message": "AI Assistant input validation failed.",
+    "metadata": {
+      "errors": {
+        "prompt": [
+          "Prompt is required."
+        ]
+      }
+    },
+    "is_public": true
+  },
+  {
+    "id": "75b9017b-ea25-4746-9966-5fc89de8b5ce",
+    "created_at": "2026-06-26T10:06:47.732Z",
+    "event_type": "ask-vraj",
+    "severity": "warning",
+    "message": "AI Assistant input validation failed.",
+    "metadata": {
+      "errors": {
+        "prompt": [
+          "Prompt is too long. Max 500 characters."
+        ]
+      }
+    },
+    "is_public": true
+  },
+  {
+    "id": "d2b71fb6-5d98-41f2-b492-7bb1c65bb8b6",
+    "created_at": "2026-06-26T10:44:19.116Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /ask-vraj",
+    "metadata": {
+      "path": "/ask-vraj",
+      "referrer": "",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "b6bcbb44-1646-435d-ae23-2f534ec457de",
+    "created_at": "2026-06-26T10:44:25.786Z",
+    "event_type": "portfolio",
+    "severity": "info",
+    "message": "Page visit recorded: /",
+    "metadata": {
+      "path": "/",
+      "referrer": "http://localhost:3000/",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Sa"
+    },
+    "is_public": true
+  },
+  {
+    "id": "505eb762-64c4-4241-a4ba-ef4510dae256",
+    "created_at": "2026-06-26T11:50:22.339Z",
+    "event_type": "contact",
+    "severity": "warning",
+    "message": "Contact form input validation failed.",
+    "metadata": {
+      "errors": {
+        "message": [
+          "Message must be at least 10 characters."
+        ]
+      }
+    },
+    "is_public": true
+  },
+  {
+    "id": "b395e37a-8b20-4867-8c6a-fdb2df3478c0",
+    "created_at": "2026-06-26T11:50:22.350Z",
+    "event_type": "contact",
+    "severity": "success",
+    "message": "Contact inquiry cataloged successfully: \"Full-stack Position...\"",
+    "metadata": {
+      "subjectPreview": "Full-stack Position"
+    },
+    "is_public": true
+  },
+  {
+    "id": "37796914-0deb-485f-a427-c282a45b03eb",
+    "created_at": "2026-06-26T11:50:22.497Z",
+    "event_type": "ask-vraj",
+    "severity": "warning",
+    "message": "AI Assistant input validation failed.",
+    "metadata": {
+      "errors": {
+        "prompt": [
+          "Prompt is required."
+        ]
+      }
+    },
+    "is_public": true
+  },
+  {
+    "id": "72196378-2b69-4a3e-9b9d-ddd3d0706ccc",
+    "created_at": "2026-06-26T11:50:22.505Z",
+    "event_type": "ask-vraj",
+    "severity": "warning",
+    "message": "AI Assistant input validation failed.",
+    "metadata": {
+      "errors": {
+        "prompt": [
+          "Prompt is too long. Max 500 characters."
+        ]
+      }
+    },
+    "is_public": true
+  },
+  {
+    "id": "c54caa14-ee81-4605-8621-57180a8383ec",
+    "created_at": "2026-06-26T12:20:14.110Z",
+    "event_type": "contact",
+    "severity": "warning",
+    "message": "Contact form input validation failed.",
+    "metadata": {
+      "errors": {
+        "message": [
+          "Message must be at least 10 characters."
+        ]
+      }
+    },
+    "is_public": true
+  },
+  {
+    "id": "d66a48c7-ad01-4796-8dfe-da80e4b52480",
+    "created_at": "2026-06-26T12:20:14.209Z",
+    "event_type": "contact",
+    "severity": "success",
+    "message": "Contact inquiry cataloged successfully: \"Full-stack Position...\"",
+    "metadata": {
+      "subjectPreview": "Full-stack Position"
+    },
+    "is_public": true
+  },
+  {
+    "id": "009700ea-e9ad-4b2a-b246-f974b96c2886",
+    "created_at": "2026-06-26T12:20:15.479Z",
+    "event_type": "ask-vraj",
+    "severity": "warning",
+    "message": "AI Assistant input validation failed.",
+    "metadata": {
+      "errors": {
+        "prompt": [
+          "Prompt is required."
+        ]
+      }
+    },
+    "is_public": true
+  },
+  {
+    "id": "f382eb39-8f4f-4ed5-8ca5-b09bfdefa50b",
+    "created_at": "2026-06-26T12:20:15.593Z",
     "event_type": "ask-vraj",
     "severity": "warning",
     "message": "AI Assistant input validation failed.",

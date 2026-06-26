@@ -1,11 +1,35 @@
 'use client';
 
 import React from 'react';
-import { motion, Variants } from 'framer-motion';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { BookOpen, Calendar, Briefcase, GraduationCap, ChevronRight, Award, Server, Database, Layout } from 'lucide-react';
+import { PageTitleReveal, SectionStagger, SectionItem } from '@/components/motion/page-transition';
+import { BookOpen, Calendar, Briefcase, GraduationCap, ChevronRight, Award, Server, Layout, Database } from 'lucide-react';
+import dynamic from 'next/dynamic';
 import skillsData from '@/db/skills.json';
+
+const TechStackGraph = dynamic(() => import('@/components/ui/tech-stack-graph'), {
+  ssr: false,
+  loading: () => <div className="w-full min-h-[480px] bg-[#07070a] border border-white/5 rounded-2xl animate-pulse" />
+});
+
+interface SkillGroup {
+  category: string;
+  items: string[];
+}
+
+const categoryIcons: Record<string, React.ReactNode> = {
+  'Languages': <Server className="h-4 w-4 text-foreground" />,
+  'Frontend Development': <Layout className="h-4 w-4 text-foreground" />,
+  'Backend & APIs': <Database className="h-4 w-4 text-foreground" />,
+  'Databases & Systems': <Server className="h-4 w-4 text-foreground" />,
+};
+
+const skills = (skillsData as SkillGroup[]).map((s) => ({
+  category: s.category,
+  icon: categoryIcons[s.category] || <Server className="h-4 w-4 text-foreground" />,
+  items: s.items,
+}));
 
 interface ExperienceItem {
   period: string;
@@ -39,60 +63,26 @@ const timeline: ExperienceItem[] = [
   },
 ];
 
-interface SkillGroup {
-  category: string;
-  items: string[];
-}
 
-const categoryIcons: Record<string, React.ReactNode> = {
-  'Languages': <Server className="h-4 w-4 text-foreground" />,
-  'Frontend Development': <Layout className="h-4 w-4 text-foreground" />,
-  'Backend & APIs': <Database className="h-4 w-4 text-foreground" />,
-  'Databases & Systems': <Server className="h-4 w-4 text-foreground" />,
-};
-
-const skills = (skillsData as SkillGroup[]).map((s) => ({
-  category: s.category,
-  icon: categoryIcons[s.category] || <Server className="h-4 w-4 text-foreground" />,
-  items: s.items,
-}));
 
 export default function About() {
-  const containerVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.1, delayChildren: 0.1 }
-    }
-  };
-
-  const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 15 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.4 } }
-  };
-
   return (
-    <motion.div
-      variants={containerVariants}
-      initial="hidden"
-      animate="visible"
-      className="flex flex-col gap-12 max-w-5xl mx-auto py-6 md:py-10"
-    >
+    <SectionStagger className="flex flex-col gap-12 max-w-5xl mx-auto py-6 md:py-10">
       {/* Intro Header */}
-      <motion.div variants={itemVariants} className="flex flex-col gap-3">
+      <SectionItem className="flex flex-col gap-3">
         <span className="text-xs font-bold uppercase tracking-widest text-secondary font-mono">Identity & Background</span>
-        <h1 className="text-3xl md:text-4xl font-serif text-foreground tracking-tight font-medium">
+        <PageTitleReveal className="text-3xl md:text-4xl font-serif text-foreground tracking-tight font-medium">
           About Vraj Patel
-        </h1>
+        </PageTitleReveal>
         <p className="text-sm md:text-base text-secondary leading-relaxed max-w-3xl mt-1 font-medium">
           I am Vraj Patel, a 4th year Computer Science and Engineering student at Nirma University. 
           I focus on building functional business products—like custom ERP pipelines and quantitative visualizers—rather than toy projects. I enjoy bridging the gap between database designs and slick, interactive client interfaces.
         </p>
-      </motion.div>
+      </SectionItem>
 
       {/* Grid: Academic profile card & values */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <motion.div variants={itemVariants} className="md:col-span-1">
+        <SectionItem className="md:col-span-1">
           <Card className="h-full p-6 flex flex-col gap-4">
             <div className="h-12 w-12 rounded-xl bg-foreground/5 border border-card-border flex items-center justify-center">
               <GraduationCap className="h-6 w-6 text-foreground" />
@@ -115,9 +105,9 @@ export default function About() {
               </span>
             </div>
           </Card>
-        </motion.div>
+        </SectionItem>
 
-        <motion.div variants={itemVariants} className="md:col-span-2">
+        <SectionItem className="md:col-span-2">
           <Card className="h-full p-6 flex flex-col justify-between gap-6">
             <div className="flex flex-col gap-3">
               <div className="h-10 w-10 rounded-xl bg-foreground/5 border border-card-border flex items-center justify-center">
@@ -140,35 +130,47 @@ export default function About() {
               </ul>
             </div>
           </Card>
-        </motion.div>
+        </SectionItem>
       </div>
 
       {/* Technical Skill Matrix */}
-      <motion.div variants={itemVariants} className="flex flex-col gap-6">
+      <SectionItem className="flex flex-col gap-6">
         <h2 className="text-xl font-serif font-medium text-foreground tracking-tight flex items-center gap-2">
           <Server className="h-5 w-5 text-foreground" /> The Technical Skill Matrix
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {skills.map((category) => (
-            <Card key={category.category} className="p-5 flex flex-col gap-4 hover:border-foreground/15 transition-colors">
-              <div className="flex items-center gap-2 border-b border-card-border pb-3">
-                {category.icon}
-                <span className="text-xs font-bold text-foreground uppercase tracking-wider font-mono">{category.category}</span>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch w-full max-w-5xl mx-auto">
+          {/* Left Column: Interactive network graph */}
+          <div className="lg:col-span-6 flex flex-col justify-center">
+            <TechStackGraph />
+          </div>
+
+          {/* Right Column: Badged list */}
+          <div className="lg:col-span-6 flex flex-col gap-5 justify-center">
+            {skills.map((category) => (
+              <div key={category.category} className="flex flex-col gap-2.5">
+                <div className="flex items-center gap-3">
+                  <span className="h-1.5 w-1.5 rounded-full bg-foreground" />
+                  <div className="flex items-center gap-2 text-secondary">
+                    {category.icon}
+                    <span className="text-[10px] font-bold uppercase tracking-widest font-mono">{category.category}</span>
+                  </div>
+                  <div className="flex-1 h-px bg-card-border" />
+                </div>
+                <div className="flex flex-wrap gap-1.5 pl-6">
+                  {category.items.map((item) => (
+                    <Badge key={item} variant="outline" className="badge-hover text-xs py-1 px-2.5 cursor-default select-none border-white/5 bg-white/2 text-white/90">
+                      {item}
+                    </Badge>
+                  ))}
+                </div>
               </div>
-              <div className="flex flex-wrap gap-1.5">
-                {category.items.map((skill) => (
-                  <Badge key={skill} variant="outline" className="text-[10px] py-1">
-                    {skill}
-                  </Badge>
-                ))}
-              </div>
-            </Card>
-          ))}
+            ))}
+          </div>
         </div>
-      </motion.div>
+      </SectionItem>
 
       {/* Experience Timeline */}
-      <motion.div variants={itemVariants} className="flex flex-col gap-6">
+      <SectionItem className="flex flex-col gap-6">
         <h2 className="text-xl font-serif font-medium text-foreground tracking-tight flex items-center gap-2">
           <Briefcase className="h-5 w-5 text-foreground" /> Engineering Timeline
         </h2>
@@ -202,7 +204,7 @@ export default function About() {
             </div>
           ))}
         </div>
-      </motion.div>
-    </motion.div>
+      </SectionItem>
+    </SectionStagger>
   );
 }

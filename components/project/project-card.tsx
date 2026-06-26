@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { ArrowRight, ExternalLink, Github } from 'lucide-react';
@@ -9,6 +9,7 @@ import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { useTheme } from '../theme-provider';
 import { getCategoryLabel } from '@/lib/formatters/labels';
+import { useReducedMotionSafe } from '@/lib/motion/use-reduced-motion-safe';
 
 interface ProjectCardProps {
   project: Project;
@@ -24,8 +25,19 @@ export default function ProjectCard({ project }: ProjectCardProps) {
   const [imgSrc, setImgSrc] = useState(project.image || '');
   const { theme } = useTheme();
 
+  const shouldReduce = useReducedMotionSafe();
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setIsTouchDevice('ontouchstart' in window || navigator.maxTouchPoints > 0);
+    }
+  }, []);
+
   // Dynamic 3D rotation math based on hover coordinates
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (shouldReduce || isTouchDevice) return;
+
     const card = cardRef.current;
     if (!card) return;
 
@@ -61,17 +73,28 @@ export default function ProjectCard({ project }: ProjectCardProps) {
     router.push(`/projects/${project.slug}`);
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      handleCardClick();
+    }
+  };
+
   return (
     <div
       ref={cardRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       onClick={handleCardClick}
+      onKeyDown={handleKeyDown}
+      tabIndex={0}
+      role="button"
+      aria-label={`View case study for ${project.title}`}
       style={{
-        transform: `perspective(1000px) rotateX(${rotX}deg) rotateY(${rotY}deg)`,
+        transform: shouldReduce ? 'none' : `perspective(1000px) rotateX(${rotX}deg) rotateY(${rotY}deg)`,
         transition: 'transform 0.12s cubic-bezier(0.25, 1, 0.5, 1)',
       }}
-      className="h-full cursor-pointer group select-none"
+      className="h-full cursor-pointer group select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 rounded-xl"
     >
       <Card className="h-full flex flex-col justify-between hover:border-foreground/25 group transition-all duration-300 relative overflow-hidden">
         {/* Dynamic glass refraction gloss overlay */}
@@ -84,6 +107,26 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           className="absolute inset-0 pointer-events-none transition-all duration-300 z-20"
         />
 
+        {/* Dynamic border spotlight */}
+        <div
+          style={{
+            background: `radial-gradient(180px circle at ${glowX}% ${glowY}%, rgba(255, 255, 255, 0.08), transparent 80%)`,
+            padding: "1px",
+            WebkitMask: "linear-gradient(#fff 0 0) content-box exclude, linear-gradient(#fff 0 0)",
+            mask: "linear-gradient(#fff 0 0) content-box exclude, linear-gradient(#fff 0 0)",
+          }}
+          className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl z-20 -m-[1px]"
+        />
+
+        {/* Subtle shifting grid */}
+        <div
+          style={{
+            transform: shouldReduce ? 'none' : `translate3d(${rotY * 0.4}px, ${-rotX * 0.4}px, 0)`,
+            transition: 'transform 0.1s ease-out',
+          }}
+          className="absolute inset-0 pointer-events-none opacity-[0.015] bg-[linear-gradient(to_right,rgba(255,255,255,0.08)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.08)_1px,transparent_1px)] bg-[size:20px_20px] z-0"
+        />
+
         <div className="flex flex-col gap-4 relative z-10">
           {/* Featured Image */}
           {project.image && (
@@ -93,7 +136,10 @@ export default function ProjectCard({ project }: ProjectCardProps) {
                 alt={project.title}
                 fill
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                className="object-cover transition-transform duration-100 ease-out"
+                style={{
+                  transform: shouldReduce ? 'none' : `scale(1.08) translate3d(${rotY * 0.6}px, ${-rotX * 0.6}px, 0)`,
+                }}
                 onError={() => {
                   setImgSrc('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="50" viewBox="0 0 100 50" style="background:%23000;"><text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" fill="%23333" font-family="sans-serif" font-size="10">Vraj Patel Portfolio</text></svg>');
                 }}
@@ -149,7 +195,13 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         {/* Footer: Tech List and Link Indicator */}
         <div className="mt-5 pt-4 border-t border-card-border flex flex-col gap-3.5 relative z-10">
           {/* Tech list */}
-          <div className="flex flex-wrap gap-1.5">
+          <div 
+            style={{
+              transform: shouldReduce ? 'none' : `translate3d(${rotY * 0.2}px, ${-rotX * 0.2}px, 0)`,
+              transition: 'transform 0.1s ease-out',
+            }}
+            className="flex flex-wrap gap-1.5"
+          >
             {project.technologies.slice(0, 4).map((tech) => (
               <span
                 key={tech}

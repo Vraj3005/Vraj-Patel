@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Printer, Mail, Phone, MapPin } from 'lucide-react';
 import { supabase, isSupabaseConfigured } from '@/lib/supabase/client';
 import { EventBus } from '@/lib/events/event-bus';
+import { PageTitleReveal } from '@/components/motion/page-transition';
 
 export default function Resume() {
   const [copyStatus, setCopyStatus] = useState<string | null>(null);
@@ -52,7 +53,7 @@ export default function Resume() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-card-border pb-6 no-print shrink-0">
         <div className="flex flex-col gap-1">
           <span className="text-xs font-bold uppercase tracking-widest text-secondary font-mono">Academic & Career Record</span>
-          <h1 className="text-xl md:text-2xl font-medium font-serif text-foreground tracking-tight">Vraj Patel Resume</h1>
+          <PageTitleReveal className="text-xl md:text-2xl font-medium font-serif text-foreground tracking-tight">Vraj Patel Resume</PageTitleReveal>
         </div>
         <Button
           onClick={handlePrint}

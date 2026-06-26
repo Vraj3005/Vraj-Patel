@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import { ArrowRight, ExternalLink, Github, ShieldCheck, Zap } from 'lucide-react';
 import { Project } from '@/types';
@@ -8,6 +8,7 @@ import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { getCategoryLabel } from '@/lib/formatters/labels';
+import { useReducedMotionSafe } from '@/lib/motion/use-reduced-motion-safe';
 
 interface ProjectCaseCardProps {
   project: Project;
@@ -20,8 +21,19 @@ export default function ProjectCaseCard({ project }: ProjectCaseCardProps) {
   const [glowX, setGlowX] = useState(50);
   const [glowY, setGlowY] = useState(50);
 
+  const shouldReduce = useReducedMotionSafe();
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setIsTouchDevice('ontouchstart' in window || navigator.maxTouchPoints > 0);
+    }
+  }, []);
+
   // Dynamic 3D rotation math based on hover coordinates
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (shouldReduce || isTouchDevice) return;
+
     const card = cardRef.current;
     if (!card) return;
 
@@ -57,7 +69,7 @@ export default function ProjectCaseCard({ project }: ProjectCaseCardProps) {
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       style={{
-        transform: `perspective(1200px) rotateX(${rotX}deg) rotateY(${rotY}deg)`,
+        transform: shouldReduce ? 'none' : `perspective(1200px) rotateX(${rotX}deg) rotateY(${rotY}deg)`,
         transition: 'transform 0.15s cubic-bezier(0.25, 1, 0.5, 1)',
       }}
       className="w-full relative group select-none"
@@ -69,6 +81,26 @@ export default function ProjectCaseCard({ project }: ProjectCaseCardProps) {
             background: `radial-gradient(circle at ${glowX}% ${glowY}%, rgba(255, 255, 255, 0.03) 0%, transparent 60%)`,
           }}
           className="absolute inset-0 pointer-events-none transition-all duration-300"
+        />
+
+        {/* Dynamic border spotlight */}
+        <div
+          style={{
+            background: `radial-gradient(220px circle at ${glowX}% ${glowY}%, rgba(255, 255, 255, 0.08), transparent 80%)`,
+            padding: "1px",
+            WebkitMask: "linear-gradient(#fff 0 0) content-box exclude, linear-gradient(#fff 0 0)",
+            mask: "linear-gradient(#fff 0 0) content-box exclude, linear-gradient(#fff 0 0)",
+          }}
+          className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl z-20 -m-[1px]"
+        />
+
+        {/* Subtle shifting grid */}
+        <div
+          style={{
+            transform: shouldReduce ? 'none' : `translate3d(${rotY * 0.4}px, ${-rotX * 0.4}px, 0)`,
+            transition: 'transform 0.1s ease-out',
+          }}
+          className="absolute inset-0 pointer-events-none opacity-[0.015] bg-[linear-gradient(to_right,rgba(255,255,255,0.08)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.08)_1px,transparent_1px)] bg-[size:20px_20px] z-0"
         />
 
         {/* Card Header: Title & Meta */}
@@ -134,7 +166,13 @@ export default function ProjectCaseCard({ project }: ProjectCaseCardProps) {
         {/* Footer actions: tech stack and click triggers */}
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mt-2 relative z-10">
           {/* Tech Tag Pills */}
-          <div className="flex flex-wrap gap-1.5">
+          <div 
+            style={{
+              transform: shouldReduce ? 'none' : `translate3d(${rotY * 0.25}px, ${-rotX * 0.25}px, 0)`,
+              transition: 'transform 0.1s ease-out',
+            }}
+            className="flex flex-wrap gap-1.5"
+          >
             {project.technologies.slice(0, 4).map((tech) => (
               <span key={tech} className="text-[9px] font-semibold text-gray-400 bg-white/5 border border-white/8 px-2 py-0.5 rounded-full">
                 {tech}

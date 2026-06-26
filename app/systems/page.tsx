@@ -5,6 +5,9 @@ import dynamic from 'next/dynamic';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Network, Server, Cpu, Layers, Activity, Shield, GitCommit } from 'lucide-react';
 import { Card } from '@/components/ui/card';
+import { PageTitleReveal } from '@/components/motion/page-transition';
+import { SystemBlueprintBackground } from '@/components/visual/system-blueprint-background';
+import SystemHealthHud from '@/components/dashboard/system-health-hud';
 
 // Dynamically lazy-loaded heavy visualizers
 const SystemVisualizer = dynamic(() => import('@/components/visualizers/system-visualizer'), {
@@ -27,6 +30,11 @@ const DeveloperConsole = dynamic(() => import('@/components/console/developer-co
   loading: () => <div className="py-20 text-center text-xs font-mono text-secondary">Initializing Developer telemetry logs...</div>
 });
 
+const ScrollArchitectureStory = dynamic(() => import('@/components/systems/scroll-architecture-story'), {
+  ssr: false,
+  loading: () => <div className="py-20 text-center text-xs font-mono text-secondary">Initializing architecture story...</div>
+});
+
 export default function SystemsPlayground() {
   const [activeTab, setActiveTab] = useState<'architecture' | 'security' | 'lifecycle' | 'telemetry'>('architecture');
 
@@ -34,20 +42,26 @@ export default function SystemsPlayground() {
     <div className="flex flex-col gap-8 py-6 md:py-10 max-w-5xl mx-auto w-full px-4 sm:px-6 font-sans">
       
       {/* Header */}
-      <div className="flex flex-col gap-3 border-b border-card-border pb-6 shrink-0 select-none">
-        <span className="text-xs font-bold uppercase tracking-widest text-secondary flex items-center gap-1.5 font-mono">
-          <Network className="h-4 w-4 text-foreground" /> Systems Exploration Desk
-        </span>
-        <h1 className="text-3xl md:text-4xl font-medium font-serif text-foreground tracking-tight">
-          System Control Center
-        </h1>
-        <p className="text-xs md:text-sm text-secondary leading-relaxed max-w-2xl font-medium">
-          Inspect Vraj Patel&apos;s architectural frameworks, interactive security layers, and real-time backend operations from a unified console.
-        </p>
+      <div className="flex flex-col gap-3 border-b border-card-border pb-6 shrink-0 select-none relative overflow-hidden rounded-xl bg-foreground/[0.01] p-4">
+        <SystemBlueprintBackground variant="systems" density="medium" className="opacity-[0.04] z-0" />
+        <div className="relative z-10 flex flex-col gap-3">
+          <span className="text-xs font-bold uppercase tracking-widest text-secondary flex items-center gap-1.5 font-mono">
+            <Network className="h-4 w-4 text-foreground" /> Systems Exploration Desk
+          </span>
+          <PageTitleReveal className="text-3xl md:text-4xl font-medium font-serif text-foreground tracking-tight">
+            System Control Center
+          </PageTitleReveal>
+          <p className="text-xs md:text-sm text-secondary leading-relaxed max-w-2xl font-medium">
+            Inspect Vraj Patel&apos;s architectural frameworks, interactive security layers, and real-time backend operations from a unified console.
+          </p>
+        </div>
       </div>
 
+      {/* Public System Health HUD */}
+      <SystemHealthHud />
+
       {/* Control Tabs switcher */}
-      <div className="flex flex-wrap gap-1.5 p-1 bg-white/[0.01] border border-white/5 rounded-xl select-none max-w-md relative z-20">
+      <div className="flex flex-wrap gap-1.5 p-1 bg-white/[0.01] border border-white/5 rounded-xl select-none max-w-3xl w-full relative z-20">
         <button
           onClick={() => setActiveTab('architecture')}
           className={`flex-1 px-3 py-2 text-xs font-mono rounded-lg border transition-all duration-305 flex items-center justify-center gap-1.5 ${
@@ -186,6 +200,11 @@ export default function SystemsPlayground() {
             Tuning client events writes logs to the Telemetry tab in real time. Submit a contact form or query Ask Vraj to watch the pipeline fire.
           </p>
         </Card>
+      </div>
+
+      {/* Scroll-Driven Architecture Story Section */}
+      <div className="mt-12 pt-10 border-t border-card-border">
+        <ScrollArchitectureStory />
       </div>
     </div>
   );

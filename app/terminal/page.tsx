@@ -4,6 +4,7 @@ import React from 'react';
 import CLITerminal from '@/components/console/cli-terminal';
 import { Card } from '@/components/ui/card';
 import { Terminal, Command } from 'lucide-react';
+import { PageTitleReveal } from '@/components/motion/page-transition';
 
 export default function TerminalPage() {
   return (
@@ -13,9 +14,9 @@ export default function TerminalPage() {
         <span className="text-xs font-bold uppercase tracking-widest text-secondary flex items-center gap-1.5 font-mono">
           <Terminal className="h-4 w-4 text-cyan-400" /> System Command Center
         </span>
-        <h1 className="text-3xl md:text-4xl font-medium font-serif text-foreground tracking-tight">
+        <PageTitleReveal className="text-3xl md:text-4xl font-medium font-serif text-foreground tracking-tight">
           Interactive CLI Terminal
-        </h1>
+        </PageTitleReveal>
         <p className="text-xs md:text-sm text-secondary leading-relaxed max-w-2xl font-medium">
           A fully interactive command-driven terminal shell to probe system architectures, verify security layers, execute transaction flow traces, and chat with Ask Vraj AI.
         </p>

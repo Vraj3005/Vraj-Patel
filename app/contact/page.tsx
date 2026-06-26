@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Send, Mail, CheckCircle, AlertCircle, Phone, Globe } from 'lucide-react';
+import { PageTitleReveal } from '@/components/motion/page-transition';
 
 // Contact form schemas using Zod validation
 const contactSchema = z.object({
@@ -72,9 +73,9 @@ export default function Contact() {
         <span className="text-xs font-bold uppercase tracking-widest text-secondary flex items-center gap-1.5 font-mono">
           <Mail className="h-4 w-4 text-foreground" /> Secure Communications
         </span>
-        <h1 className="text-3xl md:text-4xl font-medium font-serif text-foreground tracking-tight">
+        <PageTitleReveal className="text-3xl md:text-4xl font-medium font-serif text-foreground tracking-tight">
           Contact Vraj Patel
-        </h1>
+        </PageTitleReveal>
         <p className="text-xs md:text-sm text-secondary leading-relaxed max-w-2xl font-medium">
           Recruiters, clients, and technical teams can use this secure portal to dispatch business opportunities, questions, or project inquiries directly to Vraj.
         </p>
