@@ -2525,5 +2525,61 @@
       }
     },
     "is_public": true
+  },
+  {
+    "id": "446ed1d5-3ce0-424c-8e5a-249e0188ceed",
+    "created_at": "2026-06-26T08:34:09.928Z",
+    "event_type": "contact",
+    "severity": "warning",
+    "message": "Contact form input validation failed.",
+    "metadata": {
+      "errors": {
+        "message": [
+          "Message must be at least 10 characters."
+        ]
+      }
+    },
+    "is_public": true
+  },
+  {
+    "id": "cb477bb8-532a-4309-a759-7286c0ad2816",
+    "created_at": "2026-06-26T08:34:09.987Z",
+    "event_type": "contact",
+    "severity": "success",
+    "message": "Contact inquiry cataloged successfully: \"Full-stack Position...\"",
+    "metadata": {
+      "subjectPreview": "Full-stack Position"
+    },
+    "is_public": true
+  },
+  {
+    "id": "0d88cf87-f066-4c59-adfe-63d5a44a7f8a",
+    "created_at": "2026-06-26T08:34:10.428Z",
+    "event_type": "ask-vraj",
+    "severity": "warning",
+    "message": "AI Assistant input validation failed.",
+    "metadata": {
+      "errors": {
+        "prompt": [
+          "Prompt is required."
+        ]
+      }
+    },
+    "is_public": true
+  },
+  {
+    "id": "56a8ce1b-e30f-4a53-b4b7-2569be82ca04",
+    "created_at": "2026-06-26T08:34:10.444Z",
+    "event_type": "ask-vraj",
+    "severity": "warning",
+    "message": "AI Assistant input validation failed.",
+    "metadata": {
+      "errors": {
+        "prompt": [
+          "Prompt is too long. Max 500 characters."
+        ]
+      }
+    },
+    "is_public": true
   }
 ]

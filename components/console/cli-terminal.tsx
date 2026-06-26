@@ -174,7 +174,7 @@ export default function CLITerminal() {
             <div className="flex flex-col gap-1.5 font-mono">
               <span className="text-cyan-400 font-bold">NAME: Vraj Patel</span>
               <span className="text-white/80">ROLE: Full-Stack Developer / Quant Research / AI Engineer</span>
-              <span className="text-white/80">ACADEMICS: Computer Science & Engineering (3rd Year) at Nirma University</span>
+              <span className="text-white/80">ACADEMICS: Computer Science & Engineering (4th Year) at Nirma University</span>
               <span className="text-white/80">BATCH: 2023-2027 | CGPA: 7.98</span>
               <span className="text-white/80">CORE FOCUS: Performance-tuned web apps, ERP workflows, volatility skew engines, and ML models.</span>
             </div>
@@ -187,7 +187,7 @@ export default function CLITerminal() {
               <span className="text-cyan-400 font-bold border-b border-white/5 pb-1">BACKGROUND & OBJECTIVE</span>
               <p className="text-white/85">
                 Vraj Patel is a software engineer specializing in developer-first ERP suites, high-throughput trading boards, and automated pipeline intelligence. 
-                Currently a 3rd-year CS student at Nirma University, he is completing a Software Engineering Internship at Pitbull Corporations (May 1st - July 1st).
+                Currently a 4th-year CS student at Nirma University, he is completing a Software Engineering Internship at Pitbull Corporations (May 1st - July 1st).
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 mt-1 text-[11px]">
                 <div className="bg-white/2 border border-white/5 p-2 rounded-lg">

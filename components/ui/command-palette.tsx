@@ -58,14 +58,7 @@ export default function CommandPalette({ isOpen, onClose }: CommandPaletteProps)
       action: () => { router.push('/systems'); onClose(); },
       icon: <ShieldCheck className="h-4 w-4 text-cyan-400" />,
     },
-    {
-      id: 'nav-lab',
-      label: 'Go to Lab Experiment',
-      description: 'Run interactive strategy simulators and option volatility models.',
-      category: 'Navigation',
-      action: () => { router.push('/lab'); onClose(); },
-      icon: <Terminal className="h-4 w-4 text-accent" />,
-    },
+
     {
       id: 'nav-ai',
       label: 'Open Ask Vraj',

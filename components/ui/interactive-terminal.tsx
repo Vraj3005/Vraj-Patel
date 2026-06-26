@@ -88,7 +88,7 @@ export default function InteractiveTerminal() {
         ...prev,
         { text: 'Name: Vraj Patel', type: 'system' },
         { text: 'Role: Full-Stack Architect / Quant Research / AI Automation Engineer', type: 'output' },
-        { text: 'Academics: CSE Undergrad (3rd year) at Nirma University | CGPA: 7.98', type: 'output' },
+        { text: 'Academics: CSE Undergrad (4th year) at Nirma University | CGPA: 7.98', type: 'output' },
         { text: 'Core Focus: Building performant ERP engines, full-stack SPAs, offline synchronization layers, and options volatility math models.', type: 'output' },
         { text: '', type: 'output' }
       ]);

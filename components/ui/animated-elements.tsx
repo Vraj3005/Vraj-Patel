@@ -20,7 +20,8 @@ export function AnimatedCounter({
   divisor = 1,
   className = '',
 }: AnimatedCounterProps) {
-  const [count, setCount] = useState(0);
+  const [mounted, setMounted] = useState(false);
+  const [count, setCount] = useState(target);
   const containerRef = useRef<HTMLDivElement>(null);
   const hasAnimated = useRef(false);
 
@@ -40,6 +41,16 @@ export function AnimatedCounter({
   }, [target, duration]);
 
   useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!mounted) return;
+    
+    // Once mounted, reset count to 0 and trigger normal animation checks
+    setCount(0);
+    hasAnimated.current = false;
+
     const el = containerRef.current;
     if (!el) return;
 
@@ -54,11 +65,12 @@ export function AnimatedCounter({
 
     observer.observe(el);
     return () => observer.disconnect();
-  }, [startAnimation]);
+  }, [mounted, startAnimation]);
 
+  const activeValue = mounted ? count : target;
   const displayValue = divisor > 1
-    ? (count / divisor).toFixed(decimals)
-    : count.toString();
+    ? (activeValue / divisor).toFixed(decimals)
+    : activeValue.toString();
 
   return (
     <div ref={containerRef} className={`tabular-nums ${className}`}>

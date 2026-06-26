@@ -4,7 +4,7 @@ import { projects } from '@/lib/data/projects';
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://vrajpatel.dev';
 
-  const routes = ['', '/about', '/projects', '/lab', '/resume', '/contact', '/ask-vraj'].map((route) => ({
+  const routes = ['', '/about', '/projects', '/resume', '/contact', '/ask-vraj'].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
     changeFrequency: 'monthly' as const,

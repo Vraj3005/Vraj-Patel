@@ -39,7 +39,7 @@ export default function TerminalLogs() {
         break;
       case 'about':
         newLines.push({
-          text: 'Candidate: Vraj Patel\nPosition: Full-Stack Architect / Quant Dev\nEducation: B.Tech CSE (3rd Year), Nirma University\nCGPA: 7.98/10.0\nBio: Custom ERP systems developer, options volatility smile modeling, and LLM automation scripts builder.',
+          text: 'Candidate: Vraj Patel\nPosition: Full-Stack Architect / Quant Dev\nEducation: B.Tech CSE (4th Year), Nirma University\nCGPA: 7.98/10.0\nBio: Custom ERP systems developer, options volatility smile modeling, and LLM automation scripts builder.',
           type: 'output',
         });
         break;

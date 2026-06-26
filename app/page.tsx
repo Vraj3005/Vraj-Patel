@@ -94,7 +94,7 @@ export default function Home() {
                 Vraj Patel
               </h1>
               <p className="text-base md:text-lg text-secondary max-w-lg leading-relaxed">
-                3rd year CSE student at Nirma University. I build full-stack applications,
+                4th year CSE student at Nirma University. I build full-stack applications,
                 ERP systems, and quantitative research platforms.
               </p>
             </div>
@@ -166,7 +166,7 @@ export default function Home() {
             transition={{ type: 'spring', stiffness: 400, damping: 25 }}
           >
             <AnimatedCounter target={5} suffix="+" className="text-4xl font-bold text-foreground" />
-            <span className="text-[11px] text-muted uppercase tracking-widest font-mono">Client Systems</span>
+            <span className="text-[11px] text-muted uppercase tracking-widest font-mono">Business Systems</span>
           </motion.div>
 
           {/* Education */}

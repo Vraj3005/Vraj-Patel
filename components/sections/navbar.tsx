@@ -16,7 +16,6 @@ const navItems = [
   { label: 'Projects', path: '/projects' },
   { label: 'Systems', path: '/systems' },
   { label: 'Dashboard', path: '/dashboard' },
-  { label: 'Lab', path: '/lab' },
   { label: 'Ask AI', path: '/ask-vraj' },
   { label: 'Terminal', path: '/terminal' },
   { label: 'Resume', path: '/resume' },

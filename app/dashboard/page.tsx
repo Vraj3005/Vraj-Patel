@@ -255,7 +255,7 @@ export default function DashboardPage() {
       </div>
 
       {/* Footer Navigation Shortcuts */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 border-t border-card-border pt-8 mt-4 select-none">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 border-t border-card-border pt-8 mt-4 select-none">
         <Link href="/terminal" className="group">
           <Card className="p-4 bg-card-bg/20 border-card-border hover:border-cyan-500/20 hover:bg-cyan-500/[0.01] transition-all flex items-center justify-between cursor-pointer">
             <div className="flex items-center gap-3">
@@ -280,21 +280,6 @@ export default function DashboardPage() {
               <div className="flex flex-col">
                 <span className="text-xs font-bold text-foreground font-serif">AI Assistant chatbot</span>
                 <span className="text-[9px] font-mono text-secondary uppercase">Ask custom project queries</span>
-              </div>
-            </div>
-            <ChevronRight className="h-4 w-4 text-muted group-hover:text-cyan-400 group-hover:translate-x-0.5 transition-all" />
-          </Card>
-        </Link>
-
-        <Link href="/lab" className="group">
-          <Card className="p-4 bg-card-bg/20 border-card-border hover:border-cyan-500/20 hover:bg-cyan-500/[0.01] transition-all flex items-center justify-between cursor-pointer">
-            <div className="flex items-center gap-3">
-              <div className="p-2 rounded-lg bg-white/3 border border-white/5 group-hover:bg-cyan-500/5 group-hover:border-cyan-500/10 text-cyan-400">
-                <Network className="h-4 w-4" />
-              </div>
-              <div className="flex flex-col">
-                <span className="text-xs font-bold text-foreground font-serif">Engineering Sandbox</span>
-                <span className="text-[9px] font-mono text-secondary uppercase">Interact with pricing models</span>
               </div>
             </div>
             <ChevronRight className="h-4 w-4 text-muted group-hover:text-cyan-400 group-hover:translate-x-0.5 transition-all" />
