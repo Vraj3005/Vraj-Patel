@@ -130,16 +130,16 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         <div className="flex flex-col gap-4 relative z-10">
           {/* Featured Image */}
           {project.image && (
-            <div className="relative aspect-video w-full overflow-hidden rounded-xl border border-card-border mb-1 bg-foreground/5">
-              <Image 
+            <div className="relative aspect-video w-full overflow-hidden rounded-xl border border-card-border mb-1 bg-black/40">
+              <img 
                 src={imgSrc} 
                 alt={project.title}
-                fill
-                unoptimized
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                className="object-cover transition-transform duration-100 ease-out"
+                className="transition-transform duration-100 ease-out absolute left-0"
                 style={{
-                  transform: shouldReduce ? 'none' : `scale(1.08) translate3d(${rotY * 0.6}px, ${-rotX * 0.6}px, 0)`,
+                  width: '100%',
+                  height: 'auto',
+                  top: 0,
+                  transform: shouldReduce ? 'none' : `scale(1.04) translate3d(${rotY * 0.6}px, ${-rotX * 0.6}px, 0)`,
                 }}
                 onError={() => {
                   setImgSrc('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="50" viewBox="0 0 100 50" style="background:%23000;"><text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" fill="%23333" font-family="sans-serif" font-size="10">Vraj Patel Portfolio</text></svg>');

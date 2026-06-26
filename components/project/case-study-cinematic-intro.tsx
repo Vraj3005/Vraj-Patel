@@ -198,7 +198,7 @@ export default function CaseStudyCinematicIntro({ project }: CaseStudyCinematicI
           className="lg:col-span-5 w-full h-full relative"
         >
           {project.image && !imgError ? (
-            <div className="relative aspect-video w-full overflow-hidden rounded-2xl border border-card-border shadow-2xl bg-foreground/5 group">
+            <div className="relative aspect-video w-full overflow-hidden rounded-2xl border border-card-border shadow-2xl bg-black/40 group">
               {/* Image Loading Shimmer fallback */}
               {!imageLoaded && (
                 <div className="absolute inset-0 bg-zinc-950/80 animate-pulse border border-white/5 rounded-2xl flex items-center justify-center">
@@ -206,17 +206,18 @@ export default function CaseStudyCinematicIntro({ project }: CaseStudyCinematicI
                 </div>
               )}
               
-              <Image 
-                src={project.image} 
+              <img 
+                src={project.image || ''} 
                 alt={project.title}
-                fill
-                priority
-                unoptimized
-                sizes="(max-width: 1024px) 100vw, 40vw"
                 className={cn(
-                  "object-cover transition-opacity duration-300",
+                  "transition-opacity duration-300 absolute left-0",
                   imageLoaded ? "opacity-100" : "opacity-0"
                 )}
+                style={{
+                  width: '100%',
+                  height: 'auto',
+                  top: 0,
+                }}
                 onLoad={() => setImageLoaded(true)}
                 onError={() => setImgError(true)}
               />
