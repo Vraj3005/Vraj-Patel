@@ -213,6 +213,7 @@ export default function AIWidget() {
                   <button
                     onClick={handleResetSession}
                     title="Reset Session"
+                    aria-label="Reset session"
                     className="p-1.5 text-secondary hover:text-foreground rounded-md hover:bg-foreground/5 transition-colors cursor-pointer"
                   >
                     <RefreshCw className="h-3.5 w-3.5" />
@@ -220,6 +221,7 @@ export default function AIWidget() {
                 )}
                 <button
                   onClick={() => setIsOpen(false)}
+                  aria-label="Close chat window"
                   className="p-1.5 text-secondary hover:text-foreground rounded-md hover:bg-foreground/5 transition-colors cursor-pointer"
                 >
                   <X className="h-3.5 w-3.5" />
@@ -312,6 +314,7 @@ export default function AIWidget() {
                   onBlur={handleInputBlur}
                   disabled={isLoading}
                   className="flex-1 py-1.5 px-3 rounded-lg text-xs"
+                  aria-label="Ask Vraj AI query"
                 />
                 <Button
                   type="submit"
@@ -319,6 +322,7 @@ export default function AIWidget() {
                   size="sm"
                   disabled={!inputValue.trim() || isLoading}
                   className="p-2 aspect-square rounded-lg flex items-center justify-center shrink-0 cursor-pointer"
+                  aria-label="Send message"
                 >
                   <Send className="h-3.5 w-3.5" />
                 </Button>
@@ -335,6 +339,7 @@ export default function AIWidget() {
         whileTap={{ scale: 0.95 }}
         className="h-12 w-12 rounded-full bg-foreground border border-foreground text-background flex items-center justify-center shadow-xl cursor-pointer hover:shadow-2xl transition-shadow relative overflow-hidden"
         title="Ask Vraj AI"
+        aria-label="Toggle AI Chat Assistant"
       >
         <AnimatePresence mode="wait">
           {isOpen ? (

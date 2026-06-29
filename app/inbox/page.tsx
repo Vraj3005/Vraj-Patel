@@ -182,6 +182,7 @@ export default function InboxPage() {
                 disabled={loading}
                 className="p-2 border border-card-border bg-card-bg rounded-lg hover:bg-white/5 text-secondary hover:text-foreground transition-all cursor-pointer"
                 title="Refresh messages"
+                aria-label="Refresh messages"
               >
                 <RefreshCw className={`h-4 w-4 ${loading ? 'animate-spin' : ''}`} />
               </button>
@@ -209,6 +210,7 @@ export default function InboxPage() {
                 onChange={(e) => setSearchTerm(e.target.value)}
                 placeholder="Search messages by sender, email, subject, or message text..."
                 className="w-full pl-9 pr-4 py-2 bg-card-bg/40 border border-card-border hover:border-white/10 focus:border-cyan-500/50 rounded-xl text-white placeholder-muted font-mono text-xs focus:ring-0 focus:outline-none transition-all"
+                aria-label="Search messages"
               />
             </div>
             

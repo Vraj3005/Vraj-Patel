@@ -112,6 +112,7 @@ export default function CommandShell({ onExecuteCommand }: CommandShellProps) {
           placeholder="Enter command..."
           className="flex-1 bg-transparent border-0 text-white placeholder-muted font-mono text-xs focus:ring-0 focus:outline-none py-0.5"
           disabled={isEvaluating}
+          aria-label="Terminal command"
         />
         <button type="submit" className="text-[9px] font-mono text-muted hover:text-white cursor-pointer" disabled={isEvaluating}>
           Execute <CornerDownLeft className="h-3 w-3 inline" />

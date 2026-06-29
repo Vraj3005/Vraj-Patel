@@ -100,21 +100,15 @@ export default function RecruiterWidget() {
           </div>
 
           <div className="flex flex-col gap-3">
-            <Link href="/resume" className="w-full">
-              <Button className="w-full justify-center gap-2" variant="primary" size="md">
-                <FileDown className="h-4 w-4" /> Download A4 Resume
-              </Button>
-            </Link>
-            <Link href="/contact" className="w-full">
-              <Button className="w-full justify-center gap-2" variant="secondary" size="md">
-                <Calendar className="h-4 w-4" /> Schedule Interview
-              </Button>
-            </Link>
-            <Link href="/ask-vraj" className="w-full">
-              <Button className="w-full justify-center gap-2" variant="secondary" size="md">
-                <Send className="h-4 w-4" /> Ask AI agent a question
-              </Button>
-            </Link>
+            <Button href="/resume" className="w-full justify-center gap-2" variant="primary" size="md">
+              <FileDown className="h-4 w-4" /> Download A4 Resume
+            </Button>
+            <Button href="/contact" className="w-full justify-center gap-2" variant="secondary" size="md">
+              <Calendar className="h-4 w-4" /> Schedule Interview
+            </Button>
+            <Button href="/ask-vraj" className="w-full justify-center gap-2" variant="secondary" size="md">
+              <Send className="h-4 w-4" /> Ask AI agent a question
+            </Button>
           </div>
 
           <div className="border-t border-white/5 pt-4 text-[10px] text-muted text-center leading-relaxed">

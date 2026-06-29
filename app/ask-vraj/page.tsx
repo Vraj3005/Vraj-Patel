@@ -373,6 +373,7 @@ export default function AskVraj() {
                 onBlur={handleInputBlur}
                 disabled={isLoading}
                 className="flex-1 py-2.5 px-4 rounded-xl font-medium"
+                aria-label="Ask Vraj AI query"
               />
               <Button
                 type="submit"
@@ -380,6 +381,7 @@ export default function AskVraj() {
                 size="md"
                 disabled={!inputValue.trim() || isLoading}
                 className="shrink-0 flex items-center justify-center p-3 rounded-xl aspect-square cursor-pointer"
+                aria-label="Send message"
               >
                 <Send className="h-4 w-4" />
               </Button>

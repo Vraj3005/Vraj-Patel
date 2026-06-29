@@ -122,12 +122,13 @@ function LoginContent() {
           <form onSubmit={handleLogin} className="w-full flex flex-col gap-4 relative z-10 text-left">
             {/* Email Field */}
             <div className="flex flex-col gap-1.5">
-              <label className="text-[10px] font-mono font-bold text-secondary uppercase">Operator ID</label>
+              <label htmlFor="login-operator-id" className="text-[10px] font-mono font-bold text-secondary uppercase">Operator ID</label>
               <div className="relative flex items-center">
                 <div className="absolute left-3.5 text-secondary">
                   <Mail className="h-4 w-4" />
                 </div>
                 <input
+                  id="login-operator-id"
                   type="text"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
@@ -141,12 +142,13 @@ function LoginContent() {
 
             {/* Password Field */}
             <div className="flex flex-col gap-1.5">
-              <label className="text-[10px] font-mono font-bold text-secondary uppercase">Access Token</label>
+              <label htmlFor="login-access-token" className="text-[10px] font-mono font-bold text-secondary uppercase">Access Token</label>
               <div className="relative flex items-center">
                 <div className="absolute left-3.5 text-secondary">
                   <KeyRound className="h-4 w-4" />
                 </div>
                 <input
+                  id="login-access-token"
                   type="text"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
@@ -161,6 +163,7 @@ function LoginContent() {
                   onClick={() => setShowPassword(!showPassword)}
                   className="absolute right-3 text-secondary hover:text-foreground cursor-pointer focus:outline-none"
                   title={showPassword ? 'Hide token' : 'Show token'}
+                  aria-label={showPassword ? 'Hide token' : 'Show token'}
                 >
                   {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                 </button>

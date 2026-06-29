@@ -151,6 +151,7 @@ export default function TerminalLogs() {
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
           className="flex-1 bg-transparent border-0 text-white placeholder-muted font-mono text-xs focus:ring-0 focus:outline-none py-1"
+          aria-label="Terminal command"
         />
         <button
           type="submit"

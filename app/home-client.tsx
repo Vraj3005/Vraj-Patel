@@ -3,14 +3,21 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { projects } from '@/lib/data/projects';
-import AIPreview from '@/components/sections/ai-preview';
-import GitTelemetry from '@/components/sections/git-telemetry';
 import { getCategoryLabel } from '@/lib/formatters/labels';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { AnimatedCounter } from '@/components/ui/animated-elements';
 import dynamic from 'next/dynamic';
+const AIPreview = dynamic(() => import('@/components/sections/ai-preview'), {
+  ssr: false,
+  loading: () => <div className="w-full min-h-[300px] bg-black/45 border border-white/5 rounded-2xl animate-pulse" />
+});
+
+const GitTelemetry = dynamic(() => import('@/components/sections/git-telemetry'), {
+  ssr: false,
+  loading: () => <div className="w-full min-h-[260px] bg-black/45 border border-white/5 rounded-2xl animate-pulse" />
+});
 
 const InteractiveTerminal = dynamic(() => import('@/components/ui/interactive-terminal'), {
   ssr: false,
@@ -399,11 +406,9 @@ export default function HomeClient() {
                 Single-page A4, ATS-compatible format.
               </p>
             </div>
-            <Link href="/resume" className="self-start mt-2">
-              <Button variant="primary" size="md" className="flex items-center gap-2">
-                View Resume <ArrowRight className="h-3.5 w-3.5" />
-              </Button>
-            </Link>
+            <Button href="/resume" variant="primary" size="md" className="self-start mt-2 flex items-center gap-2">
+              View Resume <ArrowRight className="h-3.5 w-3.5" />
+            </Button>
           </Card>
         </motion.div>
 
@@ -418,11 +423,9 @@ export default function HomeClient() {
                 Open for internships, freelance, and collaborations.
               </p>
             </div>
-            <Link href="/contact" className="self-start mt-2">
-              <Button variant="secondary" size="md" className="flex items-center gap-2">
-                Send Message <ArrowRight className="h-3.5 w-3.5" />
-              </Button>
-            </Link>
+            <Button href="/contact" variant="secondary" size="md" className="self-start mt-2 flex items-center gap-2">
+              Send Message <ArrowRight className="h-3.5 w-3.5" />
+            </Button>
           </Card>
         </motion.div>
       </motion.section>

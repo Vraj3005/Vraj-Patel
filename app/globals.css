@@ -6,9 +6,9 @@
   --card-bg: #141414;
   --card-border: #1e1e1e;
   --primary: #ffffff;
-  --secondary: #888888;
+  --secondary: #a3a3a3;
   --accent: #555555;
-  --muted: #666666;
+  --muted: #858585;
 }
 
 @theme {

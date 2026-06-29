@@ -147,12 +147,14 @@ export default function AIPreview() {
                 onChange={(e) => setPrompt(e.target.value)}
                 disabled={isLoading}
                 className="flex-1 py-2 px-3 rounded-lg text-xs"
+                aria-label="Ask Vraj AI query"
               />
               <Button
                 type="submit"
                 variant="primary"
                 disabled={!prompt.trim() || isLoading}
                 className="p-2 aspect-square rounded-lg flex items-center justify-center"
+                aria-label="Send message"
               >
                 <Send className="h-3.5 w-3.5" />
               </Button>
