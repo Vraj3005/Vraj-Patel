@@ -131,7 +131,7 @@ function LoginContent() {
                   type="text"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="operator@its-vraj.vercel.app"
+                  placeholder="operator@patel-vraj.vercel.app"
                   className="w-full pl-10 pr-4 py-2.5 bg-[#0e0e11] border border-card-border hover:border-white/10 focus:border-cyan-500/50 rounded-xl text-white placeholder-muted font-sans text-xs focus:ring-0 focus:outline-none transition-all"
                   disabled={loading}
                   required

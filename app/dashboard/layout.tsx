@@ -4,12 +4,12 @@ export const metadata: Metadata = {
   title: 'Engineering Dashboard | Vraj Patel Portfolio',
   description: 'View public portfolio metrics, project categories, technology usage, and engineering activity from Vraj Patel’s developer portfolio.',
   alternates: {
-    canonical: 'https://its-vraj.vercel.app/dashboard',
+    canonical: 'https://patel-vraj.vercel.app/dashboard',
   },
   openGraph: {
     title: 'Engineering Dashboard | Vraj Patel Portfolio',
     description: 'View public portfolio metrics, project categories, technology usage, and engineering activity from Vraj Patel’s developer portfolio.',
-    url: 'https://its-vraj.vercel.app/dashboard',
+    url: 'https://patel-vraj.vercel.app/dashboard',
     type: 'website',
   },
   twitter: {

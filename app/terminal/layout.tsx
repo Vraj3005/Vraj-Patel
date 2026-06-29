@@ -4,12 +4,12 @@ export const metadata: Metadata = {
   title: 'Developer Terminal | Vraj Patel Portfolio',
   description: 'Explore Vraj Patel’s portfolio using an interactive command-style interface for projects, skills, systems, and resume information.',
   alternates: {
-    canonical: 'https://its-vraj.vercel.app/terminal',
+    canonical: 'https://patel-vraj.vercel.app/terminal',
   },
   openGraph: {
     title: 'Developer Terminal | Vraj Patel Portfolio',
     description: 'Explore Vraj Patel’s portfolio using an interactive command-style interface for projects, skills, systems, and resume information.',
-    url: 'https://its-vraj.vercel.app/terminal',
+    url: 'https://patel-vraj.vercel.app/terminal',
     type: 'website',
   },
   twitter: {

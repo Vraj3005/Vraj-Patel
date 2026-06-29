@@ -535,7 +535,7 @@ export default function ProjectCaseStudy({ params }: ProjectPageProps) {
               ['typescript', 'javascript', 'python', 'sql', 'c++', 'html', 'css'].includes(tech.toLowerCase())
             ).join(', ') || 'TypeScript',
             'runtimePlatform': project.category === 'quant_research' ? 'Python / Streamlit' : 'Node.js / Vercel',
-            'url': `https://its-vraj.vercel.app/projects/${project.slug}`,
+            'url': `https://patel-vraj.vercel.app/projects/${project.slug}`,
             'author': {
               '@type': 'Person',
               'name': 'Vraj Patel'

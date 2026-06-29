@@ -4,12 +4,12 @@ export const metadata: Metadata = {
   title: 'Ask Vraj AI | Vraj Patel Portfolio Assistant',
   description: 'Ask an AI assistant about Vraj Patel’s projects, skills, ERP systems, AI automation work, and quantitative research portfolio.',
   alternates: {
-    canonical: 'https://its-vraj.vercel.app/ask-vraj',
+    canonical: 'https://patel-vraj.vercel.app/ask-vraj',
   },
   openGraph: {
     title: 'Ask Vraj AI | Vraj Patel Portfolio Assistant',
     description: 'Ask an AI assistant about Vraj Patel’s projects, skills, ERP systems, AI automation work, and quantitative research portfolio.',
-    url: 'https://its-vraj.vercel.app/ask-vraj',
+    url: 'https://patel-vraj.vercel.app/ask-vraj',
     type: 'website',
   },
   twitter: {

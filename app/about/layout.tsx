@@ -4,12 +4,12 @@ export const metadata: Metadata = {
   title: 'About Vraj Patel | CSE Student & Software Developer',
   description: 'Learn about Vraj Patel, a Computer Science Engineering student focused on full-stack development, AI automation, ERP systems, dashboards, and quantitative research platforms.',
   alternates: {
-    canonical: 'https://its-vraj.vercel.app/about',
+    canonical: 'https://patel-vraj.vercel.app/about',
   },
   openGraph: {
     title: 'About Vraj Patel | CSE Student & Software Developer',
     description: 'Learn about Vraj Patel, a Computer Science Engineering student focused on full-stack development, AI automation, ERP systems, dashboards, and quantitative research platforms.',
-    url: 'https://its-vraj.vercel.app/about',
+    url: 'https://patel-vraj.vercel.app/about',
     type: 'profile',
   },
   twitter: {

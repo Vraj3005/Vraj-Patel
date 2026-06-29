@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next';
 import { projects } from '@/lib/data/projects';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = 'https://its-vraj.vercel.app';
+  const baseUrl = 'https://patel-vraj.vercel.app';
 
   // 9 public routes
   const staticRoutes = [

@@ -55,12 +55,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description,
     keywords,
     alternates: {
-      canonical: `https://its-vraj.vercel.app/projects/${slug}`,
+      canonical: `https://patel-vraj.vercel.app/projects/${slug}`,
     },
     openGraph: {
       title,
       description,
-      url: `https://its-vraj.vercel.app/projects/${slug}`,
+      url: `https://patel-vraj.vercel.app/projects/${slug}`,
       type: 'article',
       images: [
         {

@@ -5,12 +5,12 @@ export const metadata: Metadata = {
   title: 'Vraj Patel | Full-Stack Developer & AI/ERP Systems Builder',
   description: 'Explore the portfolio of Vraj Patel, a CSE student at Nirma University building full-stack software, ERP systems, dashboards, AI automation workflows, and quant research projects.',
   alternates: {
-    canonical: 'https://its-vraj.vercel.app',
+    canonical: 'https://patel-vraj.vercel.app',
   },
   openGraph: {
     title: 'Vraj Patel | Full-Stack Developer & AI/ERP Systems Builder',
     description: 'Explore the portfolio of Vraj Patel, a CSE student at Nirma University building full-stack software, ERP systems, dashboards, AI automation workflows, and quant research projects.',
-    url: 'https://its-vraj.vercel.app',
+    url: 'https://patel-vraj.vercel.app',
     siteName: 'Vraj Patel Portfolio',
     type: 'website',
     locale: 'en_IN',
@@ -37,9 +37,9 @@ export default function Home() {
     '@graph': [
       {
         '@type': 'Person',
-        '@id': 'https://its-vraj.vercel.app/#person',
+        '@id': 'https://patel-vraj.vercel.app/#person',
         'name': 'Vraj Patel',
-        'url': 'https://its-vraj.vercel.app',
+        'url': 'https://patel-vraj.vercel.app',
         'jobTitle': 'Full-Stack Developer',
         'description': 'Computer Science Engineering student at Nirma University building full-stack applications, ERP systems, dashboards, AI automation tools, and quantitative research platforms.',
         'email': 'patelvrajpatel30@gmail.com',
@@ -60,20 +60,20 @@ export default function Home() {
       },
       {
         '@type': 'WebSite',
-        '@id': 'https://its-vraj.vercel.app/#website',
+        '@id': 'https://patel-vraj.vercel.app/#website',
         'name': 'Vraj Patel Portfolio',
-        'url': 'https://its-vraj.vercel.app',
+        'url': 'https://patel-vraj.vercel.app',
         'description': 'Portfolio of Vraj Patel featuring full-stack software, ERP systems, AI automation, dashboards, and quant research platforms.',
         'publisher': {
-          '@id': 'https://its-vraj.vercel.app/#person'
+          '@id': 'https://patel-vraj.vercel.app/#person'
         }
       },
       {
         '@type': 'ProfilePage',
-        '@id': 'https://its-vraj.vercel.app/#profile',
-        'url': 'https://its-vraj.vercel.app',
+        '@id': 'https://patel-vraj.vercel.app/#profile',
+        'url': 'https://patel-vraj.vercel.app',
         'mainEntity': {
-          '@id': 'https://its-vraj.vercel.app/#person'
+          '@id': 'https://patel-vraj.vercel.app/#person'
         }
       }
     ]

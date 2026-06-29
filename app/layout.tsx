@@ -21,7 +21,7 @@ const fontMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://its-vraj.vercel.app'),
+  metadataBase: new URL('https://patel-vraj.vercel.app'),
   title: {
     default: 'Vraj Patel | Full-Stack Developer, AI/ERP Systems Builder & Quant Research Enthusiast',
     template: '%s | Vraj Patel Portfolio',
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: '/',
   },
-  authors: [{ name: 'Vraj Patel', url: 'https://its-vraj.vercel.app' }],
+  authors: [{ name: 'Vraj Patel', url: 'https://patel-vraj.vercel.app' }],
   creator: 'Vraj Patel',
   publisher: 'Vraj Patel',
   robots: {
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Vraj Patel | Full-Stack Developer & AI/ERP Systems Builder',
     description: 'Portfolio of Vraj Patel, a CSE student at Nirma University building real-world ERP systems, dashboards, AI automation tools, and quant research platforms.',
-    url: 'https://its-vraj.vercel.app',
+    url: 'https://patel-vraj.vercel.app',
     siteName: 'Vraj Patel Portfolio',
     type: 'website',
     locale: 'en_IN',
