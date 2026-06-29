@@ -15,6 +15,7 @@ export default function Footer() {
             rel="noopener noreferrer"
             className="h-9 w-9 rounded-lg border border-card-border bg-card-bg hover:bg-white/5 flex items-center justify-center text-secondary hover:text-foreground transition-colors cursor-pointer"
             title="GitHub (Personal)"
+            aria-label="GitHub Personal Profile"
           >
             <Github className="h-4 w-4" />
           </a>
@@ -24,6 +25,7 @@ export default function Footer() {
             rel="noopener noreferrer"
             className="h-9 w-9 rounded-lg border border-cyan-500/20 bg-cyan-950/10 hover:bg-cyan-900/20 flex items-center justify-center text-cyan-400 hover:text-cyan-300 transition-colors cursor-pointer"
             title="GitHub (Academic/Debug)"
+            aria-label="GitHub Academic and Debug Profile"
           >
             <Github className="h-4 w-4" />
           </a>
@@ -33,6 +35,7 @@ export default function Footer() {
             rel="noopener noreferrer"
             className="h-9 w-9 rounded-lg border border-card-border bg-card-bg hover:bg-white/5 flex items-center justify-center text-secondary hover:text-foreground transition-colors cursor-pointer"
             title="LinkedIn"
+            aria-label="LinkedIn Profile"
           >
             <Linkedin className="h-4 w-4" />
           </a>
@@ -40,6 +43,7 @@ export default function Footer() {
             href="mailto:patelvrajpatel30@gmail.com"
             className="h-9 w-9 rounded-lg border border-card-border bg-card-bg hover:bg-white/5 flex items-center justify-center text-secondary hover:text-foreground transition-colors cursor-pointer"
             title="Email"
+            aria-label="Send Email"
           >
             <Mail className="h-4 w-4" />
           </a>

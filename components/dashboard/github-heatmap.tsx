@@ -163,6 +163,7 @@ export default function GithubHeatmap({ username: _username }: GithubHeatmapProp
             disabled={syncing || loading}
             className="p-1 hover:text-cyan-400 text-secondary disabled:opacity-50 transition-colors cursor-pointer flex items-center justify-center rounded-lg border border-transparent hover:border-white/5 bg-transparent ml-1"
             title="Force refresh contributions cache"
+            aria-label="Force refresh contributions cache"
           >
             <RefreshCw className={`h-3.5 w-3.5 ${syncing ? 'animate-spin text-cyan-400' : ''}`} />
           </button>
@@ -239,7 +240,7 @@ export default function GithubHeatmap({ username: _username }: GithubHeatmapProp
                       height="9"
                       rx="1.5"
                       ry="1.5"
-                      className={`transition-all duration-200 cursor-pointer ${getColorClass(day.level)} hover:scale-125 hover:stroke-cyan-300/30 hover:z-10`}
+                      className={`transition-[transform,fill,stroke] duration-200 cursor-pointer ${getColorClass(day.level)} hover:scale-125 hover:stroke-cyan-300/30 hover:z-10`}
                       onMouseEnter={(e) => {
                         const rect = e.currentTarget.getBoundingClientRect();
                         const container = e.currentTarget.ownerSVGElement?.parentElement?.getBoundingClientRect();

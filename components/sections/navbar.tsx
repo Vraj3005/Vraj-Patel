@@ -81,6 +81,7 @@ export default function Navbar() {
             onClick={() => setIsCmdOpen(true)}
             className="p-2 border border-card-border bg-card-bg rounded-lg hover:bg-white/5 text-secondary hover:text-foreground transition-colors cursor-pointer no-print"
             title="Search (Ctrl+K)"
+            aria-label="Open search palette"
           >
             <Search className="h-4 w-4" />
           </button>
@@ -90,6 +91,7 @@ export default function Navbar() {
             onClick={() => setIsRecruiterOpen(true)}
             className="px-3.5 py-1.5 border border-cyan-500/20 bg-cyan-950/15 hover:bg-cyan-900/30 text-cyan-400 hover:text-cyan-300 text-xs font-mono font-bold rounded-lg transition-all cursor-pointer no-print flex items-center gap-1.5"
             title="Summarize for Recruiter"
+            aria-label="Open recruiter summary modal"
           >
             <Briefcase className="h-3.5 w-3.5 text-cyan-400" /> Recruiter Mode
           </button>
@@ -107,6 +109,7 @@ export default function Navbar() {
             onClick={() => setIsRecruiterOpen(true)}
             className="p-2 text-cyan-400 hover:text-cyan-300 cursor-pointer"
             title="Recruiter Mode"
+            aria-label="Open recruiter summary modal"
           >
             <Briefcase className="h-[18px] w-[18px] text-cyan-400" />
           </button>
@@ -114,12 +117,14 @@ export default function Navbar() {
             onClick={() => setIsCmdOpen(true)}
             className="p-2 text-secondary hover:text-foreground cursor-pointer"
             title="Search"
+            aria-label="Open search palette"
           >
             <Search className="h-[18px] w-[18px]" />
           </button>
           <button
             onClick={() => setIsOpen(!isOpen)}
             className="p-2 text-secondary hover:text-foreground focus:outline-none cursor-pointer"
+            aria-label={isOpen ? "Close mobile menu" : "Open mobile menu"}
           >
             {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
