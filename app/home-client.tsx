@@ -308,11 +308,9 @@ export default function HomeClient() {
             </span>
             <h2 className="text-2xl md:text-3xl font-semibold text-foreground tracking-tight">Selected Projects</h2>
           </div>
-          <Link href="/projects">
-            <Button variant="secondary" size="sm" className="flex items-center gap-1.5">
-              All Projects <ArrowRight className="h-3.5 w-3.5" />
-            </Button>
-          </Link>
+          <Button href="/projects" variant="secondary" size="sm" className="flex items-center gap-1.5">
+            All Projects <ArrowRight className="h-3.5 w-3.5" />
+          </Button>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

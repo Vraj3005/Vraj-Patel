@@ -96,11 +96,9 @@ export default function Navbar() {
             <Briefcase className="h-3.5 w-3.5 text-cyan-400" /> Recruiter Mode
           </button>
 
-          <Link href="/contact" className="no-print">
-            <Button variant="primary" size="sm" className="flex items-center gap-1">
-              Contact <ArrowUpRight className="h-3 w-3" />
-            </Button>
-          </Link>
+          <Button href="/contact" variant="primary" size="sm" className="flex items-center gap-1 no-print">
+            Contact <ArrowUpRight className="h-3 w-3" />
+          </Button>
         </div>
 
         {/* Mobile Controls */}
@@ -169,11 +167,9 @@ export default function Navbar() {
               <Briefcase className="h-3.5 w-3.5 text-cyan-400" /> Recruiter Mode
             </button>
 
-            <Link href="/contact" onClick={() => setIsOpen(false)}>
-              <Button variant="primary" size="md" className="w-full flex items-center justify-center gap-1">
-                Contact <ArrowUpRight className="h-4 w-4" />
-              </Button>
-            </Link>
+            <Button href="/contact" onClick={() => setIsOpen(false)} variant="primary" size="md" className="w-full flex items-center justify-center gap-1">
+              Contact <ArrowUpRight className="h-4 w-4" />
+            </Button>
           </motion.div>
         )}
       </AnimatePresence>

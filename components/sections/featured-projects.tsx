@@ -26,11 +26,9 @@ export default function FeaturedProjects() {
           </p>
         </div>
 
-        <Link href="/projects" className="shrink-0">
-          <Button variant="secondary" size="md" className="flex items-center gap-1.5">
-            View All {projects.length} Projects <ArrowRight className="h-4 w-4" />
-          </Button>
-        </Link>
+        <Button href="/projects" variant="secondary" size="md" className="flex items-center gap-1.5 shrink-0">
+          View All {projects.length} Projects <ArrowRight className="h-4 w-4" />
+        </Button>
       </div>
 
       {/* Projects Grid */}

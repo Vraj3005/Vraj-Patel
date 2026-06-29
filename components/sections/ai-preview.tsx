@@ -72,11 +72,9 @@ export default function AIPreview() {
               Powered by Gemini. Ask about projects, tech stack, experience, or availability.
             </p>
           </div>
-          <Link href="/ask-vraj">
-            <Button variant="secondary" size="sm" className="flex items-center gap-1">
-              Full Chat <ArrowRight className="h-3.5 w-3.5" />
-            </Button>
-          </Link>
+          <Button href="/ask-vraj" variant="secondary" size="sm" className="flex items-center gap-1">
+            Full Chat <ArrowRight className="h-3.5 w-3.5" />
+          </Button>
         </div>
 
         {/* Chat Box */}
