@@ -101,11 +101,11 @@ export default function InteractiveTerminal() {
         setHistory(prev => [
           ...prev,
           { text: 'Client Software & Custom ERP platforms (Collaborations):', type: 'system' },
-          { text: '1. Enermass Solar Calculator & ERP (Live) - 3D rooftop shading models and materials management.', type: 'output' },
-          { text: '2. Bhagwati Interior ERP (Live) - Designer material logs, real-time budgets, and PDF quotation compiler.', type: 'output' },
-          { text: '3. Driedhub Marketplace & ERP (Live) - DTC dried fruit marketplace integrated with Razorpay and custom metrics board.', type: 'output' },
-          { text: '4. Marea Luxury Fashion & ERP (Live) - Editorial fashion storefront utilizing GSAP scroll triggers and drag-drop admin board.', type: 'output' },
-          { text: '5. Surendra & Co. Website (Live) - Coach manufacturer presentation portal with interactive options configuration.', type: 'output' },
+          { text: '1. Solar Sizing Calculator & ERP (Live) - 3D rooftop shading models and materials management.', type: 'output' },
+          { text: '2. Interior Design ERP (Live) - Designer material logs, real-time budgets, and PDF quotation compiler.', type: 'output' },
+          { text: '3. Afghan Anjeer Marketplace & ERP (Live) - DTC dried fruit marketplace integrated with Razorpay and custom metrics board.', type: 'output' },
+          { text: '4. Clothing Brand Storefront & ERP (Live) - Editorial fashion storefront utilizing GSAP scroll triggers and drag-drop admin board.', type: 'output' },
+          { text: '5. Bus Body Building Company Website (Live) - Coach manufacturer presentation portal with interactive options configuration.', type: 'output' },
           { text: '', type: 'output' }
         ]);
       } else if (arg === '--quant') {

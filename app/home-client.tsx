@@ -53,7 +53,10 @@ const techStack = [
 
 export default function HomeClient() {
   const [isRecruiterOpen, setIsRecruiterOpen] = useState(false);
-  const featuredProjects = projects.filter((p) => p.featured).slice(0, 4);
+  const slugsOrder = ['outreachops-ai', 'anjeer-marketplace', 'nf-lrd-regime-discovery', 'bus-body-builder-website'];
+  const featuredProjects = slugsOrder
+    .map(slug => projects.find(p => p.slug === slug))
+    .filter((p): p is typeof projects[number] => !!p);
 
   const containerVariants: Variants = {
     hidden: { opacity: 0 },

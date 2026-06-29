@@ -36,7 +36,7 @@ export class GraphDataResolver {
       external: 720
     };
 
-    if (slug === 'enermass-solar-calculator') {
+    if (slug === 'solar-sizing-calculator') {
       nodes = [
         { id: 'user', label: 'Installer Surveyor', type: 'user', status: 'online', x: cols.user, y: 250, details: { description: 'Sales surveyor operating on-site.', client: 'Mobile Web Browser' } },
         { id: 'ui', label: 'Sizing Frontend UI', type: 'frontend', status: 'online', x: cols.frontend, y: 250, details: { stack: 'Next.js, React, Tailwind CSS', state: 'Zustand Store Context' } },
@@ -77,7 +77,7 @@ export class GraphDataResolver {
         { id: 'e6', source: 'api', target: 'db', animated: false, label: 'Write send status' },
         { id: 'e7', source: 'api', target: 'smtp', animated: true, flowSpeed: 'normal', label: 'Sequence SMTP mail' }
       ];
-    } else if (slug === 'bhagwati-interior-erp') {
+    } else if (slug === 'interior-design-erp') {
       nodes = [
         { id: 'user', label: 'Studio Designer', type: 'user', status: 'online', x: cols.user, y: 250, details: { role: 'Project Manager / Interior Designer', action: 'Upload site specifications' } },
         { id: 'ui', label: 'Next.js Studio View', type: 'frontend', status: 'online', x: cols.frontend, y: 250, details: { library: 'Tailwind CSS, shadcn/ui components', animation: 'Framer Motion dashboard views' } },
@@ -100,10 +100,10 @@ export class GraphDataResolver {
         { id: 'e7', source: 'actions', target: 'qstash', animated: true, flowSpeed: 'normal', label: 'Queue notice' },
         { id: 'e8', source: 'qstash', target: 'resend', animated: true, flowSpeed: 'normal' }
       ];
-    } else if (slug === 'driedhub-marketplace') {
+    } else if (slug === 'anjeer-marketplace') {
       nodes = [
         { id: 'user', label: 'Retail Buyer', type: 'user', status: 'online', x: cols.user, y: 250, details: { role: 'Customer browsing marketplace', action: 'Purchase dry fruits' } },
-        { id: 'ui', label: 'Driedhub Storefront', type: 'frontend', status: 'online', x: cols.frontend, y: 250, details: { stack: 'Next.js App Router, Tailwind CSS', state: 'Zustand cart checkout context' } },
+        { id: 'ui', label: 'Afghan Anjeer Marketplace Storefront', type: 'frontend', status: 'online', x: cols.frontend, y: 250, details: { stack: 'Next.js App Router, Tailwind CSS', state: 'Zustand cart checkout context' } },
         { id: 'auth', label: 'Supabase Auth sessions', type: 'auth', status: 'online', x: cols.frontend, y: 130, details: { engine: 'Supabase email & OTP logins', state: 'Browser cookies session store' } },
         { id: 'api', label: 'Next.js Checkout API', type: 'api', status: 'online', x: cols.api, y: 250, details: { route: '/api/checkout serverless lambda', validation: 'Secure request payload checks' } },
         { id: 'rzp', label: 'Razorpay Checkout SDK', type: 'external', status: 'online', x: cols.db, y: 250, details: { client: 'Razorpay checkout overlay integrations', status: 'Secure payments signature verify' } },
@@ -117,7 +117,7 @@ export class GraphDataResolver {
         { id: 'e4', source: 'api', target: 'rzp', animated: true, flowSpeed: 'fast', label: 'Request payment token' },
         { id: 'e5', source: 'rzp', target: 'db', animated: true, flowSpeed: 'normal', label: 'Sync order billing record' }
       ];
-    } else if (slug === 'driedhub-admin-dashboard') {
+    } else if (slug === 'anjeer-admin-dashboard') {
       nodes = [
         { id: 'user', label: 'Admin Inventory Lead', type: 'user', status: 'online', x: cols.user, y: 250, details: { role: 'Store Owner / Operator', action: 'Update product lists & pricing' } },
         { id: 'ui', label: 'Admin ERP Panel', type: 'frontend', status: 'online', x: cols.frontend, y: 250, details: { framework: 'Next.js Admin Console SPA', layouts: 'Grid tables data displays' } },
@@ -132,10 +132,10 @@ export class GraphDataResolver {
         { id: 'e3', source: 'ui', target: 'api', animated: true, flowSpeed: 'fast', label: 'Flush stock updates' },
         { id: 'e4', source: 'api', target: 'db', animated: true, flowSpeed: 'fast' }
       ];
-    } else if (slug === 'marea-website') {
+    } else if (slug === 'clothing-brand-website') {
       nodes = [
         { id: 'user', label: 'Fashion Shopper', type: 'user', status: 'online', x: cols.user, y: 250, details: { role: 'Visitor', action: 'Purchase luxury apparel' } },
-        { id: 'ui', label: 'Marea Luxe Portal', type: 'frontend', status: 'online', x: cols.frontend, y: 250, details: { design: 'Glassmorphic catalog collections display', library: 'Tailwind CSS + Framer Motion animations' } },
+        { id: 'ui', label: 'Clothing Brand Storefront', type: 'frontend', status: 'online', x: cols.frontend, y: 250, details: { design: 'Glassmorphic catalog collections display', library: 'Tailwind CSS + Framer Motion animations' } },
         { id: 'cms', label: 'TipTap WYSIWYG Content', type: 'frontend', status: 'online', x: cols.frontend, y: 130, details: { editor: 'Rich text CMS inputs parser', rendering: 'Parse design notes dynamically' } },
         { id: 'api', label: 'Next.js API Server', type: 'api', status: 'online', x: cols.api, y: 250, details: { router: 'Next.js Serverless endpoints router', validator: 'Stripe webhook triggers receiver' } },
         { id: 'stripe', label: 'Stripe Payments API', type: 'external', status: 'online', x: cols.db, y: 250, details: { pipeline: 'Stripe redirect link checkout session', check: 'Card transaction processing' } },
@@ -149,12 +149,12 @@ export class GraphDataResolver {
         { id: 'e4', source: 'api', target: 'stripe', animated: true, flowSpeed: 'fast', label: 'Redirect to Stripe billing' },
         { id: 'e5', source: 'stripe', target: 'db', animated: true, flowSpeed: 'normal', label: 'Confirm payment receipt' }
       ];
-    } else if (slug === 'marea-admin-dashboard') {
+    } else if (slug === 'clothing-brand-admin') {
       nodes = [
         { id: 'user', label: 'Store Manager', type: 'user', status: 'online', x: cols.user, y: 250, details: { action: 'Curate catalog collections & analyze analytics sales logs' } },
-        { id: 'ui', label: 'Marea Admin Panel', type: 'frontend', status: 'online', x: cols.frontend, y: 250, details: { framework: 'Next.js Admin Console dashboard', features: 'Sales widgets, charts, and CMS editor' } },
+        { id: 'ui', label: 'Clothing Brand Admin Panel', type: 'frontend', status: 'online', x: cols.frontend, y: 250, details: { framework: 'Next.js Admin Console dashboard', features: 'Sales widgets, charts, and CMS editor' } },
         { id: 'auth', label: 'Admin Guard Sessions', type: 'auth', status: 'online', x: cols.frontend, y: 130, details: { verify: 'Supabase authenticated token parser' } },
-        { id: 'api', label: 'Marea Admin API Routes', type: 'api', status: 'online', x: cols.api, y: 250, details: { endpoints: 'Admin analytics data loaders API', actions: 'Dnd-kit catalogs list update' } },
+        { id: 'api', label: 'Clothing Brand Admin API Routes', type: 'api', status: 'online', x: cols.api, y: 250, details: { endpoints: 'Admin analytics data loaders API', actions: 'Dnd-kit catalogs list update' } },
         { id: 'db', label: 'Supabase Postgres DB', type: 'database', status: 'online', x: cols.db, y: 250, details: { contents: 'Products assets, sales ledger, collections settings', access: 'Restricted admin actions only' } }
       ];
 
@@ -164,10 +164,10 @@ export class GraphDataResolver {
         { id: 'e3', source: 'ui', target: 'api', animated: true, flowSpeed: 'fast' },
         { id: 'e4', source: 'api', target: 'db', animated: true, flowSpeed: 'fast', label: 'Save collection layout' }
       ];
-    } else if (slug === 'surendra-bus-body') {
+    } else if (slug === 'bus-body-builder-website') {
       nodes = [
         { id: 'user', label: 'Corporate Client', type: 'user', status: 'online', x: cols.user, y: 250, details: { role: 'Bus fleet owner looking for bus customization', action: 'Inquire quote' } },
-        { id: 'ui', label: 'Surendra Portal UI', type: 'frontend', status: 'online', x: cols.frontend, y: 250, details: { stack: 'Next.js Frontend show page, Tailwind CSS', layout: 'Responsive portfolio grids' } },
+        { id: 'ui', label: 'Coach Builder Portal UI', type: 'frontend', status: 'online', x: cols.frontend, y: 250, details: { stack: 'Next.js Frontend show page, Tailwind CSS', layout: 'Responsive portfolio grids' } },
         { id: 'validation', label: 'Contact Form Validator', type: 'validation', status: 'online', x: cols.api, y: 130, details: { library: 'React Hook Form validations checks', target: 'Check email and phone parameters' } },
         { id: 'api', label: 'Email forward API Router', type: 'api', status: 'online', x: cols.api, y: 250, details: { endpoint: '/api/contact mail sender route', provider: 'Nodemailer transport server' } },
         { id: 'mail', label: 'Corporate Mail inbox', type: 'external', status: 'online', x: cols.external, y: 250, details: { target: 'Recieves contact detail alerts', status: 'Outlook / Gmail inbox receipt' } }

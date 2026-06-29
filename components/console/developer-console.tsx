@@ -539,7 +539,7 @@ export default function DeveloperConsole({ adminMode = false }: DeveloperConsole
             return (
               <div
                 key={log.id}
-                className="flex flex-col border border-white/5 bg-black/20 rounded-xl overflow-hidden hover:border-white/10 hover:bg-white/[0.01] transition-all"
+                className="flex flex-col border border-white/5 bg-black/20 rounded-xl overflow-hidden hover:border-white/10 hover:bg-white/[0.01] transition-all shrink-0"
               >
                 {/* Log Row Header */}
                 <div

@@ -25,7 +25,7 @@ export function ProjectsPreview() {
         <div className="flex items-center justify-between p-2 rounded-lg bg-white/[0.02] border border-white/5 hover:border-cyan-500/10 transition-colors">
           <span className="text-foreground font-semibold flex items-center gap-2">
             <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
-            Bhagwati Interior ERP
+            Interior Design ERP
           </span>
           <Badge variant="outline" className="text-[9px] border-emerald-500/20 text-emerald-400 bg-emerald-950/20 px-1.5 py-0">
             ACTIVE
@@ -33,11 +33,11 @@ export function ProjectsPreview() {
         </div>
         <div className="flex items-center justify-between p-2 rounded-lg bg-white/[0.02] border border-white/5 hover:border-cyan-500/10 transition-colors">
           <span className="text-foreground font-semibold flex items-center gap-2">
-            <span className="h-1.5 w-1.5 rounded-full bg-zinc-500" />
-            Enermass Calculator
+            <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
+            Solar Sizing Calculator
           </span>
-          <Badge variant="outline" className="text-[9px] border-white/5 text-muted bg-white/5 px-1.5 py-0">
-            STANDBY
+          <Badge variant="outline" className="text-[9px] border-emerald-500/20 text-emerald-400 bg-emerald-950/20 px-1.5 py-0">
+            ACTIVE
           </Badge>
         </div>
       </div>
@@ -164,18 +164,80 @@ export function AIAssistantPreview() {
 // TELEMETRY DASHBOARD PREVIEW
 // ═══════════════════════════════════════════
 export function TelemetryDashboardPreview() {
-  const [metrics, setMetrics] = useState({ cpu: 12, ram: 1.4, sessions: 4 });
+  const [metrics, setMetrics] = useState({ cpu: 5, ram: 0.12, views: 180 });
+  const [waveSeed, setWaveSeed] = useState(0);
 
   useEffect(() => {
+    // 1. Fetch real page views count from database stats
+    fetch('/api/telemetry/stats')
+      .then(res => res.json())
+      .then(payload => {
+        if (payload.success && payload.stats) {
+          setMetrics(prev => ({
+            ...prev,
+            views: payload.stats.totalViews || prev.views
+          }));
+        }
+      })
+      .catch(() => {});
+
+    // 2. Measure client CPU load via requestAnimationFrame (FPS)
+    let lastTime = performance.now();
+    let frameCount = 0;
+    let fps = 60;
+    let rAFHandle: number;
+
+    const measureFps = () => {
+      const now = performance.now();
+      frameCount++;
+      if (now >= lastTime + 1000) {
+        fps = Math.round((frameCount * 1000) / (now - lastTime));
+        frameCount = 0;
+        lastTime = now;
+      }
+      rAFHandle = requestAnimationFrame(measureFps);
+    };
+    rAFHandle = requestAnimationFrame(measureFps);
+
+    // 3. Periodic metric check interval
     const interval = setInterval(() => {
-      setMetrics({
-        cpu: Math.floor(Math.random() * 8) + 8,
-        ram: parseFloat((Math.random() * 0.1 + 1.35).toFixed(2)),
-        sessions: Math.floor(Math.random() * 2) + 4
-      });
-    }, 3000);
-    return () => clearInterval(interval);
+      // Calculate CPU load: lower FPS correlates to busy main thread
+      const currentCpu = Math.max(2, Math.min(99, Math.round(100 - (fps / 60) * 100 + (Math.random() * 4))));
+
+      // Retrieve browser memory heap size if supported
+      const perf = typeof window !== 'undefined' ? (window.performance as any) : null;
+      const heap = perf && perf.memory ? perf.memory.usedJSHeapSize : null;
+      const currentRam = heap
+        ? parseFloat((heap / (1024 * 1024 * 1024)).toFixed(3))
+        : parseFloat((0.082 + Math.random() * 0.012).toFixed(3));
+
+      setMetrics(prev => ({
+        ...prev,
+        cpu: currentCpu,
+        ram: currentRam
+      }));
+      setWaveSeed(s => s + 1);
+    }, 2000);
+
+    return () => {
+      cancelAnimationFrame(rAFHandle);
+      clearInterval(interval);
+    };
   }, []);
+
+  // Generate dynamic wave path coordinates based on CPU/RAM load
+  const wavePath = (() => {
+    const amp1 = 8 + (metrics.cpu / 20);
+    const amp2 = 6 + (metrics.ram * 10);
+    const phase = waveSeed * 0.5;
+    
+    const y1 = Math.round(18 + Math.sin(phase) * amp1);
+    const y2 = Math.round(12 + Math.cos(phase + 1) * amp2);
+    const y3 = Math.round(20 + Math.sin(phase + 2) * amp1);
+    const y4 = Math.round(10 + Math.cos(phase + 3) * amp2);
+    
+    return `M0 25 Q 20 ${y1}, 45 ${y2} T 90 ${y3} T 135 ${y4} L 150 30 L 150 30 L 0 30 Z`;
+  })();
 
   return (
     <div className="flex flex-col gap-3 font-mono w-full h-full select-none">
@@ -192,18 +254,19 @@ export function TelemetryDashboardPreview() {
         </div>
         <div className="flex flex-col gap-1 p-2 bg-white/[0.02] border border-white/5 rounded-lg items-center text-center">
           <Activity className="h-3.5 w-3.5 text-violet-400 animate-pulse" />
-          <span className="text-[8px] text-muted font-bold uppercase tracking-wider">SESSIONS</span>
-          <span className="text-[11px] font-bold text-foreground">{metrics.sessions}</span>
+          <span className="text-[8px] text-muted font-bold uppercase tracking-wider">PAGE VIEWS</span>
+          <span className="text-[11px] font-bold text-foreground">{metrics.views}</span>
         </div>
       </div>
 
       <div className="relative w-full h-[32px] bg-black/20 border border-white/5 rounded-lg overflow-hidden flex items-end">
         <svg width="100%" height="100%" viewBox="0 0 150 30" preserveAspectRatio="none" className="w-full h-full">
           <path
-            d="M0 25 Q 15 20, 30 22 T 60 12 T 90 18 T 120 8 T 150 15 L 150 30 L 0 30 Z"
+            d={wavePath}
             fill="rgba(139, 92, 246, 0.08)"
             stroke="rgba(139, 92, 246, 0.4)"
             strokeWidth="0.8"
+            className="transition-all duration-1000 ease-in-out"
           />
           <line x1="0" y1="15" x2="150" y2="15" stroke="rgba(255, 255, 255, 0.02)" strokeWidth="0.5" strokeDasharray="3 3" />
         </svg>

@@ -236,7 +236,7 @@ export default function ProjectCaseStudy({ params }: ProjectPageProps) {
         <SystemVisualizer projectSlug={project.slug} />
         
         {/* Render Data Flow Explorer if project has matching flow */}
-        {['enermass-solar-calculator', 'bhagwati-interior-erp', 'outreachops-ai', 'driedhub-marketplace', 'mspe-volatility-engine', 'nf-lrd-regime-discovery', 'btc-algo-trading'].includes(project.slug) && (
+        {['solar-sizing-calculator', 'interior-design-erp', 'outreachops-ai', 'anjeer-marketplace', 'mspe-volatility-engine', 'nf-lrd-regime-discovery', 'btc-algo-trading'].includes(project.slug) && (
           <div className="mt-4 pt-4 border-t border-card-border">
             <span className="text-[10px] font-mono text-secondary uppercase font-bold tracking-wider select-none mb-3 block">System Transaction Flow Progression</span>
             <DataFlowExplorer projectSlug={project.slug} allowFlowSwitching={false} />

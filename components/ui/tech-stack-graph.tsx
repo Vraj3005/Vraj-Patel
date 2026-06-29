@@ -29,13 +29,13 @@ export default function TechStackGraph() {
     { id: 'gemini', label: 'Gemini API', type: 'tech', x: 100, y: 460, color: '#60a5fa' }, // Blue
 
     // Target Project Nodes (Right side)
-    { id: 'surendra', label: 'Surendra & Co.', type: 'project', x: 500, y: 30, color: '#e2e8f0' },
-    { id: 'enermass', label: 'Enermass Solar', type: 'project', x: 500, y: 76, color: '#e2e8f0' },
-    { id: 'bhagwati', label: 'Bhagwati Interior', type: 'project', x: 500, y: 122, color: '#e2e8f0' },
-    { id: 'driedhub', label: 'Driedhub Market', type: 'project', x: 500, y: 168, color: '#e2e8f0' },
-    { id: 'driedhub-admin', label: 'Driedhub Admin', type: 'project', x: 500, y: 214, color: '#e2e8f0' },
-    { id: 'marea', label: 'Marea Luxury', type: 'project', x: 500, y: 260, color: '#e2e8f0' },
-    { id: 'marea-admin', label: 'Marea Admin', type: 'project', x: 500, y: 306, color: '#e2e8f0' },
+    { id: 'bus-body-builder', label: 'Bus Coach Builder', type: 'project', x: 500, y: 30, color: '#e2e8f0' },
+    { id: 'solar-sizing', label: 'Solar Sizing Engine', type: 'project', x: 500, y: 76, color: '#e2e8f0' },
+    { id: 'interior-design', label: 'Interior Design Studio', type: 'project', x: 500, y: 122, color: '#e2e8f0' },
+    { id: 'anjeer', label: 'Afghan Anjeer Marketplace Market', type: 'project', x: 500, y: 168, color: '#e2e8f0' },
+    { id: 'anjeer-admin', label: 'Afghan Anjeer Marketplace Admin', type: 'project', x: 500, y: 214, color: '#e2e8f0' },
+    { id: 'clothing-brand', label: 'Clothing Brand Luxury', type: 'project', x: 500, y: 260, color: '#e2e8f0' },
+    { id: 'clothing-brand-admin', label: 'Clothing Brand Admin', type: 'project', x: 500, y: 306, color: '#e2e8f0' },
     { id: 'mspe', label: 'MSPE Greeks', type: 'project', x: 500, y: 352, color: '#e2e8f0' },
     { id: 'nflrd', label: 'NF-LRD Quant', type: 'project', x: 500, y: 398, color: '#e2e8f0' },
     { id: 'btcalgo', label: 'BTC-ALGO Trading', type: 'project', x: 500, y: 444, color: '#e2e8f0' },
@@ -45,33 +45,33 @@ export default function TechStackGraph() {
   // Connections mapping
   const edges: Edge[] = [
     // Next.js connections
-    { source: 'nextjs', target: 'surendra' },
-    { source: 'nextjs', target: 'enermass' },
-    { source: 'nextjs', target: 'bhagwati' },
-    { source: 'nextjs', target: 'driedhub' },
-    { source: 'nextjs', target: 'driedhub-admin' },
-    { source: 'nextjs', target: 'marea' },
-    { source: 'nextjs', target: 'marea-admin' },
+    { source: 'nextjs', target: 'bus-body-builder' },
+    { source: 'nextjs', target: 'solar-sizing' },
+    { source: 'nextjs', target: 'interior-design' },
+    { source: 'nextjs', target: 'anjeer' },
+    { source: 'nextjs', target: 'anjeer-admin' },
+    { source: 'nextjs', target: 'clothing-brand' },
+    { source: 'nextjs', target: 'clothing-brand-admin' },
     { source: 'nextjs', target: 'mspe' },
     { source: 'nextjs', target: 'coldemail' },
 
     // Supabase connections
-    { source: 'supabase', target: 'enermass' },
-    { source: 'supabase', target: 'driedhub' },
-    { source: 'supabase', target: 'driedhub-admin' },
-    { source: 'supabase', target: 'marea' },
-    { source: 'supabase', target: 'marea-admin' },
+    { source: 'supabase', target: 'solar-sizing' },
+    { source: 'supabase', target: 'anjeer' },
+    { source: 'supabase', target: 'anjeer-admin' },
+    { source: 'supabase', target: 'clothing-brand' },
+    { source: 'supabase', target: 'clothing-brand-admin' },
     { source: 'supabase', target: 'coldemail' },
 
     // Python connections
-    { source: 'python', target: 'enermass' },
+    { source: 'python', target: 'solar-sizing' },
     { source: 'python', target: 'mspe' },
     { source: 'python', target: 'nflrd' },
     { source: 'python', target: 'btcalgo' },
     { source: 'python', target: 'coldemail' },
 
     // Gemini API connections
-    { source: 'gemini', target: 'bhagwati' },
+    { source: 'gemini', target: 'interior-design' },
     { source: 'gemini', target: 'coldemail' }
   ];
 

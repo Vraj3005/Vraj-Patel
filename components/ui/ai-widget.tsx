@@ -16,7 +16,7 @@ interface ChatMessage {
 const quickPrompts = [
   'Who is Vraj Patel?',
   'What is Vraj’s strongest project?',
-  'Explain Enermass Solar ERP.',
+  'Explain Solar Sizing Engine ERP.',
   'Explain NF-LRD technically.',
   'Summarize Vraj for a recruiter.',
   'What makes him different?',

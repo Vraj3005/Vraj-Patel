@@ -43,8 +43,8 @@ const timeline: ExperienceItem[] = [
   {
     period: 'May 2026 - Jul 2026',
     role: 'Software Engineering Intern',
-    organization: 'Pitbull Corporation',
-    description: 'Engineered and delivered core client ERP platforms and e-commerce websites (Enermass Solar Calculator, Bhagwati Interior ERP, Driedhub Marketplace, Marea Luxury Storefront, and Surendra website) during a 2-month summer internship, designing database schemas and optimizing visual layouts.',
+    organization: 'Software Consultancy Agency',
+    description: 'Engineered and delivered core client ERP platforms and e-commerce websites (Solar Sizing Calculator, Interior Design ERP, Afghan Anjeer Marketplace, Clothing Brand Luxury Storefront, and Bus Body Builder website) during a 2-month summer internship, designing database schemas and optimizing visual layouts.',
     type: 'client',
   },
   {

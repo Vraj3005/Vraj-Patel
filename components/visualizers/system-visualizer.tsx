@@ -17,14 +17,14 @@ interface SystemVisualizerProps {
 }
 
 const PROJECT_LIST = [
-  { slug: 'enermass-solar-calculator', name: 'Enermass Solar Calculator & ERP' },
+  { slug: 'solar-sizing-calculator', name: 'Solar Sizing Calculator & ERP' },
   { slug: 'outreachops-ai', name: 'OutreachOps AI (AI Coldmail)' },
-  { slug: 'bhagwati-interior-erp', name: 'Bhagwati Interior ERP' },
-  { slug: 'driedhub-marketplace', name: 'Driedhub Marketplace' },
-  { slug: 'driedhub-admin-dashboard', name: 'Driedhub Admin ERP' },
-  { slug: 'marea-website', name: 'Marea Luxury Fashion' },
-  { slug: 'marea-admin-dashboard', name: 'Marea Admin ERP' },
-  { slug: 'surendra-bus-body', name: 'Surendra Bus Body Website' },
+  { slug: 'interior-design-erp', name: 'Interior Design ERP' },
+  { slug: 'anjeer-marketplace', name: 'Afghan Anjeer Marketplace' },
+  { slug: 'anjeer-admin-dashboard', name: 'Afghan Anjeer Marketplace Admin ERP' },
+  { slug: 'clothing-brand-website', name: 'Clothing Brand Storefront' },
+  { slug: 'clothing-brand-admin', name: 'Clothing Brand Admin ERP' },
+  { slug: 'bus-body-builder-website', name: 'Bus Body Builder Bus Body Website' },
   { slug: 'mspe-volatility-engine', name: 'MSPE Volatility Engine' },
   { slug: 'nf-lrd-regime-discovery', name: 'NF-LRD Regime Discovery' },
   { slug: 'btc-algo-trading', name: 'BTC-ALGO Trading Board' },
@@ -32,7 +32,7 @@ const PROJECT_LIST = [
 ];
 
 export default function SystemVisualizer({ 
-  projectSlug = 'enermass-solar-calculator', 
+  projectSlug = 'solar-sizing-calculator', 
   allowProjectSwitching = false 
 }: SystemVisualizerProps) {
   const [activeProject, setActiveProject] = useState(projectSlug);

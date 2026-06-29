@@ -22,10 +22,10 @@ export const TECH_PROJECT_MAP: TechItem[] = [
     category: "Frontend",
     proof: "Core web framework used to build production portals. Implemented dynamic routes, middleware API gateways, and hydration-safe SSR states.",
     projects: [
-      { title: "Enermass Solar Calculator", slug: "enermass-solar-calculator" },
-      { title: "Bhagwati Interior ERP", slug: "bhagwati-interior-erp" },
+      { title: "Solar Sizing Calculator", slug: "solar-sizing-calculator" },
+      { title: "Interior Design ERP", slug: "interior-design-erp" },
       { title: "OutreachOps AI", slug: "outreachops-ai" },
-      { title: "Marea Luxury Fashion", slug: "marea-website" },
+      { title: "Clothing Brand Storefront", slug: "clothing-brand-website" },
       { title: "Ask Vraj AI", slug: "ask-vraj", isExternal: true }
     ]
   },
@@ -36,9 +36,9 @@ export const TECH_PROJECT_MAP: TechItem[] = [
     category: "Frontend",
     proof: "Leveraged advanced state hooks (useState, useEffect, useMemo), custom context structures, and React Three Fiber 3D canvases.",
     projects: [
-      { title: "Enermass Solar Calculator", slug: "enermass-solar-calculator" },
-      { title: "Driedhub Marketplace", slug: "driedhub-marketplace" },
-      { title: "Marea Luxury Fashion", slug: "marea-website" },
+      { title: "Solar Sizing Calculator", slug: "solar-sizing-calculator" },
+      { title: "Afghan Anjeer Marketplace", slug: "anjeer-marketplace" },
+      { title: "Clothing Brand Storefront", slug: "clothing-brand-website" },
       { title: "Ask Vraj AI", slug: "ask-vraj", isExternal: true }
     ]
   },
@@ -50,9 +50,9 @@ export const TECH_PROJECT_MAP: TechItem[] = [
     proof: "Maintained complete type-safety across database models, event routers, schema validations, and options Greeks numerical pipelines.",
     projects: [
       { title: "OutreachOps AI", slug: "outreachops-ai" },
-      { title: "Enermass Solar Calculator", slug: "enermass-solar-calculator" },
-      { title: "Bhagwati Interior ERP", slug: "bhagwati-interior-erp" },
-      { title: "Driedhub Marketplace", slug: "driedhub-marketplace" }
+      { title: "Solar Sizing Calculator", slug: "solar-sizing-calculator" },
+      { title: "Interior Design ERP", slug: "interior-design-erp" },
+      { title: "Afghan Anjeer Marketplace", slug: "anjeer-marketplace" }
     ]
   },
   {
@@ -62,10 +62,10 @@ export const TECH_PROJECT_MAP: TechItem[] = [
     category: "Frontend",
     proof: "Designed unified UI design systems, glassy responsive elements, dark modes, and print-media PDF templates.",
     projects: [
-      { title: "Enermass Solar Calculator", slug: "enermass-solar-calculator" },
-      { title: "Bhagwati Interior ERP", slug: "bhagwati-interior-erp" },
-      { title: "Marea Luxury Fashion", slug: "marea-website" },
-      { title: "Surendra & Co. Website", slug: "surendra-bus-body" }
+      { title: "Solar Sizing Calculator", slug: "solar-sizing-calculator" },
+      { title: "Interior Design ERP", slug: "interior-design-erp" },
+      { title: "Clothing Brand Storefront", slug: "clothing-brand-website" },
+      { title: "Bus Body Building Company Website", slug: "bus-body-builder-website" }
     ]
   },
   {
@@ -75,7 +75,7 @@ export const TECH_PROJECT_MAP: TechItem[] = [
     category: "Frontend",
     proof: "Created custom layout overlays, route transition blurs, spotlight cursor bounds, and smooth springs.",
     projects: [
-      { title: "Surendra & Co. Website", slug: "surendra-bus-body" },
+      { title: "Bus Body Building Company Website", slug: "bus-body-builder-website" },
       { title: "Ask Vraj AI", slug: "ask-vraj", isExternal: true }
     ]
   },
@@ -88,9 +88,9 @@ export const TECH_PROJECT_MAP: TechItem[] = [
     category: "Backend/DB",
     proof: "Constructed API backend endpoints, database connector integrations, webhook verifications, and email queues.",
     projects: [
-      { title: "Enermass Solar Calculator", slug: "enermass-solar-calculator" },
-      { title: "Bhagwati Interior ERP", slug: "bhagwati-interior-erp" },
-      { title: "Driedhub Marketplace", slug: "driedhub-marketplace" }
+      { title: "Solar Sizing Calculator", slug: "solar-sizing-calculator" },
+      { title: "Interior Design ERP", slug: "interior-design-erp" },
+      { title: "Afghan Anjeer Marketplace", slug: "anjeer-marketplace" }
     ]
   },
   {
@@ -111,8 +111,8 @@ export const TECH_PROJECT_MAP: TechItem[] = [
     category: "Backend/DB",
     proof: "Configured PostgreSQL databases, customer table structures, secured Row Level Security (RLS) policies, and authenticated login channels.",
     projects: [
-      { title: "Driedhub Marketplace", slug: "driedhub-marketplace" },
-      { title: "Marea Luxury Fashion", slug: "marea-website" },
+      { title: "Afghan Anjeer Marketplace", slug: "anjeer-marketplace" },
+      { title: "Clothing Brand Storefront", slug: "clothing-brand-website" },
       { title: "Ask Vraj AI", slug: "ask-vraj", isExternal: true }
     ]
   },
@@ -123,9 +123,9 @@ export const TECH_PROJECT_MAP: TechItem[] = [
     category: "Backend/DB",
     proof: "Designed relational tables, triggers, indexes, and optimized query transactions for inventory ledgers and telemetry log lists.",
     projects: [
-      { title: "Enermass Solar Calculator", slug: "enermass-solar-calculator" },
-      { title: "Bhagwati Interior ERP", slug: "bhagwati-interior-erp" },
-      { title: "Driedhub Marketplace", slug: "driedhub-marketplace" }
+      { title: "Solar Sizing Calculator", slug: "solar-sizing-calculator" },
+      { title: "Interior Design ERP", slug: "interior-design-erp" },
+      { title: "Afghan Anjeer Marketplace", slug: "anjeer-marketplace" }
     ]
   },
   {
@@ -135,8 +135,8 @@ export const TECH_PROJECT_MAP: TechItem[] = [
     category: "Backend/DB",
     proof: "Managed database queries and schema migration scripts, eliminating SQL write injection vulnerabilities.",
     projects: [
-      { title: "Enermass Solar Calculator", slug: "enermass-solar-calculator" },
-      { title: "Bhagwati Interior ERP", slug: "bhagwati-interior-erp" }
+      { title: "Solar Sizing Calculator", slug: "solar-sizing-calculator" },
+      { title: "Interior Design ERP", slug: "interior-design-erp" }
     ]
   },
 
@@ -149,7 +149,7 @@ export const TECH_PROJECT_MAP: TechItem[] = [
     proof: "Leveraged model intelligence to crawl/personalize marketing copy, audit logs, and power conversational portfolios.",
     projects: [
       { title: "OutreachOps AI", slug: "outreachops-ai" },
-      { title: "Bhagwati Interior ERP", slug: "bhagwati-interior-erp" },
+      { title: "Interior Design ERP", slug: "interior-design-erp" },
       { title: "Ask Vraj AI", slug: "ask-vraj", isExternal: true }
     ]
   },
@@ -255,7 +255,7 @@ export const TECH_PROJECT_MAP: TechItem[] = [
     projects: [
       { title: "OutreachOps AI", slug: "outreachops-ai" },
       { title: "MSPE Volatility Engine", slug: "mspe-volatility-engine" },
-      { title: "Driedhub Marketplace", slug: "driedhub-marketplace" }
+      { title: "Afghan Anjeer Marketplace", slug: "anjeer-marketplace" }
     ]
   },
   {
@@ -265,8 +265,8 @@ export const TECH_PROJECT_MAP: TechItem[] = [
     category: "Tools",
     proof: "Primary cloud deployment platform. Maintained production serverless builds, edge handlers, SSL details, and environment configurations.",
     projects: [
-      { title: "Enermass Solar Calculator", slug: "enermass-solar-calculator" },
-      { title: "Bhagwati Interior ERP", slug: "bhagwati-interior-erp" },
+      { title: "Solar Sizing Calculator", slug: "solar-sizing-calculator" },
+      { title: "Interior Design ERP", slug: "interior-design-erp" },
       { title: "OutreachOps AI", slug: "outreachops-ai" }
     ]
   },
@@ -277,8 +277,8 @@ export const TECH_PROJECT_MAP: TechItem[] = [
     category: "Tools",
     proof: "Containerized local development networks, including PostgreSQL servers and Redis caching instances.",
     projects: [
-      { title: "Bhagwati Interior ERP", slug: "bhagwati-interior-erp" },
-      { title: "Driedhub Marketplace", slug: "driedhub-marketplace" }
+      { title: "Interior Design ERP", slug: "interior-design-erp" },
+      { title: "Afghan Anjeer Marketplace", slug: "anjeer-marketplace" }
     ]
   }
 ];

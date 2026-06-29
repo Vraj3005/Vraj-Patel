@@ -43,7 +43,7 @@ export default function CommandShell({ onExecuteCommand }: CommandShellProps) {
       if (lower === 'status') {
         output = 'System status: ONLINE.\nDatabase nodes: 16 connected.\nSecurity parameters: active.';
       } else if (lower === 'projects') {
-        output = 'Active project pipelines:\n- OutreachOps AI (AI Automation)\n- Enermass Solar Calculator (ERP)\n- Bhagwati ERP (ERP)\n- Driedhub Marketplace (E-commerce)\n- Marea website (E-commerce)';
+        output = 'Active project pipelines:\n- OutreachOps AI (AI Automation)\n- Solar Sizing Calculator (ERP)\n- Interior Design Studio ERP (ERP)\n- Afghan Anjeer Marketplace (E-commerce)\n- Clothing Brand website (E-commerce)';
       } else if (lower === 'metrics') {
         output = 'Core Telemetry Vitals:\nAvg API response latency: 120ms\nCache hits ratio: 94.2%\nThreat mitigations: active.';
       } else if (lower === 'clear') {

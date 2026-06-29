@@ -39,7 +39,7 @@ export default function Resume() {
     setTimeout(() => setCopyStatus(null), 2000);
   };
 
-  const shortSummaryText = `Highly technical CSE student at Nirma University. Architects robust web applications, custom pricing ERP platforms (Enermass, Bhagwati), and quantitative market research tools (regime discovery, options pricing engines).`;
+  const shortSummaryText = `Highly technical CSE student at Nirma University. Architects robust web applications, custom pricing ERP platforms (Solar Sizing Engine, Interior Design Studio), and quantitative market research tools (regime discovery, options pricing engines).`;
 
   const fullStackSummaryText = `Computer Science Undergrad with proven expertise building client ERP architectures. Experienced shipping next-generation full-stack solutions, custom pricing matrices, and database query optimizations. Proficient with Next.js, Express, FastAPI, PostgreSQL, and Supabase RLS policies.`;
 
@@ -191,14 +191,14 @@ export default function Resume() {
               <div className="flex justify-between items-start text-xs md:text-sm">
                 <div className="flex flex-col gap-0.5">
                   <span className="font-bold font-serif text-foreground print:text-black">Software Engineering Intern</span>
-                  <span className="text-secondary print:text-gray-700 font-medium">Pitbull Corporation · Gujarat, India</span>
+                  <span className="text-secondary print:text-gray-700 font-medium">Software Consultancy Agency · Gujarat, India</span>
                 </div>
                 <div className="flex flex-col items-end text-[10px] md:text-xs font-bold text-secondary print:text-primary font-mono">
                   <span>May 2026 - Jul 2026</span>
                 </div>
               </div>
               <p className="text-xs text-secondary print:text-gray-600 leading-relaxed font-medium">
-                Engineered and delivered core client ERP systems and B2B layouts (Bhagwati Interior ERP, Enermass Solar Calculator, Driedhub, Marea, and Surendra website). Built performant data sync logic, automated GST invoice pipelines, and optimized Three.js/scroll rendering interfaces.
+                Engineered and delivered core client ERP systems and B2B layouts (Interior Design ERP, Solar Sizing Calculator, Afghan Anjeer Marketplace, Clothing Brand, and Bus Body Builder website). Built performant data sync logic, automated GST invoice pipelines, and optimized Three.js/scroll rendering interfaces.
               </p>
             </div>
           </div>
@@ -243,10 +243,10 @@ export default function Resume() {
                 </p>
               </div>
 
-              {/* Project 4: Enermass */}
+              {/* Project 4: Solar Sizing Engine */}
               <div className="flex flex-col gap-1 text-xs">
                 <div className="flex justify-between items-start">
-                  <span className="font-bold font-serif text-foreground print:text-black">Enermass Solar Calculator & ERP · <span className="text-[10px] text-muted italic">Collaboration Project</span></span>
+                  <span className="font-bold font-serif text-foreground print:text-black">Solar Sizing Calculator & ERP · <span className="text-[10px] text-muted italic">Collaboration Project</span></span>
                   <span className="text-[10px] font-bold text-secondary print:text-primary font-mono">May 2026 - Jun 2026</span>
                 </div>
                 <p className="text-secondary print:text-gray-700 leading-relaxed text-[11px] md:text-xs font-medium">

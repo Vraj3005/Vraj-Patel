@@ -22,7 +22,7 @@ const CONTEXT_NODES: ContextNode[] = [
     id: "projects",
     name: "Projects Context",
     count: "10 Systems Mapped",
-    detail: "Canonical databases from enermass, outreachops, constructionos, mspe, and nflrd loaded.",
+    detail: "Canonical databases from solar-sizing, outreachops, constructionos, mspe, and nflrd loaded.",
     color: "#06b6d4", // Cyan
     bgGlow: "rgba(6, 182, 212, 0.4)",
     x: 29,

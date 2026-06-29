@@ -15,7 +15,7 @@ export default function ComplexityCards() {
     },
     {
       title: 'Redis Cache & QStash Worker pipeline',
-      project: 'Bhagwati Interior ERP',
+      project: 'Interior Design ERP',
       tech: 'Upstash Redis / QStash Queue / Drizzle',
       desc: 'Implements asynchronous queues to coordinate catalog price revisions and prevent concurrent PostgreSQL write transactions locks, syncing client ledgers and invoice status notifications.',
       icon: <QueueIcon />,
@@ -23,7 +23,7 @@ export default function ComplexityCards() {
     },
     {
       title: 'Hydrated State-Coefficient Matrix',
-      project: 'Enermass Solar Calculator & ERP',
+      project: 'Solar Sizing Calculator & ERP',
       tech: 'Zustand Store / LocalStorage Hydration',
       desc: 'Computes state-by-state subsidies (PM Surya Ghar brackets) and complex invoice quantities overrides entirely on the client, caching active drafts offline in LocalStorage.',
       icon: <ClientIcon />,

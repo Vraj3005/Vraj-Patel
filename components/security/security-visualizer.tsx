@@ -308,9 +308,9 @@ const fetchInquiries = async (passcode: string) => {
       }
     ]
   },
-  'enermass-erp': {
-    id: 'enermass-erp',
-    title: 'Enermass Solar Calculator',
+  'solar-sizing-erp': {
+    id: 'solar-sizing-erp',
+    title: 'Solar Sizing Calculator',
     description: 'Boundary checks on calculation inputs, sandboxed PDF rendering, and IP request bounds.',
     layers: [
       {
@@ -356,9 +356,9 @@ await page.setBypassCSP(false);`
       }
     ]
   },
-  'bhagwati-erp': {
-    id: 'bhagwati-erp',
-    title: 'Bhagwati Interior ERP',
+  'interior-design-erp': {
+    id: 'interior-design-erp',
+    title: 'Interior Design ERP',
     description: 'Server actions origin white-lists, assigned row security validation, and task signature triggers.',
     layers: [
       {
@@ -421,14 +421,14 @@ if (!isValid) return new Response("Forbidden: Signature invalid", { status: 401 
 };
 
 const PROJECT_SLUG_MAP: Record<string, string> = {
-  'enermass-solar-calculator': 'enermass-erp',
+  'solar-sizing-calculator': 'solar-sizing-erp',
   'outreachops-ai': 'ask-vraj',
-  'bhagwati-interior-erp': 'bhagwati-erp',
-  'driedhub-marketplace': 'portfolio',
-  'driedhub-admin-dashboard': 'inbox',
-  'marea-website': 'portfolio',
-  'marea-admin-dashboard': 'inbox',
-  'surendra-bus-body': 'portfolio',
+  'interior-design-erp': 'interior-design-erp',
+  'anjeer-marketplace': 'portfolio',
+  'anjeer-admin-dashboard': 'inbox',
+  'clothing-brand-website': 'portfolio',
+  'clothing-brand-admin': 'inbox',
+  'bus-body-builder-website': 'portfolio',
   'mspe-volatility-engine': 'portfolio',
   'nf-lrd-regime-discovery': 'portfolio',
   'btc-algo-trading': 'portfolio',

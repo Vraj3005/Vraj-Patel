@@ -24,7 +24,7 @@ interface ProjectArchitecture {
 }
 
 const architectureData: Record<string, ProjectArchitecture> = {
-  'enermass-solar-calculator': {
+  'solar-sizing-calculator': {
     frontend: {
       title: 'Frontend Sizing UI',
       icon: <Layout className="h-4 w-4" />,
@@ -112,7 +112,7 @@ const architectureData: Record<string, ProjectArchitecture> = {
       keyMetric: 'OAuth 2.0 Secure'
     }
   },
-  'bhagwati-interior-erp': {
+  'interior-design-erp': {
     frontend: {
       title: 'Frontend Dashboard',
       icon: <Layout className="h-4 w-4" />,
@@ -156,7 +156,7 @@ const architectureData: Record<string, ProjectArchitecture> = {
       keyMetric: 'NextAuth Credentials'
     }
   },
-  'driedhub-marketplace': {
+  'anjeer-marketplace': {
     frontend: {
       title: 'Frontend Storefront',
       icon: <Layout className="h-4 w-4" />,
@@ -200,7 +200,7 @@ const architectureData: Record<string, ProjectArchitecture> = {
       keyMetric: 'Webhook verification'
     }
   },
-  'driedhub-admin-dashboard': {
+  'anjeer-admin-dashboard': {
     frontend: {
       title: 'Frontend Interface',
       icon: <Layout className="h-4 w-4" />,
@@ -244,7 +244,7 @@ const architectureData: Record<string, ProjectArchitecture> = {
       keyMetric: 'RLS Protected'
     }
   },
-  'marea-website': {
+  'clothing-brand-website': {
     frontend: {
       title: 'Frontend Interface',
       icon: <Layout className="h-4 w-4" />,
@@ -288,7 +288,7 @@ const architectureData: Record<string, ProjectArchitecture> = {
       keyMetric: 'Secure account logins'
     }
   },
-  'marea-admin-dashboard': {
+  'clothing-brand-admin': {
     frontend: {
       title: 'Frontend Interface',
       icon: <Layout className="h-4 w-4" />,
@@ -332,7 +332,7 @@ const architectureData: Record<string, ProjectArchitecture> = {
       keyMetric: 'Role-based access locks'
     }
   },
-  'surendra-bus-body': {
+  'bus-body-builder-website': {
     frontend: {
       title: 'Frontend Portal',
       icon: <Layout className="h-4 w-4" />,

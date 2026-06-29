@@ -51,7 +51,7 @@ export default function RecruiterModal({ isOpen, onClose }: RecruiterModalProps)
     {
       icon: <Terminal className="h-4 w-4 text-emerald-400" />,
       title: 'ERP & Client Software Builder',
-      subtitle: 'Enermass Solar Calculator & Bhagwati Interior ERP',
+      subtitle: 'Solar Sizing Calculator & Interior Design ERP',
       text: 'Built customized pricing engines. Sped up tilt & shading estimations via Zustand state calculations. Saved designers 65% quote times.'
     },
     {
@@ -77,7 +77,7 @@ export default function RecruiterModal({ isOpen, onClose }: RecruiterModalProps)
   const handleCopySummary = () => {
     const summaryText = `Vraj Patel — Recruiter Summary Checklist:
 1. Full-Stack Development: CSE Undergrad at Nirma University. Fluent in TypeScript, Next.js, and Python.
-2. ERP & Client Software: Built Enermass Solar ERP and Bhagwati Interior ERP. Optimized calculations using Zustand state.
+2. ERP & Client Software: Built Solar Sizing Engine ERP and Interior Design ERP. Optimized calculations using Zustand state.
 3. AI Automation: Programmed outbound scrapers utilizing Google GenAI SDK and Zod structured JSON schemas.
 4. Quant Finance: Built HMM market regime analyzers in Python and Black-Scholes options pricing mathematics.
 5. Production Mindset: Focuses on database security (Supabase RLS) and simple in-memory rate limiting.`;

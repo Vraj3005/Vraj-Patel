@@ -6,6 +6,7 @@ import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import Link from 'next/link';
+import AICoreAvatar from '@/components/ai/ai-core-avatar';
 
 interface Message {
   role: 'user' | 'assistant';
@@ -85,15 +86,26 @@ export default function AIPreview() {
           <div className="flex-1 overflow-y-auto p-5 scrollbar-thin flex flex-col gap-4 relative z-10">
             {messages.map((m, idx) => {
               const isBot = m.role === 'assistant';
+              const isLatestBotMsg = isBot && idx === messages.length - 1 && isLoading;
+              
               return (
                 <div key={idx} className={`flex gap-3 max-w-[85%] ${isBot ? 'self-start' : 'self-end flex-row-reverse'}`}>
-                  <div className={`h-7 w-7 rounded-lg border flex items-center justify-center shrink-0 ${
-                    isBot ? 'bg-card-bg border-card-border text-foreground' : 'bg-white border-white text-black'
-                  }`}>
-                    {isBot ? <Bot className="h-3.5 w-3.5" /> : <User className="h-3.5 w-3.5" />}
-                  </div>
-                  <div className={`rounded-xl px-3.5 py-2 text-xs leading-relaxed ${
-                    isBot ? 'bg-white/5 border border-card-border text-foreground' : 'bg-white text-black font-medium border border-white'
+                  {isBot ? (
+                    <div className="h-8 w-8 rounded-lg border border-card-border bg-foreground/5 shrink-0 flex items-center justify-center overflow-hidden">
+                      <AICoreAvatar 
+                        status={isLatestBotMsg ? 'responding' : 'ready'} 
+                        size="sm" 
+                      />
+                    </div>
+                  ) : (
+                    <div className="h-8 w-8 rounded-lg flex items-center justify-center border shrink-0 bg-foreground border-foreground text-background">
+                      <User className="h-4 w-4" />
+                    </div>
+                  )}
+                  <div className={`rounded-2xl px-3.5 py-2.5 text-xs leading-relaxed ${
+                    isBot 
+                      ? 'bg-foreground/[0.03] text-foreground border border-card-border rounded-tl-none' 
+                      : 'bg-foreground text-background font-medium border border-foreground rounded-tr-none'
                   }`}>
                     {m.content}
                   </div>
@@ -101,12 +113,12 @@ export default function AIPreview() {
               );
             })}
 
-            {isLoading && (
+            {isLoading && messages[messages.length - 1]?.role === 'user' && (
               <div className="flex gap-3 self-start">
-                <div className="h-7 w-7 rounded-lg bg-card-bg border border-card-border flex items-center justify-center text-foreground animate-pulse">
-                  <Bot className="h-3.5 w-3.5" />
+                <div className="h-8 w-8 rounded-lg border border-card-border bg-foreground/5 shrink-0 flex items-center justify-center overflow-hidden">
+                  <AICoreAvatar status="thinking" size="sm" />
                 </div>
-                <div className="bg-white/5 border border-card-border rounded-xl px-4 py-2 flex items-center gap-1.5">
+                <div className="bg-foreground/[0.03] border border-card-border rounded-2xl rounded-tl-none px-4 py-2 flex items-center gap-1.5">
                   <div className="h-1.5 w-1.5 rounded-full bg-foreground animate-bounce" style={{ animationDelay: '0ms' }} />
                   <div className="h-1.5 w-1.5 rounded-full bg-foreground animate-bounce" style={{ animationDelay: '150ms' }} />
                   <div className="h-1.5 w-1.5 rounded-full bg-foreground animate-bounce" style={{ animationDelay: '300ms' }} />

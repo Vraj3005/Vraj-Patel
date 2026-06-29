@@ -11,9 +11,9 @@ const SPECIFIC_METADATA: Record<string, { title: string; description: string }> 
     title: 'OutreachOps AI | Gemini Cold Email Automation Project',
     description: 'OutreachOps AI is Vraj Patel’s AI automation project using Google GenAI SDK, Gmail OAuth API, and Google Sheets API to generate personalized outreach drafts and manage outbound workflows.',
   },
-  'enermass-solar-calculator': {
-    title: 'Enermass Solar Calculator & ERP | Vraj Patel Portfolio',
-    description: 'A solar quotation calculator and ERP-style workflow system for Enermass, designed to manage customer requirements, pricing logic, subsidy calculations, and project workflow.',
+  'solar-sizing-calculator': {
+    title: 'Solar Sizing Calculator & ERP | Vraj Patel Portfolio',
+    description: 'A solar quotation calculator and ERP-style workflow system for Solar Sizing Engine, designed to manage customer requirements, pricing logic, subsidy calculations, and project workflow.',
   },
   'constructionos': {
     title: 'ConstructionOS ERP | Vraj Patel Portfolio',

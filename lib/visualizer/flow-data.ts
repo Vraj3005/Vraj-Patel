@@ -6,11 +6,11 @@ import { DataFlow } from '@/types/advanced';
  */
 export const DATA_FLOWS: DataFlow[] = [
   {
-    id: 'enermass-solar-calculator',
-    name: 'Enermass Quote Generation Workflow',
+    id: 'solar-sizing-calculator',
+    name: 'Solar Quote Generation Workflow',
     description: 'Traces how client-side user specifications are validated, computed against state subsidy formulas, and compiled to A4 PDF proposals.',
     accentColor: '#eab308', // Amber
-    projectSlug: 'enermass-solar-calculator',
+    projectSlug: 'solar-sizing-calculator',
     steps: [
       {
         sequence: 1,
@@ -140,11 +140,11 @@ export const DATA_FLOWS: DataFlow[] = [
     ]
   },
   {
-    id: 'bhagwati-interior-erp',
-    name: 'Bhagwati Interior ERP Pipeline',
+    id: 'interior-design-erp',
+    name: 'Interior Design ERP Pipeline',
     description: 'Visualizes the end-to-end data lifecycle when a designer submits milestone schedule updates through Next.js Server Actions to Supabase and QStash queues.',
     accentColor: '#14b8a6', // Teal
-    projectSlug: 'bhagwati-interior-erp',
+    projectSlug: 'interior-design-erp',
     steps: [
       {
         sequence: 1,
@@ -360,7 +360,7 @@ export const DATA_FLOWS: DataFlow[] = [
         nodeId: 'user',
         title: 'Visitor Prompt Submission',
         description: 'User enters a question in the AI chat bubble or dedicated ask-vraj playground.',
-        input: 'Raw text query string (e.g., "What tech did you use for Driedhub?").',
+        input: 'Raw text query string (e.g., "What tech did you use for Afghan Anjeer Marketplace?").',
         action: 'Appends prompt to local Zustand chat logs and updates chat container.',
         output: 'Sanitized visitor prompt.',
         securityNote: 'XSS character checks prevent script injections on input render.',
@@ -826,17 +826,17 @@ export const DATA_FLOWS: DataFlow[] = [
     ]
   },
   {
-    id: 'driedhub-marketplace',
-    name: 'Driedhub Order Checkout Pipeline',
-    description: 'Traces the secure checkout data flow on Driedhub: inventory validation checks, Razorpay payment processing, and transaction writes to Supabase.',
+    id: 'anjeer-marketplace',
+    name: 'Afghan Anjeer Marketplace Order Checkout Pipeline',
+    description: 'Traces the secure checkout data flow on Afghan Anjeer Marketplace: inventory validation checks, Razorpay payment processing, and transaction writes to Supabase.',
     accentColor: '#06b6d4', // Cyan
-    projectSlug: 'driedhub-marketplace',
+    projectSlug: 'anjeer-marketplace',
     steps: [
       {
         sequence: 1,
         nodeId: 'user',
         title: 'Basket Checkout Submission',
-        description: 'Customer clicks check out on Driedhub marketplace shopping cart.',
+        description: 'Customer clicks check out on Afghan Anjeer Marketplace marketplace shopping cart.',
         input: 'List of product ids, quantities, buyer details.',
         action: 'Saves items details state and triggers validation routines.',
         output: 'Structured cart details payload.',
@@ -1462,11 +1462,11 @@ export const DATA_FLOWS: DataFlow[] = [
     ]
   },
   {
-    id: 'driedhub-admin-dashboard',
-    name: 'Driedhub Admin ERP Workflow',
+    id: 'anjeer-admin-dashboard',
+    name: 'Afghan Anjeer Marketplace Admin ERP Workflow',
     description: 'Traces how administrative inventory modifications are session-checked, routed via API endpoints, and committed to the Supabase database.',
     accentColor: '#ec4899', // Pink/Rose
-    projectSlug: 'driedhub-admin-dashboard',
+    projectSlug: 'anjeer-admin-dashboard',
     steps: [
       {
         sequence: 1,
@@ -1571,11 +1571,11 @@ export const DATA_FLOWS: DataFlow[] = [
     ]
   },
   {
-    id: 'marea-website',
-    name: 'Marea Checkout Integration Pipeline',
+    id: 'clothing-brand-website',
+    name: 'Clothing Brand Checkout Integration Pipeline',
     description: 'Traces how customer cart selections are processed through Next.js endpoints, Stripe checkout redirects, and Supabase order transactions.',
     accentColor: '#a855f7', // Purple
-    projectSlug: 'marea-website',
+    projectSlug: 'clothing-brand-website',
     steps: [
       {
         sequence: 1,
@@ -1705,11 +1705,11 @@ export const DATA_FLOWS: DataFlow[] = [
     ]
   },
   {
-    id: 'marea-admin-dashboard',
-    name: 'Marea Showcase Reordering Workflow',
+    id: 'clothing-brand-admin',
+    name: 'Clothing Brand Showcase Reordering Workflow',
     description: 'Traces how custom home product layouts are rearranged with drag-and-drop actions, authenticated, and updated in database records.',
     accentColor: '#a855f7', // Purple
-    projectSlug: 'marea-admin-dashboard',
+    projectSlug: 'clothing-brand-admin',
     steps: [
       {
         sequence: 1,
@@ -1814,11 +1814,11 @@ export const DATA_FLOWS: DataFlow[] = [
     ]
   },
   {
-    id: 'surendra-bus-body',
-    name: 'Surendra Fleet Inquiry Pipeline',
+    id: 'bus-body-builder-website',
+    name: 'Bus Body Builder Fleet Inquiry Pipeline',
     description: 'Traces how client fleet requirements are validated, formatted, and routed to sales mailboxes using Nodemailer.',
     accentColor: '#3b82f6', // Blue
-    projectSlug: 'surendra-bus-body',
+    projectSlug: 'bus-body-builder-website',
     steps: [
       {
         sequence: 1,

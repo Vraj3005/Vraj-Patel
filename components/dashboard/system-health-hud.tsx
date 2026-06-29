@@ -282,8 +282,8 @@ export default function SystemHealthHud({ className }: SystemHealthHudProps) {
 
           // Determine hover highlight/dim relationships
           const isHovered = hoveredId === module.id;
-          const isDependency = hoveredModule ? hoveredModule.dependencies.includes(module.id) : false;
-          const isDimmed = hoveredId !== null && !isHovered && !isDependency;
+          const isDependency = false;
+          const isDimmed = hoveredId !== null && !isHovered;
 
           return (
             <Link
@@ -298,18 +298,18 @@ export default function SystemHealthHud({ className }: SystemHealthHudProps) {
                   "cursor-pointer p-4 rounded-xl border relative overflow-hidden transition-all duration-300 flex flex-col justify-between aspect-[4/3] group",
                   isDimmed 
                     ? "opacity-30 blur-[0.2px] scale-[0.98] border-white/5 bg-zinc-950/10" 
-                    : cn("backdrop-blur-md", isHovered || isDependency ? cn("scale-101", theme.glow) : "border-card-border")
+                    : cn("backdrop-blur-md", isHovered ? cn("scale-101", theme.glow) : "border-card-border")
                 )}
                 style={{
-                  zIndex: isHovered || isDependency ? 20 : 10,
+                  zIndex: isHovered ? 20 : 10,
                   background: isDimmed 
                     ? undefined 
-                    : (isHovered || isDependency
+                    : (isHovered
                         ? `linear-gradient(135deg, rgba(12, 12, 16, 0.95) 0%, rgba(16, 16, 20, 0.98) 60%, ${theme.color}22 100%)`
                         : `linear-gradient(135deg, rgba(8, 8, 10, 0.95) 0%, rgba(10, 10, 12, 0.98) 70%, ${theme.color}0a 100%)`),
                   borderColor: isDimmed
                     ? undefined
-                    : (isHovered || isDependency
+                    : (isHovered
                         ? `${theme.color}40`
                         : undefined)
                 }}
@@ -320,13 +320,13 @@ export default function SystemHealthHud({ className }: SystemHealthHudProps) {
                 {/* Background Schematic Illustration */}
                 <SystemNodeGraphic 
                   id={module.id} 
-                  isHovered={isHovered || isDependency}
+                  isHovered={isHovered}
                   color={theme.color}
                   className={cn(
                     "absolute inset-0 w-full h-full pointer-events-none transition-all duration-300 z-0",
-                    isHovered || isDependency
-                      ? "opacity-[0.45] scale-[1.02]"
-                      : "opacity-[0.15]"
+                    isHovered
+                      ? "opacity-[0.85] scale-[1.02]"
+                      : "opacity-[0.35]"
                   )}
                 />
 

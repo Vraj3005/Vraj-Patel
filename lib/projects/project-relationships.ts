@@ -47,14 +47,14 @@ const constructionOSStub: ProjectNode = {
 const NODE_COORDINATES: Record<string, { x: number; y: number }> = {
   "outreachops-ai": { x: 15, y: 25 },
   "ask-vraj": { x: 32, y: 12 },
-  "enermass-solar-calculator": { x: 32, y: 45 },
-  "bhagwati-interior-erp": { x: 48, y: 32 },
+  "solar-sizing-calculator": { x: 32, y: 45 },
+  "interior-design-erp": { x: 48, y: 32 },
   "constructionos": { x: 52, y: 55 }, // Coordinates defined above
-  "surendra-bus-body": { x: 82, y: 15 },
-  "marea-website": { x: 70, y: 32 },
-  "driedhub-marketplace": { x: 88, y: 40 },
-  "marea-admin-dashboard": { x: 68, y: 78 },
-  "driedhub-admin-dashboard": { x: 85, y: 72 },
+  "bus-body-builder-website": { x: 82, y: 15 },
+  "clothing-brand-website": { x: 70, y: 32 },
+  "anjeer-marketplace": { x: 88, y: 40 },
+  "clothing-brand-admin": { x: 68, y: 78 },
+  "anjeer-admin-dashboard": { x: 85, y: 72 },
   "mspe-volatility-engine": { x: 12, y: 70 },
   "nf-lrd-regime-discovery": { x: 32, y: 80 },
   "btc-algo-trading": { x: 14, y: 88 }
@@ -91,23 +91,23 @@ export const getProjectNodes = (): ProjectNode[] => {
 export const projectLinks: ProjectLink[] = [
   // AI Node group
   { source: "outreachops-ai", target: "ask-vraj" },
-  { source: "outreachops-ai", target: "enermass-solar-calculator" },
+  { source: "outreachops-ai", target: "solar-sizing-calculator" },
   
   // ERP Node group
-  { source: "enermass-solar-calculator", target: "bhagwati-interior-erp" },
-  { source: "bhagwati-interior-erp", target: "constructionos" },
-  { source: "enermass-solar-calculator", target: "constructionos" },
+  { source: "solar-sizing-calculator", target: "interior-design-erp" },
+  { source: "interior-design-erp", target: "constructionos" },
+  { source: "solar-sizing-calculator", target: "constructionos" },
 
   // E-commerce/Websites group
-  { source: "surendra-bus-body", target: "marea-website" },
-  { source: "marea-website", target: "driedhub-marketplace" },
+  { source: "bus-body-builder-website", target: "clothing-brand-website" },
+  { source: "clothing-brand-website", target: "anjeer-marketplace" },
 
   // Dashboards group
-  { source: "marea-website", target: "marea-admin-dashboard" },
-  { source: "driedhub-marketplace", target: "driedhub-admin-dashboard" },
-  { source: "marea-admin-dashboard", target: "driedhub-admin-dashboard" },
-  { source: "marea-admin-dashboard", target: "bhagwati-interior-erp" },
-  { source: "marea-admin-dashboard", target: "constructionos" },
+  { source: "clothing-brand-website", target: "clothing-brand-admin" },
+  { source: "anjeer-marketplace", target: "anjeer-admin-dashboard" },
+  { source: "clothing-brand-admin", target: "anjeer-admin-dashboard" },
+  { source: "clothing-brand-admin", target: "interior-design-erp" },
+  { source: "clothing-brand-admin", target: "constructionos" },
 
   // Quant Node group
   { source: "mspe-volatility-engine", target: "nf-lrd-regime-discovery" },

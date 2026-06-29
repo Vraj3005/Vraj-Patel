@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     'Vraj Patel CSE',
     'Full-Stack Developer Ahmedabad',
     'Next.js Developer India',
-    'Enermass Solar Calculator',
+    'Solar Sizing Calculator',
     'OutreachOps AI'
   ],
   alternates: {

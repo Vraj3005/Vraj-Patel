@@ -31,7 +31,7 @@ export default function CLITerminal() {
   const [history, setHistory] = useState<LogLine[]>([
     { id: 'init-1', type: 'system', content: 'Vraj Patel - Portfolio Core Systems Shell v2.0.0' },
     { id: 'init-2', type: 'system', content: 'Type "help" to list available commands. Press TAB to autocomplete. Use UP/DOWN keys for history.' },
-    { id: 'init-3', type: 'system', content: 'Fallback AI integration is active. Try: ask "What technologies are used in Driedhub?"' },
+    { id: 'init-3', type: 'system', content: 'Fallback AI integration is active. Try: ask "What technologies are used in Afghan Anjeer Marketplace?"' },
     { id: 'init-4', type: 'output', content: '' }
   ]);
   const [inputValue, setInputValue] = useState('');
@@ -187,7 +187,7 @@ export default function CLITerminal() {
               <span className="text-cyan-400 font-bold border-b border-white/5 pb-1">BACKGROUND & OBJECTIVE</span>
               <p className="text-white/85">
                 Vraj Patel is a software engineer specializing in developer-first ERP suites, high-throughput trading boards, and automated pipeline intelligence. 
-                Currently a 4th-year CS student at Nirma University, he is completing a Software Engineering Internship at Pitbull Corporations (May 1st - July 1st).
+                Currently a 4th-year CS student at Nirma University, he is completing a Software Engineering Internship at Software Consultancy Agencys (May 1st - July 1st).
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 mt-1 text-[11px]">
                 <div className="bg-white/2 border border-white/5 p-2 rounded-lg">
@@ -463,9 +463,9 @@ export default function CLITerminal() {
                 integrated with secure backends (Supabase PostgreSQL, FastAPI, and Row-Level Security policies).
               </p>
               <div className="flex flex-col gap-1.5 text-[11px] mt-1">
-                <div>💥 <strong>Real Clients Deployed:</strong> Enermass, Bhagwati Interiors, Driedhub, Marea.</div>
+                <div>💥 <strong>Real Clients Deployed:</strong> Solar Sizing Engine, Interior Design Studios, Afghan Anjeer Marketplace, Clothing Brand.</div>
                 <div>💥 <strong>Mathematical Skills:</strong> Volatility clustering models, regimes classifiers (hmmlearn).</div>
-                <div>💥 <strong>Available Internship:</strong> May 1 - July 1 (Pitbull Corporations). Available for full-time.</div>
+                <div>💥 <strong>Available Internship:</strong> May 1 - July 1 (Software Consultancy Agencys). Available for full-time.</div>
               </div>
             </div>
           );
@@ -770,7 +770,7 @@ export default function CLITerminal() {
     else if (cat === 'quant') filtered = projects.filter(p => p.category === 'quant_research');
     else if (cat === 'ai') filtered = projects.filter(p => p.technologies.some(t => t.toLowerCase().includes('gemini') || t.toLowerCase().includes('ai')));
     else if (cat === 'dashboard') filtered = projects.filter(p => p.title.toLowerCase().includes('dashboard') || p.title.toLowerCase().includes('board'));
-    else if (cat === 'website') filtered = projects.filter(p => p.title.toLowerCase().includes('website') || p.title.toLowerCase().includes('portal') || p.slug.includes('marea-website') || p.slug.includes('surendra'));
+    else if (cat === 'website') filtered = projects.filter(p => p.title.toLowerCase().includes('website') || p.title.toLowerCase().includes('portal') || p.slug.includes('clothing-brand-website') || p.slug.includes('bus-body-builder'));
 
     return (
       <div className="flex flex-col gap-2 font-mono text-[10.5px] text-left select-none">

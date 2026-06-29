@@ -51,7 +51,7 @@ export default function TerminalLogs() {
         break;
       case 'projects':
         newLines.push({
-          text: 'Production Cases Shipped:\n1. OutreachOps AI (Autonomous B2B outbound campaign SaaS)\n2. Enermass Solar Calculator (Fast mathematical tilt & shading model)\n3. NF-LRD Quant regime switches classifier (Hidden Markov Models)\n4. MSPE implied option volatility smile visualizer (3D Plotly rendering)\n5. Driedhub Marketplace (DTC e-commerce & Razorpay payments)\nVisit the "/projects" tab for full technical analyses.',
+          text: 'Production Cases Shipped:\n1. OutreachOps AI (Autonomous B2B outbound campaign SaaS)\n2. Solar Sizing Calculator (Fast mathematical tilt & shading model)\n3. NF-LRD Quant regime switches classifier (Hidden Markov Models)\n4. MSPE implied option volatility smile visualizer (3D Plotly rendering)\n5. Afghan Anjeer Marketplace (DTC e-commerce & Razorpay payments)\nVisit the "/projects" tab for full technical analyses.',
           type: 'output',
         });
         break;

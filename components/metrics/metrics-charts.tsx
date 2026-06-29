@@ -41,21 +41,21 @@ const projectComplexities: Record<string, {
   ai: number;
   quant: number;
 }> = {
-  'enermass-solar-calculator': { ui: 90, backend: 70, db: 65, ai: 10, quant: 60 },
+  'solar-sizing-calculator': { ui: 90, backend: 70, db: 65, ai: 10, quant: 60 },
   'outreachops-ai': { ui: 60, backend: 90, db: 70, ai: 95, quant: 10 },
-  'bhagwati-interior-erp': { ui: 75, backend: 85, db: 80, ai: 50, quant: 20 },
-  'driedhub-marketplace': { ui: 80, backend: 80, db: 85, ai: 20, quant: 10 },
-  'driedhub-admin-dashboard': { ui: 85, backend: 70, db: 75, ai: 15, quant: 10 },
-  'marea-website': { ui: 95, backend: 65, db: 60, ai: 10, quant: 0 },
-  'marea-admin-dashboard': { ui: 85, backend: 75, db: 75, ai: 10, quant: 0 },
-  'surendra-bus-body': { ui: 70, backend: 30, db: 20, ai: 10, quant: 0 },
+  'interior-design-erp': { ui: 75, backend: 85, db: 80, ai: 50, quant: 20 },
+  'anjeer-marketplace': { ui: 80, backend: 80, db: 85, ai: 20, quant: 10 },
+  'anjeer-admin-dashboard': { ui: 85, backend: 70, db: 75, ai: 15, quant: 10 },
+  'clothing-brand-website': { ui: 95, backend: 65, db: 60, ai: 10, quant: 0 },
+  'clothing-brand-admin': { ui: 85, backend: 75, db: 75, ai: 10, quant: 0 },
+  'bus-body-builder-website': { ui: 70, backend: 30, db: 20, ai: 10, quant: 0 },
   'mspe-volatility-engine': { ui: 80, backend: 85, db: 45, ai: 50, quant: 95 },
   'nf-lrd-regime-discovery': { ui: 50, backend: 70, db: 30, ai: 75, quant: 90 },
   'btc-algo-trading': { ui: 45, backend: 65, db: 25, ai: 30, quant: 80 }
 };
 
 export default function MetricsCharts({ timelineData, statsData }: MetricsChartsProps) {
-  const [selectedSlug, setSelectedSlug] = useState<string>('enermass-solar-calculator');
+  const [selectedSlug, setSelectedSlug] = useState<string>('solar-sizing-calculator');
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
