@@ -4,6 +4,17 @@ import { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Vraj Patel | Full-Stack Developer & AI/ERP Systems Builder',
   description: 'Explore the portfolio of Vraj Patel, a CSE student at Nirma University building full-stack software, ERP systems, dashboards, AI automation workflows, and quant research projects.',
+  keywords: [
+    'Vraj Patel',
+    'Vraj Patel Portfolio',
+    'Vraj Patel Nirma University',
+    'Vraj Patel Developer',
+    'Vraj Patel CSE',
+    'Full-Stack Developer Ahmedabad',
+    'Next.js Developer India',
+    'Enermass Solar Calculator',
+    'OutreachOps AI'
+  ],
   alternates: {
     canonical: 'https://patel-vraj.vercel.app',
   },
@@ -75,6 +86,44 @@ export default function Home() {
         'mainEntity': {
           '@id': 'https://patel-vraj.vercel.app/#person'
         }
+      },
+      {
+        '@type': 'FAQPage',
+        '@id': 'https://patel-vraj.vercel.app/#faq',
+        'mainEntity': [
+          {
+            '@type': 'Question',
+            'name': 'Who is Vraj Patel?',
+            'acceptedAnswer': {
+              '@type': 'Answer',
+              'text': 'Vraj Patel is a software engineer and computer science undergraduate student at Nirma University, specialized in building full-stack web applications, ERP architectures, and quantitative market research platforms.'
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "When is Vraj available for full-time employment?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Vraj graduates from Nirma University in May 2027. He is available for internships starting immediately, or full-time software engineering roles upon his expected graduation."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is Vraj Patel's core tech stack expertise?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Full-stack engineering: Next.js and React on the frontend; Node.js and FastAPI (Python) on the backend; coupled with PostgreSQL, Supabase RLS, and Drizzle ORM for data layers."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What sets Vraj Patel apart from other computer science graduates?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "He builds real-world production business software, having shipped customized ERP modules directly to clients (solar calculators, interior design trackers) and designed algorithmic options trading suites."
+            }
+          }
+        ]
       }
     ]
   };
