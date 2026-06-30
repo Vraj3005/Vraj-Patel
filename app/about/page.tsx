@@ -75,8 +75,8 @@ export default function About() {
           About Vraj Patel
         </PageTitleReveal>
         <p className="text-sm md:text-base text-secondary leading-relaxed max-w-3xl mt-1 font-medium">
-          I am Vraj Patel, a 4th year Computer Science and Engineering student at Nirma University. 
-          I focus on building functional business products—like custom ERP pipelines and quantitative visualizers—rather than toy projects. I enjoy bridging the gap between database designs and slick, interactive client interfaces.
+          I am Vraj Patel, a 4th year Computer Science and Engineering student at Nirma University.
+          I focus on building functional business products—like custom ERP pipelines and quantitative visualizers—rather than toy projects. I enjoy bridging the gap between database designs and slick, interactive client interfaces. Vraj Patel’s work includes client ERP systems, business dashboards, e-commerce websites, AI outreach automation, and market analytics platforms.
         </p>
       </SectionItem>
 

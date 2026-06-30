@@ -3,6 +3,10 @@ import { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Ask Vraj AI | Vraj Patel Portfolio Assistant',
   description: 'Ask an AI assistant about Vraj Patel’s projects, skills, ERP systems, AI automation work, and quantitative research portfolio.',
+  robots: {
+    index: false,
+    follow: true,
+  },
   alternates: {
     canonical: 'https://patel-vraj.vercel.app/ask-vraj',
   },

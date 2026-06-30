@@ -110,8 +110,7 @@ export default function HomeClient() {
                 Vraj Patel
               </h1>
               <p className="text-base md:text-lg text-secondary max-w-lg leading-relaxed">
-                4th year CSE student at Nirma University. I build full-stack applications,
-                ERP systems, and quantitative research platforms.
+                Vraj Patel is a 4th year Computer Science Engineering student at Nirma University in Gujarat, India, focused on full-stack development, ERP systems, AI automation, dashboards, and quantitative research platforms.
               </p>
             </div>
 

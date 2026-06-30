@@ -3,6 +3,10 @@ import { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Developer Terminal | Vraj Patel Portfolio',
   description: 'Explore Vraj Patel’s portfolio using an interactive command-style interface for projects, skills, systems, and resume information.',
+  robots: {
+    index: false,
+    follow: true,
+  },
   alternates: {
     canonical: 'https://patel-vraj.vercel.app/terminal',
   },

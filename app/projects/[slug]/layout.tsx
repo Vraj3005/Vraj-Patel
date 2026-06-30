@@ -8,32 +8,52 @@ interface Props {
 
 const SPECIFIC_METADATA: Record<string, { title: string; description: string }> = {
   'outreachops-ai': {
-    title: 'OutreachOps AI | Gemini Cold Email Automation Project',
+    title: 'OutreachOps AI | Gemini Cold Email Automation by Vraj Patel',
     description: 'OutreachOps AI is Vraj Patel’s AI automation project using Google GenAI SDK, Gmail OAuth API, and Google Sheets API to generate personalized outreach drafts and manage outbound workflows.',
   },
   'solar-sizing-calculator': {
     title: 'Solar Sizing Calculator & ERP | Vraj Patel Portfolio',
-    description: 'A solar quotation calculator and ERP-style workflow system for Solar Sizing Engine, designed to manage customer requirements, pricing logic, subsidy calculations, and project workflow.',
+    description: 'A solar quotation calculator and ERP-style workflow system by Vraj Patel for managing customer requirements, pricing logic, subsidy calculations, and project workflows.',
+  },
+  'interior-design-erp': {
+    title: 'Interior Design ERP | Vraj Patel Portfolio',
+    description: 'A custom enterprise planning system built by Vraj Patel for interior design operations, managing material catalogs, client boards, and estimates.',
+  },
+  'anjeer-marketplace': {
+    title: 'Afghan Anjeer Marketplace | Vraj Patel Portfolio',
+    description: 'A direct-to-consumer e-commerce storefront designed by Vraj Patel for healthy food retail, integrated with Razorpay checkout overlays.',
+  },
+  'anjeer-admin-dashboard': {
+    title: 'Anjeer Admin Dashboard | Vraj Patel Portfolio',
+    description: 'An internal backoffice ERP dashboard designed by Vraj Patel for tracking sales logs, inventory balances, and order fulfillment states.',
+  },
+  'clothing-brand-website': {
+    title: 'Clothing Brand Storefront | Vraj Patel Portfolio',
+    description: 'A high-fidelity editorial luxury fashion storefront by Vraj Patel utilizing GSAP animations and smooth scrolling configurations.',
+  },
+  'clothing-brand-admin': {
+    title: 'Clothing Brand Admin Dashboard | Vraj Patel Portfolio',
+    description: 'An internal admin panel built by Vraj Patel featuring TipTap rich text editors, drag reordering setups, and tanstack data sheets.',
+  },
+  'bus-body-builder-website': {
+    title: 'Bus Body Building Company Website | Vraj Patel Portfolio',
+    description: 'A premium coach builder portal built by Vraj Patel featuring Framer Motion visuals and custom inquiry estimation forms.',
   },
   'constructionos': {
     title: 'ConstructionOS ERP | Vraj Patel Portfolio',
     description: 'A construction ERP concept built around project management, inventory tracking, purchase orders, worker workflows, and business dashboards.',
   },
-  'construction-os': {
-    title: 'ConstructionOS ERP | Vraj Patel Portfolio',
-    description: 'A construction ERP concept built around project management, inventory tracking, purchase orders, worker workflows, and business dashboards.',
-  },
   'nf-lrd-regime-discovery': {
-    title: 'NF-LRD NIFTY 50 Regime Discovery | Vraj Patel Portfolio',
-    description: 'A quantitative research platform for NIFTY 50 market regime analysis using Python, statistical modeling, feature engineering, and dashboard-based visualization.',
+    title: 'NF-LRD NIFTY 50 Market Regime Discovery | Vraj Patel Portfolio',
+    description: 'A quantitative research platform by Vraj Patel for NIFTY 50 market regime analysis using Python, HMMs, and Streamlit.',
   },
   'mspe-volatility-engine': {
     title: 'Market Surface Projection Engine | Vraj Patel Portfolio',
-    description: 'A market analytics and projection platform using Python, FastAPI, statistical models, volatility surfaces, and interactive visualization.',
+    description: 'A market volatility skew projection web calculator by Vraj Patel using FastAPI, Black-Scholes solvers, and Plotly 3D meshes.',
   },
   'btc-algo-trading': {
     title: 'BTC-ALGO Trading Dashboard | Vraj Patel Portfolio',
-    description: 'A Bitcoin algorithmic trading dashboard with historical data, indicators, backtesting logic, and interactive market research views.',
+    description: 'A Bitcoin algorithmic indicator crossover trading dashboard with historical backtesting views by Vraj Patel.',
   },
 };
 
